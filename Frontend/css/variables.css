@@ -1,0 +1,25 @@
+:root {
+    --bleu-principal: #1E90FF;
+    --bleu-fonce: #1873CC;
+    --orange: #FF8C42;
+    --vert: #2ECC71;
+    --gris-texte: #2D3748;
+    --gris-clair: #A0AEC0;
+    --blanc: #FFFFFF;
+    --fond: #F7FAFC;
+    --rayon: 16px;
+    --ombre: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: linear-gradient(180deg, #E6F3FF 0%, var(--fond) 100%);
+    color: var(--gris-texte);
+    min-height: 100vh;
+}

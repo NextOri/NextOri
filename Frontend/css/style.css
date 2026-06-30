@@ -1,0 +1,119 @@
+.onboarding {
+    max-width: 420px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem;
+    text-align: center;
+}
+
+/* Logo */
+.logo-section {
+    margin-bottom: 2rem;
+}
+
+.logo-circle {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, var(--bleu-principal), var(--bleu-fonce));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+}
+
+.logo-circle svg {
+    width: 40px;
+    height: 40px;
+}
+
+.logo-section h1 {
+    font-size: 2rem;
+    color: var(--bleu-principal);
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+}
+
+.subtitle {
+    color: var(--gris-clair);
+    font-size: 0.9rem;
+}
+
+/* Image */
+.image-container {
+    margin: 2rem 0;
+}
+
+.image-container img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 24px;
+    box-shadow: var(--ombre);
+}
+
+/* Contenu */
+.content-section h2 {
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+    line-height: 1.3;
+}
+
+.description {
+    color: var(--gris-clair);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 2rem;
+}
+
+/* Features 3 icônes */
+.features {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 2.5rem;
+}
+
+.feature {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+}
+
+.icon-blue { background: #E6F3FF; }
+.icon-orange { background: #FFF2E6; }
+.icon-green { background: #E6F9F0; }
+
+/* Bouton */
+.btn-primary {
+    width: 100%;
+    background: var(--bleu-principal);
+    color: var(--blanc);
+    border: none;
+    padding: 1rem;
+    border-radius: var(--rayon);
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-bottom: 1rem;
+    transition: 0.2s;
+}
+
+.btn-primary:hover {
+    background: var(--bleu-fonce);
+}
+
+.link-secondary {
+    color: var(--gris-clair);
+    text-decoration: none;
+    font-size: 0.9rem;
+}

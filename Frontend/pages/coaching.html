@@ -2,58 +2,122 @@
 <html lang="fr">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>NextStep — Coaching personnalisé</title>
   <link rel="stylesheet" href="../css/landing.css" />
   <link rel="stylesheet" href="../css/coaching.css" />
 </head>
 <body class="coaching-page">
+  <header class="hero hero--coaching">
+    <div class="hero-inner">
+      <div class="hero-copy">
+        <span class="hero-badge">Coaching startup</span>
+        <h1>Coaching personnalisé</h1>
+        <p>Réserve une séance avec un conseiller NextStep pour recevoir un accompagnement personnalisé dans ton orientation scolaire et professionnelle.</p>
+      </div>
+      <div class="hero-visual">
+        <img src="../images/coaching-hero-illustration.svg" alt="Illustration de coaching" />
+      </div>
+    </div>
+  </header>
+
   <main class="page-shell">
-    <section class="hero compact-hero">
-      <div class="hero-title-group">
-        <p class="hero-label">Coaching personnalisé</p>
-        <h1>Réserve une séance avec un conseiller NextStep.</h1>
+    <section class="advisors-section">
+      <div class="section-title">
+        <h2>Choisis ton conseiller</h2>
+      </div>
+      <div class="advisor-cards">
+        <article class="advisor-card advisor-card--highlight">
+          <div class="advisor-card-left">
+            <img class="advisor-photo" src="../images/coach-photo-1.svg" alt="Laurent Denbin MASSOYA" />
+            <div>
+              <div class="advisor-name">Laurent Denbin MASSOYA</div>
+              <div class="advisor-badge">Cofondateur de NextStep</div>
+              <div class="advisor-role">Conseiller en orientation</div>
+              <span class="advisor-pill">📚 Orientation académique & carrières</span>
+              <p class="advisor-description">J'accompagne les élèves et les étudiants dans leur choix d'études à l'aide du modèle RIASEC. Mon objectif est de les aider à mieux comprendre leur profil et à choisir une voie adaptée à leurs intérêts.</p>
+              <div class="advisor-trust-list">
+                <span>✓ Profil vérifié</span>
+                <span>✓ Modèle RIASEC</span>
+                <span>✓ Disponible aujourd'hui</span>
+              </div>
+            </div>
+          </div>
+          <div class="advisor-card-right">
+            <ul class="advisor-features">
+              <li><span>🎓</span> Orientation académique & universitaire</li>
+              <li><span>🧭</span> Analyse complète de ton profil</li>
+              <li><span>📘</span> Conseils pour tes choix d'études</li>
+            </ul>
+            <div class="advisor-actions">
+              <a href="#" class="btn btn-primary">Prendre rendez-vous</a>
+              <a href="#" class="btn btn-secondary">Voir le profil</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="advisor-card">
+          <div class="advisor-card-left">
+            <img class="advisor-photo" src="../images/coach-photo-2.svg" alt="Ndeye Awa NIANE" />
+            <div>
+              <div class="advisor-name">Ndeye Awa NIANE</div>
+              <div class="advisor-badge">Cofondatrice de NextStep</div>
+              <div class="advisor-role">Conseillère en orientation</div>
+              <span class="advisor-pill">🎓 Orientation scolaire & professionnelle</span>
+              <p class="advisor-description">J'aide les jeunes à explorer les métiers, les filières et les établissements adaptés à leur profil afin qu'ils puissent faire un choix éclairé.</p>
+              <div class="advisor-trust-list">
+                <span>✓ Profil vérifié</span>
+                <span>✓ Modèle RIASEC</span>
+                <span>✓ Disponible aujourd'hui</span>
+              </div>
+            </div>
+          </div>
+          <div class="advisor-card-right">
+            <ul class="advisor-features">
+              <li><span>🎓</span> Orientation scolaire & professionnelle</li>
+              <li><span>💡</span> Exploration métiers et filières</li>
+              <li><span>🤝</span> Support pour un choix éclairé</li>
+            </ul>
+            <div class="advisor-actions">
+              <a href="#" class="btn btn-primary">Prendre rendez-vous</a>
+              <a href="#" class="btn btn-secondary">Voir le profil</a>
+            </div>
+          </div>
+        </article>
       </div>
     </section>
 
-    <section class="advisor-list">
-      <article class="advisor-card">
-        <div class="advisor-top">
-          <img class="advisor-photo" src="../images/coach-photo-1.svg" alt="Portrait Laurent Denbin MASSOYA" />
-          <div class="advisor-copy">
-            <div class="advisor-title-row">
-              <h2>Laurent Denbin MASSOYA</h2>
-              <span class="advisor-verified">Vérifié</span>
-            </div>
-            <p class="advisor-role">Cofondateur de NextStep · Conseiller en orientation</p>
-            <span class="advisor-pill">Orientation académique & carrières</span>
-            <p class="advisor-description">J'accompagne les élèves et étudiants dans leur choix d'études grâce au modèle RIASEC.</p>
+    <section class="trust-section">
+      <div class="trust-grid">
+        <article class="trust-card">
+          <div class="trust-icon">🔒</div>
+          <div>
+            <h3>Confidentialité garantie</h3>
+            <p>Toutes les données sont sécurisées.</p>
           </div>
-        </div>
-        <div class="advisor-actions">
-          <a href="#" class="btn btn-primary">Prendre rendez-vous</a>
-          <a href="#" class="btn btn-secondary">Voir le profil</a>
-        </div>
-      </article>
-
-      <article class="advisor-card">
-        <div class="advisor-top">
-          <img class="advisor-photo" src="../images/coach-photo-2.svg" alt="Portrait Ndeye Awa NIANE" />
-          <div class="advisor-copy">
-            <div class="advisor-title-row">
-              <h2>Ndeye Awa NIANE</h2>
-              <span class="advisor-verified">Vérifié</span>
-            </div>
-            <p class="advisor-role">Cofondatrice de NextStep · Conseillère en orientation</p>
-            <span class="advisor-pill">Orientation scolaire & professionnelle</span>
-            <p class="advisor-description">J'aide les jeunes à choisir une filière et un métier adaptés à leur profil.</p>
+        </article>
+        <article class="trust-card">
+          <div class="trust-icon">🎯</div>
+          <div>
+            <h3>Orientation RIASEC</h3>
+            <p>Orientation basée sur le modèle RIASEC.</p>
           </div>
-        </div>
-        <div class="advisor-actions">
-          <a href="#" class="btn btn-primary">Prendre rendez-vous</a>
-          <a href="#" class="btn btn-secondary">Voir le profil</a>
-        </div>
-      </article>
+        </article>
+        <article class="trust-card">
+          <div class="trust-icon">💬</div>
+          <div>
+            <h3>Accompagnement personnalisé</h3>
+            <p>Des échanges pensés pour toi.</p>
+          </div>
+        </article>
+        <article class="trust-card">
+          <div class="trust-icon">🎓</div>
+          <div>
+            <h3>Pensé pour l'Afrique</h3>
+            <p>Pensé pour les élèves et étudiants africains.</p>
+          </div>
+        </article>
+      </div>
     </section>
   </main>
 </body>

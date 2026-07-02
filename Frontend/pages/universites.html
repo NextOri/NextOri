@@ -112,7 +112,7 @@
     .event-card-desc { margin: 0; color: #5d6487; font-size: 0.95rem; line-height: 1.4; }
     .event-card-date { margin: 0; color: #3f5dff; font-size: 0.92rem; font-weight: 700; }
     .event-card-action { display: none; }
-    .establishments-section { width: min(860px, calc(100% - 2rem)); margin: 2rem auto 4rem; }
+    .establishments-section { width: min(860px, calc(100% - 2rem)); margin: 2rem auto 4rem; display: grid; gap: 1.25rem; }
     .establishments-title-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 1rem; }
     .establishments-heading { display: grid; gap: 0.2rem; }
     .establishments-heading h2 { margin: 0; font-size: 1.55rem; color: #101a34; font-weight: 800; }
@@ -127,8 +127,11 @@
     .establishment-meta { display: flex; flex-wrap: wrap; gap: 0.75rem; color: #5d6487; font-size: 0.92rem; align-items: center; }
     .establishment-pill { padding: 0.35rem 0.85rem; border-radius: 999px; background: #fff3e5; color: #c56a23; font-size: 0.82rem; font-weight: 700; }
     .establishment-description { margin: 0; color: #5d6487; font-size: 0.95rem; line-height: 1.6; }
+    .establishment-levels { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+    .establishment-level { padding: 0.45rem 0.85rem; border-radius: 999px; background: #eff4ff; color: #2f56d5; font-size: 0.82rem; font-weight: 700; }
     .establishment-tags { display: flex; flex-wrap: wrap; gap: 0.55rem; }
-    .establishment-tag { padding: 0.45rem 0.85rem; border-radius: 999px; background: #f4f7ff; color: #2f56d5; font-size: 0.82rem; font-weight: 700; }
+    .establishment-tag { padding: 0.45rem 0.85rem; border-radius: 999px; background: #f4f7ff; color: #101a34; font-size: 0.82rem; font-weight: 700; }
+    .establishment-level { padding: 0.45rem 0.85rem; border-radius: 999px; background: #eff4ff; color: #3f5dff; font-size: 0.82rem; font-weight: 700; }
     .establishment-actions { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
     .establishment-fees { margin: 0; color: #101a34; font-size: 1rem; font-weight: 800; }
     .establishment-fees-label { display: block; color: #65739e; font-size: 0.85rem; font-weight: 500; margin-bottom: 0.25rem; }
@@ -570,10 +573,54 @@
             <span class="establishment-tag">Lettres & Humanités</span>
             <span class="establishment-tag">+2</span>
           </div>
+          <div class="establishment-levels">
+            <span class="establishment-level">Licence</span>
+            <span class="establishment-level">Master</span>
+            <span class="establishment-level">Doctorat</span>
+          </div>
           <div class="establishment-actions">
             <div>
               <span class="establishment-fees-label">Frais</span>
               <p class="establishment-fees">20 000</p>
+            </div>
+            <div style="display:flex; align-items:center; gap:1rem; flex-wrap:wrap;">
+              <span style="color:#158754; font-weight:700;">Bourses dispo</span>
+              <a class="establishment-link" href="#">Découvrir</a>
+            </div>
+          </div>
+        </div>
+      </article>
+      <article class="establishment-card">
+        <div class="establishment-card-inner">
+          <div class="establishment-card-top">
+            <div class="establishment-icon">🏛️</div>
+            <div class="establishment-info">
+              <p class="establishment-name">UGB</p>
+              <p class="establishment-subtitle">Université Gaston Berger</p>
+              <div class="establishment-meta">
+                <span>📍 Saint-Louis</span>
+                <span>⏱ Depuis 1990</span>
+              </div>
+            </div>
+            <span class="establishment-pill">Sélectif</span>
+          </div>
+          <p class="establishment-description">Université moderne fondée en 1990, reconnue pour son excellence en sciences, technologie et sciences humaines.</p>
+          <div class="establishment-tags">
+            <span class="establishment-tag">Sciences & Tech</span>
+            <span class="establishment-tag">Sciences Économiques</span>
+            <span class="establishment-tag">Droit</span>
+            <span class="establishment-tag">Lettres & Humanités</span>
+            <span class="establishment-tag">+2</span>
+          </div>
+          <div class="establishment-levels">
+            <span class="establishment-level">Licence</span>
+            <span class="establishment-level">Master</span>
+            <span class="establishment-level">Doctorat</span>
+          </div>
+          <div class="establishment-actions">
+            <div>
+              <span class="establishment-fees-label">Frais</span>
+              <p class="establishment-fees">25 000</p>
             </div>
             <div style="display:flex; align-items:center; gap:1rem; flex-wrap:wrap;">
               <span style="color:#158754; font-weight:700;">Bourses dispo</span>

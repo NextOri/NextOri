@@ -1,4 +1,4 @@
-# Base de données Next Step
+# Base de données NextOri
 
 ## Base utilisée
 
@@ -6,7 +6,7 @@ MySQL (XAMPP)
 
 Nom de la base :
 
-nextstep_db
+nextori_db
 
 ## Contenu
 
@@ -15,8 +15,6 @@ nextstep_db
 
 ## Installation
 
-1. Créer une base nommée nextstep_db.
+1. Créer une base nommée nextori_db.
 2. Importer schema.sql.
 3. Importer seed.sql.
-
-

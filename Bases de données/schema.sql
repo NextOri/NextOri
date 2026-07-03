@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données : `nextstep_db_v1`
+-- Base de données : `nextori_db_v1`
 --
 
 -- --------------------------------------------------------

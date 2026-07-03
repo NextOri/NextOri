@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NextStep — Réservation confirmée</title>
+  <link rel="stylesheet" href="../css/landing.css" />
+  <link rel="stylesheet" href="../css/coaching.css" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f2f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    .confirmation-card {
+      background-color: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      padding: 40px;
+      max-width: 500px;
+      width: 100%;
+      text-align: center;
+      box-sizing: border-box;
+    }
+
+    .confirmation-icon-wrapper {
+      width: 80px;
+      height: 80px;
+      background-color: #4CAF50;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0 auto 25px;
+    }
+
+    .confirmation-icon-wrapper svg {
+      color: #fff;
+      font-size: 40px;
+    }
+
+    .confirmation-card h1 {
+      font-size: 28px;
+      color: #333;
+      margin-bottom: 15px;
+    }
+
+    .confirmation-card p {
+      font-size: 16px;
+      color: #555;
+      line-height: 1.6;
+      margin-bottom: 25px;
+    }
+
+    .reservation-details-summary {
+      background-color: #f9f9f9;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 30px;
+      text-align: left;
+    }
+
+    .detail-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .detail-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .detail-item .label {
+      font-size: 15px;
+      color: #777;
+    }
+
+    .detail-item .value {
+      font-size: 15px;
+      color: #333;
+      font-weight: 500;
+    }
+
+    .detail-item .value.highlight {
+      color: #4CAF50;
+      font-weight: 600;
+    }
+
+    .confirmation-info {
+      font-size: 14px;
+      color: #777;
+      margin-bottom: 30px;
+    }
+
+    .btn-home {
+      display: block;
+      width: 100%;
+      padding: 15px 20px;
+      background-color: #4285F4;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-size: 18px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background-color 0.2s ease-in-out;
+    }
+
+    .btn-home:hover {
+      background-color: #3367D6;
+    }
+  </style>
+</head>
+<body>
+  <div class="confirmation-card">
+    <div class="confirmation-icon-wrapper">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check"><polyline points="20 6 9 17 4 12"></polyline></svg>
+    </div>
+    <h1>Réservation confirmée ! 🎉</h1>
+    <p>Ta session avec Dr. Fatou Diop est programmée pour <br /> le Lundi 25 Mars à 11:00.</p>
+
+    <div class="reservation-details-summary">
+      <div class="detail-item">
+        <span class="label">Type de session</span>
+        <span class="value">Téléphone</span>
+      </div>
+      <div class="detail-item">
+        <span class="label">Durée</span>
+        <span class="value">30 min</span>
+      </div>
+      <div class="detail-item">
+        <span class="label">Montant</span>
+        <span class="value highlight">10,000 FCFA</span>
+      </div>
+    </div>
+
+    <p class="confirmation-info">Un email de confirmation a été envoyé avec les détails de ta session.</p>
+
+    <a href="#" class="btn-home">Retour à l'accueil</a>
+  </div>
+</body>
+</html>

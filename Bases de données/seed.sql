@@ -33,9 +33,9 @@ INSERT INTO metier (nom, description, secteur, niveau_etude, salaire_min, salair
 INSERT INTO universite (nom, description , type, pays, ville, site_web) VALUES
 ('UCAD', 'Université Cheikh Anta Diop de Dakar, la plus grande université du Sénégal', 'publique', 'Sénégal', 'Dakar', 'https://www.ucad.sn'),
 ('UGB', 'Université Gaston Berger de Saint-Louis', 'publique', 'Sénégal', 'Saint-Louis', 'https://www.ugb.sn'),
-('UIDT', 'Université Iba Der Thiam de Thiès', 'publique', 'Sénégal', 'Thiès', 'https://www.univ-thies.sn'),
+('UIDT', 'Université Iba Der Thiam de Thiès', 'publique', 'Sénégal', 'Thiès', 'https://www.uidt.sn'),
 ('ESP', 'École Supérieure Polytechnique de Dakar', 'publique', 'Sénégal', 'Dakar', 'https://www.esp.sn'),
-('SUPDECO', 'Institut privé spécialisé en management et commerce', 'privée', 'Sénégal', 'Dakar', 'https://www.supdeco.sn');
+('SUPDECO', 'Institut privé spécialisé en management et commerce', 'privee', 'Sénégal', 'Dakar', 'https://www.supdeco.sn');
 
 -- =========================
 -- METIER_FILIERE
@@ -119,10 +119,6 @@ INSERT INTO question (id_questionnaire, texte, ordre) VALUES
 (1,'Dans 10 ans, tu te vois...',19),
 
 (1,'Qu''est-ce qui est le plus important pour toi dans une carrière ?',20);
-
---==========================
-PROPOSITIONS
---===========================
 
 -- =========================
 -- PROPOSITIONS QUESTION 1
@@ -215,9 +211,9 @@ INSERT INTO proposition (id_question, lettre, libelle, type_riasec) VALUES
 (7,'E','Atteindre un objectif ambitieux ou gagner', 'E');
 
 
---==========================
+-- ==========================
 -- PROPOSITIONS QUESTION 8
---===========================
+-- ==========================
 
 INSERT INTO proposition (id_question, lettre, libelle, type_riasec) VALUES
 (8,'A','Outils manuels ou machines', 'R'),
@@ -227,9 +223,9 @@ INSERT INTO proposition (id_question, lettre, libelle, type_riasec) VALUES
 (8,'E','Tableurs et logiciels d’organisation', 'C'),
 (8,'F','Outils de gestion de projet ou business', 'E');
 
---==========================
+-- ==========================
 -- PROPOSITIONS QUESTION 9
---===========================
+-- ==========================
 
 INSERT INTO proposition (id_question, lettre, libelle, type_riasec) VALUES
 (9,'A','Créer un projet qui a de l’impact ou du profit', 'E'),
@@ -240,7 +236,7 @@ INSERT INTO proposition (id_question, lettre, libelle, type_riasec) VALUES
 (9,'F','Aider directement des personnes en difficulté', 'S');
 
 
---===========================
+-- ===========================
 -- PROPOSITIONS QUESTION 10
 --===========================
 

@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NextOri — Coaching personnalisé</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#101B36;
+    --navy-2:#16213E;
+    --gold:#F5A623;
+    --gold-dark:#E2960F;
+    --bg:#F4F5F8;
+    --card:#FFFFFF;
+    --text-gray:#5B6472;
+    --line:#E7EAF0;
+  }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  body{
+    background:var(--bg);
+    font-family:'Inter', sans-serif;
+  }
+  .page{ max-width:1400px; margin:0 auto; }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    background:linear-gradient(135deg, var(--navy), var(--navy-2));
+    position:relative;
+    overflow:hidden;
+    padding:36px 50px 70px;
+    border-radius:0 0 0 0;
+  }
+  .hero::after{
+    content:"";
+    position:absolute;
+    left:0; right:0; bottom:-1px; height:70px;
+    background:var(--bg);
+    border-radius:60% 60% 0 0 / 100% 100% 0 0;
+    transform:scaleX(1.3);
+  }
+  .hero-wave{
+    position:absolute; left:0; right:0; bottom:0; height:90px;
+    background:var(--gold);
+    clip-path: ellipse(70% 100% at 30% 100%);
+    opacity:0.95;
+  }
+
+  .logo-row{ display:flex; align-items:center; gap:14px; margin-bottom:34px; position:relative; z-index:2; }
+  .logo-icon{ width:52px; height:52px; }
+  .logo-text{ font-family:'Baloo 2', sans-serif; font-weight:800; font-size:30px; color:#fff; line-height:1; }
+  .logo-text span{ color:var(--gold); }
+  .logo-sub{ font-size:11px; color:#B9C2D4; margin-top:2px; letter-spacing:0.2px; }
+
+  .hero-title{
+    font-family:'Baloo 2', sans-serif;
+    font-weight:800;
+    font-size:56px;
+    color:#fff;
+    line-height:1.05;
+    position:relative; z-index:2;
+    max-width:750px;
+  }
+  .hero-title span{ color:var(--gold); }
+  .hero-sub{
+    font-size:19px;
+    color:#C7D2E0;
+    margin-top:16px;
+    position:relative; z-index:2;
+  }
+  .hero-underline{
+    width:60px; height:4px; background:var(--gold);
+    margin-top:22px; border-radius:3px; position:relative; z-index:2;
+  }
+
+  .hero-illustration{
+    position:absolute;
+    top:20px; right:40px;
+    width:520px;
+    height:260px;
+    z-index:1;
+  }
+
+  /* ---------- SECTION ---------- */
+  .section{ padding:40px 50px 60px; }
+  .section-title{
+    display:flex; align-items:center; gap:14px;
+    font-family:'Baloo 2', sans-serif; font-weight:700; font-size:26px; color:var(--navy);
+    margin-bottom:26px;
+  }
+  .section-title .bar{ width:26px; height:4px; background:var(--gold); border-radius:3px; }
+
+  /* ---------- ADVISOR CARD ---------- */
+  .advisor-card{
+    background:var(--card);
+    border-radius:22px;
+    box-shadow:0 8px 26px rgba(16,27,54,0.06);
+    display:grid;
+    grid-template-columns:280px 1fr 340px;
+    gap:0;
+    margin-bottom:26px;
+    overflow:hidden;
+  }
+
+  .advisor-photo{
+    position:relative;
+    background:linear-gradient(160deg,#2A3B5E,#16213E);
+    display:flex; align-items:flex-end; justify-content:center;
+    padding:0;
+  }
+  .advisor-photo svg{ width:100%; height:100%; display:block; }
+  .advisor-photo-corner{
+    position:absolute; bottom:0; right:0;
+    width:70px; height:70px;
+    background:var(--gold);
+    clip-path: polygon(100% 0, 0% 100%, 100% 100%);
+  }
+
+  .advisor-info{ padding:30px 26px; border-right:1px solid var(--line); }
+  .advisor-name{
+    font-family:'Baloo 2', sans-serif;
+    font-weight:700; font-size:24px; color:var(--navy); margin-bottom:4px;
+  }
+  .advisor-role-main{ color:var(--gold); font-weight:700; font-size:15.5px; margin-bottom:2px; }
+  .advisor-role-sub{ color:var(--navy); font-size:15px; margin-bottom:14px; }
+
+  .advisor-badge{
+    display:inline-flex; align-items:center; gap:8px;
+    background:var(--navy); color:#fff;
+    font-size:13px; font-weight:600;
+    padding:8px 16px; border-radius:20px;
+    margin-bottom:16px;
+  }
+  .advisor-badge svg{ width:15px; height:15px; }
+
+  .advisor-desc{ font-size:14px; color:var(--text-gray); line-height:1.55; margin-bottom:16px; }
+
+  .advisor-rating{ display:flex; align-items:center; gap:8px; font-size:14px; color:var(--navy); font-weight:600; }
+  .advisor-rating .star{ color:var(--gold); font-size:16px; }
+  .advisor-rating .sessions{ color:var(--text-gray); font-weight:500; }
+
+  .advisor-skills{ padding:30px 26px; display:flex; flex-direction:column; gap:16px; }
+  .skill-row{ display:flex; align-items:center; gap:14px; font-size:14.5px; color:var(--navy); font-weight:500; }
+  .skill-icon{
+    width:34px; height:34px; border-radius:10px;
+    background:#F2F4F8;
+    display:flex; align-items:center; justify-content:center;
+    flex-shrink:0;
+  }
+  .skill-icon svg{ width:18px; height:18px; }
+
+  .btn-avail{
+    display:inline-flex; align-items:center; gap:10px;
+    background:var(--gold);
+    color:var(--navy);
+    font-weight:700; font-size:14.5px;
+    padding:13px 22px;
+    border-radius:12px;
+    border:none;
+    cursor:pointer;
+    margin-top:4px;
+    box-shadow:0 8px 18px rgba(245,166,35,0.35);
+    transition:transform 0.15s ease;
+  }
+  .btn-avail:hover{ transform:translateY(-1px); background:var(--gold-dark); }
+  .btn-avail svg{ width:16px; height:16px; }
+
+  /* ---------- BOTTOM INFO BAR ---------- */
+  .info-bar{
+    background:var(--navy);
+    border-radius:22px;
+    margin:0 50px 50px;
+    padding:32px 40px;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+  }
+  .info-item{ display:flex; align-items:flex-start; gap:14px; }
+  .info-icon{
+    width:44px; height:44px; border-radius:12px;
+    background:rgba(245,166,35,0.15);
+    display:flex; align-items:center; justify-content:center;
+    flex-shrink:0;
+  }
+  .info-icon svg{ width:22px; height:22px; }
+  .info-title{ color:#fff; font-weight:700; font-size:15px; margin-bottom:3px; }
+  .info-desc{ color:#9FAAC0; font-size:13px; line-height:1.4; }
+
+  @media (max-width:1100px){
+    .advisor-card{ grid-template-columns:1fr; }
+    .advisor-photo{ height:220px; }
+    .advisor-info{ border-right:none; border-bottom:1px solid var(--line); }
+    .hero-illustration{ display:none; }
+    .info-bar{ grid-template-columns:1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-wave"></div>
+
+    <div class="logo-row">
+      <svg class="logo-icon" viewBox="0 0 100 100">
+        <path d="M15 70 Q 20 30, 55 22" stroke="#F5A623" stroke-width="9" fill="none" stroke-linecap="round"/>
+        <polygon points="55,22 44,20 50,32" fill="#F5A623"/>
+        <g transform="translate(50,8)">
+          <polygon points="0,10 24,0 48,10 24,20" fill="#FFFFFF"/>
+          <rect x="20" y="14" width="8" height="12" fill="#FFFFFF"/>
+          <circle cx="24" cy="27" r="3" fill="#FFFFFF"/>
+        </g>
+      </svg>
+      <div>
+        <div class="logo-text">Next<span>Ori</span></div>
+        <div class="logo-sub">Des choix éclairés pour un avenir meilleur.</div>
+      </div>
+    </div>
+
+    <div class="hero-title">Coaching <span>personnalisé</span></div>
+    <div class="hero-sub">Réserve une session avec un conseiller d'orientation professionnel</div>
+    <div class="hero-underline"></div>
+
+    <svg class="hero-illustration" viewBox="0 0 520 260">
+      <path d="M60,150 C140,60 260,220 340,90 C380,30 440,60 470,110" stroke="#3A4A6E" stroke-width="2" stroke-dasharray="6 8" fill="none"/>
+
+      <circle cx="60" cy="90" r="42" fill="#FFFFFF"/>
+      <g transform="translate(38,68)">
+        <polygon points="0,10 22,0 44,10 22,20" fill="#16213E"/>
+        <rect x="18" y="14" width="8" height="10" fill="#16213E"/>
+        <circle cx="22" cy="25" r="2.6" fill="#16213E"/>
+      </g>
+
+      <circle cx="55" cy="200" r="38" fill="#FFFFFF"/>
+      <circle cx="55" cy="200" r="20" fill="none" stroke="#F5A623" stroke-width="4"/>
+      <circle cx="55" cy="200" r="11" fill="none" stroke="#F5A623" stroke-width="4"/>
+      <circle cx="55" cy="200" r="3" fill="#F5A623"/>
+
+      <circle cx="470" cy="70" r="40" fill="#FFFFFF"/>
+      <g transform="translate(455,50)">
+        <circle cx="15" cy="14" r="13" fill="none" stroke="#F5A623" stroke-width="3.5"/>
+        <rect x="10" y="26" width="10" height="6" rx="2" fill="#F5A623"/>
+      </g>
+
+      <g transform="translate(190,60)">
+        <circle cx="30" cy="16" r="15" fill="#F5A623"/>
+        <path d="M8,120 Q8,60 30,50 Q52,60 52,120 Z" fill="#16213E"/>
+        <rect x="42" y="45" width="14" height="45" rx="7" fill="#16213E" transform="rotate(-25 49 65)"/>
+
+        <circle cx="110" cy="20" r="15" fill="#3A2A1A"/>
+        <path d="M88,120 Q88,64 110,54 Q132,64 132,120 Z" fill="#F5A623"/>
+        <rect x="86" y="49" width="14" height="45" rx="7" fill="#F5A623" transform="rotate(25 93 69)"/>
+      </g>
+
+      <path d="M480,190 Q500,170 495,200 Q515,190 500,215 Q490,230 480,190" fill="#F5A623" opacity="0.85"/>
+    </svg>
+  </div>
+
+  <!-- ADVISORS SECTION -->
+  <div class="section">
+    <div class="section-title"><span class="bar"></span> Choisis ton conseiller</div>
+
+    <!-- ADVISOR 1 -->
+    <div class="advisor-card">
+      <div class="advisor-photo">
+        <svg viewBox="0 0 280 320" preserveAspectRatio="xMidYMax slice">
+          <rect width="280" height="320" fill="#233658"/>
+          <circle cx="140" cy="120" r="58" fill="#3A2A1A"/>
+          <path d="M60,320 Q60,210 140,190 Q220,210 220,320 Z" fill="#1B2A4A"/>
+          <rect x="60" y="230" width="160" height="90" fill="#FFFFFF" opacity="0.05"/>
+        </svg>
+        <div class="advisor-photo-corner"></div>
+      </div>
+
+      <div class="advisor-info">
+        <div class="advisor-name">Laurent Denbin MASSOYA</div>
+        <div class="advisor-role-main">Co-fondateur de NextOri</div>
+        <div class="advisor-role-sub">Conseiller en orientation</div>
+
+        <div class="advisor-badge">
+          <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="7" width="18" height="12" rx="2" stroke="#fff" stroke-width="1.8"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" stroke="#fff" stroke-width="1.8"/></svg>
+          Orientation académique &amp; carrières
+        </div>
+
+        <div class="advisor-desc">
+          Passionné par l'éducation et les nouvelles technologies, je t'aide à découvrir tes forces et à construire un parcours qui te ressemble.
+        </div>
+
+        <div class="advisor-rating">
+          <span class="star">★</span> 4.9 <span class="sessions">245 sessions</span>
+        </div>
+      </div>
+
+      <div class="advisor-skills">
+        <div class="skill-row">
+          <div class="skill-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M4 14v-2a8 8 0 0 1 16 0v2" stroke="#16213E" stroke-width="1.8"/><rect x="3" y="14" width="5" height="6" rx="2" fill="#16213E"/><rect x="16" y="14" width="5" height="6" rx="2" fill="#16213E"/></svg></div>
+          Écoute et accompagnement
+        </div>
+        <div class="skill-row">
+          <div class="skill-icon"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#16213E" stroke-width="1.8"/><path d="M12 3v9l7 4" stroke="#16213E" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+          Analyse de profil RIASEC
+        </div>
+        <div class="skill-row">
+          <div class="skill-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3L2 8l10 5 8-4.2V15h1.5V8L12 3z" fill="#16213E"/><path d="M6 11.5V16c0 1.5 2.7 3 6 3s6-1.5 6-3v-4.5l-6 3.15-6-3.15z" fill="#16213E"/></svg></div>
+          Orientation scolaire &amp; universitaire
+        </div>
+        <div class="skill-row">
+          <div class="skill-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M4 19V5a2 2 0 0 1 2-2h11l3 3v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z" stroke="#16213E" stroke-width="1.8"/><path d="M8 8h6M8 12h8" stroke="#16213E" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+          Conseils pour choix de filières
+        </div>
+        <div class="skill-row">
+          <div class="skill-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.5-9.5 9-9.5 9z" stroke="#16213E" stroke-width="1.8"/></svg></div>
+          Motivation &amp; développement personnel
+        </div>
+
+        <button class="btn-avail">
+          <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="16" rx="2" stroke="#16213E" stroke-width="1.8"/><path d="M3 10h18M8 3v4M16 3v4" stroke="#16213E" stroke-width="1.8" stroke-linecap="round"/></svg>
+          Voir les disponibilités
+        </button>
+      </div>
+    </div>
+
+    <!-- ADVISOR 2 -->
+    <div class="advisor-card">
+      <div class="advisor-photo">
+        <svg viewBox="0 0 280 320" preserveAspectRatio="xMidYMax slice">
+          <rect width="280" height="320" fill="#233658"/>
+          <path d="M105,65 Q140,45 175,65 Q185,90 175,110 L105,110 Q95,90 105,65 Z" fill="#1B2A4A"/>
+          <circle cx="140" cy="120" r="52" fill="#3A2A1A"/>
+          <path d="M65,320 Q65,215 140,195 Q215,215 215,320 Z" fill="#233658"/>
+          <path d="M100,320 Q100,240 140,225 Q180,240 180,320 Z" fill="#F5F7FA" opacity="0.9"/>
+        </svg>
+        <div class="advisor-photo-corner"></div>
+      </div>
+
+      <div class="advisor-info">
+        <div class="advisor-name">Ndeye Awa NIANE</div>
+        <div class="advisor-role-main">Fondatrice de NextOri</div>
+        <div class="advisor-role-sub">Conseillère en orientation</div>
+
+        <div class="advisor-badge">
+          <svg viewBox="0 0 24 24" fill="none"><circle cx="9" cy="8" r="3" stroke="#fff" stroke-width="1.8"/><circle cx="17" cy="9" r="2.5" stroke="#fff" stroke-width="1.8"/><path d="M3 20c1-4 3.5-6 6-6s5 2 6 6" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/><path d="M15 14c2 0 4 2 5 6" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg>
+          Orientation personnelle &amp; professionnelle
+        </div>
+
+        <div class="advisor-desc">
+          À l'écoute et bienveillante, je t'accompagne pour mieux te connaître, clarifier tes choix et avancer avec confiance.
+        </div>
+
+        <div class="advisor-rating">
+          <span class="star">★</span> 4.9 <span class="sessions">238 sessions</span>
+        </div>
+      </div>
+
+      <div class="advisor-skills">
+        <div class="skill-row">
+          <div class="skill-icon"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="#16213E" stroke-width="1.8"/><path d="M4 20c1.5-4.5 5-7 8-7s6.5 2.5 8 7" stroke="#16213E" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+          Test de personnalité RIASEC
+        </div>
+        <div class="skill-row">
+          <div class="skill-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2l1.6 5.2L19 9l-5.4 1.8L12 16l-1.6-5.2L5 9l5.4-1.8L12 2z" fill="#16213E"/></svg></div>
+          Découverte des talents &amp; intérêts
+        </div>
+        <div class="skill-row">
+          <div class="skill-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M4 21V9M12 21V3M20 21v-7" stroke="#16213E" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+          Choix de métiers &amp; parcours
+        </div>
+        <div class="skill-row">
+          <div class="skill-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2c3 3 5 7 5 11a5 5 0 0 1-10 0c0-4 2-8 5-11z" stroke="#16213E" stroke-width="1.8"/><path d="M9 15l3 3 3-3" stroke="#16213E" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+          Préparation à l'avenir
+        </div>
+        <div class="skill-row">
+          <div class="skill-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.5-9.5 9-9.5 9z" stroke="#16213E" stroke-width="1.8"/></svg></div>
+          Soutien &amp; confiance en soi
+        </div>
+
+        <button class="btn-avail">
+          <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="16" rx="2" stroke="#16213E" stroke-width="1.8"/><path d="M3 10h18M8 3v4M16 3v4" stroke="#16213E" stroke-width="1.8" stroke-linecap="round"/></svg>
+          Voir les disponibilités
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- BOTTOM INFO BAR -->
+  <div class="info-bar">
+    <div class="info-item">
+      <div class="info-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z" stroke="#F5A623" stroke-width="1.8"/><path d="M9 12l2 2 4-4" stroke="#F5A623" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+      <div>
+        <div class="info-title">Confidentialité garantie</div>
+        <div class="info-desc">Tes informations sont protégées</div>
+      </div>
+    </div>
+    <div class="info-item">
+      <div class="info-icon"><svg viewBox="0 0 24 24" fill="none"><circle cx="9" cy="8" r="3" stroke="#F5A623" stroke-width="1.8"/><circle cx="17" cy="9" r="2.4" stroke="#F5A623" stroke-width="1.8"/><path d="M3 20c1-4 3.5-6 6-6s5 2 6 6" stroke="#F5A623" stroke-width="1.8" stroke-linecap="round"/><path d="M15 14c2 0 4 2 5 6" stroke="#F5A623" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+      <div>
+        <div class="info-title">Conseillers engagés</div>
+        <div class="info-desc">Une équipe passionnée à ton écoute</div>
+      </div>
+    </div>
+    <div class="info-item">
+      <div class="info-icon"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#F5A623" stroke-width="1.8"/><circle cx="12" cy="12" r="4" stroke="#F5A623" stroke-width="1.8"/><path d="M12 2v3M12 19v3" stroke="#F5A623" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+      <div>
+        <div class="info-title">Accompagnement personnalisé</div>
+        <div class="info-desc">Des conseils adaptés à ton profil</div>
+      </div>
+    </div>
+    <div class="info-item">
+      <div class="info-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M4 19V9M11 19V5M18 19v-7" stroke="#F5A623" stroke-width="1.8" stroke-linecap="round"/><path d="M3 19h18" stroke="#F5A623" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+      <div>
+        <div class="info-title">Ton avenir, ton choix</div>
+        <div class="info-desc">Nous t'aidons à faire le meilleur choix</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

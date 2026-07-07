@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Test d'orientation RIASEC</title>
+<style>
+  :root{
+    --purple:#7C3AED;
+    --blue:#4F46E5;
+    --bg:#F7F8FC;
+    --card-border:#E7E9F3;
+    --text-dark:#1F2333;
+    --text-gray:#6B7280;
+    --gray-light:#EEF0F6;
+    --gray-track:#E5E7EB;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:var(--bg);
+    color:var(--text-dark);
+    display:flex;
+    justify-content:center;
+  }
+  .phone-shell{
+    width:100%;
+    max-width:440px;
+    min-height:100vh;
+    background:#fff;
+    display:flex;
+    flex-direction:column;
+    position:relative;
+  }
+  .banner{
+    background:linear-gradient(135deg,var(--blue),var(--purple));
+    color:#fff;
+    padding:16px 20px;
+    display:flex;
+    gap:12px;
+    align-items:flex-start;
+    position:relative;
+  }
+  .banner .icon{font-size:18px;line-height:1;margin-top:2px;}
+  .banner-text h3{margin:0 0 4px;font-size:15px;font-weight:700;}
+  .banner-text p{margin:0;font-size:13px;line-height:1.4;opacity:0.92;}
+  .banner .close{
+    position:absolute;top:14px;right:16px;
+    background:none;border:none;color:#fff;
+    font-size:18px;cursor:pointer;opacity:0.85;
+  }
+  .banner.hidden{display:none;}
+
+  .header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:14px 16px 10px;
+  }
+  .header-left{display:flex;align-items:center;gap:10px;}
+  .back-btn{
+    background:none;border:none;font-size:20px;color:var(--text-dark);
+    cursor:pointer;display:flex;align-items:center;padding:4px;
+  }
+  .header-title{display:flex;align-items:center;gap:8px;font-weight:700;font-size:16px;}
+  .header-title .brain{font-size:18px;}
+  .counter{color:var(--text-gray);font-size:14px;font-weight:600;}
+
+  .progress-wrap{padding:0 16px 8px;}
+  .progress-track{
+    width:100%;height:6px;background:var(--gray-track);
+    border-radius:999px;overflow:hidden;
+  }
+  .progress-fill{
+    height:100%;
+    background:linear-gradient(90deg,var(--blue),var(--purple));
+    border-radius:999px;
+    transition:width .3s ease;
+  }
+  .progress-meta{
+    display:flex;justify-content:space-between;
+    font-size:12.5px;color:var(--text-gray);
+    margin-top:6px;
+  }
+
+  hr.sep{border:none;border-top:1px solid var(--card-border);margin:10px 0 0;}
+
+  .content{padding:18px 16px 12px;flex:1;}
+  .q-label{
+    display:flex;align-items:center;gap:8px;
+    color:var(--text-gray);font-size:13.5px;font-weight:600;margin-bottom:12px;
+  }
+  .q-label .bulb{font-size:16px;}
+  .q-title{
+    font-size:21px;font-weight:800;line-height:1.35;
+    margin:0 0 16px;
+    color:var(--text-dark);
+  }
+  .hint{
+    display:flex;align-items:center;gap:8px;
+    background:var(--gray-light);
+    border-radius:12px;
+    padding:10px 14px;
+    font-size:13.5px;color:var(--text-gray);
+    margin-bottom:16px;
+  }
+  .hint b{color:var(--text-dark);}
+
+  .options{display:flex;flex-direction:column;gap:12px;}
+  .option{
+    display:flex;align-items:center;gap:14px;
+    border:1.5px solid var(--card-border);
+    border-radius:16px;
+    padding:16px 16px;
+    cursor:pointer;
+    background:#fff;
+    transition:border-color .15s ease, background .15s ease, box-shadow .15s ease;
+  }
+  .option:active{transform:scale(0.995);}
+  .option .letter{
+    flex:none;
+    width:34px;height:34px;
+    border-radius:50%;
+    border:1.5px solid #CBD0DE;
+    display:flex;align-items:center;justify-content:center;
+    font-weight:700;font-size:14px;color:var(--text-gray);
+    transition:all .15s ease;
+  }
+  .option .label{
+    font-size:15.5px;font-weight:600;color:var(--text-dark);
+    line-height:1.35;
+  }
+  .option.selected{
+    border-color:var(--purple);
+    background:#F6F4FE;
+    box-shadow:0 0 0 1px var(--purple) inset;
+  }
+  .option.selected .letter{
+    background:linear-gradient(135deg,var(--blue),var(--purple));
+    border-color:transparent;
+    color:#fff;
+  }
+
+  .footer{
+    padding:14px 16px calc(14px + env(safe-area-inset-bottom));
+    text-align:center;
+  }
+  .footer .helper{
+    font-size:13px;color:var(--text-gray);margin-bottom:10px;
+  }
+  .next-btn{
+    width:100%;
+    padding:16px;
+    border:none;
+    border-radius:14px;
+    font-size:16px;
+    font-weight:700;
+    color:#fff;
+    background:#D3D6E0;
+    cursor:not-allowed;
+    display:flex;align-items:center;justify-content:center;gap:6px;
+    transition:background .2s ease, box-shadow .2s ease;
+  }
+  .next-btn.active{
+    background:linear-gradient(135deg,var(--blue),var(--purple));
+    cursor:pointer;
+    box-shadow:0 8px 18px rgba(124,58,237,0.28);
+  }
+  .next-btn .arrow{transition:transform .15s ease;}
+  .next-btn.active:active .arrow{transform:translateX(3px);}
+
+  .bottom-nav{
+    display:flex;
+    border-top:1px solid var(--card-border);
+    padding:8px 4px calc(8px + env(safe-area-inset-bottom));
+    background:#fff;
+  }
+  .nav-item{
+    flex:1;
+    display:flex;flex-direction:column;align-items:center;gap:3px;
+    font-size:11px;color:var(--text-gray);
+    padding:4px 0;
+  }
+  .nav-item .nav-icon{font-size:19px;}
+  .nav-item.active{color:var(--purple);}
+  .nav-item.active .nav-icon{color:var(--purple);}
+  .nav-underline{
+    height:3px;width:22px;border-radius:3px;
+    background:transparent;margin-bottom:2px;
+  }
+  .nav-item.active .nav-underline{background:var(--purple);}
+
+  .done-screen{
+    flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    padding:40px 24px;text-align:center;gap:14px;
+  }
+  .done-screen .emoji{font-size:52px;}
+  .done-screen h2{margin:0;font-size:22px;font-weight:800;}
+  .done-screen p{margin:0;color:var(--text-gray);font-size:14.5px;line-height:1.5;}
+  .restart-btn{
+    margin-top:10px;
+    padding:14px 28px;
+    border:none;border-radius:14px;
+    background:linear-gradient(135deg,var(--blue),var(--purple));
+    color:#fff;font-weight:700;font-size:15px;cursor:pointer;
+  }
+
+  @media (min-width:600px){
+    .phone-shell{
+      max-width:480px;
+      min-height:88vh;
+      margin:24px 0;
+      border-radius:28px;
+      box-shadow:0 20px 60px rgba(20,20,50,0.15);
+      overflow:hidden;
+      border:1px solid #EDEEF5;
+    }
+    .banner{border-radius:28px 28px 0 0;}
+  }
+  @media (min-width:900px){
+    .phone-shell{max-width:520px;}
+    .q-title{font-size:23px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="phone-shell">
+
+  <div class="banner" id="banner">
+    <div class="icon">ⓘ</div>
+    <div class="banner-text">
+      <h3>Test basé sur le modèle RIASEC</h3>
+      <p>Réponds honnêtement pour obtenir les meilleures suggestions. Il n'y a pas de bonnes ou mauvaises réponses.</p>
+    </div>
+    <button class="close" onclick="document.getElementById('banner').classList.add('hidden')">✕</button>
+  </div>
+
+  <div class="header">
+    <div class="header-left">
+      <button class="back-btn" onclick="goBack()">‹</button>
+      <div class="header-title"><span class="brain">🧠</span> Test d'orientation RIASEC</div>
+    </div>
+    <div class="counter" id="counter">1/20</div>
+  </div>
+
+  <div class="progress-wrap">
+    <div class="progress-track"><div class="progress-fill" id="progressFill" style="width:5%"></div></div>
+    <div class="progress-meta">
+      <span id="progressPct">5% complété</span>
+      <span>⏱ ~10 min</span>
+    </div>
+  </div>
+
+  <hr class="sep">
+
+  <div id="quizArea">
+    <div class="content">
+      <div class="q-label"><span class="bulb">💡</span> <span id="qLabel">Question 1 sur 20</span></div>
+      <h1 class="q-title" id="qTitle"></h1>
+      <div class="hint">💬 Choisis l'option qui te correspond le <b>mieux</b></div>
+      <div class="options" id="optionsList"></div>
+    </div>
+
+    <div class="footer">
+      <div class="helper" id="helperText">Sélectionne une réponse pour continuer</div>
+      <button class="next-btn" id="nextBtn" onclick="nextQuestion()">Suivant <span class="arrow">›</span></button>
+    </div>
+  </div>
+
+  <div id="doneArea" style="display:none;" class="done-screen">
+    <div class="emoji">🎉</div>
+    <h2>Test terminé !</h2>
+    <p>Merci d'avoir répondu aux 20 questions. Tes résultats d'orientation RIASEC sont prêts.</p>
+    <button class="restart-btn" onclick="restartQuiz()">Recommencer le test</button>
+  </div>
+
+  <div class="bottom-nav">
+    <div class="nav-item"><div class="nav-underline"></div><span class="nav-icon">🏠</span>Accueil</div>
+    <div class="nav-item active"><div class="nav-underline"></div><span class="nav-icon">🎯</span>Test</div>
+    <div class="nav-item"><div class="nav-underline"></div><span class="nav-icon">🔎</span>Carrières</div>
+    <div class="nav-item"><div class="nav-underline"></div><span class="nav-icon">🎓</span>Universités</div>
+    <div class="nav-item"><div class="nav-underline"></div><span class="nav-icon">👤</span>Profil</div>
+  </div>
+
+</div>
+
+<script>
+const questions = [
+  {
+    title: "Quelle activité préfères-tu faire pendant ton temps libre ?",
+    options: [
+      "Réparer ou construire des objets",
+      "Résoudre des énigmes ou faire des recherches",
+      "Dessiner, écrire ou jouer de la musique",
+      "Aider des amis avec leurs problèmes",
+      "Organiser des événements ou diriger un groupe",
+      "Classer, trier ou organiser des choses"
+    ]
+  },
+  {
+    title: "Dans un projet de groupe, quel rôle prends-tu naturellement ?",
+    options: [
+      "Celui qui fabrique ou assemble les éléments concrets",
+      "Celui qui analyse les données et cherche des solutions",
+      "Celui qui propose des idées créatives et originales",
+      "Celui qui veille à ce que tout le monde se sente inclus",
+      "Celui qui prend les décisions et motive l'équipe",
+      "Celui qui planifie, suit les tâches et les délais"
+    ]
+  },
+  {
+    title: "Quel type de matière scolaire t'a le plus intéressé ?",
+    options: [
+      "Technologie ou travaux pratiques",
+      "Sciences ou mathématiques",
+      "Arts plastiques ou musique",
+      "Sciences humaines ou psychologie",
+      "Économie ou gestion",
+      "Comptabilité ou bureautique"
+    ]
+  },
+  {
+    title: "Quel environnement de travail t'attire le plus ?",
+    options: [
+      "Un atelier ou un chantier en plein air",
+      "Un laboratoire ou un centre de recherche",
+      "Un studio créatif ou une salle de spectacle",
+      "Une école, un hôpital ou une association",
+      "Une entreprise dynamique ou une start-up",
+      "Un bureau bien organisé"
+    ]
+  },
+  {
+    title: "Que préfères-tu regarder comme émission ou vidéo ?",
+    options: [
+      "Bricolage, mécanique ou construction",
+      "Documentaires scientifiques",
+      "Films, art ou création artistique",
+      "Témoignages ou histoires humaines",
+      "Business, entrepreneuriat ou débats",
+      "Tutoriels d'organisation ou de gestion"
+    ]
+  },
+  {
+    title: "Quel objectif te motive le plus dans un travail ?",
+    options: [
+      "Créer quelque chose de tangible et utile",
+      "Comprendre comment les choses fonctionnent",
+      "Exprimer ma créativité et mon originalité",
+      "Avoir un impact positif sur les autres",
+      "Réussir et prendre des responsabilités",
+      "Assurer un travail précis et fiable"
+    ]
+  },
+  {
+    title: "Comment réagis-tu face à un problème complexe ?",
+    options: [
+      "Je cherche une solution pratique et manuelle",
+      "J'analyse chaque détail avant d'agir",
+      "J'imagine des approches originales",
+      "Je demande l'avis des autres et j'écoute",
+      "Je prends les devants et propose un plan",
+      "Je suis une méthode structurée étape par étape"
+    ]
+  },
+  {
+    title: "Quel type de sport ou d'activité physique préfères-tu ?",
+    options: [
+      "Un sport nécessitant force et habileté manuelle",
+      "Un sport stratégique demandant réflexion",
+      "Une activité artistique comme la danse",
+      "Un sport d'équipe axé sur la coopération",
+      "Un sport compétitif avec un esprit de leader",
+      "Une activité régulière et disciplinée comme la course"
+    ]
+  },
+  {
+    title: "Quel métier t'attirerait le plus parmi ceux-ci ?",
+    options: [
+      "Électricien ou mécanicien",
+      "Chercheur ou ingénieur",
+      "Designer ou musicien",
+      "Enseignant ou infirmier",
+      "Entrepreneur ou commercial",
+      "Comptable ou assistant administratif"
+    ]
+  },
+  {
+    title: "Dans une bibliothèque, quel rayon visiterais-tu en premier ?",
+    options: [
+      "Bricolage et mécanique",
+      "Sciences et technologies",
+      "Art et littérature",
+      "Développement personnel et société",
+      "Business et management",
+      "Organisation et productivité"
+    ]
+  },
+  {
+    title: "Que fais-tu quand tu as une idée en tête ?",
+    options: [
+      "Je la construis ou la fabrique directement",
+      "Je fais des recherches pour la valider",
+      "Je la transforme en création artistique",
+      "J'en parle avec d'autres pour avoir leur avis",
+      "Je cherche à la vendre ou à convaincre",
+      "Je la planifie soigneusement avant d'agir"
+    ]
+  },
+  {
+    title: "Quelle qualité penses-tu avoir le plus développée ?",
+    options: [
+      "L'habileté manuelle",
+      "L'esprit d'analyse",
+      "La créativité",
+      "L'empathie",
+      "Le leadership",
+      "Le sens de l'organisation"
+    ]
+  },
+  {
+    title: "Quel genre de défi te stimule le plus ?",
+    options: [
+      "Réparer ou fabriquer quelque chose de complexe",
+      "Résoudre un problème scientifique difficile",
+      "Créer une œuvre originale",
+      "Aider quelqu'un à surmonter une difficulté",
+      "Lancer un nouveau projet ambitieux",
+      "Mettre de l'ordre dans un système compliqué"
+    ]
+  },
+  {
+    title: "Quel outil utilises-tu le plus volontiers ?",
+    options: [
+      "Des outils manuels ou machines",
+      "Des logiciels d'analyse de données",
+      "Des outils de création (dessin, musique, écriture)",
+      "Des outils de communication et d'écoute",
+      "Des outils de gestion de projet et de vente",
+      "Des tableurs et outils de classement"
+    ]
+  },
+  {
+    title: "Comment aimes-tu apprendre de nouvelles choses ?",
+    options: [
+      "En pratiquant directement avec mes mains",
+      "En étudiant la théorie en profondeur",
+      "En explorant librement et en expérimentant",
+      "En échangeant avec d'autres personnes",
+      "En relevant des défis concrets",
+      "En suivant une méthode claire et structurée"
+    ]
+  },
+  {
+    title: "Quel type de reconnaissance te tient le plus à cœur ?",
+    options: [
+      "Que mon travail manuel soit solide et durable",
+      "Que mes idées soient scientifiquement justes",
+      "Que ma créativité soit reconnue",
+      "Que mon aide ait vraiment servi aux autres",
+      "Que mon influence ait fait avancer les choses",
+      "Que mon travail soit précis et fiable"
+    ]
+  },
+  {
+    title: "Dans une équipe, ce qui t'agace le plus c'est...",
+    options: [
+      "Le manque de moyens pratiques pour agir",
+      "Le manque de rigueur dans l'analyse",
+      "Le manque de place pour la créativité",
+      "Le manque d'écoute entre les membres",
+      "Le manque de décisions claires",
+      "Le manque d'organisation générale"
+    ]
+  },
+  {
+    title: "Quel type de projet aimerais-tu mener ?",
+    options: [
+      "Construire ou restaurer quelque chose",
+      "Mener une étude ou une expérience",
+      "Créer une œuvre ou un contenu original",
+      "Organiser une action solidaire",
+      "Créer ou développer une entreprise",
+      "Mettre en place un système efficace"
+    ]
+  },
+  {
+    title: "Que préférerais-tu faire un samedi après-midi ?",
+    options: [
+      "Bricoler ou jardiner",
+      "Lire un article scientifique ou faire une expérience",
+      "Peindre, écrire ou faire de la musique",
+      "Passer du temps à aider ou écouter un proche",
+      "Travailler sur un projet personnel ambitieux",
+      "Ranger, planifier ou organiser mes affaires"
+    ]
+  },
+  {
+    title: "Pour finir, quelle phrase te décrit le mieux ?",
+    options: [
+      "Je préfère faire les choses de mes mains",
+      "J'aime comprendre le pourquoi des choses",
+      "J'ai besoin de m'exprimer librement",
+      "Je me sens utile quand j'aide les autres",
+      "J'aime prendre des initiatives et convaincre",
+      "J'aime que tout soit clair et bien rangé"
+    ]
+  }
+];
+
+let current = 0;
+let selectedOption = null;
+const answers = new Array(questions.length).fill(null);
+const letters = ["A","B","C","D","E","F"];
+
+function renderQuestion(){
+  const q = questions[current];
+  document.getElementById('qLabel').textContent = `Question ${current+1} sur ${questions.length}`;
+  document.getElementById('counter').textContent = `${current+1}/${questions.length}`;
+  document.getElementById('qTitle').textContent = q.title;
+
+  const pct = Math.round(((current+1)/questions.length)*100);
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressPct').textContent = pct + '% complété';
+
+  const list = document.getElementById('optionsList');
+  list.innerHTML = '';
+  q.options.forEach((opt, i)=>{
+    const div = document.createElement('div');
+    div.className = 'option';
+    div.onclick = ()=>selectOption(i);
+    div.innerHTML = `<div class="letter">${letters[i]}</div><div class="label">${opt}</div>`;
+    if(answers[current] === i) div.classList.add('selected');
+    list.appendChild(div);
+  });
+
+  selectedOption = answers[current];
+  updateNextBtn();
+}
+
+function selectOption(i){
+  answers[current] = i;
+  selectedOption = i;
+  document.querySelectorAll('.option').forEach((el, idx)=>{
+    el.classList.toggle('selected', idx===i);
+  });
+  updateNextBtn();
+}
+
+function updateNextBtn(){
+  const btn = document.getElementById('nextBtn');
+  const helper = document.getElementById('helperText');
+  if(selectedOption !== null){
+    btn.classList.add('active');
+    helper.textContent = 'Prêt à continuer';
+  } else {
+    btn.classList.remove('active');
+    helper.textContent = 'Sélectionne une réponse pour continuer';
+  }
+}
+
+function nextQuestion(){
+  if(selectedOption === null) return;
+  if(current < questions.length - 1){
+    current++;
+    renderQuestion();
+  } else {
+    document.getElementById('quizArea').style.display = 'none';
+    document.getElementById('doneArea').style.display = 'flex';
+  }
+}
+
+function goBack(){
+  if(current > 0){
+    current--;
+    renderQuestion();
+  }
+}
+
+function restartQuiz(){
+  current = 0;
+  answers.fill(null);
+  document.getElementById('doneArea').style.display = 'none';
+  document.getElementById('quizArea').style.display = 'block';
+  renderQuestion();
+}
+
+renderQuestion();
+</script>
+
+</body>
+</html>

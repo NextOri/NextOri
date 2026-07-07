@@ -18,3 +18,6 @@ nextori_db
 1. Créer une base nommée nextori_db.
 2. Importer schema.sql.
 3. Importer seed.sql.
+
+## Tester la base de données
+Requetes sql validées

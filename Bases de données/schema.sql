@@ -176,6 +176,12 @@ CREATE TABLE `test_riasec` (
   `profil_dominant` varchar(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+ALTER TABLE test_riasec
+ADD CONSTRAINT fk_test_questionnaire
+FOREIGN KEY (id_questionnaire)
+REFERENCES questionnaire(id_questionnaire)
+ON UPDATE CASCADE
+ON DELETE RESTRICT;
 -- --------------------------------------------------------
 
 --

@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tes résultats — Orientation RIASEC</title>
+<style>
+  :root{
+    --navy-900:#0b1233;
+    --navy-800:#131b45;
+    --navy-700:#1c2557;
+    --purple-600:#7c3aed;
+    --purple-500:#9333ea;
+    --magenta-500:#c026d3;
+    --pink-500:#ec4899;
+    --blue-500:#3b82f6;
+    --slate-600:#4b5563;
+    --slate-700:#374151;
+    --dark-800:#1f2937;
+    --dark-900:#111827;
+    --cream-50:#fffaf0;
+    --cream-100:#fef3d7;
+    --amber-500:#f59e0b;
+    --amber-600:#ea580c;
+    --green-600:#16a34a;
+    --lav-50:#f2f2fb;
+    --lav-100:#eceefc;
+    --ink-900:#111827;
+    --ink-600:#4b5563;
+    --ink-400:#9ca3af;
+    --card-radius:20px;
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:var(--lav-50);
+    color:var(--ink-900);
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .page{
+    width:100%;
+    padding:0 0 48px;
+  }
+
+  /* HEADER */
+  .header{
+    background:linear-gradient(135deg,var(--navy-900) 0%, var(--navy-700) 100%);
+    padding:28px 20px 40px;
+    border-radius:0 0 28px 28px;
+    color:#fff;
+    display:flex;
+    align-items:center;
+    gap:14px;
+  }
+  .header .icon{
+    width:44px;height:44px;border-radius:12px;
+    background:rgba(255,255,255,0.12);
+    display:flex;align-items:center;justify-content:center;
+    font-size:20px;flex-shrink:0;
+  }
+  .header h1{margin:0;font-size:22px;font-weight:800;letter-spacing:-0.02em;}
+  .header p{margin:2px 0 0;font-size:13px;color:#b6bbdc;}
+
+  .container{
+    padding:0 20px;
+    margin-top:-14px;
+    max-width:1200px;
+    margin-left:auto;
+    margin-right:auto;
+  }
+
+  /* SUCCESS BANNER */
+  .success{
+    background:linear-gradient(135deg,#fff7e6,#ffedcc);
+    border:1px solid #ffe2ad;
+    border-radius:18px;
+    padding:16px 18px;
+    display:flex;
+    gap:12px;
+    align-items:flex-start;
+    margin-top:20px;
+    box-shadow:0 6px 20px rgba(180,120,0,0.06);
+  }
+  .success .emoji{font-size:24px;line-height:1;}
+  .success strong{display:block;font-size:15px;color:#7a4a00;margin-bottom:2px;}
+  .success span{font-size:13.5px;color:#8a5c10;line-height:1.5;}
+
+  /* PROFILE CARD */
+  .profile-card{
+    background:#fff;
+    border-radius:22px;
+    padding:24px;
+    margin-top:16px;
+    box-shadow:0 10px 30px rgba(20,20,60,0.06);
+  }
+  .profile-head{display:flex;align-items:center;gap:12px;margin-bottom:20px;}
+  .profile-head .badge{
+    width:42px;height:42px;border-radius:12px;
+    background:var(--navy-900);
+    display:flex;align-items:center;justify-content:center;
+    color:#fff;font-size:18px;
+  }
+  .profile-head h2{margin:0;font-size:17px;font-weight:800;}
+  .profile-head p{margin:1px 0 0;font-size:12.5px;color:var(--ink-400);}
+
+  .trait-row{margin-bottom:18px;}
+  .trait-row:last-of-type{margin-bottom:0;}
+  .trait-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;}
+  .trait-name{display:flex;align-items:center;gap:10px;font-weight:700;font-size:14.5px;}
+  .trait-name .ic{font-size:17px;}
+  .trait-name small{display:block;font-weight:500;color:var(--ink-400);font-size:11.5px;}
+  .trait-pct{font-weight:800;font-size:15px;}
+  .bar-track{height:9px;border-radius:99px;background:#eef0f6;overflow:hidden;}
+  .bar-fill{height:100%;border-radius:99px;}
+  .fill-inv{background:linear-gradient(90deg,#7c3aed,#a855f7);}
+  .fill-art{background:linear-gradient(90deg,#ec4899,#f472b6);}
+  .fill-rea{background:linear-gradient(90deg,#3b82f6,#60a5fa);}
+  .trait-desc{font-size:13px;color:var(--ink-600);line-height:1.6;margin:10px 0 16px;}
+
+  .trait-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+  .pill{
+    background:#f3e8ff;color:#7c3aed;
+    font-size:12.5px;font-weight:700;
+    padding:6px 13px;border-radius:99px;
+  }
+  .subhead{font-size:13.5px;font-weight:700;color:var(--ink-600);margin:18px 0 0;}
+
+  /* INFO BOXES */
+  .note-box{
+    border-radius:18px;
+    padding:16px 18px;
+    margin-top:16px;
+    display:flex;gap:12px;
+    font-size:13px;line-height:1.6;
+  }
+  .note-box.yellow{
+    background:#fffdf0;border:1px solid #fbe8a6;
+  }
+  .note-box.blue{
+    background:#eef1ff;border:1px solid #dde3ff;
+  }
+  .note-box .ic{font-size:18px;flex-shrink:0;margin-top:1px;}
+  .note-box ul{margin:6px 0 0;padding:0;list-style:none;}
+  .note-box li{margin-bottom:8px;color:var(--ink-600);}
+  .note-box li:last-child{margin-bottom:0;}
+  .note-box b{color:var(--ink-900);}
+  .note-box p.lead{margin:0 0 8px;color:var(--ink-600);}
+  .note-box p.lead b{color:var(--navy-900);}
+  .note-box .accent{color:#7c3aed;font-weight:700;}
+
+  /* SECTION TITLE */
+  .section-title{
+    display:flex;align-items:center;gap:10px;
+    margin:28px 0 4px;
+  }
+  .section-title h3{margin:0;font-size:18px;font-weight:800;}
+  .section-sub{font-size:13px;color:var(--ink-400);margin:0 0 16px;}
+
+  /* CAREER GRID */
+  .career-grid{
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+  }
+
+  .career-card{
+    background:#fff;
+    border-radius:var(--card-radius);
+    overflow:hidden;
+    box-shadow:0 10px 26px rgba(20,20,60,0.07);
+    display:flex;flex-direction:column;
+  }
+  .career-head{
+    padding:18px 20px;
+    color:#fff;
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  .career-head .head-icon{
+    width:38px;height:38px;border-radius:11px;
+    background:rgba(255,255,255,0.18);
+    display:flex;align-items:center;justify-content:center;
+    font-size:18px;margin-bottom:8px;
+  }
+  .compat-label{font-size:10.5px;letter-spacing:0.06em;font-weight:700;opacity:0.85;text-transform:uppercase;}
+  .compat-pct{font-size:24px;font-weight:800;line-height:1.2;margin-top:2px;}
+  .compat-sub{font-size:12px;opacity:0.85;font-weight:600;}
+  .target-ic{font-size:20px;opacity:0.9;}
+
+  .head-purple{background:linear-gradient(135deg,#7c3aed,#c026d3);}
+  .head-slate{background:linear-gradient(135deg,#4b5563,#6b7280);}
+  .head-dark{background:linear-gradient(135deg,#1f2937,#0f1420);}
+
+  .career-body{padding:18px 20px 20px;flex:1;display:flex;flex-direction:column;}
+  .career-body h4{margin:0 0 8px;font-size:18px;font-weight:800;}
+  .tag-field{
+    display:inline-block;background:#f3e8ff;color:#8b3ff0;
+    font-size:11.5px;font-weight:700;padding:4px 11px;border-radius:99px;
+    margin-bottom:10px;width:fit-content;
+  }
+  .career-body p.desc{font-size:13.5px;color:var(--ink-600);line-height:1.55;margin:0 0 16px;}
+
+  .stat-row{display:flex;gap:10px;margin-bottom:16px;}
+  .stat{
+    flex:1;background:#f7f8fb;border-radius:12px;
+    padding:10px 6px;text-align:center;
+  }
+  .stat .val{font-size:12.5px;font-weight:800;color:var(--ink-900);}
+  .stat .lab{font-size:10px;color:var(--ink-400);margin-top:2px;}
+
+  .formation-box{
+    background:#eef4ff;border-radius:14px;
+    padding:12px 14px;margin-bottom:16px;
+  }
+  .formation-box .flabel{
+    font-size:10.5px;font-weight:700;color:#3b6fe0;
+    text-transform:uppercase;letter-spacing:0.04em;
+    display:flex;align-items:center;gap:6px;margin-bottom:6px;
+  }
+  .formation-name{display:flex;align-items:center;gap:8px;font-size:13.5px;font-weight:700;margin-bottom:2px;}
+  .formation-name .fic{
+    width:22px;height:22px;border-radius:7px;background:#dbe6ff;
+    display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;
+  }
+  .formation-meta{font-size:11.5px;color:var(--ink-400);margin-bottom:8px;margin-left:30px;}
+  .uni-row{font-size:11.5px;color:var(--ink-600);margin-left:0;display:flex;flex-wrap:wrap;gap:6px;align-items:center;}
+  .uni-pill{
+    background:#fff;border:1px solid #dbe6ff;color:#3b6fe0;
+    font-size:11px;font-weight:600;padding:3px 9px;border-radius:99px;
+  }
+  .uni-more{font-size:11px;color:var(--ink-400);}
+
+  .btn-dark{
+    margin-top:auto;
+    background:var(--navy-900);color:#fff;border:none;
+    padding:13px 16px;border-radius:13px;
+    font-size:13.5px;font-weight:700;
+    display:flex;align-items:center;justify-content:center;gap:6px;
+    cursor:pointer;width:100%;
+  }
+
+  /* BEST CARD */
+  .best-card{
+    grid-column:1/-1;
+    background:linear-gradient(160deg,#fffdf5,#fff6e0);
+    border:1px solid #ffe6a3;
+    border-radius:22px;
+    padding:22px;
+    position:relative;
+  }
+  .best-badge{
+    display:flex;align-items:center;gap:6px;
+    font-size:12px;font-weight:800;color:#b8860b;
+    text-transform:uppercase;letter-spacing:0.03em;
+    margin-bottom:14px;
+  }
+  .best-trophy{
+    position:absolute;top:20px;right:20px;
+    width:42px;height:42px;border-radius:50%;
+    background:linear-gradient(135deg,#f59e0b,#ea580c);
+    display:flex;align-items:center;justify-content:center;
+    color:#fff;font-size:18px;box-shadow:0 6px 14px rgba(234,88,12,0.35);
+  }
+  .best-top{display:flex;align-items:center;gap:12px;margin-bottom:10px;}
+  .best-icon{
+    width:44px;height:44px;border-radius:13px;background:#1f2233;
+    display:flex;align-items:center;justify-content:center;color:#fff;font-size:20px;
+  }
+  .best-top h4{margin:0;font-size:20px;font-weight:800;}
+  .best-desc{font-size:13.5px;color:var(--ink-600);margin:8px 0 18px;line-height:1.55;max-width:520px;}
+  .best-score{background:#fff;border-radius:16px;padding:16px 18px;margin-bottom:16px;}
+  .best-score-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px;}
+  .best-score-top span:first-child{font-size:13px;color:var(--ink-600);font-weight:600;}
+  .best-score-top span:last-child{font-size:22px;font-weight:800;color:#16a34a;}
+  .best-score .bar-track{height:10px;}
+  .best-score .note{font-size:11.5px;color:var(--ink-400);margin-top:8px;}
+  .best-meta{display:flex;gap:12px;margin-bottom:18px;}
+  .best-meta .m{flex:1;background:#fff;border-radius:13px;padding:12px 14px;}
+  .best-meta .m .lab{font-size:11px;color:var(--ink-400);margin-bottom:3px;}
+  .best-meta .m .val{font-size:15px;font-weight:800;}
+  .btn-gold{
+    background:linear-gradient(135deg,#f59e0b,#ea580c);
+    color:#fff;border:none;padding:14px 16px;border-radius:14px;
+    font-size:14px;font-weight:800;width:100%;cursor:pointer;
+  }
+
+  /* CTA / MISC BOXES */
+  .misc-grid{display:flex;flex-direction:column;gap:14px;margin-top:24px;}
+  .cta-box{
+    background:#eef1ff;border-radius:18px;padding:16px 18px;
+    display:flex;gap:14px;align-items:center;
+  }
+  .cta-box .cta-ic{
+    width:38px;height:38px;border-radius:11px;background:#fff;
+    display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;
+  }
+  .cta-box .cta-text strong{display:block;font-size:14px;margin-bottom:2px;}
+  .cta-box .cta-text p{margin:0;font-size:12.5px;color:var(--ink-600);line-height:1.5;}
+  .cta-btn-dark{
+    margin-top:12px;background:var(--navy-900);color:#fff;border:none;
+    padding:12px;border-radius:12px;font-size:13.5px;font-weight:700;
+    width:100%;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;
+  }
+
+  .search-box{
+    background:#fff;border-radius:18px;padding:18px;
+    box-shadow:0 8px 20px rgba(20,20,60,0.05);
+  }
+  .search-box h4{margin:0 0 12px;font-size:15px;font-weight:800;display:flex;align-items:center;gap:8px;}
+  .search-input{
+    width:100%;padding:12px 16px;border-radius:12px;
+    border:1px solid #e5e7f0;background:#f7f8fb;
+    font-size:13.5px;color:var(--ink-400);
+  }
+
+  .uni-box{
+    background:#eef1ff;border-radius:18px;padding:16px 18px;
+    display:flex;align-items:center;justify-content:space-between;gap:10px;
+  }
+  .uni-box .l{display:flex;align-items:center;gap:12px;}
+  .uni-box .cta-ic{background:#fff;}
+  .uni-box strong{font-size:14px;display:block;}
+  .uni-box span{font-size:12px;color:var(--ink-600);}
+  .chev{font-size:18px;color:var(--ink-400);}
+
+  .riasec-box{
+    background:#f7f0ff;border:1px solid #ecd9ff;border-radius:18px;padding:18px;
+  }
+  .riasec-box .l{display:flex;gap:12px;margin-bottom:12px;}
+  .riasec-box .cta-ic{background:#fff;}
+  .riasec-box strong{font-size:14px;display:block;margin-bottom:4px;}
+  .riasec-box p{margin:0;font-size:12.5px;color:var(--ink-600);line-height:1.6;}
+  .riasec-btns{display:flex;gap:10px;margin-top:14px;}
+  .btn-outline{
+    flex:1;background:#fff;border:1px solid #d9c4f5;color:#7c3aed;
+    padding:11px;border-radius:11px;font-size:13px;font-weight:700;cursor:pointer;
+  }
+  .btn-fill{
+    flex:1;background:var(--navy-900);border:none;color:#fff;
+    padding:11px;border-radius:11px;font-size:13px;font-weight:700;cursor:pointer;
+  }
+
+  /* RESPONSIVE */
+  /* Tout reste sur UNE seule colonne, on agrandit juste un peu le contenu
+     pour tablette et ordinateur — même déroulé vertical que le mobile. */
+  @media(min-width:720px){
+    .header{padding:32px 36px 46px;border-radius:0 0 30px 30px;}
+    .header h1{font-size:24px;}
+    .header p{font-size:14px;}
+    .container{padding:0 36px;max-width:680px;}
+    body{font-size:15px;}
+  }
+
+  @media(min-width:1080px){
+    .header{padding:38px 60px 54px;}
+    .header h1{font-size:27px;}
+    .header p{font-size:14.5px;}
+    .container{padding:0 40px;max-width:760px;}
+    .career-card h4{font-size:19px;}
+    .best-top h4{font-size:22px;}
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="header">
+    <div class="icon">✨</div>
+    <div>
+      <h1>Tes résultats</h1>
+      <p>10 carrières trouvées</p>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <div class="success">
+      <div class="emoji">🎉</div>
+      <div>
+        <strong>Test complété avec succès !</strong>
+        <span>Nous avons analysé tes 20 réponses selon le modèle RIASEC et trouvé 10 carrières compatibles avec ton profil.</span>
+      </div>
+    </div>
+
+    <div class="top-grid">
+      <div>
+        <div class="profile-card">
+          <div class="profile-head">
+            <div class="badge">◎</div>
+            <div>
+              <h2>Ton profil RIASEC</h2>
+              <p>Basé sur le modèle scientifique Holland</p>
+            </div>
+          </div>
+
+          <div class="trait-row">
+            <div class="trait-top">
+              <div class="trait-name"><span class="ic">🔬</span><span>Investigateur<br><small>Investigative</small></span></div>
+              <div class="trait-pct" style="color:#7c3aed;">65%</div>
+            </div>
+            <div class="bar-track"><div class="bar-fill fill-inv" style="width:65%;"></div></div>
+          </div>
+
+          <p class="trait-desc">Tu es curieux(se), analytique et tu aimes comprendre comment les choses fonctionnent. Tu es attiré(e) par la recherche, les sciences et l'analyse.</p>
+
+          <div class="trait-row">
+            <div class="trait-top">
+              <div class="trait-name"><span class="ic">🎨</span><span>Artistique<br><small>Artistic</small></span></div>
+              <div class="trait-pct" style="color:#ec4899;">17%</div>
+            </div>
+            <div class="bar-track"><div class="bar-fill fill-art" style="width:17%;"></div></div>
+          </div>
+
+          <div class="trait-row">
+            <div class="trait-top">
+              <div class="trait-name"><span class="ic">🔧</span><span>Réaliste<br><small>Realistic</small></span></div>
+              <div class="trait-pct" style="color:#3b82f6;">13%</div>
+            </div>
+            <div class="bar-track"><div class="bar-fill fill-rea" style="width:13%;"></div></div>
+          </div>
+
+          <p class="subhead">Tes traits dominants :</p>
+          <div class="trait-tags">
+            <span class="pill">Analytique</span>
+            <span class="pill">Curieux</span>
+            <span class="pill">Intellectuel</span>
+            <span class="pill">Scientifique</span>
+            <span class="pill">Logique</span>
+          </div>
+        </div>
+
+        <div class="note-box yellow">
+          <div class="ic">📌</div>
+          <ul>
+            <li>✓ <b>Ce résultat est un guide</b>, pas une décision finale. Il t'aide à explorer les carrières qui correspondent à tes intérêts et ta personnalité.</li>
+            <li>✓ <b>Cette plateforme ne choisit pas pour toi</b>. Elle t'aide à mieux te comprendre pour prendre des décisions éclairées.</li>
+            <li>✓ <b>D'autres facteurs comptent aussi</b> : tes résultats scolaires, ta situation personnelle, et ta motivation sont tout aussi importants.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div>
+        <div class="note-box blue">
+          <div class="ic">💡</div>
+          <div>
+            <p class="lead">Sélection personnalisée et ciblée</p>
+            <p style="margin:0 0 8px;color:var(--ink-600);">Voici les <b style="color:var(--navy-900);">carrières les plus pertinentes</b> basées sur ton profil <b style="color:var(--navy-900);">Investigateur + Artistique</b>.</p>
+            <p style="margin:0;color:var(--ink-600);"><span class="accent">✳</span> Ceci est une <b style="color:var(--navy-900);">sélection des meilleures correspondances</b>, pas toutes les carrières possibles. Chaque profil RIASEC reçoit des recommandations différentes et personnalisées.</p>
+          </div>
+        </div>
+
+        <div class="section-title" style="margin-top:24px;">
+          <span style="font-size:20px;">🏅</span>
+          <h3>Top carrières pour toi</h3>
+        </div>
+        <p class="section-sub">Les 4 meilleures correspondances · formations incluses</p>
+
+        <div class="career-grid">
+
+          <div class="career-card">
+            <div class="career-head head-purple">
+              <div>
+                <div class="head-icon">🔍</div>
+                <div class="compat-label">Compatibilité</div>
+                <div class="compat-pct">74%</div>
+                <div class="compat-sub">Bon match</div>
+              </div>
+              <div class="target-ic">◎</div>
+            </div>
+            <div class="career-body">
+              <h4>Chercheur</h4>
+              <span class="tag-field">Sciences</span>
+              <p class="desc">Mène des recherches scientifiques pour faire avancer les connaissances</p>
+              <div class="stat-row">
+                <div class="stat"><div class="val">500K–1500K</div><div class="lab">FCFA/mois</div></div>
+                <div class="stat"><div class="val">📈 +23%</div><div class="lab">Croissance</div></div>
+                <div class="stat"><div class="val">⚡ Moyenne</div><div class="lab">Demande</div></div>
+              </div>
+              <button class="btn-dark">Voir carrière + formations →</button>
+            </div>
+          </div>
+
+          <div class="career-card">
+            <div class="career-head head-slate">
+              <div>
+                <div class="head-icon">🤖</div>
+                <div class="compat-label">Compatibilité</div>
+                <div class="compat-pct">69%</div>
+                <div class="compat-sub">Match modéré</div>
+              </div>
+              <div class="target-ic">◎</div>
+            </div>
+            <div class="career-body">
+              <h4>Ingénieur IA</h4>
+              <span class="tag-field">Tech &amp; Data</span>
+              <p class="desc">Conçoit et développe des systèmes d'intelligence artificielle</p>
+              <div class="stat-row">
+                <div class="stat"><div class="val">1200K–3500K</div><div class="lab">FCFA/mois</div></div>
+                <div class="stat"><div class="val">📈 +50%</div><div class="lab">Croissance</div></div>
+                <div class="stat"><div class="val">⚡ Très forte</div><div class="lab">Demande</div></div>
+              </div>
+              <div class="formation-box">
+                <div class="flabel">🎓 Formation recommandée</div>
+                <div class="formation-name"><span class="fic">🎓</span> Informatique / Génie Logiciel</div>
+                <div class="formation-meta">⏱ 3–5 ans · Licence</div>
+                <div class="uni-row">
+                  <span class="uni-pill">📍 UCAD</span>
+                  <span class="uni-pill">📍 UGB</span>
+                  <span class="uni-pill">📍 UIDT</span>
+                  <span class="uni-more">+2 filières</span>
+                </div>
+              </div>
+              <button class="btn-dark">Voir carrière + formations →</button>
+            </div>
+          </div>
+
+          <div class="career-card">
+            <div class="career-head head-dark">
+              <div>
+                <div class="head-icon">🔬</div>
+                <div class="compat-label">Compatibilité</div>
+                <div class="compat-pct">69%</div>
+                <div class="compat-sub">Match modéré</div>
+              </div>
+              <div class="target-ic">◎</div>
+            </div>
+            <div class="career-body">
+              <h4>Biologiste</h4>
+              <span class="tag-field">Sciences</span>
+              <p class="desc">Étudie les organismes vivants et les processus biologiques</p>
+              <div class="stat-row">
+                <div class="stat"><div class="val">400K–1200K</div><div class="lab">FCFA/mois</div></div>
+                <div class="stat"><div class="val">📈 +20%</div><div class="lab">Croissance</div></div>
+                <div class="stat"><div class="val">⚡ Moyenne</div><div class="lab">Demande</div></div>
+              </div>
+              <div class="formation-box">
+                <div class="flabel">🎓 Formation recommandée</div>
+                <div class="formation-name"><span class="fic">🎓</span> Sciences de l'Environnement</div>
+                <div class="formation-meta">⏱ 3–5 ans · Licence</div>
+                <div class="uni-row">
+                  <span class="uni-pill">📍 UCAD</span>
+                  <span class="uni-pill">📍 UGB</span>
+                  <span class="uni-pill">📍 UASZ</span>
+                </div>
+              </div>
+              <button class="btn-dark">Voir carrière + formations →</button>
+            </div>
+          </div>
+
+          <div class="career-card">
+            <div class="career-head head-slate">
+              <div>
+                <div class="head-icon">📊</div>
+                <div class="compat-label">Compatibilité</div>
+                <div class="compat-pct">68%</div>
+                <div class="compat-sub">Match modéré</div>
+              </div>
+              <div class="target-ic">◎</div>
+            </div>
+            <div class="career-body">
+              <h4>Actuaire</h4>
+              <span class="tag-field">Finance</span>
+              <p class="desc">Évalue les risques financiers à l'aide de mathématiques et statistiques</p>
+              <div class="stat-row">
+                <div class="stat"><div class="val">800K–2200K</div><div class="lab">FCFA/mois</div></div>
+                <div class="stat"><div class="val">📈 +27%</div><div class="lab">Croissance</div></div>
+                <div class="stat"><div class="val">⚡ Forte</div><div class="lab">Demande</div></div>
+              </div>
+              <div class="formation-box">
+                <div class="flabel">🎓 Formation recommandée</div>
+                <div class="formation-name"><span class="fic">🎓</span> Science des Données</div>
+                <div class="formation-meta">⏱ 2–5 ans · Master</div>
+                <div class="uni-row">
+                  <span class="uni-pill">📍 UCAD</span>
+                  <span class="uni-pill">📍 ESP</span>
+                  <span class="uni-pill">📍 ISM</span>
+                  <span class="uni-more">+2 filières</span>
+                </div>
+              </div>
+              <button class="btn-dark">Voir carrière + formations →</button>
+            </div>
+          </div>
+
+          <div class="best-card">
+            <div class="best-trophy">🏆</div>
+            <div class="best-badge">🎖 Meilleure compatibilité</div>
+            <div class="best-top">
+              <div class="best-icon">⚛</div>
+              <div>
+                <h4>Physicien</h4>
+                <span class="tag-field" style="margin-top:6px;">Sciences</span>
+              </div>
+            </div>
+            <p class="best-desc">Étudie les lois fondamentales de l'univers et la matière</p>
+            <div class="best-score">
+              <div class="best-score-top"><span>Score de compatibilité</span><span>74%</span></div>
+              <div class="bar-track"><div class="bar-fill" style="width:74%;background:linear-gradient(90deg,#7c3aed,#a855f7);"></div></div>
+              <div class="note">Basé sur ton profil RIASEC Investigateur + Artistique</div>
+            </div>
+            <div class="best-meta">
+              <div class="m"><div class="lab">↗ Demande</div><div class="val">Moyenne</div></div>
+              <div class="m"><div class="lab">📈 Croissance</div><div class="val">+18%</div></div>
+            </div>
+            <button class="btn-gold">Explorer cette carrière en détail →</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="misc-grid">
+      <div class="cta-box" style="flex-direction:column;align-items:stretch;">
+        <div style="display:flex;gap:14px;align-items:center;">
+          <div class="cta-ic">💬</div>
+          <div class="cta-text">
+            <strong>Besoin d'aide pour comprendre tes résultats ?</strong>
+            <p>Parle avec un conseiller d'orientation professionnel pour t'aider à interpréter ton profil RIASEC et choisir la meilleure voie.</p>
+          </div>
+        </div>
+        <button class="cta-btn-dark">💬 Parler à un conseiller</button>
+      </div>
+
+      <div class="search-box">
+        <h4>🔎 Toutes les carrières compatibles</h4>
+        <input class="search-input" placeholder="Rechercher une carrière..." disabled>
+      </div>
+
+      <div class="uni-box">
+        <div class="l">
+          <div class="cta-ic">🎓</div>
+          <div>
+            <strong>Explorer les universités</strong>
+            <span>18 établissements au Sénégal</span>
+          </div>
+        </div>
+        <div class="chev">›</div>
+      </div>
+
+      <div class="riasec-box">
+        <div class="l">
+          <div class="cta-ic">📖</div>
+          <div>
+            <strong>En savoir plus sur le modèle RIASEC</strong>
+            <p>Le modèle RIASEC (ou Holland Code) est un outil scientifique utilisé mondialement pour l'orientation professionnelle depuis 1959.</p>
+          </div>
+        </div>
+        <div class="riasec-btns">
+          <button class="btn-outline">En savoir plus</button>
+          <button class="btn-fill">Refaire le test</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NextOri — Votre avis compte !</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0B1F4D;
+    --navy-2:#132a63;
+    --navy-3:#1c3778;
+    --gold:#F4B400;
+    --gold-dark:#DFA300;
+    --bg:#F1F3F8;
+    --card:#ffffff;
+    --line:#E7EAF2;
+    --text-gray:#6B7280;
+    --text-dark:#101B33;
+    --green:#2FBF71;
+  }
+
+  *{ box-sizing:border-box; margin:0; padding:0; }
+
+  body{
+    background:var(--bg);
+    font-family:'Inter', sans-serif;
+    color:var(--text-dark);
+    display:flex;
+    justify-content:center;
+    min-height:100vh;
+  }
+
+  .page{
+    width:100%;
+    max-width:430px;
+    padding-bottom:120px;
+  }
+
+  /* ---------- Header ---------- */
+  .header{
+    background:linear-gradient(150deg, var(--navy), var(--navy-3));
+    padding:36px 22px 46px;
+    border-radius:0 0 28px 28px;
+    text-align:center;
+  }
+  .header .star{ font-size:38px; margin-bottom:10px; display:block; }
+  .header h1{
+    font-family:'Baloo 2', sans-serif;
+    font-weight:800;
+    font-size:24px;
+    color:#fff;
+    margin-bottom:12px;
+  }
+  .header p{
+    font-size:13.5px;
+    line-height:1.6;
+    color:#C4CDE6;
+    max-width:340px;
+    margin:0 auto;
+  }
+
+  /* ---------- Cards ---------- */
+  .card{
+    background:var(--card);
+    border-radius:20px;
+    padding:22px;
+    margin:-20px 18px 0;
+    box-shadow:0 8px 22px rgba(11,31,77,0.06);
+    position:relative;
+    z-index:2;
+  }
+  .card + .card{ margin-top:16px; }
+  .card-num{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:26px; height:26px;
+    border-radius:50%;
+    background:var(--navy);
+    color:var(--gold);
+    font-size:12.5px;
+    font-weight:800;
+    margin-right:8px;
+    flex-shrink:0;
+  }
+  .card-title{
+    display:flex;
+    align-items:center;
+    font-family:'Baloo 2', sans-serif;
+    font-weight:700;
+    font-size:16px;
+    color:var(--navy);
+    margin-bottom:16px;
+    line-height:1.35;
+  }
+
+  /* ---------- Stars ---------- */
+  .stars{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    margin:6px 0 4px;
+  }
+  .star-btn{
+    background:none; border:none; cursor:pointer;
+    font-size:34px; line-height:1;
+    color:#DADFEC;
+    transition:transform .15s ease, color .15s ease;
+  }
+  .star-btn.filled{ color:var(--gold); }
+  .star-btn:hover{ transform:scale(1.15); }
+  .stars-label{
+    text-align:center;
+    font-size:12.5px;
+    color:var(--text-gray);
+    font-weight:600;
+    min-height:16px;
+  }
+
+  /* ---------- Checkboxes (chips) ---------- */
+  .chip-grid{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+  .chip{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    background:#F5F6FA;
+    border:1.5px solid var(--line);
+    border-radius:12px;
+    padding:11px 14px;
+    font-size:13.5px;
+    font-weight:600;
+    color:var(--text-dark);
+    cursor:pointer;
+    user-select:none;
+    transition:all .15s ease;
+    flex:1 1 calc(50% - 5px);
+    min-width:130px;
+  }
+  .chip .box{
+    width:18px; height:18px; border-radius:6px;
+    border:2px solid #C7CCDA;
+    flex-shrink:0;
+    display:flex; align-items:center; justify-content:center;
+    transition:all .15s ease;
+  }
+  .chip .box svg{ width:11px; height:11px; opacity:0; transition:opacity .15s ease; }
+  .chip.selected{
+    background:#FFF6DE; border-color:var(--gold);
+  }
+  .chip.selected .box{ background:var(--gold); border-color:var(--gold); }
+  .chip.selected .box svg{ opacity:1; }
+
+  /* single-select round chip (radio style) */
+  .radio-chip{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    background:#F5F6FA;
+    border:1.5px solid var(--line);
+    border-radius:12px;
+    padding:13px 14px;
+    font-size:14px;
+    font-weight:600;
+    cursor:pointer;
+    transition:all .15s ease;
+  }
+  .radio-chip + .radio-chip{ margin-top:10px; }
+  .radio-chip .dot{
+    width:20px; height:20px; border-radius:50%;
+    border:2px solid #C7CCDA;
+    flex-shrink:0;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .radio-chip .dot::after{
+    content:""; width:10px; height:10px; border-radius:50%;
+    background:var(--navy); transform:scale(0); transition:transform .15s ease;
+  }
+  .radio-chip.selected{ background:#EEF1FB; border-color:var(--navy); }
+  .radio-chip.selected .dot{ border-color:var(--navy); }
+  .radio-chip.selected .dot::after{ transform:scale(1); }
+
+  /* ---------- Textareas ---------- */
+  textarea{
+    width:100%;
+    min-height:100px;
+    border:1.5px solid var(--line);
+    border-radius:14px;
+    padding:14px;
+    font-family:'Inter', sans-serif;
+    font-size:14px;
+    color:var(--text-dark);
+    resize:vertical;
+    background:#FAFBFD;
+    transition:border-color .15s ease;
+  }
+  textarea:focus{ outline:none; border-color:var(--gold); background:#fff; }
+  textarea::placeholder{ color:#A6AEBF; }
+
+  /* ---------- 3-button recommend row ---------- */
+  .btn-row{ display:flex; gap:10px; }
+  .rec-btn{
+    flex:1;
+    display:flex; align-items:center; justify-content:center; gap:6px;
+    background:#F5F6FA; border:1.5px solid var(--line);
+    border-radius:12px; padding:13px 8px;
+    font-size:13.5px; font-weight:700; color:var(--text-dark);
+    cursor:pointer; transition:all .15s ease;
+  }
+  .rec-btn.selected.yes{ background:#E9FBF2; border-color:var(--green); color:#1A9E5C; }
+  .rec-btn.selected.maybe{ background:#FFF6DE; border-color:var(--gold-dark); color:#946B00; }
+  .rec-btn.selected.no{ background:#FDEAEA; border-color:#E4483C; color:#C23327; }
+
+  /* ---------- NPS scale ---------- */
+  .nps-grid{
+    display:grid;
+    grid-template-columns:repeat(6, 1fr);
+    gap:8px;
+    margin-bottom:10px;
+  }
+  .nps-btn{
+    aspect-ratio:1;
+    border-radius:10px;
+    border:1.5px solid var(--line);
+    background:#F5F6FA;
+    font-weight:700;
+    font-size:14px;
+    color:var(--text-dark);
+    cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+    transition:all .15s ease;
+  }
+  .nps-btn.selected{ background:var(--navy); border-color:var(--navy); color:#fff; }
+  .nps-legend{
+    display:flex; justify-content:space-between;
+    font-size:11.5px; color:var(--text-gray); font-weight:600;
+  }
+
+  /* ---------- Source channel grid ---------- */
+  .source-grid{
+    display:flex; flex-wrap:wrap; gap:10px;
+  }
+  .source-chip{
+    display:flex; align-items:center; gap:8px;
+    background:#F5F6FA; border:1.5px solid var(--line);
+    border-radius:999px; padding:10px 14px;
+    font-size:13px; font-weight:600; color:var(--text-dark);
+    cursor:pointer; transition:all .15s ease;
+  }
+  .source-chip.selected{ background:var(--navy); border-color:var(--navy); color:#fff; }
+  .source-chip span.emoji{ font-size:15px; }
+
+  /* ---------- Submit ---------- */
+  .submit-wrap{
+    margin:22px 18px 0;
+  }
+  .submit-btn{
+    width:100%;
+    display:flex; align-items:center; justify-content:center; gap:10px;
+    background:linear-gradient(135deg, var(--gold), var(--gold-dark));
+    color:var(--navy);
+    border:none;
+    border-radius:999px;
+    padding:17px 20px;
+    font-size:16.5px;
+    font-weight:800;
+    cursor:pointer;
+    box-shadow:0 12px 26px rgba(244,180,0,0.35);
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .submit-btn:hover{ transform:translateY(-2px); }
+  .submit-btn:active{ transform:translateY(0); }
+
+  /* ---------- Confirmation toast ---------- */
+  .confirm-overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(11,31,77,0.55);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .25s ease;
+    z-index:2000;
+    padding:20px;
+  }
+  .confirm-overlay.show{ opacity:1; pointer-events:auto; }
+  .confirm-box{
+    background:#fff;
+    border-radius:22px;
+    padding:36px 30px;
+    text-align:center;
+    max-width:320px;
+    transform:scale(0.85);
+    transition:transform .25s cubic-bezier(.34,1.56,.64,1);
+    box-shadow:0 20px 50px rgba(0,0,0,0.25);
+  }
+  .confirm-overlay.show .confirm-box{ transform:scale(1); }
+  .confirm-check{
+    width:70px; height:70px;
+    border-radius:50%;
+    background:linear-gradient(135deg, var(--green), #1FA867);
+    display:flex; align-items:center; justify-content:center;
+    margin:0 auto 18px;
+  }
+  .confirm-check svg{ width:32px; height:32px; }
+  .confirm-box h3{
+    font-family:'Baloo 2', sans-serif;
+    font-weight:700; font-size:19px; color:var(--navy);
+    margin-bottom:8px;
+  }
+  .confirm-box p{ font-size:13.5px; color:var(--text-gray); line-height:1.5; }
+
+  /* ---------- Responsive ---------- */
+  @media (min-width:640px){
+    .page{ max-width:640px; }
+    .header{ padding:44px 34px 54px; border-radius:0 0 32px 32px; }
+    .header h1{ font-size:27px; }
+    .header p{ max-width:440px; font-size:14.5px; }
+    .card{ margin-left:26px; margin-right:26px; padding:26px; }
+    .card-title{ font-size:17px; }
+    .submit-wrap{ margin-left:26px; margin-right:26px; }
+    .nps-grid{ grid-template-columns:repeat(11, 1fr); }
+  }
+
+  @media (min-width:1024px){
+    body{ padding:30px 16px; }
+    .page{
+      max-width:760px;
+      background:var(--bg);
+      border-radius:28px;
+      box-shadow:0 20px 60px rgba(11,31,77,0.1);
+      overflow:hidden;
+    }
+    .header{ padding:52px 50px 60px; border-radius:0; }
+    .header h1{ font-size:29px; }
+    .header .star{ font-size:44px; }
+    .card{ margin-left:40px; margin-right:40px; padding:30px; }
+    .submit-wrap{ margin-left:40px; margin-right:40px; }
+    .chip{ flex:1 1 calc(33.33% - 8px); }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <div class="header">
+    <span class="star">⭐</span>
+    <h1>Votre avis compte !</h1>
+    <p>Merci d'avoir utilisé NextOri. Votre retour nous aide à améliorer la plateforme et à mieux accompagner les futurs utilisateurs.</p>
+  </div>
+
+  <!-- 1. Évaluation générale -->
+  <div class="card">
+    <div class="card-title"><span class="card-num">1</span>Comment évaluez-vous votre expérience sur NextOri ?</div>
+    <div class="stars" id="starRow">
+      <button class="star-btn" data-val="1">★</button>
+      <button class="star-btn" data-val="2">★</button>
+      <button class="star-btn" data-val="3">★</button>
+      <button class="star-btn" data-val="4">★</button>
+      <button class="star-btn" data-val="5">★</button>
+    </div>
+    <div class="stars-label" id="starLabel"></div>
+  </div>
+
+  <!-- 2. Ce que vous avez préféré -->
+  <div class="card">
+    <div class="card-title"><span class="card-num">2</span>Ce que vous avez préféré</div>
+    <div class="chip-grid" id="chipGrid">
+      <div class="chip" data-key="riasec"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Test RIASEC</div>
+      <div class="chip" data-key="filieres"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Recommandation de filières</div>
+      <div class="chip" data-key="metiers"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Découverte des métiers</div>
+      <div class="chip" data-key="etablissements"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Établissements</div>
+      <div class="chip" data-key="design"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Design de l'application</div>
+      <div class="chip" data-key="autre1"><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Autre</div>
+    </div>
+  </div>
+
+  <!-- 3. Compréhension de l'avenir -->
+  <div class="card">
+    <div class="card-title"><span class="card-num">3</span>NextOri vous a-t-il aidé à mieux comprendre votre avenir ?</div>
+    <div id="understandGroup">
+      <div class="radio-chip" data-key="beaucoup"><span class="dot"></span>Oui, beaucoup</div>
+      <div class="radio-chip" data-key="unpeu"><span class="dot"></span>Oui, un peu</div>
+      <div class="radio-chip" data-key="pasencore"><span class="dot"></span>Pas encore</div>
+    </div>
+  </div>
+
+  <!-- 4. Suggestions -->
+  <div class="card">
+    <div class="card-title"><span class="card-num">4</span>Suggestions d'amélioration</div>
+    <textarea placeholder="Écrivez votre suggestion..."></textarea>
+  </div>
+
+  <!-- 5. Recommandation -->
+  <div class="card">
+    <div class="card-title"><span class="card-num">5</span>Recommanderiez-vous NextOri à un proche ?</div>
+    <div class="btn-row" id="recGroup">
+      <div class="rec-btn yes" data-key="oui">👍 Oui</div>
+      <div class="rec-btn maybe" data-key="peutetre">🤔 Peut-être</div>
+      <div class="rec-btn no" data-key="non">👎 Non</div>
+    </div>
+  </div>
+
+  <!-- 6. NPS -->
+  <div class="card">
+    <div class="card-title"><span class="card-num">6</span>Quelle est la probabilité que vous recommandiez NextOri à un ami ?</div>
+    <div class="nps-grid" id="npsGrid"></div>
+    <div class="nps-legend">
+      <span>0 · Pas du tout</span>
+      <span>10 · Certainement</span>
+    </div>
+  </div>
+
+  <!-- Bonus : canal de découverte -->
+  <div class="card">
+    <div class="card-title"><span class="card-num">★</span>Comment avez-vous connu NextOri ?</div>
+    <div class="source-grid" id="sourceGrid">
+      <div class="source-chip" data-key="tiktok"><span class="emoji">🎵</span>TikTok</div>
+      <div class="source-chip" data-key="facebook"><span class="emoji">📘</span>Facebook</div>
+      <div class="source-chip" data-key="instagram"><span class="emoji">📸</span>Instagram</div>
+      <div class="source-chip" data-key="whatsapp"><span class="emoji">💬</span>WhatsApp</div>
+      <div class="source-chip" data-key="amifamille"><span class="emoji">👪</span>Ami ou famille</div>
+      <div class="source-chip" data-key="ecole"><span class="emoji">🎓</span>École / Université</div>
+      <div class="source-chip" data-key="google"><span class="emoji">🔎</span>Google</div>
+      <div class="source-chip" data-key="autre2"><span class="emoji">✨</span>Autre</div>
+    </div>
+  </div>
+
+  <!-- 7. Message libre -->
+  <div class="card">
+    <div class="card-title"><span class="card-num">7</span>Avez-vous un message pour l'équipe NextOri ?</div>
+    <textarea placeholder="Écrivez votre message..."></textarea>
+  </div>
+
+  <div class="submit-wrap">
+    <button class="submit-btn" id="submitBtn">📨 Envoyer mon avis</button>
+  </div>
+
+</div>
+
+<!-- Confirmation -->
+<div class="confirm-overlay" id="confirmOverlay">
+  <div class="confirm-box">
+    <div class="confirm-check">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    <h3>Merci !</h3>
+    <p>Votre avis a bien été envoyé.</p>
+  </div>
+</div>
+
+<script>
+  // ----- Stars -----
+  const starBtns = document.querySelectorAll('.star-btn');
+  const starLabel = document.getElementById('starLabel');
+  const starTexts = ["","Décevant","Peut mieux faire","Correct","Très bien","Excellent !"];
+  let starValue = 0;
+  starBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      starValue = parseInt(btn.dataset.val);
+      starBtns.forEach(b => b.classList.toggle('filled', parseInt(b.dataset.val) <= starValue));
+      starLabel.textContent = starTexts[starValue];
+    });
+  });
+
+  // ----- Chips (multi-select) -----
+  document.querySelectorAll('#chipGrid .chip').forEach(chip => {
+    chip.addEventListener('click', () => chip.classList.toggle('selected'));
+  });
+
+  // ----- Radio group (single-select) helper -----
+  function makeRadioGroup(containerId, itemSelector){
+    const container = document.getElementById(containerId);
+    container.querySelectorAll(itemSelector).forEach(item => {
+      item.addEventListener('click', () => {
+        container.querySelectorAll(itemSelector).forEach(i => i.classList.remove('selected'));
+        item.classList.add('selected');
+      });
+    });
+  }
+  makeRadioGroup('understandGroup', '.radio-chip');
+  makeRadioGroup('recGroup', '.rec-btn');
+  makeRadioGroup('sourceGrid', '.source-chip');
+
+  // ----- NPS 0-10 -----
+  const npsGrid = document.getElementById('npsGrid');
+  for(let i=0;i<=10;i++){
+    const btn = document.createElement('div');
+    btn.className = 'nps-btn';
+    btn.textContent = i;
+    btn.addEventListener('click', () => {
+      npsGrid.querySelectorAll('.nps-btn').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+    });
+    npsGrid.appendChild(btn);
+  }
+
+  // ----- Submit -----
+  const overlay = document.getElementById('confirmOverlay');
+  document.getElementById('submitBtn').addEventListener('click', () => {
+    overlay.classList.add('show');
+    setTimeout(() => overlay.classList.remove('show'), 2400);
+  });
+</script>
+
+</body>
+</html>

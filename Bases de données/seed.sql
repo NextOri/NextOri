@@ -44,7 +44,7 @@ INSERT INTO universite (nom, description , type, pays, ville, site_web) VALUES
 INSERT INTO metier_filiere VALUES
 (1, 1), -- Développeur Web -> Informatique
 (2, 1), -- Data Scientist -> Informatique
-(3, 2), -- Génie Civil -> Génie Civil
+(3, 2), -- Ingénieur Génie Civil -> Génie Civil
 (4, 3), -- Médecin -> Médecine
 (5, 4), -- Avocat -> Droit
 (6, 5), -- Comptable -> Gestion

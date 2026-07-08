@@ -77,6 +77,9 @@ CREATE TABLE `metier` (
   `salaire_max` decimal(12,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+ALTER TABLE metier
+ADD COLUMN profil_riasec VARCHAR(3) NOT NULL
+AFTER niveau_etude;
 -- --------------------------------------------------------
 
 --

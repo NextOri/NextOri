@@ -35,10 +35,20 @@ class ReponseRepository
 
         $statement = $this->connection->prepare($sql);
 
-        return $statement->execute([
-            ":test" => $idTest,
-            ":proposition" => $idProposition
-        ]);
+        $resultat = $statement->execute([
+    ":test" => $idTest,
+    ":proposition" => $idProposition
+]);
+
+var_dump($resultat);
+
+if (!$resultat) {
+
+    print_r($statement->errorInfo());
+
+}
+
+return $resultat;
     }
 
     public function recupererTypesRiasec(int $idTest): array

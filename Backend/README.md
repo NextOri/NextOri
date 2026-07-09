@@ -25,6 +25,37 @@ Date de début: le 07 Juillet 2026
 ✅ Étape 10 : Rechercher les universites
 
 ➡️ Étape 11 : Construire le moteur complet de NextOri
+      Ce qu'il ne fera PAS
+
+Il ne fera pas de SQL.
+
+Il ne calculera pas les scores.
+
+Il ne recherchera pas les métiers.
+
+Il ne recherchera pas les universités.
+
+Il ne connaîtra pas les règles RIASEC.
+
+Tout cela existe déjà.
+
+     Ce qu'il fera
+Il coordonnera les autres services.
+
+                 OrientationService
+                         │
+     ┌───────────────────┼───────────────────┐
+     │                   │                   │
+ TestService      ReponseService      RiasecService
+                                             │
+                                             ▼
+                                      MetierService
+                                             │
+                                             ▼
+                                     FiliereService
+                                             │
+                                             ▼
+                                   UniversiteService
 
 
 NB: Les repository: Donne-moi les réponses.

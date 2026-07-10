@@ -78,5 +78,99 @@ class OrientationService
    {
     return $this->metierService->rechercherMetiersCompatibles($profil);
     } 
+    public function rechercherFilieres(
+    array $metiers
+    ): array
+    {
+    return $this->filiereService
+                ->rechercherFilieresCompatibles($metiers);
+    }
+ public function rechercherUniversites(
+    array $filieres
+    ): array
+   { 
+    return $this->universiteService
+                ->rechercherUniversitesCompatibles($filieres);
+   }
+ /**
+ * Exécute tout le processus d'orientation.
+ */
+  public function executerOrientation(
+    int $idUser,
+    int $idQuestionnaire,
+    array $reponses
+ ): array
+ {
+
+    // 1. Création du test
+
+    $idTest = $this->demarrerTest(
+        $idUser,
+        $idQuestionnaire
+    );
+
+
+    // 2. Enregistrement des réponses
+
+    $this->enregistrerReponses(
+        $idTest,
+        $reponses
+    );
+
+
+    // 3. Calcul du profil
+
+    $resultatRiasec = $this->calculerProfil(
+        $idTest
+    );
+
+
+    // 4. Profil principal
+
+    $profilPrincipal =
+        $resultatRiasec["profil"]["profil_principal"];
+
+
+    // 5. Métiers
+
+    $metiers =
+        $this->rechercherMetiers(
+            $profilPrincipal
+        );
+
+
+    // 6. Filières
+
+    $filieres =
+        $this->rechercherFilieres(
+            $metiers
+        );
+
+
+    // 7. Universités
+
+    $universites =
+        $this->rechercherUniversites(
+            $filieres
+        );
+
+
+    // 8. Résultat final
+
+    return [
+
+        "id_test" => $idTest,
+
+        "profil" => $resultatRiasec,
+
+        "metiers" => $metiers,
+
+        "filieres" => $filieres,
+
+        "universites" => $universites
+
+    ];
+
+ }
 
 }

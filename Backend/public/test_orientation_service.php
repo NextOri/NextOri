@@ -64,9 +64,9 @@ echo "</pre>";
 // 5. Recherche des métiers
 // ================================
 
-$metiers = $service->rechercherMetiers(
-    $resultatRiasec["profil"]
-);
+$profil = $resultatRiasec["profil"]["profil_principal"];
+
+$metiers = $service->rechercherMetiers($profil);
 
 
 echo "<h2>Métiers recommandés</h2>";
@@ -74,6 +74,36 @@ echo "<h2>Métiers recommandés</h2>";
 echo "<pre>";
 
 print_r($metiers);
+
+echo "</pre>";
+
+
+// ================================
+// 5. Recherche des filières
+// ================================
+
+$filieres = $service->rechercherFilieres($metiers);
+
+echo "<h2>Filières recommandées</h2>";
+
+echo "<pre>";
+
+print_r($filieres);
+
+echo "</pre>";
+
+
+// ================================
+// 5. Recherche des universités
+// ================================
+
+$universites = $service->rechercherUniversites($filieres);
+
+echo "<h2>Universités recommandées</h2>";
+
+echo "<pre>";
+
+print_r($universites);
 
 echo "</pre>";
 

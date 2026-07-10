@@ -1,4 +1,4 @@
-Date de début: le 07 Juillet 2026
+Date de début: le 07 Juillet 2026    
 📊 État actuel du backend
 
 ✅ Étape 1 : Connexion MySQL
@@ -24,7 +24,7 @@ Date de début: le 07 Juillet 2026
 
 ✅ Étape 10 : Rechercher les universites
 
-➡️ Étape 11 : Construire le moteur complet de NextOri
+✅ Étape 11 : Construire le moteur complet de NextOri
       Ce qu'il ne fera PAS
 
 Il ne fera pas de SQL.
@@ -56,6 +56,17 @@ Il coordonnera les autres services.
                                              │
                                              ▼
                                    UniversiteService
+
+
+➡️ Étape 12 : Optimisation du moteur NextOri V1
+
+Dans cette phase, nous intégrerons toutes les améliorations que nous avons identifiées :
+
+✅ supprimer automatiquement les métiers avec un score de compatibilité de 0 ;
+✅ séparer les recommandations en 5 métiers principaux et 5 métiers secondaires ;
+✅ faire en sorte que les filières soient calculées uniquement à partir des métiers retenus ;
+✅ faire en sorte que les universités soient calculées uniquement à partir des filières retenues ;
+✅ améliorer le classement des recommandations pour qu'il soit plus pertinent.
 
 
 NB: Les repository: Donne-moi les réponses.
@@ -337,3 +348,6 @@ Resultat apres test
                 │
                 ▼
 10. Retour JSON
+
+
+

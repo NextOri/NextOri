@@ -67,7 +67,8 @@ Dans cette phase, nous intégrerons toutes les améliorations que nous avons ide
 ✅ faire en sorte que les filières soient calculées uniquement à partir des métiers retenus ;
 ✅ faire en sorte que les universités soient calculées uniquement à partir des filières retenues ;
 ✅ améliorer le classement des recommandations pour qu'il soit plus pertinent.
-➡️
+
+➡️ Étape 13: Preparation de l'API
 
 NB: Les repository: Donne-moi les réponses.
     Les services: Compte les scores.

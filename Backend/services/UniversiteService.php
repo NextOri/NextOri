@@ -52,4 +52,16 @@ class UniversiteService
 
         return $universitesUniques;
     }
+    /**
+ * Retourne les universités liées à une filière précise
+ */
+    public function rechercherUniversitesParFiliere(
+    int $idFiliere
+   ): array
+   {
+
+    return $this->universiteRepository
+                ->recupererParFiliere($idFiliere);
+
+   }
 }

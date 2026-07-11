@@ -127,6 +127,18 @@ public function obtenirFilieresDepuisRecommandations(array $recommandations): ar
     return $this->rechercherFilieresCompatibles($metiers);
 
 }
+/**
+ * Retourne les filières liées à un métier précis
+ */
+public function rechercherFilieresParMetier(
+    int $idMetier
+): array
+{
+
+    return $this->filiereRepository
+                ->recupererFilieresParMetier($idMetier);
+
+}
 
 
 

@@ -58,7 +58,7 @@ Il coordonnera les autres services.
                                    UniversiteService
 
 
-➡️ Étape 12 : Optimisation du moteur NextOri V1
+✅ Étape 12 : Optimisation du moteur NextOri V1
 
 Dans cette phase, nous intégrerons toutes les améliorations que nous avons identifiées :
 
@@ -67,7 +67,7 @@ Dans cette phase, nous intégrerons toutes les améliorations que nous avons ide
 ✅ faire en sorte que les filières soient calculées uniquement à partir des métiers retenus ;
 ✅ faire en sorte que les universités soient calculées uniquement à partir des filières retenues ;
 ✅ améliorer le classement des recommandations pour qu'il soit plus pertinent.
-
+➡️
 
 NB: Les repository: Donne-moi les réponses.
     Les services: Compte les scores.

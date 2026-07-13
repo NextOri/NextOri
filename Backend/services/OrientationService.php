@@ -7,20 +7,17 @@ require_once __DIR__ . "/MetierService.php";
 require_once __DIR__ . "/FiliereService.php";
 require_once __DIR__ . "/UniversiteService.php";
 
+
 class OrientationService
 {
 
     private TestService $testService;
-
     private ReponseService $reponseService;
-
     private RiasecService $riasecService;
-
     private MetierService $metierService;
-
     private FiliereService $filiereService;
-
     private UniversiteService $universiteService;
+
 
 
     public function __construct()
@@ -39,138 +36,258 @@ class OrientationService
         $this->universiteService = new UniversiteService();
 
     }
+
+
+
+
     public function demarrerTest(
-    int $idUser,
-    int $idQuestionnaire
+        int $idUser,
+        int $idQuestionnaire
     ): int
     {
-    return $this->testService->creerTest(
-        $idUser,
-        $idQuestionnaire
-    );
+
+        return $this->testService->creerTest(
+            $idUser,
+            $idQuestionnaire
+        );
+
     }
+
+
+
+
     public function enregistrerReponses(
-    int $idTest,
-    array $reponses
+        int $idTest,
+        array $reponses
     ): void
     {
-    $this->reponseService->enregistrerReponses(
-        $idTest,
-        $reponses
-    );
+
+        $this->reponseService->enregistrerReponses(
+            $idTest,
+            $reponses
+        );
+
     }
+
+
+
+
+
     public function calculerProfil(
-    int $idTest
+        int $idTest
     ): array
     {
-    $scores = $this->riasecService->calculerScores($idTest);
 
-    $profil = $this->riasecService->determinerProfil($scores);
+        $scores =
+            $this->riasecService->calculerScores($idTest);
 
-    return [
-        "scores" => $scores,
-        "profil" => $profil
-    ];
+
+        $profil =
+            $this->riasecService->determinerProfil($scores);
+
+
+
+        return [
+
+            "scores" => $scores,
+
+            "profil" => $profil
+
+        ];
+
     }
-    public function rechercherMetiers(
-    string $profil
-   ): array
-   {
-    return $this->metierService->rechercherMetiersCompatibles($profil);
-    } 
-    public function rechercherFilieres(
-    array $metiers
+
+
+
+
+
+    /**
+     * Nouvelle méthode :
+     * Ajoute filières et universités à chaque métier
+     */
+    private function enrichirMetiersAvecFormations(
+        array $metiers
     ): array
     {
-    return $this->filiereService
-                ->rechercherFilieresCompatibles($metiers);
+
+        $resultat = [];
+
+
+
+        foreach ($metiers as $metier) {
+
+
+            $filieres = 
+                $this->filiereService
+                     ->rechercherFilieresCompatibles(
+                         [$metier]
+                     );
+
+
+
+            $filieresCompletes = [];
+
+
+
+            foreach ($filieres as $filiere) {
+
+
+                $universites =
+                    $this->universiteService
+                         ->rechercherUniversitesCompatibles(
+                             [$filiere]
+                         );
+
+
+
+                $filieresCompletes[] = [
+
+
+                    "filiere" => $filiere,
+
+
+                    "universites" => $universites
+
+
+                ];
+
+            }
+
+
+
+
+            $metier["filieres"] =
+                $filieresCompletes;
+
+
+
+            $resultat[] = $metier;
+
+        }
+
+
+
+        return $resultat;
+
     }
- public function rechercherUniversites(
-    array $filieres
+
+
+
+
+
+    /**
+     * Processus complet NextOri
+     */
+    public function executerOrientation(
+        int $idUser,
+        int $idQuestionnaire,
+        array $reponses
     ): array
-   { 
-    return $this->universiteService
-                ->rechercherUniversitesCompatibles($filieres);
-   }
- /**
- * Exécute tout le processus d'orientation.
- */
-  public function executerOrientation(
-    int $idUser,
-    int $idQuestionnaire,
-    array $reponses
- ): array
- {
-
-    // 1. Création du test
-
-    $idTest = $this->demarrerTest(
-        $idUser,
-        $idQuestionnaire
-    );
+    {
 
 
-    // 2. Enregistrement des réponses
 
-    $this->enregistrerReponses(
-        $idTest,
-        $reponses
-    );
+        // 1 Création test
 
-
-    // 3. Calcul du profil
-
-    $resultatRiasec = $this->calculerProfil(
-        $idTest
-    );
+        $idTest =
+            $this->demarrerTest(
+                $idUser,
+                $idQuestionnaire
+            );
 
 
-    // 4. Profil principal
-
-    $profilPrincipal =
-        $resultatRiasec["profil"]["profil_principal"];
 
 
-    // 5. Métiers
+        // 2 Enregistrement réponses
 
-    $metiers =
-        $this->rechercherMetiers(
-            $profilPrincipal
+        $this->enregistrerReponses(
+            $idTest,
+            $reponses
         );
 
 
-    // 6. Filières
-
-    $filieres =
-        $this->rechercherFilieres(
-            $metiers
-        );
 
 
-    // 7. Universités
 
-    $universites =
-        $this->rechercherUniversites(
-            $filieres
-        );
+        // 3 Calcul profil
+
+        $profil =
+            $this->calculerProfil($idTest);
 
 
-    // 8. Résultat final
 
-    return [
 
-        "id_test" => $idTest,
 
-        "profil" => $resultatRiasec,
 
-        "metiers" => $metiers,
+        // Profil principal
 
-        "filieres" => $filieres,
+        $profilPrincipal =
+            $profil["profil"]["profil_principal"];
 
-        "universites" => $universites
 
-    ];
 
- }
+
+
+
+
+        // 4 Recherche métiers
+
+        $metiers =
+            $this->metierService
+                 ->obtenirRecommandations(
+                     $profilPrincipal
+                 );
+
+
+
+
+
+
+        // 5 Ajouter filières + universités
+
+        $metiersPrincipaux = 
+            $this->enrichirMetiersAvecFormations(
+                $metiers["principaux"]
+            );
+
+
+
+        $metiersSecondaires = 
+            $this->enrichirMetiersAvecFormations(
+                $metiers["secondaires"]
+            );
+
+
+
+
+
+
+
+        return [
+
+
+            "id_test" => $idTest,
+
+
+
+            "profil" => $profil,
+
+
+
+            "recommandations" => [
+
+
+                "principaux" => $metiersPrincipaux,
+
+
+                "secondaires" => $metiersSecondaires
+
+
+            ]
+
+
+        ];
+
+    }
 
 }

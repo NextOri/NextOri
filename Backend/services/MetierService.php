@@ -221,14 +221,11 @@ public function obtenirRecommandations(string $profil): array
 
     $metiers = $this->rechercherMetiersCompatibles($profil);
 
+    // Suppression des métiers incompatibles
+    $metiers = $this->filtrerMetiersCompatibles($metiers);
 
-    return [
-
-        "principaux" => array_slice($metiers, 0, 5),
-
-        "secondaires" => array_slice($metiers, 5, 5)
-
-    ];
+    // Séparation en principaux et secondaires
+    return $this->separerMetiers($metiers);
 
 }
 /**
@@ -294,6 +291,116 @@ private function formaterMetiers(array $metiers): array
     return $resultat;
 
 }
+/**
+ * Supprime les métiers dont la compatibilité est nulle.
+ */
+private function filtrerMetiersCompatibles(array $metiers): array
+{
+    $resultat = [];
+
+    foreach ($metiers as $metier) {
+
+        if ($metier["score_compatibilite"] > 0) {
+
+            $resultat[] = $metier;
+
+        }
+
+    }
+
+    return $resultat;
+}
+/**
+ * Sépare les métiers en principaux et secondaires.
+ */
+private function separerMetiers(array $metiers): array
+{
+    return [
+
+        "principaux" => array_slice($metiers, 0, 5),
+
+        "secondaires" => array_slice($metiers, 5)
+
+    ];
+}
+/**
+ * Construit la recommandation complète :
+ * Métier → Filières → Universités
+ */
+public function construireDetailsMetiers(
+    array $metiers
+): array
+{
+
+    $resultat = [];
+
+
+    foreach ($metiers as $metier) {
+
+
+        $filieres = [];
+
+
+
+        $listeFilieres =
+            (new FiliereService())
+            ->rechercherFilieresParMetier(
+                $metier["id_metier"]
+            );
+
+
+
+        foreach ($listeFilieres as $filiere) {
+
+
+            $universites =
+                (new UniversiteService())
+                ->rechercherUniversitesParFiliere(
+                    $filiere["id_filiere"]
+                );
+
+
+
+            $filieres[] = [
+
+                "id_filiere" =>
+                    $filiere["id_filiere"],
+
+                "nom" =>
+                    $filiere["nom"],
+
+                "description" =>
+                    $filiere["description"],
+
+                "domaine" =>
+                    $filiere["domaine"],
+
+                "duree" =>
+                    $filiere["duree"],
+
+                "universites" =>
+                    $universites
+
+            ];
+
+        }
+
+
+
+        $resultat[] = [
+
+            "metier" => $metier,
+
+            "filieres" => $filieres
+
+        ];
+
+    }
+
+
+    return $resultat;
+
+ }
 
 
 }

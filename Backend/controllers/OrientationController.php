@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . "/../services/OrientationService.php";
+require_once __DIR__ . "/../utils/ApiResponse.php";
 
 class OrientationController
 {
@@ -39,21 +40,32 @@ class OrientationController
             }
 
             // Vérification des paramètres obligatoires
-            if (
-                !isset($donnees["id_user"]) ||
-                !isset($donnees["id_questionnaire"]) ||
-                !isset($donnees["reponses"])
-            ) {
+if (
+    !isset($donnees["id_user"]) ||
+    !isset($donnees["id_questionnaire"]) ||
+    !isset($donnees["reponses"])
+) {
 
-                http_response_code(400);
+    ApiResponse::error(
+        400,
+        "Paramètres manquants."
+    );
 
-                echo json_encode([
-                    "success" => false,
-                    "message" => "Paramètres manquants."
-                ]);
+return;
+}
 
-                return;
-            }
+// Validation des données
+$erreur = $this->validerDonnees($donnees);
+
+if ($erreur !== null) {
+
+  ApiResponse::error(
+    400,
+    $erreur
+);
+
+return;
+}
 
             // Exécution du moteur NextOri
             $resultat = $this->orientationService->executerOrientation(
@@ -66,27 +78,73 @@ class OrientationController
 
             );
 
-            // Réponse
-            echo json_encode([
+            // Réponse API standardisée
 
-                "success" => true,
+ApiResponse::success(
+    [
+        "id_test" => $resultat["id_test"],
 
-                "data" => $resultat
+        "profil" => [
+            "principal" =>
+                $resultat["profil"]["profil"]["profil_principal"],
 
-            ], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+            "complet" =>
+                $resultat["profil"]["profil"]["profil_complet"],
 
+            "scores" =>
+                $resultat["profil"]["scores"]
+        ],
+
+        "recommandations" =>
+            $resultat["recommandations"]
+    ],
+    "Orientation réalisée avec succès."
+);
         } catch (Throwable $e) {
 
-            http_response_code(500);
-
-            echo json_encode([
-
-                "success" => false,
-
-                "message" => $e->getMessage()
-
-            ]);
-
+           ApiResponse::error(
+    500,
+    $e->getMessage()
+);
         }
     }
+    /**
+ * Vérifie les données reçues par l'API.
+ */
+private function validerDonnees(array $donnees): ?string
+{
+    // id_user
+    if (!is_int($donnees["id_user"]) || $donnees["id_user"] <= 0) {
+        return "id_user invalide.";
+    }
+
+    // id_questionnaire
+    if (!is_int($donnees["id_questionnaire"]) || $donnees["id_questionnaire"] <= 0) {
+        return "id_questionnaire invalide.";
+    }
+
+    // réponses
+    if (!is_array($donnees["reponses"])) {
+        return "Le champ reponses doit être un tableau.";
+    }
+
+    if (count($donnees["reponses"]) === 0) {
+        return "Aucune réponse envoyée.";
+    }
+
+    foreach ($donnees["reponses"] as $reponse) {
+
+        if (!isset($reponse["id_proposition"])) {
+            return "Une réponse ne possède pas id_proposition.";
+        }
+
+        if (!is_int($reponse["id_proposition"]) || $reponse["id_proposition"] <= 0) {
+            return "id_proposition invalide.";
+        }
+    }
+
+    return null;
+}
+
+
 }

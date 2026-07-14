@@ -1,0 +1,165 @@
+.hero{
+
+    min-height:80vh;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:50px;
+
+    padding:70px 80px;
+
+    background:#F2F4F7;
+
+}
+
+
+.hero-text{
+
+    width:50%;
+
+}
+
+
+.hero-text h1{
+
+    color:#0D1B2A;
+
+    font-size:48px;
+
+    line-height:1.2;
+
+    margin-bottom:25px;
+
+}
+
+
+
+.hero-text p{
+
+    color:#555;
+
+    font-size:18px;
+
+    line-height:1.7;
+
+    margin-bottom:35px;
+
+}
+
+
+
+.hero-buttons{
+
+    display:flex;
+
+    gap:20px;
+
+}
+
+
+
+.btn-primary,
+.btn-secondary{
+
+    padding:15px 30px;
+
+    border-radius:10px;
+
+    border:none;
+
+    font-size:16px;
+
+    cursor:pointer;
+
+}
+
+
+
+.btn-primary{
+
+    background:#F4B400;
+
+    color:white;
+
+}
+
+
+
+.btn-secondary{
+
+    background:#1E3A8A;
+
+    color:white;
+
+}
+
+
+
+.hero-image{
+
+    width:45%;
+
+    display:flex;
+
+    justify-content:center;
+
+}
+
+
+
+.image-placeholder{
+
+    width:400px;
+
+    height:350px;
+
+    background:#1E3A8A;
+
+    color:white;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:30px;
+
+    font-size:22px;
+
+}
+
+
+
+@media(max-width:900px){
+
+
+    .hero{
+
+        flex-direction:column;
+
+        padding:40px 20px;
+
+    }
+
+
+    .hero-text,
+    .hero-image{
+
+        width:100%;
+
+    }
+
+
+    .hero-text h1{
+
+        font-size:35px;
+
+    }
+
+
+}

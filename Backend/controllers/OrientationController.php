@@ -17,6 +17,13 @@ class OrientationController
      */
     public function executer(): void
     {
+        header("Access-Control-Allow-Origin: http://localhost:5173");
+        header("Access-Control-Allow-Methods: POST, OPTIONS");
+        header("Access-Control-Allow-Headers: Content-Type");
+        if ($_SERVER["REQUEST_METHOD"] === "OPTIONS") {
+            http_response_code(200);
+            exit();
+        }
         header("Content-Type: application/json; charset=UTF-8");
 
         try {
@@ -40,32 +47,32 @@ class OrientationController
             }
 
             // Vérification des paramètres obligatoires
-if (
-    !isset($donnees["id_user"]) ||
-    !isset($donnees["id_questionnaire"]) ||
-    !isset($donnees["reponses"])
-) {
+            if (
+                !isset($donnees["id_user"]) ||
+                !isset($donnees["id_questionnaire"]) ||
+                !isset($donnees["reponses"])
+            ) {
 
-    ApiResponse::error(
-        400,
-        "Paramètres manquants."
-    );
+                ApiResponse::error(
+                    400,
+                    "Paramètres manquants."
+                );
 
-return;
-}
+                return;
+            }
 
-// Validation des données
-$erreur = $this->validerDonnees($donnees);
+            // Validation des données
+            $erreur = $this->validerDonnees($donnees);
 
-if ($erreur !== null) {
+            if ($erreur !== null) {
 
-  ApiResponse::error(
-    400,
-    $erreur
-);
+                ApiResponse::error(
+                    400,
+                    $erreur
+                );
 
-return;
-}
+                return;
+            }
 
             // Exécution du moteur NextOri
             $resultat = $this->orientationService->executerOrientation(
@@ -80,71 +87,69 @@ return;
 
             // Réponse API standardisée
 
-ApiResponse::success(
-    [
-        "id_test" => $resultat["id_test"],
+            ApiResponse::success(
+                [
+                    "id_test" => $resultat["id_test"],
 
-        "profil" => [
-            "principal" =>
-                $resultat["profil"]["profil"]["profil_principal"],
+                    "profil" => [
+                        "principal" =>
+                        $resultat["profil"]["profil"]["profil_principal"],
 
-            "complet" =>
-                $resultat["profil"]["profil"]["profil_complet"],
+                        "complet" =>
+                        $resultat["profil"]["profil"]["profil_complet"],
 
-            "scores" =>
-                $resultat["profil"]["scores"]
-        ],
+                        "scores" =>
+                        $resultat["profil"]["scores"]
+                    ],
 
-        "recommandations" =>
-            $resultat["recommandations"]
-    ],
-    "Orientation réalisée avec succès."
-);
+                    "recommandations" =>
+                    $resultat["recommandations"]
+                ],
+                "Orientation réalisée avec succès."
+            );
         } catch (Throwable $e) {
 
-           ApiResponse::error(
-    500,
-    $e->getMessage()
-);
+            ApiResponse::error(
+                500,
+                $e->getMessage()
+            );
         }
     }
     /**
- * Vérifie les données reçues par l'API.
- */
-private function validerDonnees(array $donnees): ?string
-{
-    // id_user
-    if (!is_int($donnees["id_user"]) || $donnees["id_user"] <= 0) {
-        return "id_user invalide.";
-    }
-
-    // id_questionnaire
-    if (!is_int($donnees["id_questionnaire"]) || $donnees["id_questionnaire"] <= 0) {
-        return "id_questionnaire invalide.";
-    }
-
-    // réponses
-    if (!is_array($donnees["reponses"])) {
-        return "Le champ reponses doit être un tableau.";
-    }
-
-    if (count($donnees["reponses"]) === 0) {
-        return "Aucune réponse envoyée.";
-    }
-
-    foreach ($donnees["reponses"] as $reponse) {
-
-        if (!isset($reponse["id_proposition"])) {
-            return "Une réponse ne possède pas id_proposition.";
+     * Vérifie les données reçues par l'API.
+     */
+    private function validerDonnees(array $donnees): ?string
+    {
+        // id_user
+        if (!is_int($donnees["id_user"]) || $donnees["id_user"] <= 0) {
+            return "id_user invalide.";
         }
 
-        if (!is_int($reponse["id_proposition"]) || $reponse["id_proposition"] <= 0) {
-            return "id_proposition invalide.";
+        // id_questionnaire
+        if (!is_int($donnees["id_questionnaire"]) || $donnees["id_questionnaire"] <= 0) {
+            return "id_questionnaire invalide.";
         }
+
+        // réponses
+        if (!is_array($donnees["reponses"])) {
+            return "Le champ reponses doit être un tableau.";
+        }
+
+        if (count($donnees["reponses"]) === 0) {
+            return "Aucune réponse envoyée.";
+        }
+
+        foreach ($donnees["reponses"] as $reponse) {
+
+            if (!isset($reponse["id_proposition"])) {
+                return "Une réponse ne possède pas id_proposition.";
+            }
+
+            if (!is_int($reponse["id_proposition"]) || $reponse["id_proposition"] <= 0) {
+                return "id_proposition invalide.";
+            }
+        }
+
+        return null;
     }
-
-    return null;
-}
-
-
 }

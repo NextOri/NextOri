@@ -1,32 +1,36 @@
+import { Link } from "react-router-dom";
+
 import "../styles/Navbar.css";
+
 
 function Navbar(){
 
-    return (
+    return(
 
-        <nav>
+        <nav className="navbar">
 
-            <h2>
+            <div className="logo">
+
                 NextOri
-            </h2>
+
+            </div>
 
 
-            <ul 
-            className="nav-links">
+            <div className="nav-links">
 
-                <li>
+                <Link to="/">
                     Accueil
-                </li>
+                </Link>
 
-                <li>
-                    Test RIASEC
-                </li>
+                <Link to="/test">
+                    Test
+                </Link>
 
-                <li>
+                <Link to="/resultat">
                     Résultats
-                </li>
+                </Link>
 
-            </ul>
+            </div>
 
 
         </nav>

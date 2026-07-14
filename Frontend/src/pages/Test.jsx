@@ -1,61 +1,321 @@
-import { lancerOrientation } from "../services/orientationService";
+import { useEffect, useState } from "react";
 
-function Test() {
+import { getQuestions, getPropositions } from "../services/api";
 
-    async function testerAPI() {
+import "../styles/Test.css";
 
-        const donnees = {
+import AnswerCard from "../components/AnswerCard";
 
-            id_user: 1,
 
-            id_questionnaire: 1,
 
-            reponses: [
 
-                { id_proposition: 1 },
-                { id_proposition: 2 },
-                { id_proposition: 3 },
-                { id_proposition: 4 },
-                { id_proposition: 5 }
+function Test(){
 
-            ]
+    const [questions, setQuestions] = useState([]);
 
-        };
+    const [propositions, setPropositions] = useState([]);
 
-        try {
+    const [index, setIndex] = useState(0);
 
-            const resultat = await lancerOrientation(donnees);
+    const [reponses, setReponses] = useState([]);
 
-            console.log(resultat);
+    const [choix, setChoix] = useState(null);
 
-            alert("Communication React → API réussie !");
+    const [loading, setLoading] = useState(true);
 
-        } catch (erreur) {
 
-            console.error(erreur);
 
-            alert("Erreur de communication avec l'API.");
+    useEffect(()=>{
 
-        }
+        getQuestions()
+
+        .then((data)=>{
+
+            setQuestions(data);
+
+            setLoading(false);
+
+        })
+
+        .catch((error)=>{
+
+            console.error(error);
+
+            setLoading(false);
+
+        });
+
+
+    },[]);
+
+
+    useEffect(()=>{
+
+
+     if(questions.length > 0){
+
+
+        getPropositions(
+
+            questions[index].id_question
+
+        )
+
+        .then(data=>{
+
+            setPropositions(data);
+
+        })
+
+        .catch(error=>{
+
+            console.error(error);
+
+        });
+
+
+     }
+
+
+    },[index, questions]);
+
+
+
+    if(loading){
+
+        return (
+
+            <h2>
+
+                Chargement du test...
+
+            </h2>
+
+        );
 
     }
 
-    return (
 
-        <div>
 
-            <h1>Test de communication API</h1>
+    const question = questions[index];
 
-            <button onClick={testerAPI}>
 
-                Tester l'API NextOri
 
-            </button>
+    function choisirReponse(valeur){
+
+        setChoix(valeur);
+
+    }
+
+
+
+    function suivant(){
+
+
+        if(choix === null){
+
+            alert("Veuillez choisir une réponse.");
+
+            return;
+
+        }
+
+
+        const nouvelleReponse = {
+
+            id_question: question.id_question,
+
+            id_proposition: choix
+
+        };
+
+
+        setReponses([
+
+            ...reponses,
+
+            nouvelleReponse
+
+        ]);
+
+
+        setChoix(null);
+
+
+
+        if(index < questions.length - 1){
+
+            setIndex(index + 1);
+
+        }
+
+        else{
+
+            console.log("Réponses envoyées :", [
+
+                ...reponses,
+
+                nouvelleReponse
+
+            ]);
+
+            alert("Test terminé");
+
+        }
+
+
+    }
+
+
+
+   return (
+
+<div className="test-page">
+
+
+<header className="test-header">
+
+<h1>
+NextOri
+</h1>
+
+<p>
+Test d'orientation RIASEC
+</p>
+
+</header>
+
+<div className="test-introduction">
+
+    <h1>
+        Découvre ton profil professionnel
+    </h1>
+
+    <p>
+        Réponds aux questions suivantes pour mieux comprendre 
+        tes centres d'intérêt et découvrir les métiers qui te correspondent.
+    </p>
+
+</div>
+
+
+
+<div className="progress-container">
+
+
+    <div className="progress-info">
+
+        <span>
+            Question {index + 1} sur {questions.length}
+        </span>
+
+        <span>
+            {Math.round(((index + 1) / questions.length) * 100)}%
+        </span>
+
+
+    </div>
+
+
+
+    <div className="progress-bar">
+
+
+        <div
+
+        className="progress-fill"
+
+        style={{
+            width:`${((index + 1) / questions.length) * 100}%`
+        }}
+
+        >
 
         </div>
 
-    );
+
+    </div>
+
+
+</div>
+
+
+<div className="question-card">
+
+
+<h2>
+
+{question.texte}
+
+</h2>
+
+
+<div className="answers">
+
+
+{
+
+propositions.map((proposition)=>(
+
+
+<button
+
+key={proposition.id_proposition}
+
+className={
+choix === proposition.id_proposition
+? "answer active"
+: "answer"
+}
+
+onClick={()=>choisirReponse(proposition.id_proposition)}
+
+>
+
+
+<span>
+
+{proposition.lettre}
+
+</span>
+
+
+{proposition.libelle}
+
+
+</button>
+
+
+))
 
 }
+
+
+</div>
+
+
+</div>
+
+
+
+<button
+
+className="next-button"
+
+onClick={suivant}
+
+>
+
+Suivant
+
+</button>
+
+
+</div>
+
+);
+
+}
+
 
 export default Test;

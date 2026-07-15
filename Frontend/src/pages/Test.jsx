@@ -101,71 +101,85 @@ function Test(){
 
 
 
-    function choisirReponse(valeur){
+   function choisirReponse(idProposition){
 
-        setChoix(valeur);
+    setChoix(idProposition);
 
-    }
+    const nouvellesReponses = [...reponses];
+
+    nouvellesReponses[index] = {
+
+        id_question: question.id_question,
+
+        id_proposition: idProposition
+
+    };
+
+    setReponses(nouvellesReponses);
+
+}
 
 
 
     function suivant(){
 
+    if(choix === null){
 
-        if(choix === null){
+        alert("Veuillez choisir une réponse.");
 
-            alert("Veuillez choisir une réponse.");
-
-            return;
-
-        }
-
-
-        const nouvelleReponse = {
-
-            id_question: question.id_question,
-
-            id_proposition: choix
-
-        };
-
-
-        setReponses([
-
-            ...reponses,
-
-            nouvelleReponse
-
-        ]);
-
-
-        setChoix(null);
-
-
-
-        if(index < questions.length - 1){
-
-            setIndex(index + 1);
-
-        }
-
-        else{
-
-            console.log("Réponses envoyées :", [
-
-                ...reponses,
-
-                nouvelleReponse
-
-            ]);
-
-            alert("Test terminé");
-
-        }
-
+        return;
 
     }
 
+    if(index < questions.length - 1){
+
+        setIndex(index + 1);
+
+        const prochaineReponse = reponses[index + 1];
+
+        setChoix(
+
+            prochaineReponse
+
+            ? prochaineReponse.id_proposition
+
+            : null
+
+        );
+
+    }
+
+    else{
+
+        console.log("Réponses envoyées :", reponses);
+
+        alert("Test terminé");
+
+    }
+
+}
+
+function precedent(){
+
+    if(index > 0){
+
+        setIndex(index - 1);
+
+        const ancienneReponse = reponses[index - 1];
+
+        setChoix(
+
+            ancienneReponse
+
+            ? ancienneReponse.id_proposition
+
+            : null
+
+        );
+
+    }
+
+}
 
 
    return (
@@ -263,7 +277,7 @@ propositions.map((proposition)=>(
 key={proposition.id_proposition}
 
 className={
-choix === proposition.id_proposition
+reponses[index]?.id_proposition === proposition.id_proposition
 ? "answer active"
 : "answer"
 }
@@ -298,17 +312,40 @@ onClick={()=>choisirReponse(proposition.id_proposition)}
 
 
 
-<button
+<div className="navigation-buttons">
 
-className="next-button"
+    <button
 
-onClick={suivant}
+        className="previous-button"
 
->
+        onClick={precedent}
 
-Suivant
+        disabled={index === 0}
 
-</button>
+    >
+
+        Précédent
+
+    </button>
+
+
+    <button
+
+        className="next-button"
+
+        onClick={suivant}
+
+    >
+
+        {index === questions.length - 1
+
+            ? "Terminer"
+
+            : "Suivant"}
+
+    </button>
+
+</div>
 
 
 </div>

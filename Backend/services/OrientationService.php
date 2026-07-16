@@ -3,6 +3,7 @@
 require_once __DIR__ . "/TestService.php";
 require_once __DIR__ . "/ReponseService.php";
 require_once __DIR__ . "/RiasecService.php";
+require_once __DIR__ . "/TestResultService.php";
 require_once __DIR__ . "/MetierService.php";
 require_once __DIR__ . "/FiliereService.php";
 require_once __DIR__ . "/UniversiteService.php";
@@ -14,9 +15,11 @@ class OrientationService
     private TestService $testService;
     private ReponseService $reponseService;
     private RiasecService $riasecService;
+    private TestResultService $testResultService;
     private MetierService $metierService;
     private FiliereService $filiereService;
     private UniversiteService $universiteService;
+    
 
 
 
@@ -28,6 +31,8 @@ class OrientationService
         $this->reponseService = new ReponseService();
 
         $this->riasecService = new RiasecService();
+
+        $this->testResultService = new TestResultService();
 
         $this->metierService = new MetierService();
 
@@ -215,7 +220,12 @@ class OrientationService
         $profil =
             $this->calculerProfil($idTest);
 
-
+        
+            $this->testResultService->mettreAJourResultat(
+             $idTest,
+             $profil["scores"],
+             $profil["profil"]["profil_principal"]
+            );
 
 
 

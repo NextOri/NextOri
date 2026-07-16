@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 
-import { getQuestions, getPropositions } from "../services/api";
+import { useNavigate } from "react-router-dom";
+
+import {getQuestions, getPropositions, envoyerReponses} from "../services/api";
+
 
 import "../styles/Test.css";
 
@@ -23,7 +26,7 @@ function Test(){
 
     const [loading, setLoading] = useState(true);
 
-
+    const navigate = useNavigate();
 
     useEffect(()=>{
 
@@ -116,12 +119,16 @@ function Test(){
     };
 
     setReponses(nouvellesReponses);
-
+   
+    console.log("Réponses actuelles :", idProposition);
+    setChoix(idProposition)
 }
 
 
 
-    function suivant(){
+function suivant(){
+    console.log("Choix actuel ", choix);
+    console.log("Question actuellle ", question);
 
     if(choix === null){
 
@@ -131,34 +138,86 @@ function Test(){
 
     }
 
+
+
+    const nouvelleReponse = {
+
+        id_question: question.id_question,
+
+        id_proposition: choix
+
+    };
+
+
+
+    const nouvellesReponses = [
+
+        ...reponses,
+
+        nouvelleReponse
+
+    ];
+
+
+
+    setReponses(nouvellesReponses);
+
+
+
+    setChoix(null);
+
+
+
     if(index < questions.length - 1){
+
 
         setIndex(index + 1);
 
-        const prochaineReponse = reponses[index + 1];
-
-        setChoix(
-
-            prochaineReponse
-
-            ? prochaineReponse.id_proposition
-
-            : null
-
-        );
 
     }
 
     else{
 
-        console.log("Réponses envoyées :", reponses);
 
-        alert("Test terminé");
+        envoyerReponses(nouvellesReponses)
+
+        .then((resultat)=>{
+
+
+            console.log("RESULTAT API :", resultat);
+
+
+
+            navigate(
+
+                "/result",
+
+                {
+
+                    state: resultat
+
+                }
+
+            );
+
+
+        })
+
+        .catch((error)=>{
+
+
+            console.error(error);
+
+            alert("Erreur lors du calcul.");
+
+
+        });
+
 
     }
 
 }
-
+   
 function precedent(){
 
     if(index > 0){

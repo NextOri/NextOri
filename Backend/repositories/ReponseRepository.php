@@ -40,11 +40,12 @@ class ReponseRepository
     ":proposition" => $idProposition
 ]);
 
-var_dump($resultat);
 
 if (!$resultat) {
 
-    print_r($statement->errorInfo());
+    throw new Exception(
+        implode(" | ", $statement->errorInfo())
+    );
 
 }
 

@@ -1,0 +1,265 @@
+.metier-page{
+
+    min-height:100vh;
+
+    background:#F4F6F8;
+
+    padding:40px 30px;
+
+    color:#0D1B2A;
+
+}
+
+
+
+/* HEADER */
+
+.metier-header{
+
+    text-align:center;
+
+    margin-bottom:40px;
+
+}
+
+
+
+.metier-header h1{
+
+    font-size:38px;
+
+    color:#1E3A8A;
+
+    margin-bottom:10px;
+
+}
+
+
+
+.metier-header p{
+
+    color:#555;
+
+    font-size:17px;
+
+}
+
+
+
+
+
+/* CARTE PRINCIPALE */
+
+.metier-main-card{
+
+    background:white;
+
+    max-width:1000px;
+
+    margin:auto;
+
+    padding:35px;
+
+    border-radius:20px;
+
+    border:2px solid #1E3A8A;
+
+    box-shadow:0 5px 15px rgba(0,0,0,0.08);
+
+}
+
+
+
+.metier-tag{
+
+    display:inline-block;
+
+    background:#F4B400;
+
+    color:#0D1B2A;
+
+    padding:8px 18px;
+
+    border-radius:20px;
+
+    font-weight:bold;
+
+    margin-bottom:20px;
+
+}
+
+
+
+.metier-main-card h2{
+
+    color:#1E3A8A;
+
+    margin-bottom:15px;
+
+}
+
+
+
+.metier-description{
+
+    line-height:1.8;
+
+    font-size:17px;
+
+    color:#444;
+
+}
+
+
+
+
+
+/* INFORMATIONS */
+
+.metier-infos{
+
+    max-width:1000px;
+
+    margin:35px auto;
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:25px;
+
+}
+
+
+
+.info-card{
+
+    background:white;
+
+    padding:25px;
+
+    border-radius:18px;
+
+    border:1px solid #D9DEE5;
+
+}
+
+
+
+.info-card h3{
+
+    color:#1E3A8A;
+
+    margin-bottom:12px;
+
+}
+
+
+
+.info-card p{
+
+    color:#444;
+
+    font-size:16px;
+
+}
+
+
+
+
+
+/* BOUTON */
+
+.metier-action{
+
+    display:flex;
+
+    justify-content:center;
+
+    margin-top:40px;
+
+}
+
+
+
+.formation-button{
+
+    padding:15px 40px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:#F4B400;
+
+    color:#0D1B2A;
+
+    font-size:17px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:0.3s;
+
+}
+
+
+
+.formation-button:hover{
+
+    background:#1E3A8A;
+
+    color:white;
+
+}
+
+
+
+
+
+/* MOBILE */
+
+@media(max-width:700px){
+
+
+    .metier-page{
+
+        padding:25px 15px;
+
+    }
+
+
+
+    .metier-header h1{
+
+        font-size:30px;
+
+    }
+
+
+
+    .metier-main-card{
+
+        padding:25px;
+
+    }
+
+
+
+    .metier-infos{
+
+        grid-template-columns:1fr;
+
+    }
+
+
+
+    .formation-button{
+
+        width:100%;
+
+    }
+
+
+}

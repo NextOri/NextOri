@@ -110,8 +110,9 @@ class OrientationController
         } catch (Throwable $e) {
 
             ApiResponse::error(
-                500,
-                $e->getMessage()
+
+                $e->getMessage(),
+                500
             );
         }
     }

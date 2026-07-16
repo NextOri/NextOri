@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import "../styles/Navbar.css";
 
 
+
 function Navbar(){
 
     return(
@@ -26,7 +27,7 @@ function Navbar(){
                     Test
                 </Link>
 
-                <Link to="/resultat">
+                <Link to="/result">
                     Résultats
                 </Link>
 

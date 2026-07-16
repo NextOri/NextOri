@@ -126,93 +126,37 @@ function Test(){
 
 
 
-function suivant(){
-    console.log("Choix actuel ", choix);
-    console.log("Question actuellle ", question);
+function suivant() {
 
-    if(choix === null){
-
+    if (choix === null) {
         alert("Veuillez choisir une réponse.");
-
         return;
-
     }
 
+    if (index < questions.length - 1) {
 
-
-    const nouvelleReponse = {
-
-        id_question: question.id_question,
-
-        id_proposition: choix
-
-    };
-
-
-
-    const nouvellesReponses = [
-
-        ...reponses,
-
-        nouvelleReponse
-
-    ];
-
-
-
-    setReponses(nouvellesReponses);
-
-
-
-    setChoix(null);
-
-
-
-    if(index < questions.length - 1){
-
-
+        setChoix(null);
         setIndex(index + 1);
 
+    } else {
 
-    }
+        envoyerReponses(reponses)
 
-    else{
+            .then((resultat) => {
 
-
-        envoyerReponses(nouvellesReponses)
-
-        .then((resultat)=>{
-
-
-            console.log("RESULTAT API :", resultat);
-
-
-
-            navigate(
-
-                "/result",
-
-                {
-
+                navigate("/result", {
                     state: resultat
+                });
 
-                }
+            })
 
-            );
+            .catch((error) => {
 
+                console.error(error);
 
-        })
+                alert("Erreur lors du calcul.");
 
-        .catch((error)=>{
-
-
-            console.error(error);
-
-            alert("Erreur lors du calcul.");
-
-
-        });
-
+            });
 
     }
 

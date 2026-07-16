@@ -61,19 +61,7 @@ class OrientationService
         array $reponses
     ): void
     {
-       echo "ID TEST";
-       var_dump($idTest);
-    var_dump($reponses);
-    $ids = array_column($reponses, "id_proposition");
-
-echo "TOTAL : ".count($ids);
-
-echo "<br>";
-
-echo "UNIQUE : ".count(array_unique($ids));
-
-
-    exit;
+      
    
         $this->reponseService->enregistrerReponses(
             $idTest,

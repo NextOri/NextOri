@@ -1,83 +1,39 @@
-import { Routes, Route } from "react-router-dom";
-
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
-
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Home from "./pages/Home";
 import Test from "./pages/Test";
-import Resultat from "./pages/Resultat";
-import Metier from "./pages/Metier";
-import Filiere from "./pages/Filiere";
+import Result from "./pages/Result";
+import MetierDetail from "./pages/MetierDetail";
+import Formations from "./pages/Formations";
 import Universite from "./pages/Universite";
 
 
-function App(){
-
+function App() {
 
     return (
 
-        <>
+        
+       
+        <Routes>
 
-            <Navbar />
+            <Route path="/" element={<Home />} />
 
+            <Route path="/test" element={<Test />} />
 
-            <main>
+            <Route path="/result" element={<Result />} />
 
+            <Route path="/metier-detail" element={<MetierDetail />} />
 
-                <Routes>
+            <Route path="/formations" element={<Formations />} />
 
+            <Route path="/universites" element={<Universite />} />
 
-                    <Route 
-                        path="/" 
-                        element={<Home />} 
-                    />
+        </Routes>
+      
 
-
-                    <Route 
-                        path="/test" 
-                        element={<Test />} 
-                    />
-
-
-                    <Route 
-                        path="/resultat" 
-                        element={<Resultat />} 
-                    />
-
-
-                    <Route 
-                        path="/metier/:id" 
-                        element={<Metier />} 
-                    />
-
-
-                    <Route 
-                        path="/filiere/:id" 
-                        element={<Filiere />} 
-                    />
-
-
-                    <Route 
-                        path="/universite/:id" 
-                        element={<Universite />} 
-                    />
-
-
-                </Routes>
-
-
-            </main>
-
-
-            <Footer />
-
-
-        </>
-
+      
     );
 
 }
-
 
 export default App;

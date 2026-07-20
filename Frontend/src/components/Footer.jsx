@@ -32,7 +32,7 @@ function Footer(){
                         Test
                     </a>
 
-                    <a href="/resultat">
+                    <a href="/result">
                         Résultats
                     </a>
 

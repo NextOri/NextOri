@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NextOri — Tableau de bord (Responsive)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy-1:#0E1A33;
+    --navy-2:#1B2A4A;
+    --navy-3:#233658;
+    --gold:#F5A623;
+    --gold-dark:#E2960F;
+    --green:#2FBF71;
+    --bg:#F0F2F6;
+    --card:#FFFFFF;
+    --text-gray:#6B7280;
+    --line:#E7EAF0;
+    --purple-1:#6A4CE0;
+    --purple-2:#9B4CE0;
+    --lav-bg:#F1EEFC;
+
+    --pad:        clamp(14px, 2.2vw, 34px);
+    --radius-lg:  clamp(18px, 2vw, 28px);
+    --radius-md:  clamp(14px, 1.4vw, 20px);
+    --gap:        clamp(10px, 1.6vw, 20px);
+
+    --fs-brand:    clamp(15px, 1.6vw, 22px);
+    --fs-sub:      clamp(9.5px, 0.9vw, 13.5px);
+    --fs-dash:     clamp(24px, 3.4vw, 40px);
+    --fs-lvl:      clamp(14px, 1.5vw, 19px);
+    --fs-stat:     clamp(18px, 2.2vw, 26px);
+    --fs-h2:       clamp(18px, 2vw, 26px);
+    --fs-body:     clamp(12.5px, 1.15vw, 16px);
+    --fs-step:     clamp(13px, 1.4vw, 18px);
+    --fs-action-t: clamp(14.5px, 1.5vw, 19px);
+    --fs-action-d: clamp(11.5px, 1.05vw, 14.5px);
+  }
+
+  *{ box-sizing:border-box; margin:0; padding:0; }
+
+  body{
+    background:var(--bg);
+    font-family:'Inter', sans-serif;
+    padding:0;
+  }
+
+  .app{
+    width:100%;
+    padding-bottom:110px;
+    position:relative;
+  }
+  .container{
+    max-width:1160px;
+    margin:0 auto;
+  }
+
+  .topbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:12px var(--pad);
+    background:linear-gradient(180deg, var(--navy-1), var(--navy-2));
+    position:sticky;
+    top:0;
+    z-index:50;
+    width:100%;
+    box-shadow:0 4px 18px rgba(6,12,28,0.18);
+  }
+  .topbar-left{ display:flex; align-items:center; gap:12px; }
+  .back-btn{
+    width:clamp(30px,3.4vw,44px); height:clamp(30px,3.4vw,44px); border-radius:50%;
+    background:rgba(255,255,255,0.12);
+    display:flex; align-items:center; justify-content:center; flex-shrink:0;
+  }
+  .back-btn svg{ width:46%; height:46%; }
+  .brand-title{ line-height:1.15; }
+  .brand-title .name{ font-family:'Baloo 2', sans-serif; font-weight:800; font-size:clamp(16px,1.9vw,22px); color:#fff; }
+  .brand-title .name span{ color:var(--gold); }
+  .brand-title .sub{ font-size:var(--fs-sub); color:#B9C2D4; }
+  .topbar-right{ display:flex; align-items:center; gap:10px; }
+  .pts-badge{
+    display:flex; align-items:center; gap:8px;
+    background:rgba(255,255,255,0.1); border-radius:30px; padding:6px 12px;
+  }
+  .pts-badge .trophy{
+    width:clamp(18px,1.8vw,26px); height:clamp(18px,1.8vw,26px); border-radius:50%; background:var(--gold);
+    display:flex; align-items:center; justify-content:center; flex-shrink:0;
+  }
+  .pts-badge .trophy svg{ width:55%; height:55%; }
+  .pts-badge .txt{ line-height:1.1; }
+  .pts-badge .txt .pts{ font-size:clamp(10.5px,1.1vw,14px); font-weight:700; color:#fff; }
+  .pts-badge .txt .niv{ font-size:clamp(8px,0.85vw,11px); color:#B9C2D4; }
+  .chat-btn{
+    width:clamp(30px,3.4vw,44px); height:clamp(30px,3.4vw,44px); border-radius:50%;
+    background:rgba(255,255,255,0.12);
+    display:flex; align-items:center; justify-content:center; flex-shrink:0;
+  }
+  .chat-btn svg{ width:46%; height:46%; }
+
+  .topbar-inner{
+    max-width:1160px; margin:0 auto; width:100%;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .header-dark{
+    background:linear-gradient(180deg, var(--navy-2), var(--navy-3));
+    padding:0 0 clamp(48px, 6vw, 80px);
+    position:relative;
+    width:100%;
+  }
+  .header-dark-inner{
+    padding:var(--pad) var(--pad) 0;
+    position:relative;
+  }
+  .dash-label{ font-size:clamp(12px,1.2vw,16px); color:#B9C2D4; margin-bottom:2px; }
+  .dash-title{ font-family:'Baloo 2', sans-serif; font-weight:800; font-size:var(--fs-dash); color:#fff; }
+  .trophy-float{
+    position:absolute; top:var(--pad); right:var(--pad);
+    width:clamp(44px,5vw,66px); height:clamp(44px,5vw,66px); border-radius:50%;
+    background:rgba(255,255,255,0.1); border:2px solid rgba(255,255,255,0.15);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .trophy-float svg{ width:46%; height:46%; }
+  .trophy-badge-count{
+    position:absolute; bottom:-4px; right:-4px;
+    width:clamp(18px,1.9vw,25px); height:clamp(18px,1.9vw,25px); background:var(--gold); color:var(--navy-2);
+    font-size:clamp(10px,1vw,13px); font-weight:800; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    border:2px solid var(--navy-2);
+  }
+  .level-card{
+    margin-top:clamp(14px,1.6vw,22px); background:rgba(255,255,255,0.06);
+    border:1px solid rgba(255,255,255,0.1); border-radius:var(--radius-md); padding:var(--pad);
+  }
+  .level-top{ display:flex; align-items:center; justify-content:space-between; margin-bottom:10px; }
+  .level-name{ display:flex; align-items:center; gap:8px; font-weight:700; color:#fff; font-size:var(--fs-lvl); }
+  .level-name svg{ width:clamp(14px,1.4vw,19px); height:clamp(14px,1.4vw,19px); }
+  .level-pts{ font-weight:700; color:var(--gold); font-size:var(--fs-lvl); }
+  .progress-track{ height:clamp(7px,0.8vw,10px); background:rgba(255,255,255,0.15); border-radius:6px; overflow:hidden; margin-bottom:8px; }
+  .progress-fill{ height:100%; background:linear-gradient(90deg, var(--gold), var(--gold-dark)); border-radius:6px; }
+  .level-note{ font-size:var(--fs-body); color:#9FAAC0; }
+  .stat-row{ display:flex; gap:var(--gap); margin-top:14px; }
+  .stat-card{
+    flex:1; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1);
+    border-radius:var(--radius-md); padding:var(--pad);
+  }
+  .stat-value{ display:flex; align-items:center; gap:6px; font-size:var(--fs-stat); font-weight:800; color:#fff; margin-bottom:4px; }
+  .stat-label{ font-size:var(--fs-body); color:#9FAAC0; }
+
+  .welcome-card{
+    background:var(--card); border-radius:var(--radius-lg);
+    margin:clamp(-36px,-4vw,-52px) var(--pad) 0; padding:var(--pad);
+    box-shadow:0 14px 32px rgba(20,30,60,0.15); position:relative;
+  }
+  .welcome-title{
+    display:flex; align-items:center; gap:8px;
+    font-family:'Baloo 2', sans-serif; font-weight:700; font-size:var(--fs-h2); color:var(--navy-2); margin-bottom:6px;
+  }
+  .welcome-text{ font-size:var(--fs-body); color:var(--text-gray); line-height:1.55; margin-bottom:20px; }
+  .prog-row{ display:flex; align-items:center; justify-content:space-between; font-size:var(--fs-body); font-weight:700; color:var(--navy-2); margin-bottom:10px; }
+  .prog-row .label{ display:flex; align-items:center; gap:6px; font-weight:600; }
+  .prog-track{ height:clamp(7px,0.8vw,10px); background:var(--line); border-radius:6px; overflow:hidden; margin-bottom:18px; }
+  .prog-fill{ height:100%; background:linear-gradient(90deg, #1B2A4A, #2FBF71); border-radius:6px; width:60%; }
+  .next-step{ display:flex; align-items:center; gap:14px; background:#F5F7FA; border-radius:var(--radius-md); padding:14px 16px; }
+  .next-step svg{ width:clamp(16px,1.6vw,22px); height:clamp(16px,1.6vw,22px); flex-shrink:0; }
+  .next-step .txt{ font-size:var(--fs-body); color:var(--text-gray); }
+  .next-step .txt b{ display:block; color:var(--navy-2); font-size:calc(var(--fs-body) + 2px); margin-top:1px; }
+
+  .parcours-card{
+    background:var(--card); border-radius:var(--radius-lg); margin:var(--gap) var(--pad) 0; padding:var(--pad);
+    box-shadow:0 8px 24px rgba(20,30,60,0.05);
+  }
+  .parcours-title{
+    display:flex; align-items:center; gap:10px;
+    font-family:'Baloo 2', sans-serif; font-weight:700; font-size:var(--fs-h2); color:var(--navy-2); margin-bottom:22px;
+  }
+  .step{ display:flex; gap:16px; position:relative; padding-bottom:26px; }
+  .step:last-child{ padding-bottom:0; }
+  .step-line{ position:absolute; left:12px; top:30px; bottom:0; width:2px; background:var(--line); }
+  .step:last-child .step-line{ display:none; }
+  .step-dot{
+    width:clamp(22px,2.2vw,28px); height:clamp(22px,2.2vw,28px); border-radius:50%; flex-shrink:0;
+    display:flex; align-items:center; justify-content:center; z-index:1;
+  }
+  .step-dot.done{ background:var(--green); }
+  .step-dot.done svg{ width:55%; height:55%; }
+  .step-dot.current{ background:#fff; border:6px solid var(--navy-2); }
+  .step-dot.todo{ background:#fff; border:2px solid var(--line); }
+  .step-content{ display:flex; align-items:center; justify-content:space-between; flex:1; padding-top:2px; flex-wrap:wrap; gap:8px; }
+  .step-label{ display:flex; align-items:center; gap:8px; font-size:var(--fs-step); font-weight:600; }
+  .step-label.done{ color:var(--text-gray); }
+  .step-label.current{ color:var(--navy-2); font-weight:700; }
+  .step-label.todo{ color:#A6AEBB; }
+  .badge-encours{
+    background:#E7F0FF; color:#2D6CDF; font-size:clamp(10px,1vw,13px); font-weight:700;
+    padding:5px 12px; border-radius:20px; white-space:nowrap;
+  }
+
+  .actions{
+    margin:var(--gap) var(--pad) 0;
+    display:grid;
+    grid-template-columns:1fr;
+    gap:var(--gap);
+  }
+  .action-card{
+    background:var(--card);
+    border-radius:var(--radius-lg);
+    padding:var(--pad);
+    display:flex;
+    align-items:center;
+    gap:16px;
+    box-shadow:0 8px 24px rgba(20,30,60,0.05);
+  }
+  .action-icon{
+    width:clamp(42px,4.2vw,58px); height:clamp(42px,4.2vw,58px); border-radius:14px; flex-shrink:0;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .action-icon svg{ width:46%; height:46%; }
+  .icon-navy{ background:var(--navy-2); }
+  .icon-orange{ background:linear-gradient(135deg,#FF9A4D,#F5691E); }
+  .icon-green{ background:linear-gradient(135deg,#3FD68A,#1FA867); }
+
+  .action-body{ flex:1; }
+  .action-title{ font-size:var(--fs-action-t); font-weight:700; color:var(--navy-2); margin-bottom:2px; }
+  .action-desc{ font-size:var(--fs-action-d); color:var(--text-gray); line-height:1.4; }
+  .action-chevron{ flex-shrink:0; color:#C3CAD6; }
+  .action-chevron svg{ width:clamp(15px,1.4vw,20px); height:clamp(15px,1.4vw,20px); }
+
+  .project-card{
+    grid-column:1 / -1;
+    background:linear-gradient(135deg, var(--purple-1), var(--purple-2));
+    border-radius:var(--radius-lg);
+    padding:var(--pad);
+    display:flex;
+    align-items:center;
+    gap:16px;
+    box-shadow:0 14px 30px rgba(106,76,224,0.35);
+    position:relative;
+    overflow:hidden;
+  }
+  .project-card.locked{
+    background:linear-gradient(135deg, #6A6F85, #4B5064);
+    box-shadow:0 14px 30px rgba(40,44,58,0.28);
+  }
+  .project-card.locked .project-icon{ opacity:0.55; }
+  .project-lock-badge{
+    position:absolute; top:14px; right:14px;
+    display:flex; align-items:center; gap:6px;
+    background:rgba(255,255,255,0.16);
+    border:1px solid rgba(255,255,255,0.25);
+    color:#fff;
+    font-size:11px; font-weight:700;
+    padding:6px 12px 6px 10px;
+    border-radius:20px;
+    backdrop-filter:blur(2px);
+  }
+  .project-lock-badge svg{ width:12px; height:12px; flex-shrink:0; }
+  .project-icon{
+    width:clamp(42px,4.2vw,58px); height:clamp(42px,4.2vw,58px); border-radius:14px; flex-shrink:0;
+    background:rgba(255,255,255,0.18);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .project-icon svg{ width:46%; height:46%; }
+  .project-body{ flex:1; }
+  .project-title{
+    display:flex; align-items:center; gap:8px;
+    font-size:var(--fs-action-t); font-weight:700; color:#fff; margin-bottom:2px;
+  }
+  .project-title svg{ width:clamp(14px,1.4vw,18px); height:clamp(14px,1.4vw,18px); }
+  .project-desc{ font-size:var(--fs-action-d); color:#E4DBFB; line-height:1.4; margin-bottom:14px; }
+  .project-card.locked .project-desc{ color:#D7D9E4; max-width:520px; }
+  .project-chevron{ color:rgba(255,255,255,0.8); flex-shrink:0; }
+  .project-chevron svg{ width:clamp(15px,1.4vw,20px); height:clamp(15px,1.4vw,20px); }
+
+  .notify-btn{
+    display:inline-flex; align-items:center; gap:9px;
+    background:var(--gold);
+    color:var(--navy-2);
+    border:none;
+    border-radius:11px;
+    padding:11px 18px;
+    font-family:'Inter', sans-serif;
+    font-weight:700;
+    font-size:calc(var(--fs-action-d) + 1px);
+    cursor:pointer;
+    transition:background 0.15s ease, transform 0.15s ease;
+  }
+  .notify-btn svg{ width:16px; height:16px; flex-shrink:0; }
+  .notify-btn:hover{ background:var(--gold-dark); transform:translateY(-1px); }
+  .notify-btn.subscribed{
+    background:rgba(255,255,255,0.16);
+    color:#fff;
+    cursor:default;
+  }
+  .notify-btn.subscribed:hover{ transform:none; }
+
+  .discovery-card{
+    margin:var(--gap) var(--pad) 0;
+    background:var(--lav-bg);
+    border-radius:var(--radius-lg);
+    padding:clamp(28px,5vw,64px) clamp(20px,4vw,48px);
+    text-align:center;
+  }
+  .discovery-icon{
+    width:clamp(64px,7vw,110px); height:clamp(64px,7vw,110px); border-radius:50%;
+    background:linear-gradient(135deg, var(--purple-1), var(--purple-2));
+    display:flex; align-items:center; justify-content:center;
+    margin:0 auto clamp(16px,2vw,26px);
+    box-shadow:0 14px 30px rgba(106,76,224,0.3);
+  }
+  .discovery-icon svg{ width:44%; height:44%; }
+  .discovery-title{
+    font-family:'Baloo 2', sans-serif;
+    font-weight:700; font-size:var(--fs-h2); color:var(--navy-2); margin-bottom:10px;
+  }
+  .discovery-text{
+    font-size:var(--fs-body); color:var(--text-gray); line-height:1.6; margin-bottom:24px;
+    max-width:560px; margin-left:auto; margin-right:auto;
+  }
+  .discovery-btn{
+    display:inline-flex; align-items:center; gap:8px;
+    background:linear-gradient(135deg, var(--purple-1), var(--purple-2));
+    color:#fff; border:none; border-radius:var(--radius-md);
+    font-family:'Inter', sans-serif; font-weight:700; font-size:calc(var(--fs-body) + 2px);
+    padding:16px 30px; cursor:pointer;
+    box-shadow:0 14px 28px rgba(106,76,224,0.35);
+    transition:transform 0.15s ease;
+  }
+  .discovery-btn:hover{ transform:translateY(-1px); }
+  .discovery-btn svg{ width:clamp(15px,1.4vw,19px); height:clamp(15px,1.4vw,19px); }
+
+  .bottom-nav{
+    position:fixed; bottom:0; left:0; right:0;
+    background:#fff; border-top:1px solid var(--line);
+    display:flex; justify-content:center;
+    box-shadow:0 -4px 18px rgba(20,30,60,0.06);
+    z-index:10;
+  }
+  .bottom-nav-inner{
+    width:100%; max-width:1160px;
+    display:flex; justify-content:space-around;
+    padding:12px clamp(20px,4vw,40px) 16px;
+  }
+  .nav-item{
+    display:flex; flex-direction:column; align-items:center; gap:4px;
+    font-size:clamp(10px,1vw,13px); color:#A6AEBB; font-weight:600;
+  }
+  .nav-item svg{ width:clamp(18px,1.8vw,24px); height:clamp(18px,1.8vw,24px); }
+  .nav-item.active{ color:var(--navy-2); }
+
+  .help-btn{
+    position:fixed;
+    bottom:calc(84px + env(safe-area-inset-bottom, 0px));
+    right:max(16px, calc(50vw - 580px + 16px));
+    width:clamp(34px,3.4vw,44px); height:clamp(34px,3.4vw,44px);
+    background:var(--navy-2); color:#fff; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-weight:800; font-size:clamp(14px,1.4vw,18px);
+    box-shadow:0 6px 16px rgba(27,42,74,0.3);
+    z-index:11;
+  }
+
+  @media (min-width:640px){
+    .actions{ grid-template-columns:1fr 1fr; }
+  }
+  @media (min-width:1024px){
+    .actions{ grid-template-columns:1fr 1fr 1fr; }
+  }
+  @media (max-width:520px){
+    .project-card.locked{ flex-wrap:wrap; padding-top:44px; }
+    .project-lock-badge{ top:12px; right:12px; left:12px; justify-content:center; }
+  }
+
+  /* ---------- UNIVERSITIES SECTION ---------- */
+  .uni-section{ margin:calc(var(--gap) * 1.4) var(--pad) 0; }
+  .uni-section-head{
+    display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap:10px;
+    margin-bottom:16px;
+  }
+  .uni-section-title{
+    font-family:'Baloo 2', sans-serif; font-weight:700; font-size:var(--fs-h2); color:var(--navy-2);
+  }
+  .uni-section-sub{ font-size:var(--fs-body); color:var(--text-gray); margin-top:4px; }
+  .panel-link-gold{
+    display:inline-flex; align-items:center; gap:5px;
+    font-size:var(--fs-action-d); font-weight:700; color:var(--gold-dark); flex-shrink:0;
+  }
+  .panel-link-gold svg{ width:15px; height:15px; }
+
+  .uni-grid{ display:grid; grid-template-columns:1fr; gap:var(--gap); }
+  .uni-card{
+    background:var(--card); border-radius:var(--radius-lg); padding:var(--pad);
+    box-shadow:0 8px 24px rgba(20,30,60,0.05); border:1px solid var(--line);
+  }
+  .uni-badge{
+    display:inline-flex; align-items:center; justify-content:center;
+    font-family:'Baloo 2', sans-serif; font-weight:800; font-size:13px;
+    color:#fff; padding:6px 12px; border-radius:9px; margin-bottom:14px;
+  }
+  .uni-badge.navy{ background:var(--navy-2); }
+  .uni-badge.gold{ background:var(--gold); color:var(--navy-2); }
+  .uni-name{ font-size:var(--fs-action-t); font-weight:700; color:var(--navy-2); margin-bottom:6px; line-height:1.3; }
+  .uni-loc{ font-size:var(--fs-action-d); color:var(--text-gray); margin-bottom:14px; }
+  .uni-tags{ display:flex; flex-wrap:wrap; gap:8px; }
+  .tag-pill{
+    font-size:11.5px; font-weight:700; color:var(--navy-2);
+    background:#F5F7FA; border:1px solid var(--line); padding:5px 11px; border-radius:20px;
+  }
+
+  .coaching-locked{ margin:var(--gap) var(--pad) 0; }
+
+  @media (min-width:640px){
+    .uni-grid{ grid-template-columns:1fr 1fr; }
+  }
+  @media (min-width:1024px){
+    .uni-grid{ grid-template-columns:1fr 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="app">
+
+  <div class="topbar">
+    <div class="topbar-inner">
+      <div class="topbar-left">
+        <div class="back-btn">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M15 6l-6 6 6 6" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="brand-title">
+          <div class="name">Next<span>Ori</span></div>
+          <div class="sub">Des choix éclairés pour un avenir meilleur.</div>
+        </div>
+      </div>
+      <div class="topbar-right">
+        <div class="pts-badge">
+          <div class="trophy">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M8 4h8v3a4 4 0 0 1-8 0V4z" fill="#1B2A4A"/><path d="M8 6H5a3 3 0 0 0 3 5M16 6h3a3 3 0 0 1-3 5" stroke="#1B2A4A" stroke-width="1.4" stroke-linecap="round"/><rect x="10" y="14" width="4" height="4" fill="#1B2A4A"/><rect x="8" y="18" width="8" height="2" rx="1" fill="#1B2A4A"/></svg>
+          </div>
+          <div class="txt">
+            <div class="pts">0 pts</div>
+            <div class="niv">Niv. 1</div>
+          </div>
+        </div>
+        <div class="chat-btn">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M4 12a8 8 0 1 1 3 6.2L4 20l1.4-3.6A7.96 7.96 0 0 1 4 12z" stroke="#fff" stroke-width="1.8" stroke-linejoin="round"/></svg>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="header-dark">
+    <div class="container header-dark-inner">
+    <div class="dash-label">Tableau de bord</div>
+    <div class="dash-title">Next<span style="color:var(--gold)">Ori</span></div>
+
+    <div class="trophy-float">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M8 4h8v3a4 4 0 0 1-8 0V4z" fill="#F5A623"/><path d="M8 6H5a3 3 0 0 0 3 5M16 6h3a3 3 0 0 1-3 5" stroke="#F5A623" stroke-width="1.6" stroke-linecap="round"/><rect x="10" y="14" width="4" height="4" fill="#F5A623"/><rect x="8" y="18" width="8" height="2" rx="1" fill="#F5A623"/></svg>
+      <div class="trophy-badge-count">1</div>
+    </div>
+
+    <div class="level-card">
+      <div class="level-top">
+        <div class="level-name">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#F5A623"/></svg>
+          Niveau 1
+        </div>
+        <div class="level-pts">0 pts</div>
+      </div>
+      <div class="progress-track"><div class="progress-fill" style="width:0%"></div></div>
+      <div class="level-note">100 points pour niveau 2</div>
+    </div>
+
+    <div class="stat-row">
+      <div class="stat-card">
+        <div class="stat-value">🔥 3</div>
+        <div class="stat-label">Jours d'affilée</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">⭐ 0</div>
+        <div class="stat-label">Badges gagnés</div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <div class="container">
+  <div class="welcome-card">
+    <div class="welcome-title">👋 Bonjour, Ndeye !</div>
+    <div class="welcome-text">Bienvenue sur NextOri. Construisons ensemble ton projet d'avenir.</div>
+
+    <div class="prog-row">
+      <span class="label">📊 Progression de ton parcours</span>
+      <span>60%</span>
+    </div>
+    <div class="prog-track"><div class="prog-fill"></div></div>
+
+    <div class="next-step">
+      <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#6B7280" stroke-width="1.8"/><path d="M12 7v5l3.5 2" stroke="#6B7280" stroke-width="1.8" stroke-linecap="round"/></svg>
+      <div class="txt">Étape suivante<b>Passer le test RIASEC</b></div>
+    </div>
+  </div>
+
+  <div class="parcours-card">
+    <div class="parcours-title">🎯 Ton parcours d'orientation</div>
+
+    <div class="step">
+      <div class="step-line"></div>
+      <div class="step-dot done">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M5 12l5 5 9-9" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="step-content">
+        <div class="step-label done">✅ Créer son profil</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-line"></div>
+      <div class="step-dot current"></div>
+      <div class="step-content">
+        <div class="step-label current">📋 Passer le test RIASEC</div>
+        <div class="badge-encours">En cours</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-line"></div>
+      <div class="step-dot todo"></div>
+      <div class="step-content">
+        <div class="step-label todo">📊 Découvrir son profil RIASEC</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-line"></div>
+      <div class="step-dot todo"></div>
+      <div class="step-content">
+        <div class="step-label todo">💼 Explorer les métiers recommandés</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-line"></div>
+      <div class="step-dot todo"></div>
+      <div class="step-content">
+        <div class="step-label todo">🎓 Découvrir les formations adaptées</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-line"></div>
+      <div class="step-dot todo"></div>
+      <div class="step-content">
+        <div class="step-label todo">💬 Échanger avec un conseiller</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-dot todo"></div>
+      <div class="step-content">
+        <div class="step-label todo">🚀 Construire son projet d'avenir</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="actions">
+
+    <div class="action-card">
+      <div class="action-icon icon-navy">
+        <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#fff" stroke-width="1.8"/><path d="M15 9l-4 2-2 4 4-2 2-4z" fill="#fff"/></svg>
+      </div>
+      <div class="action-body">
+        <div class="action-title">Test d'orientation</div>
+        <div class="action-desc">Découvre les carrières faites pour toi</div>
+      </div>
+      <div class="action-chevron">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+    </div>
+
+    <div class="action-card">
+      <div class="action-icon icon-orange">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 2l1.6 5.2L19 9l-5.4 1.8L12 16l-1.6-5.2L5 9l5.4-1.8L12 2z" fill="#fff"/></svg>
+      </div>
+      <div class="action-body">
+        <div class="action-title">Explorer les carrières</div>
+        <div class="action-desc">Plus de 100 métiers à découvrir</div>
+      </div>
+      <div class="action-chevron">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+    </div>
+
+    <div class="action-card">
+      <div class="action-icon icon-green">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 3L2 8l10 5 8-4.2V15h1.5V8L12 3z" fill="#fff"/><path d="M6 11.5V16c0 1.5 2.7 3 6 3s6-1.5 6-3v-4.5l-6 3.15-6-3.15z" fill="#fff"/></svg>
+      </div>
+      <div class="action-body">
+        <div class="action-title">Programmes universitaires</div>
+        <div class="action-desc">Trouve ta formation idéale</div>
+      </div>
+      <div class="action-chevron">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+    </div>
+
+    <div class="project-card locked">
+      <div class="project-lock-badge">
+        <svg viewBox="0 0 24 24" fill="none"><rect x="4" y="10" width="16" height="10" rx="2" stroke="#fff" stroke-width="1.8"/><path d="M8 10V7a4 4 0 0 1 8 0v3" stroke="#fff" stroke-width="1.8"/></svg>
+        Bientôt disponible
+      </div>
+      <div class="project-icon">
+        <svg viewBox="0 0 24 24" fill="none"><rect x="5" y="3" width="14" height="18" rx="2" stroke="#fff" stroke-width="1.8"/><path d="M9 8h6M9 12h6M9 16h3" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </div>
+      <div class="project-body">
+        <div class="project-title">
+          <svg viewBox="0 0 24 24" fill="none"><rect x="5" y="3" width="14" height="18" rx="2" stroke="#fff" stroke-width="1.8"/><path d="M9 8h6M9 12h6" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg>
+          Mon Projet d'Avenir
+        </div>
+        <div class="project-desc">Ton plan personnalisé téléchargeable, construit à partir de ton profil RIASEC. Arrive très bientôt.</div>
+        <button class="notify-btn" type="button" data-state="idle">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M6 10a6 6 0 0 1 12 0c0 4 1.5 5.5 1.5 5.5H4.5S6 14 6 10z" stroke="currentColor" stroke-width="1.8"/><path d="M10 19a2 2 0 0 0 4 0" stroke="currentColor" stroke-width="1.8"/></svg>
+          <span class="notify-label">Me notifier quand c'est disponible</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="project-card locked">
+      <div class="project-lock-badge">
+        <svg viewBox="0 0 24 24" fill="none"><rect x="4" y="10" width="16" height="10" rx="2" stroke="#fff" stroke-width="1.8"/><path d="M8 10V7a4 4 0 0 1 8 0v3" stroke="#fff" stroke-width="1.8"/></svg>
+        Bientôt disponible
+      </div>
+      <div class="project-icon">
+        <svg viewBox="0 0 24 24" fill="none"><rect x="4" y="3" width="16" height="18" rx="2" stroke="#fff" stroke-width="1.8"/><circle cx="9" cy="8.5" r="2" stroke="#fff" stroke-width="1.6"/><path d="M5 17l3.5-4 2.5 2.5L15 11l4 6" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="project-body">
+        <div class="project-title">
+          <svg viewBox="0 0 24 24" fill="none"><rect x="4" y="3" width="16" height="18" rx="2" stroke="#fff" stroke-width="1.8"/><path d="M8 8h8M8 12h8M8 16h5" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/></svg>
+          Créer mon CV
+        </div>
+        <div class="project-desc">Génère un CV professionnel à partir de ton profil NextOri, prêt à télécharger. Arrive très bientôt.</div>
+        <button class="notify-btn" type="button" data-state="idle">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M6 10a6 6 0 0 1 12 0c0 4 1.5 5.5 1.5 5.5H4.5S6 14 6 10z" stroke="currentColor" stroke-width="1.8"/><path d="M10 19a2 2 0 0 0 4 0" stroke="currentColor" stroke-width="1.8"/></svg>
+          <span class="notify-label">Me notifier quand c'est disponible</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="project-card locked">
+      <div class="project-lock-badge">
+        <svg viewBox="0 0 24 24" fill="none"><rect x="4" y="10" width="16" height="10" rx="2" stroke="#fff" stroke-width="1.8"/><path d="M8 10V7a4 4 0 0 1 8 0v3" stroke="#fff" stroke-width="1.8"/></svg>
+        Bientôt disponible
+      </div>
+      <div class="project-icon">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M4 4h13l3 3v13a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1z" stroke="#fff" stroke-width="1.8" stroke-linejoin="round"/><path d="M8 10h8M8 14h8M8 18h5" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/></svg>
+      </div>
+      <div class="project-body">
+        <div class="project-title">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M4 4h13l3 3v13a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1z" stroke="#fff" stroke-width="1.8" stroke-linejoin="round"/><path d="M8 10h8M8 14h8" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/></svg>
+          Lettre de motivation
+        </div>
+        <div class="project-desc">Rédige une lettre de motivation personnalisée, adaptée à la formation ou au métier visé. Arrive très bientôt.</div>
+        <button class="notify-btn" type="button" data-state="idle">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M6 10a6 6 0 0 1 12 0c0 4 1.5 5.5 1.5 5.5H4.5S6 14 6 10z" stroke="currentColor" stroke-width="1.8"/><path d="M10 19a2 2 0 0 0 4 0" stroke="currentColor" stroke-width="1.8"/></svg>
+          <span class="notify-label">Me notifier quand c'est disponible</span>
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="discovery-card">
+    <div class="discovery-icon">
+      <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#fff" stroke-width="1.8"/><path d="M15 9l-4 2-2 4 4-2 2-4z" fill="#fff"/></svg>
+    </div>
+    <div class="discovery-title">Découvre ton avenir</div>
+    <div class="discovery-text">
+      Passe notre test d'orientation pour obtenir des recommandations personnalisées de carrières qui correspondent à ton profil unique.
+    </div>
+    <button class="discovery-btn">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M12 2l1.6 5.2L19 9l-5.4 1.8L12 16l-1.6-5.2L5 9l5.4-1.8L12 2z" fill="#fff"/></svg>
+      Commencer le test
+    </button>
+  </div>
+
+  <!-- UNIVERSITÉS AU SÉNÉGAL -->
+  <div class="uni-section">
+    <div class="uni-section-head">
+      <div>
+        <div class="uni-section-title">🎓 Universités au Sénégal</div>
+        <div class="uni-section-sub">Quelques établissements parmi les 109 référencés sur NextOri</div>
+      </div>
+      <a href="#" class="panel-link-gold">Voir toutes les universités
+        <svg viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+
+    <div class="uni-grid">
+      <div class="uni-card">
+        <div class="uni-badge navy">UCAD</div>
+        <div class="uni-name">Université Cheikh Anta Diop</div>
+        <div class="uni-loc">📍 Dakar · Université publique</div>
+        <div class="uni-tags"><span class="tag-pill">Toutes filières</span><span class="tag-pill">25 000 FCFA/an</span></div>
+      </div>
+      <div class="uni-card">
+        <div class="uni-badge gold">ESP</div>
+        <div class="uni-name">École Supérieure Polytechnique</div>
+        <div class="uni-loc">📍 Dakar / Thiès · École publique</div>
+        <div class="uni-tags"><span class="tag-pill">Ingénierie</span><span class="tag-pill">Sur concours</span></div>
+      </div>
+      <div class="uni-card">
+        <div class="uni-badge navy">ISM</div>
+        <div class="uni-name">Institut Supérieur de Management</div>
+        <div class="uni-loc">📍 Dakar, Point E · École privée</div>
+        <div class="uni-tags"><span class="tag-pill">Management</span><span class="tag-pill">Droit</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BESOIN D'AIDE / COACHING - BIENTÔT DISPONIBLE -->
+  <div class="project-card locked coaching-locked">
+    <div class="project-lock-badge">
+      <svg viewBox="0 0 24 24" fill="none"><rect x="4" y="10" width="16" height="10" rx="2" stroke="#fff" stroke-width="1.8"/><path d="M8 10V7a4 4 0 0 1 8 0v3" stroke="#fff" stroke-width="1.8"/></svg>
+      Bientôt disponible
+    </div>
+    <div class="project-icon">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M4 20l1.4-4.2A8 8 0 1 1 8.6 19L4 20z" stroke="#fff" stroke-width="1.8" stroke-linejoin="round"/></svg>
+    </div>
+    <div class="project-body">
+      <div class="project-title">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M4 20l1.4-4.2A8 8 0 1 1 8.6 19L4 20z" stroke="#fff" stroke-width="1.8" stroke-linejoin="round"/></svg>
+        Besoin d'aide ? Coaching personnalisé
+      </div>
+      <div class="project-desc">Réserve une session avec un conseiller NextOri (chat, appel ou vidéo). Arrive très bientôt.</div>
+      <button class="notify-btn coaching-notify-btn" type="button" data-state="idle">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M6 10a6 6 0 0 1 12 0c0 4 1.5 5.5 1.5 5.5H4.5S6 14 6 10z" stroke="currentColor" stroke-width="1.8"/><path d="M10 19a2 2 0 0 0 4 0" stroke="currentColor" stroke-width="1.8"/></svg>
+        <span class="notify-label">Me notifier quand c'est disponible</span>
+      </button>
+    </div>
+  </div>
+
+  </div>
+
+</div>
+
+<div class="bottom-nav">
+  <div class="bottom-nav-inner">
+    <div class="nav-item active">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M4 11.5 12 4l8 7.5V20a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1v-8.5z" stroke="#1B2A4A" stroke-width="1.8" stroke-linejoin="round"/></svg>
+      Accueil
+    </div>
+    <div class="nav-item">
+      <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8.5" stroke="#A6AEBB" stroke-width="1.8"/><circle cx="12" cy="12" r="3" stroke="#A6AEBB" stroke-width="1.8"/></svg>
+      Test
+    </div>
+    <div class="nav-item">
+      <svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="#A6AEBB" stroke-width="1.8"/><path d="M21 21l-4.3-4.3" stroke="#A6AEBB" stroke-width="1.8" stroke-linecap="round"/></svg>
+      Carrières
+    </div>
+    <div class="nav-item">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M12 3L2 8l10 5 8-4.2V15h1.5V8L12 3z" stroke="#A6AEBB" stroke-width="1.8" stroke-linejoin="round"/></svg>
+      Universités
+    </div>
+    <div class="nav-item">
+      <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.2" stroke="#A6AEBB" stroke-width="1.8"/><path d="M5 20c1.2-3.5 4-5.5 7-5.5s5.8 2 7 5.5" stroke="#A6AEBB" stroke-width="1.8" stroke-linecap="round"/></svg>
+      Profil
+    </div>
+  </div>
+</div>
+
+<div class="help-btn">?</div>
+
+<script>
+  document.querySelectorAll('.notify-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      if (btn.dataset.state === 'subscribed') return;
+      btn.dataset.state = 'subscribed';
+      btn.classList.add('subscribed');
+      btn.querySelector('.notify-label').textContent = "Tu seras notifié(e) ✓";
+      btn.querySelector('svg').innerHTML = '<path d="M5 12l4 4 10-10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>';
+    });
+  });
+</script>
+
+</body>
+</html>

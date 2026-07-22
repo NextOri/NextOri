@@ -27,12 +27,47 @@ useEffect(()=>{
 
 },[]);
 
+
     const location = useLocation();
 
     const navigate = useNavigate();
 
 
-    const resultat = location.state?.data;
+    const resultatInitial = location.state?.data;
+
+    const [resultat, setResultat] = useState(resultatInitial);
+
+    const [chargement, setChargement] = useState(true);
+
+    useEffect(() => {
+
+    if (!resultat) {
+        setChargement(true);
+
+        fetch("http://localhost/NextOri/backend/api/routes/resultats.php?id_user=1")
+            .then(response => response.json())
+            .then(data => {
+
+                if (data.success) {
+
+                    setResultat(data.data);
+                    setChargement(false);
+
+                }
+
+            })
+            .catch(error => {
+
+                console.error(
+                    "Erreur récupération résultat :",
+                    error
+                );
+
+            });
+    }
+    
+}, [resultat]);
+
 
 
 
@@ -397,7 +432,13 @@ useEffect(()=>{
     CAS UTILISATEUR SANS RESULTAT
     =====================================
     */
-
+     if (chargement) {
+    return (
+        <div className="result-loading">
+            Chargement des résultats...
+        </div>
+    );
+     }
 
     if(!resultat){
 
@@ -1176,6 +1217,7 @@ resultat.recommandations.secondaires.length > 0 ? (
 )
 
 }
+
             </section>
 
             {/* =====================================
@@ -1225,6 +1267,7 @@ resultat.recommandations.secondaires.length > 0 ? (
     );
 
 }
+
 
 
 export default Result;

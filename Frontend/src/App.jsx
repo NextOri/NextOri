@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Home from "./pages/Home";
 import Test from "./pages/Test";
+import Dashboard from "./pages/Dashboard";
 import Result from "./pages/Result";
 import ProfilRiasec from "./pages/Profil-Riasec";
 import Formations from "./pages/Formations";
@@ -20,6 +21,8 @@ function App() {
             <Route path="/" element={<Home />} />
 
             <Route path="/test" element={<Test />} />
+
+            <Route path="/dashboard" element={<Dashboard />} />
 
             <Route path="/result" element={<Result />} />
 

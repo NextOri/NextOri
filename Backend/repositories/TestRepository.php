@@ -64,4 +64,40 @@ class TestRepository
 
         return (int)$this->connection->lastInsertId();
     }
+
+    /**
+ * Retourne le dernier test effectué par un utilisateur.
+ */
+public function obtenirDernierTestUtilisateur(
+    int $idUser
+): ?array
+{
+
+    $sql = "
+
+        SELECT *
+
+        FROM test_riasec
+
+        WHERE id_user = :user
+
+        ORDER BY date_test DESC
+
+        LIMIT 1
+
+    ";
+
+    $statement = $this->connection->prepare($sql);
+
+    $statement->execute([
+
+        ":user" => $idUser
+
+    ]);
+
+    $test = $statement->fetch(PDO::FETCH_ASSOC);
+
+    return $test ?: null;
+
+}
 }

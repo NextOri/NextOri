@@ -153,4 +153,48 @@ class OrientationController
 
         return null;
     }
+
+    /**
+ * Retourne le dernier résultat d'orientation d'un utilisateur.
+ */
+public function recupererDernierResultat(): void
+{
+
+    header("Access-Control-Allow-Origin: http://localhost:5173");
+
+    header("Content-Type: application/json; charset=UTF-8");
+
+    try {
+
+        // Temporaire : utilisateur unique
+        $idUser = 1;
+
+        $resultat = $this->orientationService
+                         ->recupererDernierResultat($idUser);
+
+        if ($resultat === null) {
+
+            ApiResponse::error(
+                404,
+                "Aucun résultat disponible."
+            );
+
+            return;
+        }
+
+        ApiResponse::success(
+            $resultat,
+            "Dernier résultat récupéré avec succès."
+        );
+
+    } catch (Throwable $e) {
+
+        ApiResponse::error(
+            500,
+            $e->getMessage()
+        );
+
+    }
+
+}
 }

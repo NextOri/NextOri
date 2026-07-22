@@ -1,108 +1,117 @@
-/* ======================================================
-   RESULT PAGE - NEXTORI
-====================================================== */
+/* =====================================
+   RESULT PAGE - BASE
+   NextOri Theme
+===================================== */
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
 
 .result-page{
 
-    width:100%;
-
     min-height:100vh;
 
-    background:#f5f9ff;
+    background:#F2F4F7;
 
-    padding:40px 8%;
+    padding:40px 20px;
 
-    font-family:"Segoe UI",sans-serif;
+    font-family:"Inter", Arial, sans-serif;
+
+    color:#0D1B2A;
 
 }
 
 
 
-/* ======================================================
-   HEADER
-====================================================== */
+
+/* =====================================
+   HEADER RESULTAT
+===================================== */
+
 
 .result-header{
-
+    
     text-align:center;
-
-    margin-bottom:45px;
-
-}
-
-.result-header h1{
-
-    color:#0F4C81;
-
-    font-size:2.6rem;
-
-    font-weight:700;
-
-    margin-bottom:12px;
-
-}
-
-.result-header p{
-
-    color:#555;
-
-    font-size:1.05rem;
-
-    line-height:1.6;
-
-}
-
-
-
-/* ======================================================
-   PROFIL RIASEC
-====================================================== */
-
-.profile-result{
-
-    background:white;
-
-    border-radius:18px;
-
-    padding:35px;
-
-    text-align:center;
-
-    box-shadow:0 8px 25px rgba(0,0,0,.08);
 
     margin-bottom:40px;
 
 }
 
-.profile-result h2{
 
-    color:#0F4C81;
 
-    margin-bottom:25px;
+.result-header h1{
 
-    font-size:1.8rem;
+    color:#0D1B2A;
+
+    font-size:2.2rem;
+
+    font-weight:700;
+
+    margin-bottom:10px;
 
 }
 
+
+
+.result-header p{
+
+    color:#1E3A8A;
+
+    font-size:1.05rem;
+
+}
+
+
+
+
+
+/* =====================================
+   CARTE PROFIL RIASEC
+===================================== */
+
+
+.profile-result{
+
+    max-width:850px;
+
+    margin:0 auto 40px;
+
+    background:#FFFFFF;
+
+    padding:40px;
+
+    border-radius:24px;
+
+    text-align:center;
+
+    box-shadow:
+
+    0 10px 30px rgba(13,27,42,0.08);
+
+}
+
+
+
+
+
+.profile-result h2{
+
+    color:#0D1B2A;
+
+    font-size:1.8rem;
+
+    margin-bottom:15px;
+
+}
+
+
+
+
+
 .profile-code{
 
-    width:130px;
+    width:120px;
 
-    height:130px;
+    height:120px;
 
-    margin:auto;
-
-    border-radius:50%;
-
-    background:linear-gradient(135deg,#0F4C81,#27AE60);
-
-    color:white;
+    margin:25px auto;
 
     display:flex;
 
@@ -110,111 +119,179 @@
 
     align-items:center;
 
+    border-radius:50%;
+
+
+     background:linear-gradient(
+
+        90deg,
+
+        #0D1B2A 10%,
+
+        #1E3A8A 100%
+
+    );
+
+    color:#FFFFFF;
+
+
     font-size:2.5rem;
 
-    font-weight:bold;
-
-    margin-bottom:25px;
-
-    letter-spacing:4px;
+    font-weight:700;
 
 }
+
+
+
+
 
 .profile-result h3{
 
-    color:#1f2937;
+    color:#1E3A8A;
+
+    font-size:1.5rem;
 
     margin-bottom:15px;
 
-    font-size:1.4rem;
-
 }
 
-.profile-result p{
 
-    color:#666;
 
-    line-height:1.8;
 
-    max-width:720px;
+
+.profile-description{
+
+    max-width:650px;
 
     margin:auto;
 
+    color:#0D1B2A;
+
+    line-height:1.7;
+
 }
 
 
 
-/* ======================================================
-   BOUTON PROFIL
-====================================================== */
+
 
 .profile-button{
 
     margin-top:30px;
 
-    padding:14px 28px;
+    padding:14px 30px;
 
-    background:#0F4C81;
-
-    color:white;
 
     border:none;
 
-    border-radius:10px;
+    border-radius:12px;
 
-    cursor:pointer;
+
+    background:#F4B400;
+
+    color:#0D1B2A;
+
 
     font-size:1rem;
 
-    font-weight:600;
+    font-weight:700;
 
-    transition:.3s;
+
+    cursor:pointer;
+
+    transition:0.3s;
 
 }
+
+
+
+
 
 .profile-button:hover{
 
-    background:#0b3a62;
-
     transform:translateY(-2px);
+
+    opacity:0.9;
 
 }
 
 
+/* =====================================
+   SCORES RIASEC
+===================================== */
 
-/* ======================================================
-   SCORES
-====================================================== */
 
 .scores-section{
 
-    background:white;
+    max-width:850px;
 
-    border-radius:18px;
+    margin:0 auto 40px;
+
+    background:#FFFFFF;
 
     padding:35px;
 
-    margin-bottom:45px;
+    border-radius:24px;
 
-    box-shadow:0 8px 25px rgba(0,0,0,.08);
+    box-shadow:
+
+    0 10px 30px rgba(13,27,42,0.08);
 
 }
+
+
 
 .scores-section h2{
 
-    color:#0F4C81;
+    text-align:center;
 
-    margin-bottom:25px;
+    color:#0D1B2A;
+
+    font-size:1.7rem;
+
+    margin-bottom:10px;
+
+}
+
+
+
+.scores-section > p{
 
     text-align:center;
 
+    color:#1E3A8A;
+
+    margin-bottom:30px;
+
 }
+
+
+
+
+
+.scores-list{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:20px;
+
+}
+
+
+
+
 
 .score-item{
 
-    margin-bottom:20px;
+    width:100%;
 
 }
+
+
+
+
 
 .score-header{
 
@@ -222,13 +299,59 @@
 
     justify-content:space-between;
 
+    align-items:center;
+
     margin-bottom:8px;
 
-    font-weight:600;
+}
 
-    color:#333;
+
+
+
+
+.score-header span{
+
+    width:38px;
+
+    height:38px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+
+    border-radius:50%;
+
+
+    background:#0D1B2A;
+
+    color:#FFFFFF;
+
+
+    font-weight:700;
 
 }
+
+
+
+
+
+.score-header strong{
+
+    color:#0D1B2A;
+
+    font-size:1.1rem;
+
+}
+
+
+
+
+
+/* Barre vide */
+
 
 .score-bar{
 
@@ -236,7 +359,9 @@
 
     height:12px;
 
-    background:#e5e7eb;
+
+    background:#F2F4F7;
+
 
     border-radius:20px;
 
@@ -244,364 +369,49 @@
 
 }
 
-.score-fill{
+
+
+
+
+/* Progression */
+
+
+.score-progress{
 
     height:100%;
 
-    background:linear-gradient(90deg,#27AE60,#0F4C81);
 
     border-radius:20px;
 
-    transition:width .8s ease;
 
-}
+    background:linear-gradient(
 
-/* ======================================================
-   RECOMMANDATIONS
-====================================================== */
+        90deg,
 
-.jobs-section{
+        #0D1B2A 0%,
 
-    margin-bottom:50px;
+        #1E3A8A 100%
 
-}
+    );
 
-.jobs-section h2{
 
-    color:#0F4C81;
+    transition:
 
-    font-size:1.9rem;
-
-    margin-bottom:25px;
-
-    border-left:6px solid #27AE60;
-
-    padding-left:15px;
-
-}
-
-.jobs-list{
-
-    display:grid;
-
-    grid-template-columns:repeat(auto-fit,minmax(340px,1fr));
-
-    gap:28px;
+    width 0.8s ease;
 
 }
 
 
 
-/* ======================================================
-   CARTE METIER
-====================================================== */
 
-.job-card{
 
-    background:white;
 
-    border-radius:18px;
 
-    padding:28px;
 
-    box-shadow:0 10px 25px rgba(15,76,129,.08);
+/* =====================================
+   PAGE SANS RESULTAT
+===================================== */
 
-    transition:.35s;
-
-    border:1px solid #edf2f7;
-
-    display:flex;
-
-    flex-direction:column;
-
-}
-
-.job-card:hover{
-
-    transform:translateY(-8px);
-
-    box-shadow:0 18px 35px rgba(15,76,129,.18);
-
-}
-
-
-
-/* ======================================================
-   HEADER METIER
-====================================================== */
-
-.job-header{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    margin-bottom:22px;
-
-    gap:15px;
-
-}
-
-.job-header h3{
-
-    color:#0F4C81;
-
-    font-size:1.35rem;
-
-    font-weight:700;
-
-    flex:1;
-
-}
-
-
-
-/* ======================================================
-   BADGE COMPATIBILITE
-====================================================== */
-
-.compatibilite{
-
-    background:linear-gradient(135deg,#27AE60,#1abc9c);
-
-    color:white;
-
-    padding:8px 16px;
-
-    border-radius:40px;
-
-    font-size:.85rem;
-
-    font-weight:700;
-
-    white-space:nowrap;
-
-}
-
-
-
-/* ======================================================
-   DETAILS METIER
-====================================================== */
-
-.job-details{
-
-    display:grid;
-
-    grid-template-columns:1fr;
-
-    gap:16px;
-
-    margin-bottom:22px;
-
-}
-
-.job-details strong{
-
-    color:#0F4C81;
-
-    display:block;
-
-    margin-bottom:5px;
-
-    font-size:.95rem;
-
-}
-
-.job-details p{
-
-    color:#555;
-
-    line-height:1.6;
-
-}
-
-
-
-/* ======================================================
-   DESCRIPTION
-====================================================== */
-
-.job-description{
-
-    margin-top:5px;
-
-    margin-bottom:25px;
-
-}
-
-.job-description h4{
-
-    color:#0F4C81;
-
-    margin-bottom:10px;
-
-}
-
-.job-description p{
-
-    color:#666;
-
-    line-height:1.8;
-
-}
-
-
-
-/* ======================================================
-   BOUTON METIER
-====================================================== */
-
-.job-button{
-
-    margin-top:auto;
-
-    width:100%;
-
-    padding:15px;
-
-    border:none;
-
-    border-radius:12px;
-
-    background:#0F4C81;
-
-    color:white;
-
-    cursor:pointer;
-
-    font-size:1rem;
-
-    font-weight:600;
-
-    transition:.3s;
-
-}
-
-.job-button:hover{
-
-    background:#27AE60;
-
-    transform:scale(1.02);
-
-}
-
-
-
-/* ======================================================
-   AUCUN METIER
-====================================================== */
-
-.empty-job{
-
-    text-align:center;
-
-    color:#888;
-
-    background:white;
-
-    padding:30px;
-
-    border-radius:15px;
-
-    box-shadow:0 8px 20px rgba(0,0,0,.06);
-
-}
-
-
-
-/* ======================================================
-   RECOMMANDATIONS SECONDAIRES
-====================================================== */
-
-.secondary{
-
-    margin-top:20px;
-
-}
-
-.secondary .job-card{
-
-    opacity:.96;
-
-}
-
-/* ======================================================
-   ACTIONS
-====================================================== */
-
-.result-actions{
-
-    display:flex;
-
-    justify-content:center;
-
-    gap:20px;
-
-    margin-top:60px;
-
-    flex-wrap:wrap;
-
-}
-
-.retry-button,
-.home-button{
-
-    padding:15px 30px;
-
-    border:none;
-
-    border-radius:12px;
-
-    cursor:pointer;
-
-    font-size:1rem;
-
-    font-weight:600;
-
-    transition:.3s;
-
-}
-
-.retry-button{
-
-    background:#27AE60;
-
-    color:white;
-
-}
-
-.retry-button:hover{
-
-    background:#219150;
-
-    transform:translateY(-3px);
-
-}
-
-.home-button{
-
-    background:#0F4C81;
-
-    color:white;
-
-}
-
-.home-button:hover{
-
-    background:#0b3a62;
-
-    transform:translateY(-3px);
-
-}
-
-
-
-/* ======================================================
-   PAGE AUCUN RESULTAT
-====================================================== */
 
 .result-empty{
 
@@ -615,111 +425,622 @@
 
     align-items:center;
 
+
     text-align:center;
 
-    padding:40px;
 
-    background:#f5f9ff;
+    padding:30px;
+
+
+    background:#F2F4F7;
 
 }
+
+
+
+
 
 .result-empty h1{
 
-    color:#0F4C81;
+    color:#0D1B2A;
 
-    margin-bottom:20px;
+    font-size:2rem;
 
-    font-size:2.3rem;
+    margin-bottom:15px;
 
 }
+
+
+
+
 
 .result-empty p{
 
-    max-width:650px;
+    max-width:500px;
 
-    color:#666;
+    color:#1E3A8A;
 
-    line-height:1.8;
+    line-height:1.7;
 
-    margin-bottom:35px;
+    margin-bottom:30px;
 
 }
 
+
+
+
+
 .start-test-button{
 
-    padding:16px 34px;
+    padding:14px 32px;
+
 
     border:none;
 
     border-radius:12px;
 
-    background:linear-gradient(135deg,#0F4C81,#27AE60);
 
-    color:white;
+    background:#F4B400;
+
+
+    color:#0D1B2A;
+
 
     font-size:1rem;
 
-    font-weight:600;
+    font-weight:700;
+
 
     cursor:pointer;
 
-    transition:.3s;
+    transition:0.3s;
 
 }
+
+
+
+
 
 .start-test-button:hover{
 
-    transform:translateY(-3px);
+    transform:translateY(-2px);
 
-    box-shadow:0 12px 25px rgba(15,76,129,.25);
+}
+
+
+/* =====================================
+   SECTION METIERS
+===================================== */
+
+
+.jobs-section{
+
+    max-width:1100px;
+
+    margin:0 auto 50px;
 
 }
 
 
 
-/* ======================================================
-   RESPONSIVE TABLETTE
-====================================================== */
+.jobs-section > h2{
 
-@media(max-width:992px){
+    text-align:center;
 
-    .result-page{
+    color:#0D1B2A;
 
-        padding:30px 6%;
+    font-size:2rem;
 
-    }
-
-    .profile-code{
-
-        width:110px;
-
-        height:110px;
-
-        font-size:2rem;
-
-    }
+    margin-bottom:35px;
 
 }
 
 
 
-/* ======================================================
+
+
+.category-title{
+
+    color:#0D1B2A;
+
+    font-size:1.4rem;
+
+    margin:30px 0 20px;
+
+}
+
+
+
+
+
+.jobs-list{
+
+    display:grid;
+
+    grid-template-columns:
+
+    repeat(auto-fit,minmax(320px,1fr));
+
+    gap:25px;
+
+}
+
+
+
+
+
+/* =====================================
+   CARTE METIER
+===================================== */
+
+
+.job-card{
+
+    background:#FFFFFF;
+
+    padding:25px;
+
+    border-radius:20px;
+
+
+    border:1px solid #F2F4F7;
+
+
+    box-shadow:
+
+    0 8px 25px rgba(13,27,42,0.08);
+
+
+    transition:0.3s;
+
+}
+
+
+
+
+
+.job-card:hover{
+
+    transform:translateY(-5px);
+
+
+    box-shadow:
+
+    0 15px 35px rgba(13,27,42,0.12);
+
+}
+
+
+
+
+
+.job-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:flex-start;
+
+    gap:15px;
+
+    margin-bottom:20px;
+
+}
+
+
+
+
+
+.job-header h3{
+
+    color:#0D1B2A;
+
+    font-size:1.25rem;
+
+    margin:0;
+
+}
+
+
+
+
+
+/* =====================================
+   BADGE COMPATIBILITE
+===================================== */
+
+
+.compatibilite{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+
+    min-width:100px;
+
+    padding:10px;
+
+
+    border-radius:14px;
+
+
+    background:#1E3A8A;
+
+    color:#FFFFFF;
+
+
+    text-align:center;
+
+}
+
+
+
+
+
+.compatibilite span{
+
+    font-size:0.75rem;
+
+    font-weight:600;
+
+}
+
+
+
+
+
+.compatibilite strong{
+
+    font-size:1.2rem;
+
+    margin-top:5px;
+
+}
+
+
+
+
+
+/* =====================================
+   DESCRIPTION METIER
+===================================== */
+
+
+.job-card > p{
+
+    color:#1E3A8A;
+
+    line-height:1.7;
+
+    margin-bottom:20px;
+
+}
+
+
+
+
+
+/* =====================================
+   INFORMATIONS METIER
+===================================== */
+
+
+.job-information{
+
+    background:#F2F4F7;
+
+    padding:18px;
+
+    border-radius:15px;
+
+    margin:20px 0;
+
+}
+
+
+
+
+
+.job-information p{
+
+    margin:10px 0;
+
+    color:#0D1B2A;
+
+    font-size:0.95rem;
+
+}
+
+
+
+
+
+.job-information strong{
+
+    color:#1E3A8A;
+
+}
+
+
+
+
+
+/* =====================================
+   BOUTON EXPLORER CARRIERE
+===================================== */
+
+
+.job-button{
+
+    width:100%;
+
+    padding:14px 20px;
+
+
+    border:none;
+
+    border-radius:12px;
+
+
+    background:#0D1B2A;
+
+
+    color:#FFFFFF;
+
+
+    font-weight:700;
+
+
+    cursor:pointer;
+
+    transition:0.3s;
+
+}
+
+
+
+
+
+.job-button:hover{
+
+    background:#1E3A8A;
+
+}
+
+
+/* =====================================
+   AUCUN METIER SECONDAIRE
+===================================== */
+
+
+.no-secondary{
+
+    max-width:800px;
+
+    margin:30px auto;
+
+    padding:25px;
+
+
+    background:#FFFFFF;
+
+
+    border-radius:20px;
+
+
+    border:1px solid #F2F4F7;
+
+
+    text-align:center;
+
+
+    box-shadow:
+
+    0 8px 25px rgba(13,27,42,0.06);
+
+}
+
+
+
+
+.no-secondary p{
+
+    color:#0D1B2A;
+
+    font-size:1.1rem;
+
+    font-weight:700;
+
+    margin-bottom:10px;
+
+}
+
+
+
+
+
+.no-secondary span{
+
+    color:#1E3A8A;
+
+    line-height:1.6;
+
+}
+
+
+
+
+
+/* =====================================
+   ACTIONS RESULTAT
+===================================== */
+
+
+.result-actions{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:20px;
+
+
+    margin:50px 0 20px;
+
+}
+
+
+
+
+
+.retry-button,
+
+.home-button{
+
+    padding:14px 32px;
+
+
+    border-radius:12px;
+
+
+    font-size:1rem;
+
+
+    font-weight:700;
+
+
+    cursor:pointer;
+
+
+    transition:0.3s;
+
+}
+
+
+
+
+
+/* Refaire le test */
+
+
+.retry-button{
+
+    background:#F4B400;
+
+
+    color:#0D1B2A;
+
+
+    border:none;
+
+}
+
+
+
+
+
+.retry-button:hover{
+
+    transform:translateY(-2px);
+
+    opacity:0.9;
+
+}
+
+
+
+
+
+/* Retour accueil */
+
+
+.home-button{
+
+    background:#FFFFFF;
+
+
+    color:#0D1B2A;
+
+
+    border:2px solid #0D1B2A;
+
+}
+
+
+
+
+
+.home-button:hover{
+
+    background:#F2F4F7;
+
+}
+
+
+
+
+
+/* =====================================
    RESPONSIVE MOBILE
-====================================================== */
+===================================== */
+
 
 @media(max-width:768px){
 
+
+    .result-page{
+
+        padding:25px 15px;
+
+    }
+
+
+
     .result-header h1{
+
+        font-size:1.7rem;
+
+    }
+
+
+
+    .profile-result{
+
+        padding:25px 20px;
+
+    }
+
+
+
+    .profile-code{
+
+        width:95px;
+
+        height:95px;
 
         font-size:2rem;
 
     }
 
-    .profile-result{
 
-        padding:25px;
+
+
+    .scores-section{
+
+        padding:25px 20px;
 
     }
+
+
+
 
     .jobs-list{
 
@@ -727,58 +1048,154 @@
 
     }
 
+
+
+
     .job-header{
 
         flex-direction:column;
 
-        align-items:flex-start;
-
     }
+
+
+
 
     .compatibilite{
 
-        margin-top:10px;
+        width:100%;
 
     }
+
+
+
 
     .result-actions{
 
         flex-direction:column;
 
+        width:100%;
+
     }
 
+
+
+
     .retry-button,
+
     .home-button{
 
         width:100%;
 
     }
 
+
+}
+
+
+/* ==========================================
+   ANIMATION RESULTAT PROFIL
+========================================== */
+
+
+.profile-result{
+
+    animation: profilReveal 0.8s ease-out;
+
 }
 
 
 
-/* ======================================================
-   PETITES ANIMATIONS
-====================================================== */
-
-.profile-result,
-.scores-section,
-.job-card{
-
-    animation:fadeUp .6s ease;
-
-}
-
-@keyframes fadeUp{
+@keyframes profilReveal{
 
     from{
 
         opacity:0;
 
-        transform:translateY(25px);
+        transform:translateY(40px) scale(.96);
 
     }
+
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0) scale(1);
+
+    }
+
+}
+
+
+
+/* ==========================================
+   ANIMATION ICONE FELICITATION
+========================================== */
+
+
+.success-icon{
+
+    animation: iconReveal 2s ease-out;
+
+}
+
+
+
+@keyframes iconReveal{
+
+    0%{
+
+        opacity:0;
+
+        transform:scale(0) rotate(-30deg);
+
+    }
+
+
+    60%{
+
+        opacity:1;
+
+        transform:scale(1.2) rotate(10deg);
+
+    }
+
+
+    100%{
+
+        opacity:1;
+
+        transform:scale(1) rotate(0);
+
+    }
+
+}
+
+
+
+/* ==========================================
+   ANIMATION TITRE
+========================================== */
+
+
+.profile-result h2{
+
+    animation:titleReveal 1s ease-out;
+
+}
+
+
+
+@keyframes titleReveal{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(20px);
+
+    }
+
 
     to{
 

@@ -24,4 +24,20 @@ public function creerTest(
         $idQuestionnaire
     );
 }
+
+
+/**
+ * Retourne le dernier test effectué par un utilisateur.
+ */
+public function obtenirDernierTestUtilisateur(
+    int $idUser
+): ?array
+{
+
+    return $this->testRepository
+                ->obtenirDernierTestUtilisateur(
+                    $idUser
+                );
+
+}
 }

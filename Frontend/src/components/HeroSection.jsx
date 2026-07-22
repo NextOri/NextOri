@@ -48,17 +48,12 @@ function HeroSection(){
 
 
 
-                    <button
-
-                        className="btn-secondary"
-
-                        onClick={()=>navigate("/")}
-
-                    >
-
-                        Explorer la plateforme
-
-                    </button>
+                    <button 
+                    className="btn-secondary"
+                     onClick={() => navigate("/dashboard")}
+                         >
+                     Explorer la plateforme
+                        </button>
 
 
                 </div>

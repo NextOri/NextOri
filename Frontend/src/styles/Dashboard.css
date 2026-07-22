@@ -1,0 +1,772 @@
+/* ===========================
+   PAGE
+=========================== */
+
+.dashboard-page{
+
+    width:100%;
+
+    min-height:100vh;
+
+    background:#F2F4F7;
+
+    padding-bottom:110px;
+
+}
+
+
+
+/* ===========================
+   HEADER
+=========================== */
+
+.dashboard-header{
+
+    background:#0D1B2A;
+
+    padding:35px 25px 180px;
+
+    border-bottom-left-radius:25px;
+
+    border-bottom-right-radius:25px;
+
+}
+
+
+
+.dashboard-subtitle{
+
+    color:#FFFFFF;
+
+    opacity:0.8;
+
+    font-size:16px;
+
+    margin-bottom:10px;
+
+}
+
+
+
+.dashboard-header h1{
+
+    font-size:48px;
+
+    font-weight:800;
+
+    color:#FFFFFF;
+
+}
+
+
+
+.dashboard-header span{
+
+    color:#F4B400;
+
+}
+
+
+
+/* ===========================
+   CARTES
+=========================== */
+
+.level-card,
+.statistics-section,
+.welcome-card,
+.orientation-path,
+.quick-actions,
+.project-card,
+.help-card{
+
+    width:90%;
+
+    margin:auto;
+
+}
+
+
+
+/* Décalage des cartes */
+
+.level-card{
+
+    margin-top:-120px;
+
+}
+
+
+
+/* Style commun */
+
+.level-card,
+.welcome-card,
+.orientation-path,
+.project-card,
+.help-card{
+
+    background:#FFFFFF;
+
+    border-radius:22px;
+
+    box-shadow:0 10px 25px rgba(13,27,42,0.08);
+
+    padding:25px;
+
+    margin-bottom:25px;
+
+}
+
+/* ===========================
+   CARTE NIVEAU
+=========================== */
+
+.level-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:20px;
+
+}
+
+
+
+.level-header h2{
+
+    color:#0D1B2A;
+
+    font-size:26px;
+
+    font-weight:700;
+
+}
+
+
+
+.level-header span{
+
+    background:#F4B400;
+
+    color:#0D1B2A;
+
+    padding:8px 18px;
+
+    border-radius:30px;
+
+    font-weight:700;
+
+}
+
+
+
+/* Barre */
+
+.progress-bar{
+
+    width:100%;
+
+    height:14px;
+
+    background:#E5E7EB;
+
+    border-radius:30px;
+
+    overflow:hidden;
+
+}
+
+
+
+.progress-fill{
+
+    width:60%;
+
+    height:100%;
+
+    background:#F4B400;
+
+    border-radius:30px;
+
+}
+
+
+
+.progress-text{
+
+    margin-top:15px;
+
+    text-align:center;
+
+    color:#1E3A8A;
+
+    font-weight:600;
+
+}
+
+/* ===========================
+   STATISTIQUES
+=========================== */
+
+.statistics-section{
+
+    width:90%;
+
+    margin:25px auto;
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:15px;
+
+}
+
+
+
+.stat-card{
+
+    background:#FFFFFF;
+
+    border-radius:18px;
+
+    padding:20px;
+
+    text-align:center;
+
+    box-shadow:0 8px 20px rgba(13,27,42,0.08);
+
+    transition:0.3s;
+
+}
+
+
+
+.stat-card:hover{
+
+    transform:translateY(-5px);
+
+}
+
+
+
+.stat-card h3{
+
+    font-size:32px;
+
+    margin-bottom:10px;
+
+}
+
+
+
+.stat-card h2{
+
+    color:#1E3A8A;
+
+    font-size:28px;
+
+    margin-bottom:8px;
+
+}
+
+
+
+.stat-card p{
+
+    color:#0D1B2A;
+
+    font-weight:600;
+
+}
+
+
+/* ===========================
+   CARTE BIENVENUE
+=========================== */
+
+.welcome-card h2{
+
+    color:#0D1B2A;
+
+    font-size:26px;
+
+    margin-bottom:15px;
+
+}
+
+
+
+.welcome-card p{
+
+    color:#0D1B2A;
+
+    line-height:1.6;
+
+    margin-bottom:25px;
+
+}
+
+
+
+/* Bouton principal */
+
+.primary-dashboard-button{
+
+    background:#1E3A8A;
+
+    color:#FFFFFF;
+
+    border:none;
+
+    padding:14px 25px;
+
+    border-radius:12px;
+
+    font-size:16px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:0.3s;
+
+}
+
+
+
+.primary-dashboard-button:hover{
+
+    background:#0D1B2A;
+
+    transform:translateY(-3px);
+
+}
+
+
+/* ===========================
+   ACTIONS RAPIDES
+=========================== */
+
+
+.quick-actions{
+
+    width:90%;
+
+    margin:30px auto;
+
+}
+
+
+
+.quick-actions h2{
+
+    color:#0D1B2A;
+
+    margin-bottom:20px;
+
+}
+
+
+
+.actions-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:15px;
+
+}
+
+
+
+.action-card{
+
+    background:#FFFFFF;
+
+    border-radius:18px;
+
+    padding:20px;
+
+    text-align:center;
+
+    cursor:pointer;
+
+    transition:0.3s;
+
+    box-shadow:0 8px 20px rgba(13,27,42,0.08);
+
+}
+
+
+
+.action-card:hover{
+
+    transform:translateY(-5px);
+
+}
+
+
+
+.action-card span{
+
+    font-size:35px;
+
+}
+
+
+
+.action-card h3{
+
+    color:#1E3A8A;
+
+    margin:10px 0;
+
+}
+
+
+
+.action-card p{
+
+    color:#0D1B2A;
+
+    font-size:14px;
+
+}
+
+
+/* ===========================
+   PROJET D'AVENIR
+=========================== */
+
+
+.project-card h2{
+
+    color:#0D1B2A;
+
+    font-size:26px;
+
+    margin-bottom:15px;
+
+}
+
+
+
+.project-card p{
+
+    color:#0D1B2A;
+
+    line-height:1.5;
+
+}
+
+
+
+.project-steps{
+
+    margin-top:25px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:15px;
+
+}
+
+
+
+.project-step{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+}
+
+
+
+.project-step span{
+
+    width:35px;
+
+    height:35px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    border-radius:50%;
+
+    background:#F4B400;
+
+    color:#0D1B2A;
+
+    font-weight:700;
+
+}
+
+
+
+.project-step p{
+
+    margin:0;
+
+    font-weight:600;
+
+}
+
+
+
+/* ===========================
+   AIDE
+=========================== */
+
+
+.help-card{
+
+    background:#1E3A8A;
+
+}
+
+
+
+.help-card h2{
+
+    color:#FFFFFF;
+
+    margin-bottom:15px;
+
+}
+
+
+
+.help-card p{
+
+    color:#FFFFFF;
+
+    margin-bottom:25px;
+
+}
+
+
+
+.help-button{
+
+    background:#F4B400;
+
+    color:#0D1B2A;
+
+    border:none;
+
+    padding:12px 25px;
+
+    border-radius:12px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+}
+
+
+
+.help-button:hover{
+
+    background:#FFFFFF;
+
+}
+
+
+/* ===========================
+   PARCOURS ORIENTATION
+=========================== */
+
+
+.orientation-path h2{
+
+    color:#0D1B2A;
+
+    font-size:26px;
+
+    margin-bottom:25px;
+
+}
+
+
+
+.path-container{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:20px;
+
+}
+
+
+
+.path-item{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    opacity:0.6;
+
+}
+
+
+
+.path-item.completed,
+.path-item.active{
+
+    opacity:1;
+
+}
+
+
+
+.path-circle{
+
+    width:45px;
+
+    height:45px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:#F2F4F7;
+
+    color:#0D1B2A;
+
+    font-weight:700;
+
+    font-size:18px;
+
+}
+
+
+
+.path-item.completed .path-circle{
+
+    background:#F4B400;
+
+}
+
+
+
+.path-item.active .path-circle{
+
+    background:#1E3A8A;
+
+    color:#FFFFFF;
+
+}
+
+
+
+.path-item h3{
+
+    color:#0D1B2A;
+
+    margin:0 0 5px;
+
+}
+
+
+
+.path-item p{
+
+    margin:0;
+
+    font-size:14px;
+
+    color:#1E3A8A;
+
+}
+
+
+
+
+/* ===========================
+   ACTION PRINCIPALE
+=========================== */
+
+
+.action-button-section{
+
+    width:90%;
+
+    margin:30px auto;
+
+    background:#1E3A8A;
+
+    border-radius:22px;
+
+    padding:30px 25px;
+
+    text-align:center;
+
+}
+
+
+
+.action-button-section h2{
+
+    color:#FFFFFF;
+
+    margin-bottom:15px;
+
+}
+
+
+
+.action-button-section p{
+
+    color:#FFFFFF;
+
+    margin-bottom:25px;
+
+    line-height:1.5;
+
+}
+
+
+
+.start-test-button{
+
+    background:#F4B400;
+
+    color:#0D1B2A;
+
+    border:none;
+
+    padding:15px 30px;
+
+    border-radius:12px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    font-size:16px;
+
+}

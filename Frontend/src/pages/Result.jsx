@@ -1,39 +1,444 @@
+import Confetti from "react-confetti";
+import { useEffect, useState } from "react";
+
 import { useLocation, useNavigate } from "react-router-dom";
 
 import "../styles/Result.css";
 
 
+
+
 function Result(){
+
+    const [showConfetti, setShowConfetti] = useState(true);
+
+
+useEffect(()=>{
+
+    const timer = setTimeout(()=>{
+
+        setShowConfetti(false);
+
+    },4000);
+
+
+    return ()=>clearTimeout(timer);
+
+
+},[]);
+
 
     const location = useLocation();
 
     const navigate = useNavigate();
 
 
-    /*
-        Récupération des données envoyées par le backend
+    const resultatInitial = location.state?.data;
 
-        Backend :
-        {
-            success:true,
-            message:"",
-            data:{
-                id_test,
-                profil,
-                recommandations
-            }
+    const [resultat, setResultat] = useState(resultatInitial);
+
+    const [chargement, setChargement] = useState(true);
+
+    useEffect(() => {
+
+    if (!resultat) {
+        setChargement(true);
+
+        fetch("http://localhost/NextOri/backend/api/routes/resultats.php?id_user=1")
+            .then(response => response.json())
+            .then(data => {
+
+                if (data.success) {
+
+                    setResultat(data.data);
+                    setChargement(false);
+
+                }
+
+            })
+            .catch(error => {
+
+                console.error(
+                    "Erreur récupération résultat :",
+                    error
+                );
+
+            });
+    }
+    
+}, [resultat]);
+
+
+
+
+    /*
+    =====================================
+    COMPATIBILITE METIER
+    =====================================
+    */
+
+    function afficherCompatibilite(score){
+
+        const pourcentage = Math.round((score / 8) * 95);
+
+
+        let badge = "";
+
+        let couleur = "";
+
+
+        if(pourcentage >= 85){
+
+            badge = "Très compatible";
+
+            couleur = "#0D1B2A";
+
         }
 
-    */
+        else if(pourcentage >= 55){
 
-    const resultat = location.state?.data;
+            badge = "Compatible";
+
+            couleur = "#1E3A8A";
+
+        }
+
+        else{
+
+            badge = "À explorer";
+
+            couleur = "#98A2B3";
+
+        }
+
+
+        return {
+
+            pourcentage,
+
+            badge,
+
+            couleur
+
+        };
+
+    }
+
+
 
 
 
     /*
-        Si l'utilisateur arrive directement
-        sur /result sans avoir passé le test
+    =====================================
+    PROFILS RIASEC
+    =====================================
     */
+
+
+   const profils = {
+
+    RI:{
+
+        nom:"Réaliste • Investigateur",
+
+        description:
+        "Vous aimez résoudre des problèmes concrets grâce à l'observation, la logique et les activités techniques."
+
+    },
+
+    RA:{
+
+        nom:"Réaliste • Artistique",
+
+        description:
+        "Vous aimez créer, construire et transformer des idées en réalisations concrètes."
+
+    },
+
+    RS:{
+
+        nom:"Réaliste • Social",
+
+        description:
+        "Vous appréciez les activités pratiques tout en aidant les autres."
+
+    },
+
+    RE:{
+
+        nom:"Réaliste • Entreprenant",
+
+        description:
+        "Vous aimez agir, diriger et relever des défis concrets."
+
+    },
+
+    RC:{
+
+        nom:"Réaliste • Conventionnel",
+
+        description:
+        "Vous êtes organisé, méthodique et aimez les activités pratiques."
+
+    },
+
+    IR:{
+
+        nom:"Investigateur • Réaliste",
+
+        description:
+        "Vous aimez comprendre, expérimenter et résoudre des problèmes."
+
+    },
+
+    IA:{
+
+        nom:"Investigateur • Artistique",
+
+        description:
+        "Vous combinez créativité et esprit scientifique."
+
+    },
+
+    IS:{
+
+        nom:"Investigateur • Social",
+
+        description:
+        "Vous aimez analyser et transmettre vos connaissances."
+
+    },
+
+    IE:{
+
+        nom:"Investigateur • Entreprenant",
+
+        description:
+        "Vous aimez innover et porter des projets ambitieux."
+
+    },
+
+    IC:{
+
+        nom:"Investigateur • Conventionnel",
+
+        description:
+        "Vous êtes rigoureux et aimez les activités intellectuelles."
+
+    },
+
+    AR:{
+
+        nom:"Artistique • Réaliste",
+
+        description:
+        "Vous aimez créer avec des réalisations concrètes."
+
+    },
+
+    AI:{
+
+        nom:"Artistique • Investigateur",
+
+        description:
+        "Vous aimez créer tout en recherchant des solutions nouvelles."
+
+    },
+
+    AS:{
+
+        nom:"Artistique • Social",
+
+        description:
+        "Vous aimez exprimer votre créativité au service des autres."
+
+    },
+
+    AE:{
+
+        nom:"Artistique • Entreprenant",
+
+        description:
+        "Vous aimez innover, convaincre et entreprendre."
+
+    },
+
+    AC:{
+
+        nom:"Artistique • Conventionnel",
+
+        description:
+        "Vous savez allier créativité et organisation."
+
+    },
+
+    SR:{
+
+        nom:"Social • Réaliste",
+
+        description:
+        "Vous aimez aider les autres à travers des actions concrètes."
+
+    },
+
+    SI:{
+
+        nom:"Social • Investigateur",
+
+        description:
+        "Vous aimez comprendre les personnes et les accompagner."
+
+    },
+
+    SA:{
+
+        nom:"Social • Artistique",
+
+        description:
+        "Vous aimez transmettre et créer des liens."
+
+    },
+
+    SE:{
+
+        nom:"Social • Entreprenant",
+
+        description:
+        "Vous aimez diriger des équipes et accompagner les personnes."
+
+    },
+
+    SC:{
+
+        nom:"Social • Conventionnel",
+
+        description:
+        "Vous êtes organisé et aimez travailler avec les autres."
+
+    },
+
+    ER:{
+
+        nom:"Entreprenant • Réaliste",
+
+        description:
+        "Vous aimez prendre des décisions et agir."
+
+    },
+
+    EI:{
+
+        nom:"Entreprenant • Investigateur",
+
+        description:
+        "Vous aimez innover et développer de nouveaux projets."
+
+    },
+
+    EA:{
+
+        nom:"Entreprenant • Artistique",
+
+        description:
+        "Vous aimez créer et convaincre."
+
+    },
+
+    ES:{
+
+        nom:"Entreprenant • Social",
+
+        description:
+        "Vous aimez diriger, communiquer et motiver les autres."
+
+    },
+
+    EC:{
+
+        nom:"Entreprenant • Conventionnel",
+
+        description:
+        "Vous aimez gérer et organiser."
+
+    },
+
+    CR:{
+
+        nom:"Conventionnel • Réaliste",
+
+        description:
+        "Vous êtes méthodique et aimez les tâches concrètes."
+
+    },
+
+    CI:{
+
+        nom:"Conventionnel • Investigateur",
+
+        description:
+        "Vous aimez analyser avec précision."
+
+    },
+
+    CA:{
+
+        nom:"Conventionnel • Artistique",
+
+        description:
+        "Vous aimez organiser des projets créatifs."
+
+    },
+
+    CS:{
+
+        nom:"Conventionnel • Social",
+
+        description:
+        "Vous aimez organiser le travail d'équipe."
+
+    },
+
+    CE:{
+
+        nom:"Conventionnel • Entreprenant",
+
+        description:
+        "Vous aimez gérer, planifier et diriger."
+
+    }
+
+};
+
+
+
+    /*
+    =====================================
+    SALAIRE
+    =====================================
+    */
+
+
+    function afficherSalaire(min,max){
+
+        return `${Number(min).toLocaleString()} FCFA - ${Number(max).toLocaleString()} FCFA`;
+
+    }
+
+
+
+
+    /*
+    =====================================
+    CAS UTILISATEUR SANS RESULTAT
+    =====================================
+    */
+     if (chargement) {
+    return (
+        <div className="result-loading">
+            Chargement des résultats...
+        </div>
+    );
+     }
 
     if(!resultat){
 
@@ -43,25 +448,25 @@ function Result(){
 
 
                 <h1>
+
                     Aucun résultat disponible
+
                 </h1>
 
 
                 <p>
+
                     Vous n'avez pas encore effectué votre test
                     d'orientation.
 
-                    Faites le test pour découvrir votre profil
-                    RIASEC et les métiers qui vous correspondent.
                 </p>
-
 
 
                 <button
 
-                    className="start-test-button"
+                className="start-test-button"
 
-                    onClick={()=>navigate("/test")}
+                onClick={()=>navigate("/test")}
 
                 >
 
@@ -78,248 +483,617 @@ function Result(){
 
 
 
-    /*
-        Données du profil
-    */
 
     const profil = resultat.profil;
 
 
+    const profilInfo = profils[profil.principal] || {
 
-    const scores = profil.scores;
+        nom:"Profil RIASEC",
 
+        description:
+        "Votre profil professionnel a été identifié selon vos réponses."
 
-
-    /*
-        Recommandations métiers
-
-        Le backend sépare déjà :
-        - principaux
-        - secondaires
-    */
-
-    const recommandations =
-        resultat.recommandations || {};
-
-
-
-    const metiersPrincipaux =
-        recommandations.principaux || [];
-
-
-
-    const metiersSecondaires =
-        recommandations.secondaires || [];
-
-
-
-
-    /*
-        Fonction pour afficher
-        le salaire proprement
-    */
-
-    function afficherSalaire(min, max){
-
-
-        if(!min && !max){
-
-            return "Information non disponible";
-
-        }
-
-
-        return `${min?.toLocaleString()} FCFA - ${max?.toLocaleString()} FCFA`;
-
-    }
-
-
-
-
-
-    /*
-        Fonction temporaire pour la compatibilité
-
-        On modifiera avec ton vrai algorithme
-        après vérification du calcul backend.
-
-    */
-
-    function afficherCompatibilite(score){
-
-
-        if(score === undefined){
-
-            return "Compatibilité disponible";
-
-        }
-
-
-        return `${score}%`;
-
-    }
-
-
-
-
-
+    };
 
     return (
 
-        <div className="result-page">
 
+       
+
+        <div className="result-page">
+             {
+    showConfetti && (
+
+        <Confetti
+
+            numberOfPieces={250}
+
+            recycle={false}
+
+            colors={[
+                "#0D1B2A",
+                "#F4B400",
+                "#1E3A8A",
+                "#F2F4F7"
+            ]}
+
+        />
+
+    )
+}
+
+            {/* =====================================
+                HEADER RESULTAT
+            ===================================== */}
 
             <header className="result-header">
 
 
                 <h1>
+
                     Votre résultat NextOri
+
                 </h1>
 
 
                 <p>
-                    Découvrez votre profil et les métiers
-                    qui correspondent à vos intérêts.
+
+                    Découvrez les carrières qui correspondent
+                    à votre profil.
+
                 </p>
 
 
             </header>
-            {/* ===========================
-    PROFIL RIASEC
-=========================== */}
 
-<section className="profile-result">
+
+
+
+
+            {/* =====================================
+                CARTE PROFIL RIASEC
+            ===================================== */}
+
+
+            <section className="profile-result">
+
+
+                <div className="success-icon">
+
+                    🎉
+
+                </div>
+
+
+
+                <h2>
+
+                    Félicitations !
+
+                </h2>
+
+
+
+                <p className="profile-introduction">
+
+                    Votre profil dominant est
+
+                </p>
+
+
+
+
+                <div className="profile-code">
+
+                    {profil.principal}
+
+                </div>
+
+
+
+
+                <h3>
+
+                    {profilInfo.nom}
+
+                </h3>
+
+
+
+
+                <p className="profile-description">
+
+                    {profilInfo.description}
+
+                </p>
+
+
+
+
+                <p className="profile-explication">
+
+                    Nous avons analysé vos réponses et identifié
+                    les métiers qui correspondent le mieux à votre
+                    personnalité, vos centres d'intérêt et votre
+                    manière de travailler.
+
+                    <br/><br/>
+
+                    Explorez maintenant les carrières proposées
+                    pour découvrir celles qui vous correspondent.
+
+                </p>
+
+
+
+
+
+                <button
+
+                    className="profile-button"
+
+                    onClick={()=>navigate(
+
+                        "/profil-riasec",
+
+                        {
+
+                            state: {
+                                resultat: resultat
+                            }
+
+                        }
+
+                    )}
+
+                >
+
+                    Détails du profil
+
+                </button>
+
+
+
+            </section>
+
+{/* =====================================
+    SCORES RIASEC
+===================================== */}
+
+
+<section className="scores-section">
+
 
     <h2>
-        Votre profil RIASEC
+
+        Vos scores RIASEC
+
     </h2>
-
-
-    <div className="profile-code">
-
-        {profil.principal}
-
-    </div>
-
-
-    <h3>
-
-        Profil complet : {profil.complet}
-
-    </h3>
 
 
     <p>
 
-        Ce profil représente les domaines
-        qui correspondent le mieux à vos
-        intérêts professionnels.
-
-        Les métiers proposés ci-dessous
-        sont calculés automatiquement
-        à partir de votre résultat.
+        Ces scores représentent vos centres d'intérêt
+        pour chaque dimension professionnelle.
 
     </p>
 
 
-    <button
 
-        className="profile-button"
-
-        onClick={()=>
-
-            navigate(
-
-                "/profil",
-
-                {
-
-                    state: profil
-
-                }
-
-            )
-
-        }
-
-    >
-
-        Détails du profil
-
-    </button>
-
-
-</section>
-
-
-
-
-{/* ===========================
-    SCORES RIASEC
-=========================== */}
-
-<section className="scores-section">
-
-    <h2>
-
-        Vos scores
-
-    </h2>
+    <div className="scores-list">
 
 
     {
 
-        Object.entries(scores).map(
+    Object.entries(profil.scores).map(
 
-            ([lettre,valeur])=>(
+        ([lettre, score])=>(
+
+
+        <div
+
+        className="score-item"
+
+        key={lettre}
+
+        >
+
+
+            <div className="score-header">
+
+
+                <span>
+
+                    {lettre}
+
+                </span>
+
+
+                <strong>
+
+                    {score}
+
+                </strong>
+
+
+            </div>
+
+
+
+
+            <div className="score-bar">
 
 
                 <div
 
-                    key={lettre}
+                className="score-progress"
 
-                    className="score-item"
+                style={{
+
+                    width:`${(score / 10) * 100}%`
+
+                }}
 
                 >
 
-
-                    <div className="score-header">
-
-
-                        <span>
-
-                            {lettre}
-
-                        </span>
+                </div>
 
 
-                        <span>
-
-                            {valeur}
-
-                        </span>
-
-
-                    </div>
+            </div>
 
 
 
-                    <div className="score-bar">
+        </div>
 
 
-                        <div
+        )
 
-                            className="score-fill"
+    )
+
+
+    }
+
+
+    </div>
+
+
+</section>
+
+            {/* =====================================
+                RECOMMANDATIONS METIERS
+            ===================================== */}
+
+
+            <section className="jobs-section">
+
+
+                <h2>
+
+                    Métiers recommandés
+
+                </h2>
+
+
+
+
+
+                {/* ============================
+                    METIERS PRINCIPAUX
+                ============================ */}
+
+
+                <h3 className="category-title">
+
+                    ⭐ Carrières principales
+
+                </h3>
+
+
+
+                <div className="jobs-list">
+
+
+                {
+
+                resultat.recommandations.principaux.map(
+
+                    (metier)=>(
+
+
+                    <article
+
+                    className="job-card"
+
+                    key={metier.id_metier}
+
+                    >
+
+
+
+                        <div className="job-header">
+
+
+                            <h3>
+
+                                {metier.nom}
+
+                            </h3>
+
+
+
+
+                            <div
+
+                            className="compatibilite"
 
                             style={{
 
-                                width:`${(valeur/8)*100}%`
+                                backgroundColor:
+
+                                afficherCompatibilite(
+
+                                    metier.score_compatibilite
+
+                                ).couleur
 
                             }}
 
-                        >
+                            >
+
+
+                                <span>
+
+                                    {
+
+                                    afficherCompatibilite(
+
+                                        metier.score_compatibilite
+
+                                    ).badge
+
+                                    }
+
+                                </span>
+
+
+
+                                <strong>
+
+                                    {
+
+                                    afficherCompatibilite(
+
+                                        metier.score_compatibilite
+
+                                    ).pourcentage
+
+                                    }%
+
+                                </strong>
+
+
+
+                            </div>
+
+
 
                         </div>
+
+
+
+
+
+                        <p className="job-description">
+
+                            📝 {metier.description}
+
+                        </p>
+
+
+
+
+
+
+                        <div className="job-information">
+
+
+                            <p>
+
+                                📂 <strong>Secteur :</strong>
+
+                                {" "}
+
+                                {metier.secteur}
+
+                            </p>
+
+
+
+
+                            <p>
+
+                                🎓 <strong>Niveau d'étude :</strong>
+
+                                {" "}
+
+                                {metier.niveau_etude}
+
+                            </p>
+
+
+
+
+                            <p>
+
+                                💰 <strong>Salaire :</strong>
+
+                                {" "}
+
+                                {afficherSalaire(
+
+                                    metier.salaire_min,
+
+                                    metier.salaire_max
+
+                                )}
+
+                            </p>
+
+
+
+                        </div>
+
+
+
+
+
+
+                        <button
+
+                        className="job-button"
+
+                        onClick={()=>navigate(
+
+                            "/formations",
+
+                            {
+
+                                state:{
+                                    metier: metier,
+
+                                    resultat: resultat
+                                }
+
+                            }
+
+                        )}
+
+                        >
+
+                            Explorer cette carrière
+
+                        </button>
+
+
+
+
+                    </article>
+
+
+                    )
+
+                )
+
+
+                }
+
+
+                </div>
+
+
+
+
+
+
+
+
+
+                {/* ============================
+                    METIERS SECONDAIRES
+                ============================ */}
+
+
+
+                <h3 className="category-title secondary-title">
+
+                    Autres carrières compatibles
+
+                </h3>
+
+
+
+
+               {
+
+resultat.recommandations.secondaires.length > 0 ? (
+
+    <div className="jobs-list">
+
+
+    {
+
+    resultat.recommandations.secondaires.map(
+
+        (metier)=>(
+
+
+            <article
+
+            className="job-card secondary-card"
+
+            key={metier.id_metier}
+
+            >
+
+
+                <div className="job-header">
+
+
+                    <h3>
+
+                        {metier.nom}
+
+                    </h3>
+
+
+
+                    <div
+
+                    className="compatibilite"
+
+                    style={{
+
+                        backgroundColor:
+
+                        afficherCompatibilite(
+
+                            metier.score_compatibilite
+
+                        ).couleur
+
+                    }}
+
+                    >
+
+                        <span>
+
+                            {
+
+                            afficherCompatibilite(
+
+                                metier.score_compatibilite
+
+                            ).badge
+
+                            }
+
+                        </span>
+
+
+                        <strong>
+
+                            {
+
+                            afficherCompatibilite(
+
+                                metier.score_compatibilite
+
+                            ).pourcentage
+
+                            }%
+
+                        </strong>
 
 
                     </div>
@@ -327,456 +1101,173 @@ function Result(){
 
                 </div>
 
-            )
+
+
+                <p>
+
+                    📝 {metier.description}
+
+                </p>
+
+
+
+                <div className="job-information">
+
+
+                    <p>
+
+                        📂 <strong>Secteur :</strong>
+
+                        {" "}
+
+                        {metier.secteur}
+
+                    </p>
+
+
+
+                    <p>
+
+                        🎓 <strong>Niveau d'étude :</strong>
+
+                        {" "}
+
+                        {metier.niveau_etude}
+
+                    </p>
+
+
+
+                    <p>
+
+                        💰 <strong>Salaire :</strong>
+
+                        {" "}
+
+                        {afficherSalaire(
+
+                            metier.salaire_min,
+
+                            metier.salaire_max
+
+                        )}
+
+                    </p>
+
+
+                </div>
+
+
+
+                <button
+
+                className="job-button"
+
+                onClick={()=>navigate(
+
+                    "/formations",
+
+                    {
+
+                        state:metier
+
+                    }
+
+                )}
+
+                >
+
+                    Explorer cette carrière
+
+                </button>
+
+
+            </article>
+
 
         )
+
+    )
+
 
     }
 
 
-</section>
-{/* =====================================================
-    RECOMMANDATIONS PRINCIPALES
-===================================================== */}
+    </div>
 
-<section className="jobs-section">
 
-    <h2>
+) : (
 
-        ⭐ Recommandations principales
+    <div className="no-secondary">
 
-    </h2>
+        <p>
 
+            Aucun métier secondaire trouvé pour votre profil.
 
-    <div className="jobs-list">
+        </p>
 
-        {
+        <span>
 
-            metiersPrincipaux.length === 0 ?
+            Nous vous recommandons d'explorer les carrières principales proposées ci-dessus.
 
-            (
-
-                <p className="empty-job">
-
-                    Aucun métier principal trouvé.
-
-                </p>
-
-            )
-
-            :
-
-            (
-
-                metiersPrincipaux.map((metier)=>(
-
-                    <article
-
-                        key={metier.id_metier}
-
-                        className="job-card"
-
-                    >
-
-
-                        <div className="job-header">
-
-                            <h3>
-
-                                {metier.nom}
-
-                            </h3>
-
-
-                            <span className="compatibilite">
-
-                                {afficherCompatibilite(
-                                    metier.score_compatibilite
-                                )}
-
-                            </span>
-
-
-                        </div>
-
-
-
-                        <div className="job-details">
-
-
-                            <div>
-
-                                <strong>
-
-                                    Secteur
-
-                                </strong>
-
-                                <p>
-
-                                    {metier.secteur}
-
-                                </p>
-
-                            </div>
-
-
-
-                            <div>
-
-                                <strong>
-
-                                    Niveau d'étude
-
-                                </strong>
-
-                                <p>
-
-                                    {metier.niveau_etude}
-
-                                </p>
-
-                            </div>
-
-
-
-                            <div>
-
-                                <strong>
-
-                                    Salaire
-
-                                </strong>
-
-                                <p>
-
-                                    {afficherSalaire(
-
-                                        metier.salaire_min,
-
-                                        metier.salaire_max
-
-                                    )}
-
-                                </p>
-
-                            </div>
-
-
-                        </div>
-
-
-
-
-                        <div className="job-description">
-
-                            <h4>
-
-                                Description
-
-                            </h4>
-
-
-                            <p>
-
-                                {metier.description}
-
-                            </p>
-
-                        </div>
-
-
-
-
-
-                        <button
-
-                            className="job-button"
-
-                            onClick={()=>
-
-                                navigate(
-
-                                    "/formations",
-
-                                    {
-
-                                        state: metier
-
-                                    }
-
-                                )
-
-                            }
-
-                        >
-
-                            Explorer cette carrière
-
-                        </button>
-
-
-                    </article>
-
-                ))
-
-            )
-
-        }
+        </span>
 
     </div>
 
-</section>
-
-
-
-
-
-{/* =====================================================
-    RECOMMANDATIONS SECONDAIRES
-===================================================== */}
-
-<section className="jobs-section secondary">
-
-    <h2>
-
-        🌟 Autres métiers compatibles
-
-    </h2>
-
-
-    <div className="jobs-list">
-
-        {
-
-            metiersSecondaires.length === 0 ?
-
-            (
-
-                <p className="empty-job">
-
-                    Aucun métier secondaire trouvé.
-
-                </p>
-
-            )
-
-            :
-
-            (
-
-                metiersSecondaires.map((metier)=>(
-
-                    <article
-
-                        key={metier.id_metier}
-
-                        className="job-card"
-
-                    >
-
-
-                        <div className="job-header">
-
-                            <h3>
-
-                                {metier.nom}
-
-                            </h3>
-
-
-                            <span className="compatibilite">
-
-                                {afficherCompatibilite(
-
-                                    metier.score_compatibilite
-
-                                )}
-
-                            </span>
-
-
-                        </div>
-
-
-
-
-                        <div className="job-details">
-
-
-                            <div>
-
-                                <strong>
-
-                                    Secteur
-
-                                </strong>
-
-                                <p>
-
-                                    {metier.secteur}
-
-                                </p>
-
-                            </div>
-
-
-
-
-                            <div>
-
-                                <strong>
-
-                                    Niveau d'étude
-
-                                </strong>
-
-                                <p>
-
-                                    {metier.niveau_etude}
-
-                                </p>
-
-                            </div>
-
-
-
-
-                            <div>
-
-                                <strong>
-
-                                    Salaire
-
-                                </strong>
-
-                                <p>
-
-                                    {afficherSalaire(
-
-                                        metier.salaire_min,
-
-                                        metier.salaire_max
-
-                                    )}
-
-                                </p>
-
-                            </div>
-
-
-                        </div>
-
-
-
-
-
-                        <div className="job-description">
-
-                            <h4>
-
-                                Description
-
-                            </h4>
-
-
-                            <p>
-
-                                {metier.description}
-
-                            </p>
-
-                        </div>
-
-
-
-
-
-                        <button
-
-                            className="job-button"
-
-                            onClick={()=>
-
-                                navigate(
-
-                                    "/formations",
-
-                                    {
-
-                                        state: metier
-
-                                    }
-
-                                )
-
-                            }
-
-                        >
-
-                            Explorer cette carrière
-
-                        </button>
-
-
-                    </article>
-
-                ))
-
-            )
-
-        }
-
-    </div>
-
-</section>
-{/* =====================================================
-    ACTIONS
-===================================================== */}
-
-<div className="result-actions">
-
-    <button
-
-        className="retry-button"
-
-        onClick={() => navigate("/test")}
-
-    >
-
-        Refaire le test
-
-    </button>
-
-
-
-    <button
-
-        className="home-button"
-
-        onClick={() => navigate("/")}
-
-    >
-
-        Retour à l'accueil
-
-    </button>
-
-
-</div>
-
-
-
-
-
-{/* =====================================================
-    FIN DE LA PAGE
-===================================================== */}
-
-</div>
-
-);
+)
 
 }
+
+            </section>
+
+            {/* =====================================
+                ACTIONS FINALES
+            ===================================== */}
+
+
+            <div className="result-actions">
+
+
+                <button
+
+                className="retry-button"
+
+                onClick={()=>navigate("/test")}
+
+                >
+
+                    Refaire le test
+
+                </button>
+
+
+
+
+                <button
+
+                className="home-button"
+
+                onClick={()=>navigate("/")}
+
+                >
+
+                    🏠 Retour à l'accueil
+
+                </button>
+
+
+
+            </div>
+
+
+
+
+        </div>
+
+    );
+
+}
+
+
 
 export default Result;

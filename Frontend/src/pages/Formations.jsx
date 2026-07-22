@@ -1,6 +1,24 @@
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+
+import { useLocation, useNavigate } from "react-router-dom";
 
 import "../styles/Formations.css";
+
+import {
+
+    FaGraduationCap,
+
+    FaClock,
+
+    FaArrowLeft
+
+} from "react-icons/fa";
+
+import {
+
+    MdCategory
+
+} from "react-icons/md";
 
 
 function Formations(){
@@ -9,79 +27,213 @@ function Formations(){
     const navigate = useNavigate();
 
 
-
-    // Données temporaires
-    // Elles seront remplacées plus tard par l'API
-
-    const formations = [
-
-        {
-
-            id_filiere:1,
-
-            nom:"Licence Informatique",
-
-            description:
-            "Cette formation permet d'acquérir des compétences en programmation, bases de données, systèmes et analyse des données.",
-
-            domaine:"Informatique",
-
-            duree:"3 ans"
-
-        },
+    const location = useLocation();
 
 
-        {
 
-            id_filiere:2,
+    /*
+        Métier reçu depuis Result.jsx
+    */
 
-            nom:"Master Data Science",
+    const metier = location.state?.metier;
 
-            description:
-            "Cette formation prépare aux métiers de la science des données, de l'intelligence artificielle et de l'analyse avancée.",
+    const resultat = location.state?.resultat;
 
-            domaine:"Data et Intelligence Artificielle",
+    const nomMetier = metier?.nom || "ce métier";
 
-            duree:"2 ans"
-
-        }
+    
 
 
-    ];
+    /*
+        Etats
+    */
+
+    const [formations,setFormations] = useState([]);
+
+
+    const [chargement,setChargement] = useState(true);
+
+
+    const [erreur,setErreur] = useState("");
 
 
 
 
+    /*
+        Récupération des filières
+        depuis le backend
+    */
 
-    return (
+    useEffect(()=>{
+        console.log("useEffect Formations executee");
+        console.log("Metier dans useEffect :", metier);
+
+
+        const chargerFormations = async()=>{
+
+
+            try{
+
+
+                if(!metier){
+
+                    setErreur(
+                        "Aucun métier sélectionné."
+                    );
+
+
+                    setChargement(false);
+
+
+                    return;
+
+                }
+
+     console.log(
+    "URL appelée :",
+    `http://localhost/NextOri/backend/api/routes/filieres.php?id_metier=${metier.id_metier}`
+);
+
+                const reponse = await fetch(
+
+                    `http://localhost/NextOri/backend/api/routes/filieres.php?id_metier=${metier.id_metier}`
+
+                );
+                 console.log("Reponse HTTP :", reponse);
+
+
+
+                const data = await reponse.json();
+                console.log("Reponse backend :", data);
+
+
+
+                if(data.success){
+
+
+                    setFormations(data.formations);
+
+
+                }
+                else{
+
+
+                    setErreur(data.message);
+
+
+                }
+
+
+
+            }
+            catch(error){
+            console.log("Erreur fetch :", error);
+
+                setErreur(
+                    "Erreur lors du chargement des formations."
+                );
+
+
+            }
+            finally{
+
+
+                setChargement(false);
+
+
+            }
+
+
+        };
+
+
+
+        chargerFormations();
+
+
+
+    },[metier]);
+
+    return(
 
 
         <div className="formations-page">
 
 
 
-            <header className="formations-header">
+     <header className="formations-header">
 
+      <h1>
 
-                <h1>
-                    Formations associées
-                </h1>
+           🎯 Parcours de formation pour devenir
 
+            <span className="metier-title">
 
-                <p>
-                    Découvrez les formations qui peuvent vous mener vers ce métier.
-                </p>
+             {" "}{nomMetier}
 
+            </span>
 
-            </header>
+       </h1>
 
+       <p>
 
+        Découvrez les formations recommandées pour accéder à ce métier,
+        puis explorez les universités qui les proposent.
+
+      </p>
+
+          </header>
 
 
 
 
 
             <section className="formations-list">
+
+
+                {
+                    chargement && (
+
+                        <p className="formations-message">
+
+                            Chargement des formations...
+
+                        </p>
+
+                    )
+                }
+
+
+
+
+                {
+                    erreur && (
+
+                        <p className="formations-message error">
+
+                            {erreur}
+
+                        </p>
+
+                    )
+                }
+
+
+
+
+                {
+                    !chargement && !erreur && formations.length === 0 && (
+
+                        <p className="formations-message">
+
+                            Aucune formation trouvée pour ce métier.
+
+                        </p>
+
+                    )
+                }
+
+
 
 
 
@@ -102,7 +254,7 @@ function Formations(){
 
                         <h2>
 
-                            {formation.nom}
+                            🎓 {formation.nom}
 
                         </h2>
 
@@ -113,35 +265,45 @@ function Formations(){
                         <div className="formation-info">
 
 
-                            <p>
-
-                                <strong>
-                                    Domaine :
-                                </strong>
-
-                                {" "}
-
-                                {formation.domaine}
-
-                            </p>
-
-
 
                             <p>
 
+               <MdCategory className="formation-icon domaine-icon"/>
+
                                 <strong>
-                                    Durée :
-                                </strong>
 
-                                {" "}
+                        Domaine :
 
-                                {formation.duree}
+                            </strong>
 
-                            </p>
+                     {" "}
 
+                      {formation.domaine}
+
+                        </p>
+
+
+
+
+                                 <p>
+
+                        <FaClock className="formation-icon duree-icon"/>
+
+                            <strong>
+
+                          Durée :
+
+                    </strong>
+
+                      {" "}
+
+                    {formation.duree}
+
+                     </p>
 
 
                         </div>
+
 
 
 
@@ -159,12 +321,23 @@ function Formations(){
 
 
 
-
                         <button
 
                         className="university-button"
 
-                        onClick={()=>navigate("/universites")}
+                        onClick={()=>navigate("/universites",{
+
+                            state:{
+
+                                filiere: formation,
+
+                                metier,
+
+                                resultat
+
+                            }
+
+                        })}
 
                         >
 
@@ -182,18 +355,40 @@ function Formations(){
                 ))
 
                 }
+                </section>
 
 
+             <div className="formations-actions">
 
-            </section>
+    <button
 
+        className="back-result-button"
 
+        onClick={() =>
+            navigate("/result", {
+                state: {
+                    data: location.state?.resultat
+                }
+            })
+        }
 
+    >
+
+        <FaArrowLeft />
+
+            {" "}
+
+             Retour aux résultats
+
+            </button>
+
+               </div>
 
         </div>
 
 
     );
+
 
 }
 

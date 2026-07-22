@@ -179,6 +179,100 @@ class OrientationService
 
 
 
+    /**
+ * Récupère le dernier test effectué par un utilisateur.
+ */
+   public function recupererDernierResultat(
+    int $idUser
+): ?array
+{
+
+    // 1. Récupérer le dernier test
+    $test = $this->testService
+                 ->obtenirDernierTestUtilisateur(
+                     $idUser
+                 );
+
+
+    if ($test === null) {
+
+        return null;
+
+    }
+
+
+    // 2. Récupérer le profil enregistré
+
+    $profilPrincipal = $test["profil_dominant"];
+
+
+
+    $scores = [
+
+        "R" => $test["score_R"],
+        "I" => $test["score_I"],
+        "A" => $test["score_A"],
+        "S" => $test["score_S"],
+        "E" => $test["score_E"],
+        "C" => $test["score_C"]
+
+    ];
+
+
+
+    // 3. Rechercher les métiers comme dans executerOrientation
+
+    $metiers =
+        $this->metierService
+             ->obtenirRecommandations(
+                 $profilPrincipal
+             );
+
+
+
+    // 4. Ajouter formations + universités
+
+    $metiersPrincipaux =
+        $this->enrichirMetiersAvecFormations(
+            $metiers["principaux"]
+        );
+
+
+    $metiersSecondaires =
+        $this->enrichirMetiersAvecFormations(
+            $metiers["secondaires"]
+        );
+
+
+
+    // 5. Retour même structure que executerOrientation
+
+    return [
+
+        "id_test" => $test["id_test"],
+
+
+        "profil" => [
+
+            "principal" => $profilPrincipal,
+
+            "scores" => $scores
+
+        ],
+
+
+        "recommandations" => [
+
+            "principaux" => $metiersPrincipaux,
+
+            "secondaires" => $metiersSecondaires
+
+        ]
+
+    ];
+
+}
+
 
 
     /**

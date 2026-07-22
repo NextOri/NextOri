@@ -272,3 +272,100 @@
 
 
 }
+
+
+
+
+.metier-title{
+
+    color: var(--primary-color);
+
+    font-weight:700;
+
+    color:#0D1B2A;
+
+}
+
+.formations-actions{
+
+    max-width:900px;
+
+    margin:45px auto 0;
+
+     display:flex;
+
+    justify-content:center;
+
+    gap:20px;
+
+    flex-wrap:wrap;
+
+}
+
+
+
+.back-result-button{
+
+    background:#0D1B2A;
+
+    color:#FFFFFF;
+
+    border:none;
+
+    border-radius:14px;
+
+    padding:14px 28px;
+
+    font-size:1rem;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:all .3s ease;
+
+}
+
+
+
+.back-result-button:hover{
+
+    background:#1E3A8A;
+
+    transform:translateY(-3px);
+
+    box-shadow:0 10px 25px rgba(13,27,42,.20);
+
+}
+
+
+
+.formation-icon{
+
+    margin-right:8px;
+
+    vertical-align:middle;
+
+}
+
+.domaine-icon{
+
+    color:#3B82F6;
+
+}
+
+.duree-icon{
+
+    color:#F59E0B;
+
+}
+
+.back-result-button{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+}

@@ -5,7 +5,7 @@ import Test from "./pages/Test";
 import Result from "./pages/Result";
 import ProfilRiasec from "./pages/Profil-Riasec";
 import Formations from "./pages/Formations";
-import Universite from "./pages/Universite";
+import Universites from "./pages/Universites";
 
 
 function App() {
@@ -16,6 +16,7 @@ function App() {
        
         <Routes>
 
+
             <Route path="/" element={<Home />} />
 
             <Route path="/test" element={<Test />} />
@@ -24,7 +25,7 @@ function App() {
 
             <Route path="/formations" element={<Formations />} />
 
-            <Route path="/universites" element={<Universite />} />
+            <Route path="/universites" element={<Universites />} />
 
             <Route path="/profil-riasec" element={<ProfilRiasec />} />
             

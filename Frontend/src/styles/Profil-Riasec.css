@@ -241,9 +241,13 @@
 
     margin:45px auto 0;
 
-    display:flex;
+     display:flex;
 
     justify-content:center;
+
+    gap:20px;
+
+    flex-wrap:wrap;
 
 }
 
@@ -548,5 +552,44 @@
 .environnements-icon{
 
     color:#0D1B2A;
+
+}
+
+/* ==========================================
+   BOUTON RETOUR ACCUEIL
+========================================== */
+
+
+.home-button{
+
+    background:#F4B400;
+
+    color:#0D1B2A;
+
+    border:none;
+
+    border-radius:14px;
+
+    padding:14px 28px;
+
+    font-size:1rem;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.3s ease;
+
+}
+
+
+
+.home-button:hover{
+
+    background:#1E3A8A;
+
+    color:#FFFFFF;
+
+    transform:translateY(-3px);
 
 }

@@ -918,7 +918,11 @@ useEffect(()=>{
 
                             {
 
-                                state:metier
+                                state:{
+                                    metier: metier,
+
+                                    resultat: resultat
+                                }
 
                             }
 
@@ -1205,7 +1209,7 @@ resultat.recommandations.secondaires.length > 0 ? (
 
                 >
 
-                    Retour à l'accueil
+                    🏠 Retour à l'accueil
 
                 </button>
 

@@ -1,0 +1,479 @@
+.universites-page{
+
+    width:100%;
+
+    min-height:100vh;
+
+    padding:40px;
+
+    background:#F2F4F7;
+
+}
+
+
+
+/* Zone des boutons */
+
+.universites-actions{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:15px;
+
+    margin-top:30px;
+
+}
+
+
+/* Style commun des boutons */
+
+.back-formation-button,
+.home-button{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    padding:12px 20px;
+
+    border:none;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    font-size:15px;
+
+    font-weight:600;
+
+    transition:0.3s;
+
+}
+
+
+
+/* Retour aux formations */
+
+.back-formation-button{
+
+    background:#FFFFFF;
+
+    color:#0D1B2A;
+
+    border:1px solid #0D1B2A;
+
+}
+
+
+
+/* Retour accueil */
+
+.home-button{
+
+    background:#1E3A8A;
+
+    color:#FFFFFF;
+
+}
+
+
+
+/* Effet au survol */
+
+.back-formation-button:hover,
+.home-button:hover{
+
+    transform:translateY(-3px);
+
+}
+
+
+
+/* En-tête */
+
+.universites-header{
+
+    text-align:center;
+
+    margin-bottom:40px;
+
+}
+
+
+
+.universites-header h1{
+
+    color:#1E3A8A;
+
+    font-size:32px;
+
+    font-weight:700;
+
+}
+
+
+
+.filiere-title{
+
+    color:#0D1B2A;
+
+}
+
+
+
+.universites-header p{
+
+    color:#0D1B2A;
+
+    font-size:17px;
+
+}
+
+
+
+.universites-list{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:25px;
+
+}
+
+
+
+/* Carte université */
+
+.universite-card{
+
+    background:#FFFFFF;
+
+    width:100%;
+
+    padding:30px;
+
+    border-radius:15px;
+
+    box-shadow:0 8px 20px rgba(13,27,42,0.08);
+
+    animation:apparitionCarte 0.6s ease;
+
+    transition:0.3s;
+
+}
+
+
+
+/* Effet au survol */
+
+.universite-card:hover{
+
+    transform:translateY(-5px);
+
+}
+
+
+
+/* Animation */
+
+@keyframes apparitionCarte{
+
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(20px);
+
+    }
+
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+
+
+/* Titre université */
+
+.universite-card h2{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    color:#0D1B2A;
+
+    font-size:24px;
+
+    margin-bottom:20px;
+
+}
+
+
+
+/* Icône du titre */
+
+.university-title-icon{
+
+    color:#0D1B2A;
+
+    font-size:28px;
+
+}
+
+
+.universite-info{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:12px;
+
+    margin-bottom:20px;
+
+     background:#F4F6F8;
+
+     padding:15px;
+
+    border-radius:12px;
+
+    
+
+}
+
+
+
+.universite-info p{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    color:#0D1B2A;
+
+    font-size:16px;
+
+}
+
+
+
+.universite-info strong{
+
+    color:#1E3A8A;
+
+}
+
+
+
+/* Icônes informations */
+
+.universite-icon{
+
+    font-size:20px;
+
+}
+
+
+
+/* Ville */
+
+.ville-icon{
+
+    color:#F4B400;
+
+}
+
+
+
+/* Pays */
+
+.pays-icon{
+
+    color:#1E3A8A;
+
+}
+
+
+
+/* Type */
+
+.type-icon{
+
+    color:#0D1B2A;
+
+}
+
+
+
+/* Description */
+
+.universite-description{
+
+    color:#0D1B2A;
+
+    line-height:1.6;
+
+    margin-bottom:25px;
+
+    font-size:16px;
+
+}
+
+
+/* Bouton site web */
+
+.site-button{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    background:#F4B400;
+
+    color:#0D1B2A;
+
+    padding:12px 22px;
+
+    border-radius:10px;
+
+    text-decoration:none;
+
+    font-weight:700;
+
+    transition:0.3s;
+
+}
+
+
+
+.site-button:hover{
+
+    background:#1E3A8A;
+
+    color:#FFFFFF;
+
+    transform:translateY(-3px);
+
+}
+
+
+
+/* Chargement */
+
+.universites-loading{
+
+    min-height:50vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:20px;
+
+    font-weight:600;
+
+    color:#0D1B2A;
+
+}
+
+
+
+/* Erreur */
+
+.universites-error{
+
+    text-align:center;
+
+    padding:40px;
+
+    color:#0D1B2A;
+
+}
+
+
+
+/* Aucun résultat */
+
+.universites-empty{
+
+    text-align:center;
+
+    padding:50px;
+
+    color:#0D1B2A;
+
+}
+
+
+
+/* Responsive mobile */
+
+@media(max-width:768px){
+
+
+    .universites-page{
+
+        padding:20px;
+
+    }
+
+
+
+    .universites-actions{
+
+        flex-direction:column;
+
+        align-items:stretch;
+
+    }
+
+
+
+    .back-formation-button,
+    .home-button{
+
+        justify-content:center;
+
+    }
+
+
+
+    .universites-header h1{
+
+        font-size:24px;
+
+    }
+
+
+
+    .universite-card{
+
+        padding:20px;
+
+    }
+
+
+}

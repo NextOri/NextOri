@@ -313,28 +313,40 @@ function ProfilRiasec(){
             <div className="profil-actions">
 
 
+    <button
 
-                <button
+    className="back-result-button"
 
-                className="back-result-button"
+    onClick={()=>navigate("/result",{
 
-                onClick={()=>navigate("/result",{
+        state: {
+            data: resultat
+        }
 
-                    state: {
-                   data: resultat
-                    }
+    })}
 
-                })}
+    >
 
-                >
+        ← Retour aux résultats
 
-                    ← Retour aux résultats
-
-                </button>
-
+    </button>
 
 
-            </div>
+
+    <button
+
+    className="home-button"
+
+    onClick={()=>navigate("/")}
+
+    >
+
+        🏠 Retour à l'accueil
+
+    </button>
+
+
+</div>
 
 
 

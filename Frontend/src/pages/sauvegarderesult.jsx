@@ -33,14 +33,14 @@ useEffect(()=>{
     const navigate = useNavigate();
 
 
-    const resultatInitial = location.state?.data?.data ?? location.state?.data;
+    const resultatInitial = location.state?.data;
 
     console.log("STATE RESULT :", location.state);
 console.log("DATA RESULT :", resultatInitial);
 
     const [resultat, setResultat] = useState(resultatInitial);
-    
-    const [chargement, setChargement] = useState(!resultatInitial);
+
+    const [chargement, setChargement] = useState(true);
 
     useEffect(() => {
 

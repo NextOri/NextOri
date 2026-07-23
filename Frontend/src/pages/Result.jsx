@@ -1250,7 +1250,7 @@ resultat.recommandations.secondaires.length > 0 ? (
 
                 className="home-button"
 
-                onClick={()=>navigate("/")}
+                onClick={()=>navigate("/dashboard")}
 
                 >
 

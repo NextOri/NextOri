@@ -24,7 +24,7 @@
 
     background:#0D1B2A;
 
-    padding:35px 25px 180px;
+    padding:35px 25px 120px;
 
     border-bottom-left-radius:25px;
 
@@ -50,7 +50,7 @@
 
 .dashboard-header h1{
 
-    font-size:48px;
+    font-size:38px;
 
     font-weight:800;
 
@@ -79,11 +79,8 @@
 .quick-actions,
 .project-card,
 .help-card{
-
-    width:90%;
-
-    margin:auto;
-
+    width:min(94%, 980px);
+    margin:0 auto;
 }
 
 
@@ -92,7 +89,7 @@
 
 .level-card{
 
-    margin-top:-120px;
+    margin-top:-80px;
 
 }
 
@@ -108,13 +105,13 @@
 
     background:#FFFFFF;
 
-    border-radius:22px;
+    border-radius:18px;
 
     box-shadow:0 10px 25px rgba(13,27,42,0.08);
 
-    padding:25px;
+    padding:20px;
 
-    margin-bottom:25px;
+    margin-bottom:18px;
 
 }
 
@@ -214,7 +211,7 @@
 
 .statistics-section{
 
-    width:90%;
+    width:min(90%, 980px);
 
     margin:25px auto;
 
@@ -256,9 +253,9 @@
 
 .stat-card h3{
 
-    font-size:32px;
+    font-size:24px;
 
-    margin-bottom:10px;
+    margin-bottom:8px;
 
 }
 
@@ -268,9 +265,9 @@
 
     color:#1E3A8A;
 
-    font-size:28px;
+    font-size:24px;
 
-    margin-bottom:8px;
+    margin-bottom:6px;
 
 }
 
@@ -355,9 +352,9 @@
 
 .quick-actions{
 
-    width:90%;
+    width:min(90%, 980px);
 
-    margin:30px auto;
+    margin:20px auto;
 
 }
 
@@ -415,7 +412,7 @@
 
 .action-card span{
 
-    font-size:35px;
+    font-size:28px;
 
 }
 
@@ -533,49 +530,48 @@
 
 
 .help-card{
-
     background:#1E3A8A;
+    width:min(94%, 980px);
+    margin:20px auto;
+    padding:20px;
+    border-radius:18px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+    box-shadow:0 10px 25px rgba(13,27,42,0.08);
+}
 
+.help-card-content{
+    flex:1;
 }
 
 
 
 .help-card h2{
-
     color:#FFFFFF;
-
-    margin-bottom:15px;
-
+    margin:0 0 8px;
+    font-size:24px;
 }
-
-
 
 .help-card p{
-
     color:#FFFFFF;
-
-    margin-bottom:25px;
-
+    margin:0;
+    line-height:1.5;
 }
+
 
 
 
 .help-button{
-
     background:#F4B400;
-
     color:#0D1B2A;
-
     border:none;
-
-    padding:12px 25px;
-
+    padding:12px 20px;
     border-radius:12px;
-
     font-weight:700;
-
     cursor:pointer;
-
+    white-space:nowrap;
 }
 
 
@@ -584,6 +580,17 @@
 
     background:#FFFFFF;
 
+}
+
+@media (max-width: 700px) {
+    .help-card{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .help-button{
+        width:100%;
+    }
 }
 
 
@@ -713,15 +720,15 @@
 
 .action-button-section{
 
-    width:90%;
+    width:min(90%, 980px);
 
-    margin:30px auto;
+    margin:20px auto;
 
     background:#1E3A8A;
 
     border-radius:22px;
 
-    padding:30px 25px;
+    padding:24px 20px;
 
     text-align:center;
 

@@ -461,30 +461,24 @@ function Dashboard() {
 
             {/* BESOIN D'AIDE */}
 
-           <section className="help-card">
+          <section className="help-card">
 
+    <div className="help-card-content">
 
-    <h2>
+        <h2>
+            Besoin d'aide ?
+        </h2>
 
-        Besoin d'aide ?
+        <p>
+            Nos conseillers en orientation seront bientôt
+            disponibles pour vous accompagner.
+        </p>
 
-    </h2>
-
-
-    <p>
-
-        Nos conseillers en orientation seront bientôt
-        disponibles pour vous accompagner.
-
-    </p>
-
+    </div>
 
     <button className="help-button">
-
         En savoir plus
-
     </button>
-
 
 </section>
 

@@ -337,7 +337,7 @@ function ProfilRiasec(){
 
     className="home-button"
 
-    onClick={()=>navigate("/")}
+    onClick={()=>navigate("/dashboard")}
 
     >
 

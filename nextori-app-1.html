@@ -910,6 +910,7 @@ button { font-family:inherit; }
         <button class="badge-share-btn" data-badgeshare="copy">🔗 Copier</button>
       </div>
     </div>
+
     <!-- 2. Classement intelligent anonyme -->
     <div class="rank-card">
       <div class="rank-title">📊 Ma position parmi les candidats</div>
@@ -945,6 +946,7 @@ button { font-family:inherit; }
         </div>
       </div>
     </div>
+
     <!-- 4. Plan d'amélioration personnalisé IA -->
     <div class="plan-card" id="planCard">
       <div class="plan-title">🚀 Mon plan pour augmenter mes chances de réussite</div>
@@ -1005,13 +1007,13 @@ button { font-family:inherit; }
       <div class="referral-top">
         <div class="referral-icon">🎁</div>
         <div>
-          <p class="referral-title">Invite 5 amis, débloque un accompagnement offert</p>
+          <p class="referral-title">Invite 3 amis, débloque un accompagnement offert</p>
           <p class="referral-sub">Un conseiller NextOri t'aide gratuitement à préparer ton concours</p>
         </div>
       </div>
-      <p class="referral-text">Partage ton code avec tes amis. Dès que 5 personnes créent leur profil NextOri avec ton code, tu débloques une séance de coaching gratuite (valeur 8 000 FCFA).</p>
+      <p class="referral-text">Partage ton code avec tes amis. Dès que 3 personnes créent leur profil NextOri avec ton code, tu débloques une séance de coaching gratuite (valeur 8 000 FCFA).</p>
       <div class="referral-progress-track"><div class="referral-progress-fill" id="referralProgressFill"></div></div>
-      <div class="referral-progress-label" id="referralProgressLabel">0 / 5 amis inscrits</div>
+      <div class="referral-progress-label" id="referralProgressLabel">0 / 3 amis inscrits</div>
       <div class="referral-code-row">
         <div class="referral-code" id="referralCode">NEXTORI-XXXX</div>
         <button class="referral-copy-btn" id="referralCopyBtn">Copier</button>
@@ -1037,7 +1039,7 @@ button { font-family:inherit; }
 </div>
 </div>
 <script>
-    /* CONCOURS SÉNÉGAL — APP LOGIC */
+/* CONCOURS SÉNÉGAL — APP LOGIC */
 /* ============================= DATA ============================= */
 const CONTESTS = [
   { id:'esp', name:'Concours ESP', aliases:['esp','ecole superieure polytechnique','poly'], establishment:'École Supérieure Polytechnique — UCAD', category:'grande-ecole', region:'Dakar', ville:'Dakar', domaine:'Ingénierie', niveau:'Baccalauréat', diplome:'Baccalauréat', secteur:'public', prix:'gratuit', statut:'recent', ageMax:22, logoColor:'#2563eb', logoIcon:'ESP', dateOuverture:'2026-08-01', dateLimite:'2026-09-15', dateConcours:'2026-10-10', places:180, cout:'Gratuit', description:"Le concours d'entrée à l'ESP permet aux bacheliers scientifiques d'intégrer la plus grande école d'ingénieurs du Sénégal, rattachée à l'UCAD.", objectifs:"Sélectionner les meilleurs profils scientifiques pour former les futurs ingénieurs du pays dans les filières informatique, génie civil, génie électrique et télécommunications.", conditions:["Être titulaire d'un Baccalauréat série S1, S2 ou S3","Avoir au maximum 22 ans à la date du concours","Ne jamais avoir redoublé plus d'une fois au lycée","Dossier de candidature complet déposé dans les délais"], nationalite:'Sénégalaise ou résident CEDEAO', documents:['Extrait de naissance','Copie du Baccalauréat','2 photos d\'identité','Certificat de scolarité','Fiche de candidature remplie'], centres:['Dakar (ESP)','Thiès','Saint-Louis','Ziguinchor','Kaolack'], matieres:[{nom:'Mathématiques',coef:4},{nom:'Physique-Chimie',coef:3},{nom:'Sciences de la vie et de la terre',coef:1},{nom:'Culture générale',coef:1}], programme:"Le programme couvre l'intégralité du programme de Terminale S, avec un accent particulier sur l'algèbre, l'analyse, la mécanique et l'électricité.", reussir:"La réussite passe par une maîtrise solide des mathématiques et de la physique de Terminale, complétée par un entraînement régulier aux annales des années précédentes.", conseils:["Réviser en priorité les mathématiques et la physique","S'entraîner sur les annales des 5 dernières années","Gérer son temps efficacement le jour du concours","Rejoindre un groupe de révision"], erreurs:["Négliger la culture générale","Arriver en retard le jour du concours","Ne pas relire son dossier avant dépôt","Réviser seulement la veille"], ressources:['📘 Annales ESP 2020-2025','🎥 Chaîne YouTube "Prépa ESP Sénégal"','📝 Cours de soutien Mathématiques Terminale S','🧮 Quiz d\'entraînement NextOri'], resultats:"Les résultats d'admissibilité sont publiés sur le site de l'UCAD environ 3 semaines après l'épreuve écrite, suivis d'un entretien oral pour les candidats retenus.", lienOfficiel:'https://ucad.sn', contact:{adresse:'Avenue Cheikh Anta Diop, Dakar', telephone:'+221 33 824 65 74', email:'scolarite@esp.sn', site:'esp.sn', reseaux:'@ESP_Dakar'}, faq:[ {q:"Le concours est-il ouvert aux candidats libres ?", r:"Oui, tout bachelier scientifique peut candidater, qu'il soit scolarisé ou candidat libre."}, {q:"Peut-on repasser le concours plusieurs fois ?", r:"Le concours est ouvert chaque année ; il n'y a pas de limite officielle de tentatives."}, {q:"Le concours est-il payant ?", r:"Non, l'inscription au concours ESP est gratuite pour les candidats sénégalais."} ], popularity: 98 },
@@ -1150,6 +1152,7 @@ function toggleNotify(id){
   if(notifySet.has(id)){ notifySet.delete(id); showToast('🔕 Notification désactivée'); if(currentDetailId===id) updateDetailButtons(); return; }
   openNotifyModal(id);
 }
+
 /* ============================= NOTIFICATION PREFERENCES MODAL (point 2) ============================= */
 let notifyModalTargetId = null; // null = global (all favorited contests)
 const notifyModal = document.getElementById('notifyModal');
@@ -1203,6 +1206,7 @@ document.getElementById('notifySubmit').addEventListener('click', ()=>{
   closeNotifyModal();
   showToast(`✅ Rappels activés par ${channelText} !`);
 });
+
 /* ============================= REPORT AN ERROR MODAL (point 1) ============================= */
 const reportModal = document.getElementById('reportModal');
 let reportModalTargetContest = null;
@@ -1848,8 +1852,8 @@ function setupReferralCard(name){
   const code = 'NEXTORI-' + clean + Math.floor(1000 + Math.random()*9000);
   document.getElementById('referralCode').textContent = code;
   const invited = Math.floor(Math.random()*2); // demo: 0 or 1 déjà invités
-  document.getElementById('referralProgressFill').style.width = Math.round((invited/5)*100) + '%';
-  document.getElementById('referralProgressLabel').textContent = `${invited} / 5 amis inscrits`;
+  document.getElementById('referralProgressFill').style.width = Math.round((invited/3)*100) + '%';
+  document.getElementById('referralProgressLabel').textContent = `${invited} / 3 amis inscrits`;
   document.getElementById('referralCopyBtn').onclick = ()=>{
     navigator.clipboard?.writeText(code);
     showToast('📋 Code de parrainage copié !');

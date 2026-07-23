@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { useNavigate } from "react-router-dom";
+import { data, useNavigate } from "react-router-dom";
 
 import {getQuestions, getPropositions, envoyerReponses} from "../services/api";
 
@@ -88,11 +88,11 @@ function Test(){
 
         return (
 
-            <h2>
+            <h3>
 
                 Chargement du test...
 
-            </h2>
+            </h3>
 
         );
 
@@ -143,10 +143,14 @@ function suivant() {
         envoyerReponses(reponses)
 
             .then((resultat) => {
+                console.log("RESULTAT AVANT NAVIGATION :", resultat);
 
                 navigate("/result", {
-                    state: resultat
+                    state:{
+                        data: resultat
+                    }
                 });
+                console.log("RESULTAT APRES NAVIGATION :", resultat);
 
             })
 

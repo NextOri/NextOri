@@ -3,7 +3,7 @@
 class Database
 {
     private string $host = "localhost";
-    private string $dbName = "nextori_db_V1";
+    private string $dbName = "nextori_db_V2";
     private string $username = "root";
     private string $password = "";
 

@@ -35,6 +35,9 @@ useEffect(()=>{
 
     const resultatInitial = location.state?.data;
 
+    console.log("STATE RESULT :", location.state);
+console.log("DATA RESULT :", resultatInitial);
+
     const [resultat, setResultat] = useState(resultatInitial);
 
     const [chargement, setChargement] = useState(true);
@@ -68,7 +71,7 @@ useEffect(()=>{
     
 }, [resultat]);
 
-
+//  fetch("http://localhost/NextOri/backend/api/routes/resultats.php?id_user=1")
 
 
     /*

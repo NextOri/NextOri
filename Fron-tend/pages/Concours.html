@@ -1,0 +1,1295 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Concours Sénégal — NextOri</title>
+<style>
+  :root {
+    --navy: #0B1F4D;
+    --navy-light: #16305f;
+    --navy-lighter: #1c3a7a;
+    --gold: #F4C542;
+    --gold-dark: #dba91f;
+    --gray-50: #f7f8fb;
+    --gray-100: #eef1f6;
+    --gray-200: #e3e7ee;
+    --gray-400: #9aa4b2;
+    --gray-500: #6b7688;
+    --gray-700: #384153;
+    --gray-800: #1c2433;
+    --green: #16a34a;
+    --red: #e0433f;
+    --blue: #2563eb;
+    --radius: 18px;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--gray-50);
+    color: var(--gray-800);
+  }
+  img { max-width: 100%; }
+  button { font-family: inherit; }
+
+  /* ===== Header / Hero ===== */
+  .hero {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 55%, var(--navy-lighter) 100%);
+    padding: 28px 20px 26px;
+    border-radius: 0 0 26px 26px;
+  }
+  @media (min-width:768px){ .hero{ padding:38px 40px 32px; border-radius:0 0 32px 32px; } }
+
+  .hero-top { display:flex; align-items:center; justify-content:space-between; margin-bottom:18px; }
+  .hero-brand { display:flex; align-items:center; gap:10px; }
+  .hero-logo { width:36px; height:36px; border-radius:10px; background:var(--gold); display:flex; align-items:center; justify-content:center; font-weight:900; color:var(--navy); font-size:15px; }
+  .hero-brand-name { color:#fff; font-weight:800; font-size:15px; }
+  .hero-brand-sub { color:#9db1e6; font-size:10.5px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; }
+
+  .notif-toggle {
+    display:flex; align-items:center; gap:6px;
+    background:var(--gold); color:var(--navy);
+    border:none; border-radius:999px; padding:9px 16px;
+    font-size:12.5px; font-weight:800; cursor:pointer;
+    transition: transform 0.15s ease, background 0.15s ease;
+  }
+  .notif-toggle:hover { background:var(--gold-dark); transform:translateY(-1px); }
+  .notif-toggle.on { background:#16a34a; color:#fff; }
+
+  .hero-title { color:#fff; font-size:24px; font-weight:800; margin:0 0 6px; }
+  @media (min-width:768px){ .hero-title{ font-size:32px; } }
+  .hero-sub { color:#c7d2fe; font-size:13.5px; margin:0 0 20px; max-width:560px; line-height:1.5; }
+
+  .search-wrap { position:relative; max-width:640px; }
+  .search-box {
+    display:flex; align-items:center; gap:10px;
+    background:#fff; border-radius:999px; padding:13px 18px;
+    box-shadow:0 8px 24px rgba(0,0,0,0.18);
+  }
+  .search-box input { flex:1; border:none; outline:none; font-size:14px; color:var(--gray-700); }
+  .search-box input::placeholder { color:var(--gray-400); }
+  .search-clear { border:none; background:var(--gray-100); width:24px; height:24px; border-radius:999px; cursor:pointer; display:none; align-items:center; justify-content:center; font-size:12px; color:var(--gray-500); }
+
+  .search-suggestions {
+    position:absolute; top:calc(100% + 8px); left:0; right:0;
+    background:#fff; border-radius:16px; box-shadow:0 12px 32px rgba(11,31,77,0.18);
+    padding:8px; z-index:40; display:none; max-height:340px; overflow-y:auto;
+  }
+  .search-suggestions.show { display:block; }
+  .sugg-item { display:flex; align-items:center; gap:10px; padding:10px 12px; border-radius:12px; cursor:pointer; }
+  .sugg-item:hover { background:var(--gray-50); }
+  .sugg-logo { width:34px; height:34px; border-radius:10px; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:15px; color:#fff; font-weight:800; }
+  .sugg-name { font-size:13px; font-weight:700; color:var(--gray-800); }
+  .sugg-sub { font-size:11px; color:var(--gray-500); }
+  .sugg-empty { padding:16px; text-align:center; font-size:12.5px; color:var(--gray-500); }
+
+  .hero-actions { display:flex; gap:10px; margin-top:16px; flex-wrap:wrap; }
+  .btn-hero-primary {
+    background:var(--gold); color:var(--navy); border:none; border-radius:999px;
+    padding:10px 18px; font-size:13px; font-weight:800; cursor:pointer;
+  }
+  .btn-hero-outline {
+    background:rgba(255,255,255,0.08); color:#fff; border:1px solid rgba(255,255,255,0.25);
+    border-radius:999px; padding:10px 18px; font-size:13px; font-weight:700; cursor:pointer;
+  }
+
+  /* ===== Categories ===== */
+  .section { padding:22px 20px; max-width:1240px; margin:0 auto; }
+  @media (min-width:768px){ .section{ padding:26px 40px; } }
+
+  .section-head { display:flex; align-items:baseline; justify-content:space-between; margin-bottom:14px; gap:10px; flex-wrap:wrap; }
+  .section-title { font-size:17px; font-weight:800; color:var(--gray-800); margin:0; display:flex; align-items:center; gap:8px; }
+  .section-sub { font-size:12.5px; color:var(--gray-500); margin:2px 0 0; }
+  .section-link { font-size:12.5px; font-weight:700; color:var(--navy); background:none; border:none; cursor:pointer; }
+
+  .cat-scroll { display:flex; gap:10px; overflow-x:auto; padding-bottom:6px; scrollbar-width:none; }
+  .cat-scroll::-webkit-scrollbar{ display:none; }
+  .cat-chip {
+    flex-shrink:0; display:flex; align-items:center; gap:8px;
+    background:#fff; border:1.5px solid var(--gray-200); border-radius:999px;
+    padding:10px 16px; font-size:12.5px; font-weight:700; color:var(--gray-700);
+    cursor:pointer; transition:all 0.15s ease; white-space:nowrap;
+  }
+  .cat-chip:hover { border-color:var(--gold); }
+  .cat-chip.active { background:var(--navy); border-color:var(--navy); color:#fff; }
+  .cat-chip .count { background:var(--gray-100); color:var(--gray-500); font-size:10.5px; font-weight:800; padding:2px 7px; border-radius:999px; }
+  .cat-chip.active .count { background:rgba(255,255,255,0.18); color:#fff; }
+
+  /* ===== Filters bar ===== */
+  .filters-bar { display:flex; align-items:center; gap:10px; margin-bottom:16px; flex-wrap:wrap; }
+  .filter-toggle-btn {
+    display:flex; align-items:center; gap:8px;
+    background:var(--navy); color:#fff; border:none; border-radius:12px;
+    padding:11px 16px; font-size:13px; font-weight:700; cursor:pointer;
+  }
+  .filter-count-badge { background:var(--gold); color:var(--navy); font-size:10.5px; font-weight:800; border-radius:999px; padding:2px 7px; }
+
+  .filters-panel {
+    display:none;
+    background:#fff; border:1px solid var(--gray-200); border-radius:var(--radius);
+    padding:20px; margin-bottom:18px;
+    box-shadow:0 4px 16px rgba(11,31,77,0.05);
+    animation: panelIn 0.25s ease;
+  }
+  .filters-panel.open { display:block; }
+  @keyframes panelIn { from{opacity:0; transform:translateY(-8px);} to{opacity:1; transform:translateY(0);} }
+
+  .filters-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(190px,1fr)); gap:14px; margin-bottom:14px; }
+  .filter-group label { display:block; font-size:11.5px; font-weight:700; color:var(--gray-700); margin-bottom:6px; }
+  .filter-group select, .filter-group input {
+    width:100%; border:1px solid var(--gray-200); border-radius:10px; padding:9px 12px;
+    font-size:12.5px; color:var(--gray-800); outline:none; font-family:inherit;
+  }
+  .filter-group select:focus, .filter-group input:focus { border-color:var(--gold); }
+
+  .filters-toggles { display:flex; gap:16px; flex-wrap:wrap; margin-bottom:14px; padding-top:12px; border-top:1px solid var(--gray-100); }
+  .chip-toggle {
+    display:flex; align-items:center; gap:6px;
+    background:var(--gray-50); border:1px solid var(--gray-200); border-radius:999px;
+    padding:7px 13px; font-size:11.5px; font-weight:700; color:var(--gray-700); cursor:pointer;
+  }
+  .chip-toggle input { accent-color: var(--gold); }
+
+  .filters-actions { display:flex; justify-content:flex-end; gap:10px; }
+  .btn-reset { background:none; border:1px solid var(--gray-200); color:var(--gray-500); border-radius:10px; padding:9px 16px; font-size:12.5px; font-weight:700; cursor:pointer; }
+  .btn-apply { background:var(--gold); border:none; color:var(--navy); border-radius:10px; padding:9px 20px; font-size:12.5px; font-weight:800; cursor:pointer; }
+
+  /* ===== Contest cards ===== */
+  .row-scroll { display:flex; gap:14px; overflow-x:auto; padding-bottom:8px; scrollbar-width:none; }
+  .row-scroll::-webkit-scrollbar{ display:none; }
+  .card-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(280px,1fr)); gap:16px; }
+
+  .contest-card {
+    flex-shrink:0; width:270px;
+    background:#fff; border:1px solid var(--gray-200); border-radius:var(--radius);
+    overflow:hidden; box-shadow:0 1px 3px rgba(11,31,77,0.05);
+    cursor:pointer; transition:transform 0.18s ease, box-shadow 0.18s ease;
+    display:flex; flex-direction:column;
+  }
+  .card-grid .contest-card { width:auto; }
+  .contest-card:hover { transform:translateY(-3px); box-shadow:0 10px 26px rgba(11,31,77,0.12); }
+
+  .contest-top { padding:14px 16px 0; display:flex; align-items:flex-start; justify-content:space-between; gap:8px; }
+  .contest-logo { width:44px; height:44px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-weight:900; color:#fff; font-size:16px; flex-shrink:0; }
+  .fav-btn { border:none; background:var(--gray-50); width:30px; height:30px; border-radius:999px; cursor:pointer; font-size:13px; display:flex; align-items:center; justify-content:center; flex-shrink:0; transition: all 0.15s ease; }
+  .fav-btn.active { background:#fee2e2; }
+
+  .contest-body { padding:10px 16px 14px; flex:1; display:flex; flex-direction:column; }
+  .contest-name { font-size:14.5px; font-weight:800; color:var(--gray-800); margin-bottom:2px; }
+  .contest-est { font-size:11.5px; color:var(--gray-500); margin-bottom:8px; }
+
+  .status-badges { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:10px; }
+  .badge { font-size:10px; font-weight:800; padding:3px 9px; border-radius:999px; }
+  .badge-recent { background:#dcfce7; color:var(--green); }
+  .badge-soon { background:#dbeafe; color:var(--blue); }
+  .badge-closing { background:#fee2e2; color:var(--red); }
+  .badge-closed { background:var(--gray-100); color:var(--gray-500); }
+  .badge-free { background:#fffbeb; color:#b45309; }
+  .badge-public { background:#ede9fe; color:#7c3aed; }
+
+  .contest-meta { font-size:11px; color:var(--gray-500); margin-bottom:10px; display:flex; flex-direction:column; gap:4px; }
+  .contest-meta span { display:flex; align-items:center; gap:5px; }
+
+  .contest-bottom { margin-top:auto; display:flex; gap:8px; padding-top:10px; border-top:1px solid var(--gray-100); }
+  .btn-mini { flex:1; border:none; border-radius:9px; padding:8px; font-size:11.5px; font-weight:700; cursor:pointer; }
+  .btn-mini-navy { background:var(--navy); color:#fff; }
+  .btn-mini-outline { background:var(--gray-50); color:var(--navy); }
+
+  /* ===== Detail view ===== */
+  #detailView { display:none; }
+  #detailView.active { display:block; animation:fadeIn 0.3s ease; }
+  #homeView.hidden { display:none; }
+  @keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
+
+  .detail-header {
+    background:linear-gradient(135deg, var(--navy) 0%, var(--navy-lighter) 100%);
+    padding:20px; border-radius:0 0 26px 26px;
+  }
+  @media (min-width:768px){ .detail-header{ padding:28px 40px; } }
+
+  .back-btn { display:flex; align-items:center; gap:6px; background:rgba(255,255,255,0.1); border:none; color:#fff; border-radius:999px; padding:8px 14px; font-size:12.5px; font-weight:700; cursor:pointer; margin-bottom:18px; }
+
+  .detail-top { display:flex; gap:16px; align-items:flex-start; flex-wrap:wrap; }
+  .detail-logo { width:64px; height:64px; border-radius:16px; display:flex; align-items:center; justify-content:center; font-weight:900; color:#fff; font-size:22px; flex-shrink:0; }
+  .detail-name { color:#fff; font-size:21px; font-weight:800; margin:0 0 4px; }
+  @media (min-width:768px){ .detail-name{ font-size:26px; } }
+  .detail-est { color:#c7d2fe; font-size:13px; margin-bottom:10px; }
+  .detail-badges { display:flex; gap:6px; flex-wrap:wrap; }
+
+  .detail-actions { display:flex; gap:10px; margin-top:18px; flex-wrap:wrap; }
+  .btn-notify { display:flex; align-items:center; gap:7px; background:var(--gold); color:var(--navy); border:none; border-radius:999px; padding:11px 18px; font-size:13px; font-weight:800; cursor:pointer; }
+  .btn-notify.on { background:#16a34a; color:#fff; }
+  .btn-fav-lg { display:flex; align-items:center; gap:7px; background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.25); color:#fff; border-radius:999px; padding:11px 18px; font-size:13px; font-weight:700; cursor:pointer; }
+  .btn-fav-lg.active { background:#fee2e2; color:var(--red); border-color:#fee2e2; }
+  .btn-share-lg { display:flex; align-items:center; gap:7px; background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.25); color:#fff; border-radius:999px; padding:11px 18px; font-size:13px; font-weight:700; cursor:pointer; position:relative; }
+
+  .share-menu {
+    position:absolute; top:calc(100% + 8px); left:0;
+    background:#fff; border-radius:14px; box-shadow:0 12px 32px rgba(11,31,77,0.2);
+    padding:8px; display:none; z-index:30; min-width:190px;
+  }
+  .share-menu.show { display:block; }
+  .share-item { display:flex; align-items:center; gap:10px; padding:9px 12px; border-radius:10px; font-size:12.5px; font-weight:700; color:var(--gray-700); cursor:pointer; }
+  .share-item:hover { background:var(--gray-50); }
+
+  /* Key info strip */
+  .key-strip { display:grid; grid-template-columns:repeat(2,1fr); gap:10px; margin-top:20px; }
+  @media (min-width:640px){ .key-strip{ grid-template-columns:repeat(4,1fr); } }
+  .key-item { background:rgba(255,255,255,0.08); border-radius:14px; padding:12px 14px; }
+  .key-label { color:#9db1e6; font-size:10.5px; font-weight:700; text-transform:uppercase; margin-bottom:4px; }
+  .key-value { color:#fff; font-size:13.5px; font-weight:800; }
+
+  /* Detail tabs & content */
+  .detail-body { max-width:1000px; margin:0 auto; padding:24px 20px 60px; }
+  @media (min-width:768px){ .detail-body{ padding:28px 40px 70px; } }
+
+  .detail-tabs { display:flex; gap:4px; background:var(--gray-100); padding:4px; border-radius:12px; overflow-x:auto; margin-bottom:20px; scrollbar-width:none; }
+  .detail-tabs::-webkit-scrollbar{ display:none; }
+  .dtab-btn { flex-shrink:0; border:none; background:none; padding:9px 16px; border-radius:9px; font-size:12.5px; font-weight:700; color:var(--gray-500); cursor:pointer; white-space:nowrap; }
+  .dtab-btn.active { background:#fff; color:var(--navy); box-shadow:0 1px 4px rgba(11,31,77,0.12); }
+  .dtab-panel { display:none; animation:fadeIn 0.3s ease; }
+  .dtab-panel.active { display:block; }
+
+  .info-panel { background:#fff; border:1px solid var(--gray-200); border-radius:var(--radius); padding:20px; margin-bottom:16px; }
+  .info-title { font-size:15px; font-weight:800; color:var(--gray-800); margin:0 0 10px; display:flex; align-items:center; gap:8px; }
+  .info-text { font-size:13.5px; color:var(--gray-700); line-height:1.6; margin:0 0 6px; }
+  .info-list { margin:0; padding-left:18px; font-size:13.5px; color:var(--gray-700); line-height:1.9; }
+
+  .info-table { width:100%; border-collapse:collapse; }
+  .info-table td { padding:9px 0; font-size:13px; border-bottom:1px solid var(--gray-100); vertical-align:top; }
+  .info-table td:first-child { color:var(--gray-500); font-weight:700; width:42%; }
+  .info-table td:last-child { color:var(--gray-800); font-weight:600; }
+  .info-table tr:last-child td { border-bottom:none; }
+
+  .doc-tag { display:inline-flex; align-items:center; gap:6px; background:var(--gray-50); border:1px solid var(--gray-200); border-radius:10px; padding:8px 12px; font-size:12.5px; font-weight:600; color:var(--gray-700); margin:0 8px 8px 0; }
+
+  .matiere-row { display:flex; align-items:center; justify-content:space-between; padding:10px 0; border-bottom:1px solid var(--gray-100); font-size:13px; }
+  .matiere-row:last-child { border-bottom:none; }
+  .matiere-coef { background:var(--gray-100); color:var(--gray-700); font-size:11px; font-weight:800; padding:3px 10px; border-radius:999px; }
+
+  .advice-item { display:flex; gap:10px; padding:10px 0; border-bottom:1px solid var(--gray-100); }
+  .advice-item:last-child { border-bottom:none; }
+  .advice-icon { flex-shrink:0; font-size:16px; }
+  .advice-text { font-size:13px; color:var(--gray-700); line-height:1.5; }
+
+  .resource-chip { display:flex; align-items:center; gap:10px; background:var(--gray-50); border:1px solid var(--gray-200); border-radius:12px; padding:10px 14px; margin-bottom:8px; font-size:12.5px; font-weight:600; color:var(--gray-700); }
+
+  .faq-item { border-bottom:1px solid var(--gray-100); }
+  .faq-item:last-child { border-bottom:none; }
+  .faq-q { display:flex; align-items:center; justify-content:space-between; padding:14px 0; cursor:pointer; font-size:13.5px; font-weight:700; color:var(--gray-800); }
+  .faq-a { display:none; padding:0 0 14px; font-size:13px; color:var(--gray-500); line-height:1.6; }
+  .faq-item.open .faq-a { display:block; }
+  .faq-item.open .faq-chevron { transform:rotate(180deg); }
+  .faq-chevron { transition:transform 0.2s ease; font-size:12px; color:var(--gray-400); }
+
+  .contact-row { display:flex; align-items:center; gap:12px; padding:11px 0; border-bottom:1px solid var(--gray-100); font-size:13px; color:var(--gray-700); }
+  .contact-row:last-child { border-bottom:none; }
+  .contact-icon { width:36px; height:36px; border-radius:10px; background:var(--gray-50); display:flex; align-items:center; justify-content:center; font-size:15px; flex-shrink:0; }
+  .contact-link { color:var(--navy); font-weight:700; text-decoration:none; }
+
+  .official-link-btn { display:inline-flex; align-items:center; gap:8px; background:var(--navy); color:#fff; border:none; border-radius:12px; padding:12px 20px; font-size:13px; font-weight:800; cursor:pointer; text-decoration:none; }
+
+  .empty-state { text-align:center; padding:30px 20px; color:var(--gray-400); font-size:13px; }
+
+  /* Toast */
+  .toast {
+    position:fixed; left:50%; bottom:26px; transform:translateX(-50%) translateY(20px);
+    background:var(--navy); color:#fff; padding:13px 22px; border-radius:999px;
+    font-size:13px; font-weight:700; display:flex; align-items:center; gap:8px;
+    box-shadow:0 10px 30px rgba(11,31,77,0.35); opacity:0; pointer-events:none;
+    transition:opacity 0.3s ease, transform 0.3s ease; z-index:60; white-space:nowrap;
+  }
+  .toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
+
+  @media (max-width:640px){
+    .filters-grid { grid-template-columns:1fr 1fr; }
+    .detail-actions { width:100%; }
+    .detail-actions button { flex:1; justify-content:center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============================= HOME VIEW ============================= -->
+<div id="homeView">
+
+  <div class="hero">
+    <div class="hero-top">
+      <div class="hero-brand">
+        <div class="hero-logo">N</div>
+        <div>
+          <div class="hero-brand-name">Concours Sénégal</div>
+          <div class="hero-brand-sub">by NextOri</div>
+        </div>
+      </div>
+      <button class="notif-toggle" id="notifToggle">🔔 Activer les notifications</button>
+    </div>
+
+    <h1 class="hero-title">Tous les concours du Sénégal, au même endroit</h1>
+    <p class="hero-sub">Écoles, universités, fonction publique, police, gendarmerie, douane, santé... Trouve l'information fiable dont tu as besoin en moins de 30 secondes.</p>
+
+    <div class="search-wrap">
+      <div class="search-box">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9aa4b2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        <input type="text" id="searchInput" placeholder="ESP, ENA, Police, Gendarmerie, Douane, IPD..." />
+        <button class="search-clear" id="searchClear">✕</button>
+      </div>
+      <div class="search-suggestions" id="searchSuggestions"></div>
+    </div>
+
+    <div class="hero-actions">
+      <button class="btn-hero-primary" id="btnAllContests">📋 Tous les concours</button>
+      <button class="btn-hero-outline" id="btnOpenFilters">🎚️ Filtres avancés</button>
+    </div>
+  </div>
+
+  <!-- Categories -->
+  <div class="section">
+    <div class="section-head">
+      <div><h2 class="section-title">📂 Catégories</h2><p class="section-sub">Parcours par type d'établissement ou de recrutement</p></div>
+    </div>
+    <div class="cat-scroll" id="categoryScroll">
+      <button class="cat-chip active" data-cat="tous">Tous <span class="count" id="countTous">0</span></button>
+      <button class="cat-chip" data-cat="universite-publique">🏛️ Universités publiques</button>
+      <button class="cat-chip" data-cat="grande-ecole">🎓 Grandes écoles publiques</button>
+      <button class="cat-chip" data-cat="universite-privee">🏫 Universités privées</button>
+      <button class="cat-chip" data-cat="defense-securite">🛡️ Défense & Sécurité</button>
+      <button class="cat-chip" data-cat="sante">🩺 Santé</button>
+      <button class="cat-chip" data-cat="enseignement">📖 Enseignement</button>
+    </div>
+  </div>
+
+  <!-- Filters -->
+  <div class="section" style="padding-top:0;">
+    <div class="filters-bar">
+      <button class="filter-toggle-btn" id="filterToggleBtn">
+        🎚️ Filtres <span class="filter-count-badge" id="filterCountBadge">0</span>
+      </button>
+      <span style="font-size:12.5px; color:var(--gray-500); font-weight:600;" id="resultsCountLabel"></span>
+    </div>
+
+    <div class="filters-panel" id="filtersPanel">
+      <div class="filters-grid">
+        <div class="filter-group">
+          <label>Région</label>
+          <select id="fRegion"><option value="">Toutes les régions</option><option>Dakar</option><option>Thiès</option><option>Saint-Louis</option><option>Ziguinchor</option><option>Kaolack</option></select>
+        </div>
+        <div class="filter-group">
+          <label>Ville</label>
+          <select id="fVille"><option value="">Toutes les villes</option><option>Dakar</option><option>Thiès</option><option>Saint-Louis</option><option>Ziguinchor</option><option>Bambey</option></select>
+        </div>
+        <div class="filter-group">
+          <label>Domaine</label>
+          <select id="fDomaine"><option value="">Tous les domaines</option><option>Ingénierie</option><option>Santé</option><option>Droit</option><option>Administration</option><option>Sécurité</option><option>Éducation</option><option>Gestion</option><option>Journalisme</option></select>
+        </div>
+        <div class="filter-group">
+          <label>Niveau demandé</label>
+          <select id="fNiveau"><option value="">Tous niveaux</option><option>BFEM</option><option>Baccalauréat</option><option>Bac+2</option><option>Bac+3</option><option>Bac+5</option></select>
+        </div>
+        <div class="filter-group">
+          <label>Diplôme requis</label>
+          <select id="fDiplome"><option value="">Tous diplômes</option><option>BFEM</option><option>Baccalauréat</option><option>Licence</option><option>Master</option></select>
+        </div>
+        <div class="filter-group">
+          <label>Âge maximum</label>
+          <select id="fAge"><option value="">Sans limite</option><option>18</option><option>21</option><option>25</option><option>30</option><option>35</option></select>
+        </div>
+        <div class="filter-group">
+          <label>Date d'ouverture</label>
+          <input type="date" id="fDateOuverture" />
+        </div>
+        <div class="filter-group">
+          <label>Date limite</label>
+          <input type="date" id="fDateLimite" />
+        </div>
+      </div>
+
+      <div class="filters-toggles">
+        <label class="chip-toggle"><input type="checkbox" data-f="public" /> Public</label>
+        <label class="chip-toggle"><input type="checkbox" data-f="prive" /> Privé</label>
+        <label class="chip-toggle"><input type="checkbox" data-f="gratuit" /> Gratuit</label>
+        <label class="chip-toggle"><input type="checkbox" data-f="payant" /> Payant</label>
+        <label class="chip-toggle"><input type="checkbox" data-f="ouverts" /> Concours ouverts</label>
+        <label class="chip-toggle"><input type="checkbox" data-f="fermes" /> Concours fermés</label>
+      </div>
+
+      <div class="filters-actions">
+        <button class="btn-reset" id="btnResetFilters">Réinitialiser</button>
+        <button class="btn-apply" id="btnApplyFilters">Appliquer les filtres</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Recently opened -->
+  <div class="section">
+    <div class="section-head">
+      <div><h2 class="section-title">🟢 Récemment ouverts</h2><p class="section-sub">Inscriptions fraîchement lancées</p></div>
+    </div>
+    <div class="row-scroll" id="rowRecent"></div>
+  </div>
+
+  <!-- Soon to open -->
+  <div class="section">
+    <div class="section-head">
+      <div><h2 class="section-title">🔵 Bientôt ouverts</h2><p class="section-sub">Prépare-toi avant l'ouverture des inscriptions</p></div>
+    </div>
+    <div class="row-scroll" id="rowSoon"></div>
+  </div>
+
+  <!-- Closing soon -->
+  <div class="section">
+    <div class="section-head">
+      <div><h2 class="section-title">🔴 Bientôt clôturés</h2><p class="section-sub">Dernières chances de t'inscrire</p></div>
+    </div>
+    <div class="row-scroll" id="rowClosing"></div>
+  </div>
+
+  <!-- Most searched -->
+  <div class="section">
+    <div class="section-head">
+      <div><h2 class="section-title">🔥 Les plus recherchés</h2><p class="section-sub">Concours les plus consultés par les utilisateurs</p></div>
+    </div>
+    <div class="row-scroll" id="rowPopular"></div>
+  </div>
+
+  <!-- Closed -->
+  <div class="section">
+    <div class="section-head">
+      <div><h2 class="section-title">⚪ Concours fermés</h2><p class="section-sub">Archivés — à titre de référence</p></div>
+    </div>
+    <div class="row-scroll" id="rowClosed"></div>
+  </div>
+
+  <!-- All contests (filtered results) -->
+  <div class="section" id="allContestsSection" style="display:none;">
+    <div class="section-head">
+      <div><h2 class="section-title">📋 Tous les concours</h2><p class="section-sub" id="allContestsSub"></p></div>
+      <button class="section-link" id="btnCloseAll">Fermer ✕</button>
+    </div>
+    <div class="card-grid" id="allContestsGrid"></div>
+  </div>
+
+</div>
+
+<!-- ============================= DETAIL VIEW ============================= -->
+<div id="detailView">
+  <div class="detail-header">
+    <button class="back-btn" id="btnBack">← Retour</button>
+
+    <div class="detail-top">
+      <div class="detail-logo" id="dLogo"></div>
+      <div style="flex:1; min-width:200px;">
+        <h1 class="detail-name" id="dName"></h1>
+        <div class="detail-est" id="dEst"></div>
+        <div class="detail-badges" id="dBadges"></div>
+      </div>
+    </div>
+
+    <div class="detail-actions">
+      <button class="btn-notify" id="btnNotify">🔔 Me prévenir</button>
+      <button class="btn-fav-lg" id="btnFavLg">♡ Favoris</button>
+      <div style="position:relative;">
+        <button class="btn-share-lg" id="btnShare">🔗 Partager</button>
+        <div class="share-menu" id="shareMenu">
+          <div class="share-item" data-share="whatsapp">💬 WhatsApp</div>
+          <div class="share-item" data-share="facebook">📘 Facebook</div>
+          <div class="share-item" data-share="messenger">✈️ Messenger</div>
+          <div class="share-item" data-share="telegram">📨 Telegram</div>
+          <div class="share-item" data-share="copy">🔗 Copier le lien</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="key-strip">
+      <div class="key-item"><div class="key-label">Date d'ouverture</div><div class="key-value" id="kOuverture">—</div></div>
+      <div class="key-item"><div class="key-label">Date limite</div><div class="key-value" id="kLimite">—</div></div>
+      <div class="key-item"><div class="key-label">Date du concours</div><div class="key-value" id="kDate">—</div></div>
+      <div class="key-item"><div class="key-label">Places disponibles</div><div class="key-value" id="kPlaces">—</div></div>
+    </div>
+  </div>
+
+  <div class="detail-body">
+    <div class="detail-tabs" id="detailTabs">
+      <button class="dtab-btn active" data-dtab="infos">📄 Informations</button>
+      <button class="dtab-btn" data-dtab="admission">🎯 Admission</button>
+      <button class="dtab-btn" data-dtab="programme">📚 Programme</button>
+      <button class="dtab-btn" data-dtab="preparation">🧭 Préparation</button>
+      <button class="dtab-btn" data-dtab="resultats">🏆 Résultats</button>
+      <button class="dtab-btn" data-dtab="faq">❓ FAQ</button>
+      <button class="dtab-btn" data-dtab="contact">📞 Contact</button>
+    </div>
+
+    <!-- Infos -->
+    <div class="dtab-panel active" id="dtab-infos">
+      <div class="info-panel">
+        <div class="info-title">📝 Description</div>
+        <p class="info-text" id="dDescription"></p>
+      </div>
+      <div class="info-panel">
+        <div class="info-title">🎯 Objectifs</div>
+        <p class="info-text" id="dObjectifs"></p>
+      </div>
+      <div class="info-panel">
+        <div class="info-title">📅 Dates clés & organisation</div>
+        <table class="info-table" id="dDatesTable"></table>
+      </div>
+      <div class="info-panel">
+        <div class="info-title">📍 Centres d'examen</div>
+        <div id="dCentres"></div>
+      </div>
+    </div>
+
+    <!-- Admission -->
+    <div class="dtab-panel" id="dtab-admission">
+      <div class="info-panel">
+        <div class="info-title">✅ Conditions d'admission</div>
+        <ul class="info-list" id="dConditions"></ul>
+      </div>
+      <div class="info-panel">
+        <div class="info-title">🪪 Détails requis</div>
+        <table class="info-table" id="dRequisTable"></table>
+      </div>
+      <div class="info-panel">
+        <div class="info-title">📎 Documents à fournir</div>
+        <div id="dDocuments"></div>
+      </div>
+    </div>
+
+    <!-- Programme -->
+    <div class="dtab-panel" id="dtab-programme">
+      <div class="info-panel">
+        <div class="info-title">📖 Matières du concours</div>
+        <div id="dMatieres"></div>
+      </div>
+      <div class="info-panel">
+        <div class="info-title">📘 Programme officiel</div>
+        <p class="info-text" id="dProgramme"></p>
+      </div>
+    </div>
+
+    <!-- Préparation -->
+    <div class="dtab-panel" id="dtab-preparation">
+      <div class="info-panel">
+        <div class="info-title">🏆 Comment réussir ce concours</div>
+        <p class="info-text" id="dReussir"></p>
+      </div>
+      <div class="info-panel">
+        <div class="info-title">💡 Conseils</div>
+        <div id="dConseils"></div>
+      </div>
+      <div class="info-panel">
+        <div class="info-title">⚠️ Erreurs à éviter</div>
+        <div id="dErreurs"></div>
+      </div>
+      <div class="info-panel">
+        <div class="info-title">📚 Ressources recommandées</div>
+        <div id="dRessources"></div>
+      </div>
+    </div>
+
+    <!-- Résultats -->
+    <div class="dtab-panel" id="dtab-resultats">
+      <div class="info-panel">
+        <div class="info-title">🏆 Résultats & anciennes épreuves</div>
+        <p class="info-text" id="dResultats"></p>
+        <a href="#" class="official-link-btn" id="dLienOfficiel" target="_blank" rel="noopener">🔗 Voir le lien officiel</a>
+      </div>
+    </div>
+
+    <!-- FAQ -->
+    <div class="dtab-panel" id="dtab-faq">
+      <div class="info-panel" id="dFaqContainer"></div>
+    </div>
+
+    <!-- Contact -->
+    <div class="dtab-panel" id="dtab-contact">
+      <div class="info-panel" id="dContactContainer"></div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast">✅ Action effectuée</div>
+
+<script>
+/* ============================= DATA ============================= */
+const CONTESTS = [
+  {
+    id:'esp', name:'Concours ESP', aliases:['esp','ecole superieure polytechnique','poly'],
+    establishment:'École Supérieure Polytechnique — UCAD', category:'grande-ecole',
+    region:'Dakar', ville:'Dakar', domaine:'Ingénierie', niveau:'Baccalauréat', diplome:'Baccalauréat',
+    secteur:'public', prix:'gratuit', statut:'recent', ageMax:22, logoColor:'#2563eb', logoIcon:'ESP',
+    dateOuverture:'2026-08-01', dateLimite:'2026-09-15', dateConcours:'2026-10-10', places:180, cout:'Gratuit',
+    description:"Le concours d'entrée à l'ESP permet aux bacheliers scientifiques d'intégrer la plus grande école d'ingénieurs du Sénégal, rattachée à l'UCAD.",
+    objectifs:"Sélectionner les meilleurs profils scientifiques pour former les futurs ingénieurs du pays dans les filières informatique, génie civil, génie électrique et télécommunications.",
+    conditions:["Être titulaire d'un Baccalauréat série S1, S2 ou S3","Avoir au maximum 22 ans à la date du concours","Ne jamais avoir redoublé plus d'une fois au lycée","Dossier de candidature complet déposé dans les délais"],
+    nationalite:'Sénégalaise ou résident CEDEAO',
+    documents:['Extrait de naissance','Copie du Baccalauréat','2 photos d\'identité','Certificat de scolarité','Fiche de candidature remplie'],
+    centres:['Dakar (ESP)','Thiès','Saint-Louis','Ziguinchor','Kaolack'],
+    matieres:[{nom:'Mathématiques',coef:4},{nom:'Physique-Chimie',coef:3},{nom:'Sciences de la vie et de la terre',coef:1},{nom:'Culture générale',coef:1}],
+    programme:"Le programme couvre l'intégralité du programme de Terminale S, avec un accent particulier sur l'algèbre, l'analyse, la mécanique et l'électricité.",
+    reussir:"La réussite passe par une maîtrise solide des mathématiques et de la physique de Terminale, complétée par un entraînement régulier aux annales des années précédentes.",
+    conseils:["Réviser en priorité les mathématiques et la physique","S'entraîner sur les annales des 5 dernières années","Gérer son temps efficacement le jour du concours","Rejoindre un groupe de révision"],
+    erreurs:["Négliger la culture générale","Arriver en retard le jour du concours","Ne pas relire son dossier avant dépôt","Réviser seulement la veille"],
+    ressources:['📘 Annales ESP 2020-2025','🎥 Chaîne YouTube "Prépa ESP Sénégal"','📝 Cours de soutien Mathématiques Terminale S','🧮 Quiz d\'entraînement NextOri'],
+    resultats:"Les résultats d'admissibilité sont publiés sur le site de l'UCAD environ 3 semaines après l'épreuve écrite, suivis d'un entretien oral pour les candidats retenus.",
+    lienOfficiel:'https://ucad.sn',
+    contact:{adresse:'Avenue Cheikh Anta Diop, Dakar', telephone:'+221 33 824 65 74', email:'scolarite@esp.sn', site:'esp.sn', reseaux:'@ESP_Dakar'},
+    faq:[
+      {q:"Le concours est-il ouvert aux candidats libres ?", r:"Oui, tout bachelier scientifique peut candidater, qu'il soit scolarisé ou candidat libre."},
+      {q:"Peut-on repasser le concours plusieurs fois ?", r:"Le concours est ouvert chaque année ; il n'y a pas de limite officielle de tentatives."},
+      {q:"Le concours est-il payant ?", r:"Non, l'inscription au concours ESP est gratuite pour les candidats sénégalais."}
+    ],
+    popularity: 98
+  },
+  {
+    id:'ena', name:'Concours ENA', aliases:['ena','ecole nationale administration'],
+    establishment:"École Nationale d'Administration", category:'grande-ecole',
+    region:'Dakar', ville:'Dakar', domaine:'Administration', niveau:'Bac+3', diplome:'Licence',
+    secteur:'public', prix:'payant', statut:'soon', ageMax:30, logoColor:'#0B1F4D', logoIcon:'ENA',
+    dateOuverture:'2026-09-01', dateLimite:'2026-10-20', dateConcours:'2026-12-05', places:60, cout:'15 000 FCFA',
+    description:"Le concours de l'ENA forme les futurs cadres de l'administration publique sénégalaise : magistrats, administrateurs civils, inspecteurs du trésor.",
+    objectifs:"Préparer une élite administrative rigoureuse, intègre et compétente au service de l'État et des citoyens.",
+    conditions:["Être titulaire d'une Licence (Bac+3) ou diplôme équivalent","Avoir entre 21 et 30 ans","Être de nationalité sénégalaise","Jouir de ses droits civiques"],
+    nationalite:'Sénégalaise exclusivement',
+    documents:['Diplôme de Licence légalisé','Casier judiciaire','Certificat médical','Extrait de naissance','Photos d\'identité'],
+    centres:['Dakar (ENA)','Saint-Louis','Thiès'],
+    matieres:[{nom:'Culture générale',coef:3},{nom:'Droit public',coef:4},{nom:'Économie',coef:2},{nom:'Langue étrangère',coef:1}],
+    programme:"Le programme couvre le droit constitutionnel, le droit administratif, les finances publiques et l'actualité socio-économique nationale et internationale.",
+    reussir:"Une lecture régulière de la presse nationale et une bonne maîtrise du droit public sont indispensables pour réussir ce concours très sélectif.",
+    conseils:["Suivre l'actualité politique et économique quotidiennement","Maîtriser le droit constitutionnel sénégalais","S'entraîner à la dissertation juridique","Travailler l'expression écrite"],
+    erreurs:["Négliger la culture générale au profit du seul droit","Rendre une copie mal structurée","Ignorer les réformes administratives récentes"],
+    ressources:['📘 Code des institutions du Sénégal','🎥 Cours de droit public en ligne','📰 Revue de presse hebdomadaire NextOri','🧮 Annales ENA'],
+    resultats:"Les résultats sont publiés en deux temps : admissibilité (écrit) puis admission définitive (oral), généralement sur le site de la Fonction Publique.",
+    lienOfficiel:'https://fonctionpublique.gouv.sn',
+    contact:{adresse:'Route de Ouakam, Dakar', telephone:'+221 33 869 08 08', email:'contact@ena.sn', site:'ena.sn', reseaux:'@ENA_Senegal'},
+    faq:[
+      {q:"Le concours est-il accessible aux salariés du privé ?", r:"Oui, tant que les conditions de diplôme et d'âge sont respectées."},
+      {q:"Combien de places sont ouvertes chaque année ?", r:"Le nombre varie chaque année selon les besoins de l'État, généralement entre 40 et 70 places."}
+    ],
+    popularity: 95
+  },
+  {
+    id:'police', name:'Concours Police Nationale', aliases:['police','commissaire','inspecteur police'],
+    establishment:'Police Nationale du Sénégal', category:'defense-securite',
+    region:'Dakar', ville:'Dakar', domaine:'Sécurité', niveau:'Baccalauréat', diplome:'Baccalauréat',
+    secteur:'public', prix:'gratuit', statut:'recent', ageMax:28, logoColor:'#1e3a8a', logoIcon:'🚓',
+    dateOuverture:'2026-07-15', dateLimite:'2026-08-30', dateConcours:'2026-10-01', places:500, cout:'Gratuit',
+    description:"Le concours de recrutement d'élèves-inspecteurs et agents de police permet d'intégrer les rangs de la Police Nationale.",
+    objectifs:"Recruter des agents rigoureux, physiquement aptes et intègres pour assurer la sécurité publique.",
+    conditions:["Être de nationalité sénégalaise","Avoir entre 18 et 28 ans","Mesurer au moins 1,70m (hommes) / 1,60m (femmes)","Être titulaire du Baccalauréat","Aptitude physique confirmée par un médecin agréé"],
+    nationalite:'Sénégalaise exclusivement',
+    documents:['Extrait de naissance','Certificat de nationalité','Certificat médical d\'aptitude','Casier judiciaire (bulletin n°3)','Copie du Baccalauréat'],
+    centres:['Dakar','Thiès','Saint-Louis','Kaolack','Ziguinchor','Tambacounda'],
+    matieres:[{nom:'Culture générale',coef:2},{nom:'Tests psychotechniques',coef:2},{nom:'Épreuves physiques',coef:3},{nom:'Entretien oral',coef:2}],
+    programme:"Le programme comprend une épreuve écrite de culture générale, des tests psychotechniques, une évaluation physique (course, tractions, natation) et un entretien de personnalité.",
+    reussir:"Une préparation physique rigoureuse sur plusieurs mois est essentielle, combinée à une bonne culture générale sur l'actualité sécuritaire nationale.",
+    conseils:["Démarrer la préparation physique au moins 3 mois à l'avance","S'entraîner à la course de fond et aux tractions","Lire l'actualité sécuritaire et les faits de société","Préparer l'entretien oral en travaillant l'expression"],
+    erreurs:["Négliger la préparation physique","Se présenter sans les documents administratifs complets","Manquer de confiance à l'entretien oral"],
+    ressources:['🏃 Programme d\'entraînement physique 12 semaines','📘 Fiches culture générale sécurité','🎥 Témoignages d\'anciens lauréats'],
+    resultats:"Les résultats sont affichés dans les commissariats et publiés sur le site du Ministère de l'Intérieur environ 1 mois après les épreuves.",
+    lienOfficiel:'https://interieur.gouv.sn',
+    contact:{adresse:'Avenue Blaise Diagne, Dakar', telephone:'+221 33 823 71 11', email:'recrutement@police.gouv.sn', site:'police.gouv.sn', reseaux:'@PoliceSenegal'},
+    faq:[
+      {q:"Les femmes peuvent-elles candidater ?", r:"Oui, le concours est ouvert aux hommes et aux femmes selon les mêmes conditions de diplôme."},
+      {q:"Faut-il déjà avoir une expérience militaire ?", r:"Non, aucune expérience préalable n'est exigée pour les candidats civils."}
+    ],
+    popularity: 99
+  },
+  {
+    id:'gendarmerie', name:'Concours Gendarmerie Nationale', aliases:['gendarmerie','gendarme'],
+    establishment:'Gendarmerie Nationale', category:'defense-securite',
+    region:'Dakar', ville:'Dakar', domaine:'Sécurité', niveau:'BFEM', diplome:'BFEM',
+    secteur:'public', prix:'gratuit', statut:'soon', ageMax:25, logoColor:'#166534', logoIcon:'🛡️',
+    dateOuverture:'2026-09-10', dateLimite:'2026-10-25', dateConcours:'2026-11-20', places:300, cout:'Gratuit',
+    description:"Concours de recrutement de gendarmes adjoints volontaires et sous-officiers au sein de la Gendarmerie Nationale.",
+    objectifs:"Former des militaires de la gendarmerie assurant la sécurité publique sur l'ensemble du territoire, notamment en zone rurale.",
+    conditions:["Être de nationalité sénégalaise","Avoir entre 18 et 25 ans","Être titulaire du BFEM au minimum","Casier judiciaire vierge","Aptitude physique confirmée"],
+    nationalite:'Sénégalaise exclusivement',
+    documents:['Extrait de naissance','BFEM ou diplôme équivalent','Certificat médical','Casier judiciaire','Certificat de résidence'],
+    centres:['Dakar','Thiès','Kaolack','Tambacounda','Kolda'],
+    matieres:[{nom:'Épreuve écrite générale',coef:2},{nom:'Tests physiques',coef:3},{nom:'Entretien',coef:2}],
+    programme:"Le programme évalue le niveau scolaire de base (français, mathématiques), la condition physique et la motivation du candidat.",
+    reussir:"La préparation physique est déterminante ; il est conseillé de s'entraîner régulièrement plusieurs mois avant le concours.",
+    conseils:["Travailler l'endurance physique","Réviser les bases en français et mathématiques","Se renseigner sur les valeurs et missions de la gendarmerie"],
+    erreurs:["Se présenter sans préparation physique","Méconnaître l'organisation de la gendarmerie"],
+    ressources:['🏃 Guide de préparation physique','📘 Fiches de culture générale','🎥 Journée portes ouvertes Gendarmerie'],
+    resultats:"Résultats affichés dans les brigades de gendarmerie et publiés sur le site du Ministère des Forces Armées.",
+    lienOfficiel:'https://gendarmerie.sn',
+    contact:{adresse:'Camp Djibril Ba, Dakar', telephone:'+221 33 889 15 15', email:'recrutement@gendarmerie.sn', site:'gendarmerie.sn', reseaux:'@GendarmerieSN'},
+    faq:[{q:"Le concours BFEM permet-il d'évoluer vers officier ?", r:"Oui, des concours internes permettent une évolution de carrière vers les grades supérieurs."}],
+    popularity: 90
+  },
+  {
+    id:'douane', name:'Concours Douanes Sénégalaises', aliases:['douane','douanes','inspecteur douane'],
+    establishment:'Direction Générale des Douanes', category:'defense-securite',
+    region:'Dakar', ville:'Dakar', domaine:'Administration', niveau:'Bac+2', diplome:'BTS/DUT',
+    secteur:'public', prix:'payant', statut:'closing', ageMax:28, logoColor:'#7c2d12', logoIcon:'🛃',
+    dateOuverture:'2026-06-01', dateLimite:'2026-07-28', dateConcours:'2026-09-15', places:80, cout:'10 000 FCFA',
+    description:"Le concours des Douanes recrute des agents et inspecteurs chargés du contrôle des marchandises et de la lutte contre la fraude.",
+    objectifs:"Renforcer les effectifs de l'administration douanière pour sécuriser les recettes de l'État et lutter contre la contrebande.",
+    conditions:["Être de nationalité sénégalaise","Avoir entre 21 et 28 ans","Être titulaire d'un diplôme Bac+2 minimum","Aptitude physique requise pour certains postes"],
+    nationalite:'Sénégalaise exclusivement',
+    documents:['Diplôme Bac+2 légalisé','Extrait de naissance','Certificat médical','Casier judiciaire'],
+    centres:['Dakar','Saint-Louis (frontière)','Ziguinchor (frontière)'],
+    matieres:[{nom:'Droit et réglementation douanière',coef:3},{nom:'Économie',coef:2},{nom:'Culture générale',coef:2}],
+    programme:"Le programme couvre le code des douanes, les procédures d'import-export et l'actualité économique et commerciale.",
+    reussir:"Une bonne connaissance du commerce international et du code des douanes est un atout majeur.",
+    conseils:["Étudier le code des douanes sénégalais","Suivre l'actualité économique régionale (CEDEAO, UEMOA)","S'entraîner aux calculs de taxes et tarifs"],
+    erreurs:["Sous-estimer les épreuves de culture économique","Ne pas maîtriser les bases du droit douanier"],
+    ressources:['📘 Code des douanes du Sénégal','📰 Actualité économique UEMOA','🧮 Annales concours douanes'],
+    resultats:"Résultats publiés sur le site du Ministère des Finances et du Budget environ 6 semaines après les épreuves.",
+    lienOfficiel:'https://douanes.sn',
+    contact:{adresse:'Boulevard de la République, Dakar', telephone:'+221 33 889 75 00', email:'concours@douanes.sn', site:'douanes.sn', reseaux:'@DouanesSN'},
+    faq:[{q:"Les candidats du secteur privé peuvent-ils postuler ?", r:"Oui, aucune expérience préalable dans l'administration n'est exigée."}],
+    popularity: 82
+  },
+  {
+    id:'ucad-l1', name:'Orientation UCAD (Bacheliers)', aliases:['ucad','universite cheikh anta diop'],
+    establishment:'Université Cheikh Anta Diop', category:'universite-publique',
+    region:'Dakar', ville:'Dakar', domaine:'Toutes filières', niveau:'Baccalauréat', diplome:'Baccalauréat',
+    secteur:'public', prix:'gratuit', statut:'closed', ageMax:null, logoColor:'#2563eb', logoIcon:'UCAD',
+    dateOuverture:'2026-07-01', dateLimite:'2026-07-20', dateConcours:'—', places:12000, cout:'Gratuit',
+    description:"Procédure d'orientation des nouveaux bacheliers vers les facultés et instituts de l'UCAD via la plateforme Campusen.",
+    objectifs:"Répartir les nouveaux bacheliers dans les filières universitaires selon leurs vœux, leur série et leurs résultats au Baccalauréat.",
+    conditions:["Être titulaire du Baccalauréat de l'année en cours","S'inscrire sur la plateforme Campusen dans les délais"],
+    nationalite:'Sénégalaise',
+    documents:['Relevé de notes du Baccalauréat','Extrait de naissance','Photo d\'identité numérique'],
+    centres:['En ligne (plateforme Campusen)'],
+    matieres:[],
+    programme:"Pas d'épreuve écrite : orientation automatisée basée sur les résultats du Baccalauréat et les vœux exprimés par le candidat.",
+    reussir:"Bien classer ses vœux d'orientation selon ses résultats et ses centres d'intérêt réels augmente les chances d'être satisfait de son affectation.",
+    conseils:["Renseigner plusieurs vœux réalistes","Vérifier les prérequis de chaque filière avant de candidater","Suivre les délais de la plateforme Campusen de près"],
+    erreurs:["Ne classer qu'un seul vœu","Rater la date limite d'inscription sur Campusen"],
+    ressources:['🌐 Plateforme Campusen','📘 Guide des filières UCAD'],
+    resultats:"Les affectations sont publiées directement sur la plateforme Campusen.",
+    lienOfficiel:'https://campusen.sn',
+    contact:{adresse:'Avenue Cheikh Anta Diop, Dakar', telephone:'+221 33 824 65 74', email:'scolarite@ucad.sn', site:'ucad.sn', reseaux:'@UCAD_Dakar'},
+    faq:[{q:"Peut-on changer de vœu après inscription ?", r:"Oui, tant que la période d'inscription sur Campusen n'est pas terminée."}],
+    popularity: 88
+  },
+  {
+    id:'ism', name:'Concours d\'entrée ISM', aliases:['ism','institut superieur management'],
+    establishment:'Institut Supérieur de Management', category:'universite-privee',
+    region:'Dakar', ville:'Dakar', domaine:'Gestion', niveau:'Baccalauréat', diplome:'Baccalauréat',
+    secteur:'prive', prix:'payant', statut:'recent', ageMax:null, logoColor:'#7e22ce', logoIcon:'ISM',
+    dateOuverture:'2026-07-10', dateLimite:'2026-09-30', dateConcours:'2026-10-05', places:400, cout:'25 000 FCFA',
+    description:"Concours d'entrée en 1ère année de Licence pour intégrer les filières commerce, finance et management de l'ISM.",
+    objectifs:"Sélectionner des bacheliers motivés pour les former aux métiers de la gestion, du commerce et du management.",
+    conditions:["Être titulaire du Baccalauréat (toutes séries)","Constituer un dossier de candidature complet","Réussir le test d'entrée écrit"],
+    nationalite:'Toutes nationalités acceptées',
+    documents:['Copie du Baccalauréat','Extrait de naissance','2 photos d\'identité','Frais de dossier'],
+    centres:['Dakar (Campus ISM)'],
+    matieres:[{nom:'Culture générale',coef:2},{nom:'Aptitude numérique',coef:2},{nom:'Anglais',coef:1}],
+    programme:"Le test évalue le raisonnement logique, les bases en mathématiques et la culture générale économique.",
+    reussir:"Une bonne préparation en logique et en anglais des affaires permet d'aborder sereinement ce concours.",
+    conseils:["S'entraîner aux tests de logique et d'aptitude numérique","Réviser les bases d'anglais professionnel","Préparer un projet professionnel clair pour l'entretien"],
+    erreurs:["Négliger l'entretien de motivation","Arriver sans avoir préparé son projet d'études"],
+    ressources:['🧮 Tests d\'aptitude en ligne','📘 Guide des filières ISM','🎥 Journée portes ouvertes ISM'],
+    resultats:"Résultats communiqués directement par email et affichés sur le campus environ 2 semaines après le test.",
+    lienOfficiel:'https://ism.edu.sn',
+    contact:{adresse:'Sacré-Cœur 3, Dakar', telephone:'+221 33 869 93 93', email:'admission@ism.edu.sn', site:'ism.edu.sn', reseaux:'@ISM_Dakar'},
+    faq:[{q:"Existe-t-il des bourses pour les meilleurs dossiers ?", r:"Oui, l'ISM propose une bourse mérite pour les bacheliers mention Très Bien."}],
+    popularity: 76
+  },
+  {
+    id:'ipd', name:'Concours IPD', aliases:['ipd','institut prive developpement'],
+    establishment:'Institut Privé de Développement', category:'universite-privee',
+    region:'Dakar', ville:'Dakar', domaine:'Gestion', niveau:'Baccalauréat', diplome:'Baccalauréat',
+    secteur:'prive', prix:'payant', statut:'soon', ageMax:null, logoColor:'#0d9488', logoIcon:'IPD',
+    dateOuverture:'2026-08-15', dateLimite:'2026-10-01', dateConcours:'2026-10-12', places:250, cout:'20 000 FCFA',
+    description:"Test d'admission pour intégrer les filières de gestion, informatique et communication de l'IPD.",
+    objectifs:"Accueillir des bacheliers motivés dans un cursus professionnalisant orienté vers l'emploi.",
+    conditions:["Être titulaire du Baccalauréat","Dossier de candidature complet","Entretien de motivation"],
+    nationalite:'Toutes nationalités acceptées',
+    documents:['Copie du Baccalauréat','Extrait de naissance','Photos d\'identité'],
+    centres:['Dakar (Campus IPD)'],
+    matieres:[{nom:'Test de logique',coef:2},{nom:'Culture générale',coef:1},{nom:'Entretien',coef:2}],
+    programme:"Évaluation du raisonnement logique et de la motivation du candidat pour la filière choisie.",
+    reussir:"Bien préparer son entretien de motivation en ayant une idée claire du projet professionnel visé.",
+    conseils:["Se renseigner sur les débouchés de la filière choisie","Préparer des exemples concrets pour l'entretien"],
+    erreurs:["Ne pas connaître les filières proposées par l'IPD avant l'entretien"],
+    ressources:['📘 Guide des filières IPD','🎥 Vidéos de présentation des programmes'],
+    resultats:"Résultats communiqués par SMS et email dans les 10 jours suivant le test.",
+    lienOfficiel:'https://ipd.sn',
+    contact:{adresse:'Liberté 6, Dakar', telephone:'+221 33 827 45 10', email:'admission@ipd.sn', site:'ipd.sn', reseaux:'@IPD_Senegal'},
+    faq:[{q:"Y a-t-il des sessions de rattrapage ?", r:"Oui, une seconde session est généralement organisée en fin d'année."}],
+    popularity: 60
+  },
+  {
+    id:'sage-femme', name:'Concours Sage-Femme d\'État', aliases:['sage-femme','sage femme','ecole sage-femme'],
+    establishment:'École Nationale de Développement Sanitaire et Social', category:'sante',
+    region:'Dakar', ville:'Dakar', domaine:'Santé', niveau:'Baccalauréat', diplome:'Baccalauréat série S/SVT',
+    secteur:'public', prix:'payant', statut:'soon', ageMax:26, logoColor:'#db2777', logoIcon:'🩺',
+    dateOuverture:'2026-08-20', dateLimite:'2026-10-05', dateConcours:'2026-11-08', places:120, cout:'12 000 FCFA',
+    description:"Concours d'entrée en formation de sage-femme d'État, un métier essentiel pour la santé maternelle et infantile au Sénégal.",
+    objectifs:"Former des professionnelles de santé qualifiées pour accompagner les grossesses et les accouchements sur tout le territoire.",
+    conditions:["Être titulaire du Baccalauréat série S ou équivalent","Avoir entre 18 et 26 ans","Aptitude médicale confirmée"],
+    nationalite:'Sénégalaise',
+    documents:['Copie du Baccalauréat','Extrait de naissance','Certificat médical','Casier judiciaire'],
+    centres:['Dakar','Saint-Louis','Kaolack','Ziguinchor'],
+    matieres:[{nom:'Sciences de la vie et de la terre',coef:3},{nom:'Physique-Chimie',coef:2},{nom:'Culture générale',coef:1}],
+    programme:"Le programme couvre la biologie humaine, l'anatomie de base et des notions générales de santé publique.",
+    reussir:"Une bonne maîtrise des SVT de Terminale et une motivation claire pour le métier sont essentielles.",
+    conseils:["Réviser en priorité la biologie humaine","Se renseigner sur le quotidien du métier de sage-femme","S'entraîner aux annales des années précédentes"],
+    erreurs:["Négliger la physique-chimie au profit des seules SVT","Ne pas se renseigner sur les réalités du métier avant de candidater"],
+    ressources:['📘 Manuel de biologie humaine Terminale','🎥 Témoignages de sages-femmes en exercice','🧮 Annales concours santé'],
+    resultats:"Résultats affichés dans les centres régionaux de santé et publiés sur le site du Ministère de la Santé.",
+    lienOfficiel:'https://sante.gouv.sn',
+    contact:{adresse:'Fann Résidence, Dakar', telephone:'+221 33 869 42 42', email:'concours@sante.gouv.sn', site:'sante.gouv.sn', reseaux:'@MinSanteSN'},
+    faq:[{q:"Le concours est-il ouvert aux hommes ?", r:"Oui, la formation de sage-femme est ouverte à tous les candidats remplissant les conditions."}],
+    popularity: 84
+  },
+  {
+    id:'ens', name:'Concours ENS (Enseignants)', aliases:['ens','ecole normale superieure','enseignant','professeur'],
+    establishment:'École Normale Supérieure', category:'enseignement',
+    region:'Dakar', ville:'Dakar', domaine:'Éducation', niveau:'Bac+3', diplome:'Licence',
+    secteur:'public', prix:'gratuit', statut:'recent', ageMax:35, logoColor:'#b45309', logoIcon:'ENS',
+    dateOuverture:'2026-07-05', dateLimite:'2026-08-25', dateConcours:'2026-09-28', places:350, cout:'Gratuit',
+    description:"Concours de recrutement de professeurs de collège et de lycée dans les différentes disciplines enseignées au Sénégal.",
+    objectifs:"Recruter et former des enseignants qualifiés pour répondre aux besoins du système éducatif national.",
+    conditions:["Être titulaire d'une Licence dans la discipline choisie","Avoir entre 21 et 35 ans","Nationalité sénégalaise"],
+    nationalite:'Sénégalaise exclusivement',
+    documents:['Diplôme de Licence légalisé','Extrait de naissance','Casier judiciaire','Certificat médical'],
+    centres:['Dakar','Thiès','Saint-Louis','Kaolack','Ziguinchor'],
+    matieres:[{nom:'Épreuve de spécialité',coef:4},{nom:'Culture générale',coef:2},{nom:'Pédagogie',coef:2}],
+    programme:"Le programme est spécifique à chaque discipline (mathématiques, lettres, histoire-géographie, etc.) et inclut une épreuve pédagogique commune.",
+    reussir:"Une maîtrise approfondie de sa discipline de Licence associée à des notions de pédagogie augmente significativement les chances de réussite.",
+    conseils:["Réviser en profondeur le programme de sa discipline","Se former aux bases de la pédagogie","S'entraîner à la simulation de cours"],
+    erreurs:["Négliger l'épreuve pédagogique","Ne pas s'entraîner à l'oral face à un jury"],
+    ressources:['📘 Manuels de préparation par discipline','🎥 Simulations de leçons filmées','🧮 Annales ENS'],
+    resultats:"Résultats publiés sur le site du Ministère de l'Éducation Nationale environ 5 semaines après les épreuves.",
+    lienOfficiel:'https://education.gouv.sn',
+    contact:{adresse:'Colobane, Dakar', telephone:'+221 33 821 89 89', email:'concours@ens.sn', site:'ens.sn', reseaux:'@ENS_Senegal'},
+    faq:[{q:"Peut-on choisir sa région d'affectation ?", r:"Les affectations tiennent compte des vœux mais dépendent avant tout des besoins du système éducatif."}],
+    popularity: 91
+  },
+  {
+    id:'sapeurs-pompiers', name:'Concours Sapeurs-Pompiers', aliases:['sapeurs-pompiers','pompier','pompiers'],
+    establishment:'Brigade Nationale des Sapeurs-Pompiers', category:'defense-securite',
+    region:'Dakar', ville:'Dakar', domaine:'Sécurité', niveau:'BFEM', diplome:'BFEM',
+    secteur:'public', prix:'gratuit', statut:'closed', ageMax:25, logoColor:'#dc2626', logoIcon:'🚒',
+    dateOuverture:'2026-05-01', dateLimite:'2026-06-15', dateConcours:'2026-07-10', places:150, cout:'Gratuit',
+    description:"Concours de recrutement de sapeurs-pompiers volontaires et professionnels chargés de la sécurité civile.",
+    objectifs:"Renforcer les effectifs chargés de la lutte contre les incendies et des secours d'urgence sur le territoire national.",
+    conditions:["Être titulaire du BFEM minimum","Avoir entre 18 et 25 ans","Excellente condition physique"],
+    nationalite:'Sénégalaise exclusivement',
+    documents:['BFEM ou diplôme équivalent','Extrait de naissance','Certificat médical','Casier judiciaire'],
+    centres:['Dakar','Thiès','Kaolack'],
+    matieres:[{nom:'Tests physiques',coef:4},{nom:'Épreuve écrite générale',coef:2},{nom:'Entretien',coef:2}],
+    programme:"Évaluation de la condition physique (course, natation, portage) et des connaissances générales de base.",
+    reussir:"Une préparation physique intensive est le facteur clé de réussite à ce concours très exigeant physiquement.",
+    conseils:["S'entraîner à la natation et à la course d'endurance","Travailler le port de charges lourdes","Se renseigner sur les gestes de premiers secours"],
+    erreurs:["Négliger l'entraînement en natation","Se présenter en sous-préparation physique"],
+    ressources:['🏊 Programme d\'entraînement natation et course','📘 Guide des premiers secours de base'],
+    resultats:"Résultats affichés dans les casernes et publiés sur le site du Ministère de l'Intérieur.",
+    lienOfficiel:'https://interieur.gouv.sn',
+    contact:{adresse:'Caserne des Sapeurs-Pompiers, Dakar', telephone:'+221 33 823 44 44', email:'recrutement@pompiers.gouv.sn', site:'pompiers.gouv.sn', reseaux:'@PompiersSN'},
+    faq:[{q:"Faut-il savoir nager pour candidater ?", r:"Oui, une épreuve de natation fait partie intégrante des tests physiques."}],
+    popularity: 70
+  },
+  {
+    id:'uam', name:'Concours d\'entrée UAM', aliases:['uam','universite amadou mahtar mbow'],
+    establishment:'Université Amadou Mahtar Mbow', category:'universite-publique',
+    region:'Dakar', ville:'Diamniadio', domaine:'Toutes filières', niveau:'Baccalauréat', diplome:'Baccalauréat',
+    secteur:'public', prix:'gratuit', statut:'soon', ageMax:null, logoColor:'#0369a1', logoIcon:'UAM',
+    dateOuverture:'2026-08-10', dateLimite:'2026-09-20', dateConcours:'—', places:2000, cout:'Gratuit',
+    description:"Procédure d'orientation vers l'Université Amadou Mahtar Mbow, campus moderne basé à Diamniadio, orienté vers les filières innovantes.",
+    objectifs:"Offrir une alternative moderne et pluridisciplinaire aux bacheliers, avec un accent sur l'innovation et le numérique.",
+    conditions:["Être titulaire du Baccalauréat de l'année en cours","S'inscrire via la plateforme Campusen"],
+    nationalite:'Sénégalaise',
+    documents:['Relevé de notes du Baccalauréat','Extrait de naissance'],
+    centres:['En ligne (plateforme Campusen)'],
+    matieres:[],
+    programme:"Orientation automatisée selon les résultats et les vœux exprimés sur Campusen, sans épreuve écrite.",
+    reussir:"Bien renseigner ses vœux d'orientation en cohérence avec ses résultats scolaires.",
+    conseils:["Explorer les filières innovantes proposées par l'UAM avant de candidater","Vérifier les capacités d'accueil de chaque filière"],
+    erreurs:["Ignorer les spécificités pédagogiques de l'UAM avant de choisir cette filière"],
+    ressources:['🌐 Plateforme Campusen','📘 Présentation des filières UAM'],
+    resultats:"Affectations publiées directement sur la plateforme Campusen.",
+    lienOfficiel:'https://uam.edu.sn',
+    contact:{adresse:'Diamniadio, Dakar', telephone:'+221 33 000 00 00', email:'contact@uam.edu.sn', site:'uam.edu.sn', reseaux:'@UAM_Senegal'},
+    faq:[{q:"L'UAM propose-t-elle des logements étudiants ?", r:"Oui, le campus de Diamniadio dispose de résidences universitaires."}],
+    popularity: 65
+  }
+];
+
+const CATEGORY_LABELS = {
+  'universite-publique':'Université publique', 'grande-ecole':'Grande école publique',
+  'universite-privee':'Université privée', 'defense-securite':'Défense & Sécurité',
+  'sante':'Santé', 'enseignement':'Enseignement'
+};
+const STATUS_LABELS = { recent:'Ouvert', soon:'Bientôt', closing:'Se termine bientôt', closed:'Fermé' };
+const STATUS_BADGE_CLASS = { recent:'badge-recent', soon:'badge-soon', closing:'badge-closing', closed:'badge-closed' };
+
+let favorites = new Set();
+let notifySet = new Set();
+let notifGlobalOn = false;
+let activeCategory = 'tous';
+
+/* ============================= HELPERS ============================= */
+function fmtDate(d){ if(!d || d==='—') return '—'; const dt = new Date(d); return dt.toLocaleDateString('fr-FR',{day:'2-digit',month:'short',year:'numeric'}); }
+function showToast(msg){ const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show'); clearTimeout(window._toastTimer); window._toastTimer=setTimeout(()=>t.classList.remove('show'),2600); }
+
+function logoNode(c, size){
+  const el = document.createElement('div');
+  el.style.background = c.logoColor;
+  el.style.fontSize = (c.logoIcon.length>3 ? '18px':'13px');
+  el.textContent = c.logoIcon;
+  return el;
+}
+
+/* ============================= CARD RENDER ============================= */
+function contestCard(c){
+  const div = document.createElement('div');
+  div.className = 'contest-card';
+  div.onclick = ()=> openDetail(c.id);
+
+  const isFav = favorites.has(c.id);
+  div.innerHTML = `
+    <div class="contest-top">
+      <div class="contest-logo" style="background:${c.logoColor}; font-size:${c.logoIcon.length>3?'18px':'14px'};">${c.logoIcon}</div>
+      <button class="fav-btn ${isFav?'active':''}" data-fav="${c.id}">${isFav?'❤️':'♡'}</button>
+    </div>
+    <div class="contest-body">
+      <div class="contest-name">${c.name}</div>
+      <div class="contest-est">${c.establishment}</div>
+      <div class="status-badges">
+        <span class="badge ${STATUS_BADGE_CLASS[c.statut]}">${STATUS_LABELS[c.statut]}</span>
+        <span class="badge ${c.prix==='gratuit'?'badge-free':'badge-public'}">${c.prix==='gratuit'?'Gratuit':'Payant'}</span>
+      </div>
+      <div class="contest-meta">
+        <span>📍 ${c.ville}</span>
+        <span>🎓 ${c.niveau}</span>
+        <span>📅 Limite : ${fmtDate(c.dateLimite)}</span>
+      </div>
+      <div class="contest-bottom">
+        <button class="btn-mini btn-mini-navy" data-detail="${c.id}">Voir détails</button>
+        <button class="btn-mini btn-mini-outline" data-notifycard="${c.id}">🔔</button>
+      </div>
+    </div>
+  `;
+  div.querySelector('[data-fav]').addEventListener('click', e=>{ e.stopPropagation(); toggleFavorite(c.id); });
+  div.querySelector('[data-notifycard]').addEventListener('click', e=>{ e.stopPropagation(); toggleNotify(c.id); });
+  return div;
+}
+
+function renderRow(containerId, list){
+  const el = document.getElementById(containerId);
+  el.innerHTML = '';
+  if(!list.length){ el.innerHTML = '<div class="empty-state">Aucun concours dans cette catégorie pour le moment.</div>'; return; }
+  list.forEach(c => el.appendChild(contestCard(c)));
+}
+
+function refreshHomeRows(){
+  const byCat = c => activeCategory==='tous' || c.category===activeCategory;
+  renderRow('rowRecent', CONTESTS.filter(c=>c.statut==='recent' && byCat(c)));
+  renderRow('rowSoon', CONTESTS.filter(c=>c.statut==='soon' && byCat(c)));
+  renderRow('rowClosing', CONTESTS.filter(c=>c.statut==='closing' && byCat(c)));
+  renderRow('rowClosed', CONTESTS.filter(c=>c.statut==='closed' && byCat(c)));
+  renderRow('rowPopular', [...CONTESTS].filter(byCat).sort((a,b)=>b.popularity-a.popularity).slice(0,8));
+
+  document.getElementById('countTous').textContent = CONTESTS.length;
+}
+
+/* ============================= CATEGORIES ============================= */
+document.getElementById('categoryScroll').addEventListener('click', e=>{
+  const chip = e.target.closest('.cat-chip');
+  if(!chip) return;
+  document.querySelectorAll('.cat-chip').forEach(c=>c.classList.remove('active'));
+  chip.classList.add('active');
+  activeCategory = chip.dataset.cat;
+  refreshHomeRows();
+  document.getElementById('allContestsSection').style.display = 'none';
+});
+
+/* ============================= FAVORITES / NOTIFY ============================= */
+function toggleFavorite(id){
+  if(favorites.has(id)){ favorites.delete(id); showToast('💔 Retiré des favoris'); }
+  else { favorites.add(id); showToast('❤️ Ajouté aux favoris'); }
+  refreshHomeRows();
+  if(currentDetailId===id) updateDetailButtons();
+  if(document.getElementById('allContestsSection').style.display!=='none') renderAllGrid(lastFilteredList);
+}
+function toggleNotify(id){
+  if(notifySet.has(id)){ notifySet.delete(id); showToast('🔕 Notification désactivée'); }
+  else { notifySet.add(id); showToast('🔔 Tu seras prévenu(e) des mises à jour !'); }
+  if(currentDetailId===id) updateDetailButtons();
+}
+
+document.getElementById('notifToggle').addEventListener('click', function(){
+  notifGlobalOn = !notifGlobalOn;
+  this.classList.toggle('on', notifGlobalOn);
+  this.textContent = notifGlobalOn ? '🔔 Notifications activées' : '🔔 Activer les notifications';
+  showToast(notifGlobalOn ? '✅ Notifications activées pour tous les concours' : 'Notifications désactivées');
+});
+
+/* ============================= SEARCH ============================= */
+const searchInput = document.getElementById('searchInput');
+const suggestionsBox = document.getElementById('searchSuggestions');
+const searchClear = document.getElementById('searchClear');
+
+function matchContest(c, q){
+  q = q.toLowerCase();
+  return c.name.toLowerCase().includes(q) ||
+         c.establishment.toLowerCase().includes(q) ||
+         c.aliases.some(a=>a.includes(q));
+}
+
+searchInput.addEventListener('input', ()=>{
+  const q = searchInput.value.trim();
+  searchClear.style.display = q ? 'flex' : 'none';
+  if(!q){ suggestionsBox.classList.remove('show'); return; }
+  const results = CONTESTS.filter(c=>matchContest(c,q)).slice(0,8);
+  suggestionsBox.innerHTML = '';
+  if(!results.length){
+    suggestionsBox.innerHTML = '<div class="sugg-empty">Aucun concours trouvé pour "'+q+'"</div>';
+  } else {
+    results.forEach(c=>{
+      const item = document.createElement('div');
+      item.className = 'sugg-item';
+      item.innerHTML = `<div class="sugg-logo" style="background:${c.logoColor}; font-size:${c.logoIcon.length>3?'13px':'14px'};">${c.logoIcon}</div>
+        <div><div class="sugg-name">${c.name}</div><div class="sugg-sub">${c.establishment} · ${c.ville}</div></div>`;
+      item.addEventListener('click', ()=>{ openDetail(c.id); suggestionsBox.classList.remove('show'); searchInput.value=''; searchClear.style.display='none'; });
+      suggestionsBox.appendChild(item);
+    });
+  }
+  suggestionsBox.classList.add('show');
+});
+searchClear.addEventListener('click', ()=>{ searchInput.value=''; searchClear.style.display='none'; suggestionsBox.classList.remove('show'); });
+document.addEventListener('click', e=>{ if(!e.target.closest('.search-wrap')) suggestionsBox.classList.remove('show'); });
+
+/* ============================= FILTERS PANEL ============================= */
+document.getElementById('filterToggleBtn').addEventListener('click', ()=>{
+  document.getElementById('filtersPanel').classList.toggle('open');
+});
+document.getElementById('btnOpenFilters').addEventListener('click', ()=>{
+  document.getElementById('filtersPanel').classList.add('open');
+  document.getElementById('filtersPanel').scrollIntoView({behavior:'smooth', block:'center'});
+});
+
+function countActiveFilters(){
+  let n = 0;
+  ['fRegion','fVille','fDomaine','fNiveau','fDiplome','fAge','fDateOuverture','fDateLimite'].forEach(id=>{
+    if(document.getElementById(id).value) n++;
+  });
+  document.querySelectorAll('.chip-toggle input:checked').forEach(()=>n++);
+  return n;
+}
+
+let lastFilteredList = CONTESTS;
+
+function applyFilters(){
+  const region = document.getElementById('fRegion').value;
+  const ville = document.getElementById('fVille').value;
+  const domaine = document.getElementById('fDomaine').value;
+  const niveau = document.getElementById('fNiveau').value;
+  const diplome = document.getElementById('fDiplome').value;
+  const age = document.getElementById('fAge').value;
+  const dOuv = document.getElementById('fDateOuverture').value;
+  const dLim = document.getElementById('fDateLimite').value;
+  const toggles = {};
+  document.querySelectorAll('.chip-toggle input').forEach(inp=>{ toggles[inp.dataset.f] = inp.checked; });
+
+  const filtered = CONTESTS.filter(c=>{
+    if(region && c.region!==region) return false;
+    if(ville && c.ville!==ville) return false;
+    if(domaine && c.domaine!==domaine) return false;
+    if(niveau && c.niveau!==niveau) return false;
+    if(diplome && c.diplome!==diplome) return false;
+    if(age && (c.ageMax===null || c.ageMax>parseInt(age))) return false;
+    if(dOuv && c.dateOuverture < dOuv) return false;
+    if(dLim && c.dateLimite > dLim) return false;
+    if(toggles.public && c.secteur!=='public') return false;
+    if(toggles.prive && c.secteur!=='prive') return false;
+    if(toggles.gratuit && c.prix!=='gratuit') return false;
+    if(toggles.payant && c.prix!=='payant') return false;
+    if(toggles.ouverts && !(c.statut==='recent'||c.statut==='soon'||c.statut==='closing')) return false;
+    if(toggles.fermes && c.statut!=='closed') return false;
+    return true;
+  });
+
+  lastFilteredList = filtered;
+  document.getElementById('filterCountBadge').textContent = countActiveFilters();
+  renderAllGrid(filtered);
+  document.getElementById('allContestsSection').style.display = 'block';
+  document.getElementById('allContestsSection').scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+function renderAllGrid(list){
+  const grid = document.getElementById('allContestsGrid');
+  grid.innerHTML = '';
+  document.getElementById('allContestsSub').textContent = list.length + ' concours correspondant à ta recherche';
+  if(!list.length){ grid.innerHTML = '<div class="empty-state">Aucun concours ne correspond à ces critères.</div>'; return; }
+  list.forEach(c=>grid.appendChild(contestCard(c)));
+}
+
+document.getElementById('btnApplyFilters').addEventListener('click', applyFilters);
+document.getElementById('btnResetFilters').addEventListener('click', ()=>{
+  ['fRegion','fVille','fDomaine','fNiveau','fDiplome','fAge','fDateOuverture','fDateLimite'].forEach(id=>document.getElementById(id).value='');
+  document.querySelectorAll('.chip-toggle input').forEach(inp=>inp.checked=false);
+  document.getElementById('filterCountBadge').textContent = '0';
+  document.getElementById('allContestsSection').style.display = 'none';
+});
+
+document.getElementById('btnAllContests').addEventListener('click', ()=>{
+  lastFilteredList = CONTESTS;
+  renderAllGrid(CONTESTS);
+  document.getElementById('allContestsSection').style.display = 'block';
+  document.getElementById('allContestsSection').scrollIntoView({behavior:'smooth', block:'start'});
+});
+document.getElementById('btnCloseAll').addEventListener('click', ()=>{
+  document.getElementById('allContestsSection').style.display = 'none';
+});
+
+/* ============================= DETAIL VIEW ============================= */
+let currentDetailId = null;
+
+function openDetail(id){
+  const c = CONTESTS.find(x=>x.id===id);
+  if(!c) return;
+  currentDetailId = id;
+
+  document.getElementById('homeView').classList.add('hidden');
+  document.getElementById('detailView').classList.add('active');
+  window.scrollTo(0,0);
+
+  document.getElementById('dLogo').style.background = c.logoColor;
+  document.getElementById('dLogo').style.fontSize = c.logoIcon.length>3 ? '18px':'22px';
+  document.getElementById('dLogo').textContent = c.logoIcon;
+  document.getElementById('dName').textContent = c.name;
+  document.getElementById('dEst').textContent = c.establishment + ' · ' + c.ville;
+
+  document.getElementById('dBadges').innerHTML = `
+    <span class="badge ${STATUS_BADGE_CLASS[c.statut]}">${STATUS_LABELS[c.statut]}</span>
+    <span class="badge ${c.prix==='gratuit'?'badge-free':'badge-public'}">${c.prix==='gratuit'?'Gratuit':'Payant · '+c.cout}</span>
+    <span class="badge badge-public">${c.secteur==='public'?'Public':'Privé'}</span>
+    <span class="badge badge-soon">${CATEGORY_LABELS[c.category]}</span>
+  `;
+
+  document.getElementById('kOuverture').textContent = fmtDate(c.dateOuverture);
+  document.getElementById('kLimite').textContent = fmtDate(c.dateLimite);
+  document.getElementById('kDate').textContent = fmtDate(c.dateConcours);
+  document.getElementById('kPlaces').textContent = c.places ? c.places.toLocaleString('fr-FR') : '—';
+
+  // Infos tab
+  document.getElementById('dDescription').textContent = c.description;
+  document.getElementById('dObjectifs').textContent = c.objectifs;
+  document.getElementById('dDatesTable').innerHTML = `
+    <tr><td>Date d'ouverture</td><td>${fmtDate(c.dateOuverture)}</td></tr>
+    <tr><td>Date limite d'inscription</td><td>${fmtDate(c.dateLimite)}</td></tr>
+    <tr><td>Date du concours</td><td>${fmtDate(c.dateConcours)}</td></tr>
+    <tr><td>Nombre de places</td><td>${c.places ? c.places.toLocaleString('fr-FR') : '—'}</td></tr>
+    <tr><td>Coût de l'inscription</td><td>${c.cout}</td></tr>
+  `;
+  document.getElementById('dCentres').innerHTML = c.centres.map(x=>`<span class="doc-tag">📍 ${x}</span>`).join('');
+
+  // Admission tab
+  document.getElementById('dConditions').innerHTML = c.conditions.map(x=>`<li>${x}</li>`).join('');
+  document.getElementById('dRequisTable').innerHTML = `
+    <tr><td>Diplôme demandé</td><td>${c.diplome}</td></tr>
+    <tr><td>Âge maximum</td><td>${c.ageMax ? c.ageMax + ' ans' : 'Sans limite'}</td></tr>
+    <tr><td>Nationalité</td><td>${c.nationalite}</td></tr>
+    <tr><td>Domaine</td><td>${c.domaine}</td></tr>
+  `;
+  document.getElementById('dDocuments').innerHTML = c.documents.map(x=>`<span class="doc-tag">📎 ${x}</span>`).join('');
+
+  // Programme tab
+  document.getElementById('dMatieres').innerHTML = c.matieres.length
+    ? c.matieres.map(m=>`<div class="matiere-row"><span>${m.nom}</span><span class="matiere-coef">Coef. ${m.coef}</span></div>`).join('')
+    : '<div class="empty-state">Pas d\'épreuve écrite pour ce concours (orientation automatisée).</div>';
+  document.getElementById('dProgramme').textContent = c.programme;
+
+  // Préparation tab
+  document.getElementById('dReussir').textContent = c.reussir;
+  document.getElementById('dConseils').innerHTML = c.conseils.map(x=>`<div class="advice-item"><span class="advice-icon">💡</span><span class="advice-text">${x}</span></div>`).join('');
+  document.getElementById('dErreurs').innerHTML = c.erreurs.map(x=>`<div class="advice-item"><span class="advice-icon">⚠️</span><span class="advice-text">${x}</span></div>`).join('');
+  document.getElementById('dRessources').innerHTML = c.ressources.map(x=>`<div class="resource-chip">${x}</div>`).join('');
+
+  // Résultats tab
+  document.getElementById('dResultats').textContent = c.resultats;
+  document.getElementById('dLienOfficiel').href = c.lienOfficiel;
+
+  // FAQ tab
+  document.getElementById('dFaqContainer').innerHTML = c.faq.map((f,i)=>`
+    <div class="faq-item" data-faq="${i}">
+      <div class="faq-q">${f.q} <span class="faq-chevron">▾</span></div>
+      <div class="faq-a">${f.r}</div>
+    </div>
+  `).join('');
+  document.querySelectorAll('#dFaqContainer .faq-item').forEach(item=>{
+    item.querySelector('.faq-q').addEventListener('click', ()=> item.classList.toggle('open'));
+  });
+
+  // Contact tab
+  document.getElementById('dContactContainer').innerHTML = `
+    <div class="contact-row"><div class="contact-icon">📍</div><div>${c.contact.adresse}</div></div>
+    <div class="contact-row"><div class="contact-icon">📞</div><a class="contact-link" href="tel:${c.contact.telephone}">${c.contact.telephone}</a></div>
+    <div class="contact-row"><div class="contact-icon">✉️</div><a class="contact-link" href="mailto:${c.contact.email}">${c.contact.email}</a></div>
+    <div class="contact-row"><div class="contact-icon">🌐</div><a class="contact-link" href="https://${c.contact.site}" target="_blank" rel="noopener">${c.contact.site}</a></div>
+    <div class="contact-row"><div class="contact-icon">📱</div><div>${c.contact.reseaux}</div></div>
+  `;
+
+  updateDetailButtons();
+  switchDetailTab('infos');
+}
+
+function updateDetailButtons(){
+  const isFav = favorites.has(currentDetailId);
+  const isNotif = notifySet.has(currentDetailId);
+  const favBtn = document.getElementById('btnFavLg');
+  favBtn.classList.toggle('active', isFav);
+  favBtn.innerHTML = (isFav?'❤️':'♡') + ' Favoris';
+  const notifBtn = document.getElementById('btnNotify');
+  notifBtn.classList.toggle('on', isNotif);
+  notifBtn.innerHTML = isNotif ? '🔔 Notifications activées' : '🔔 Me prévenir';
+}
+
+document.getElementById('btnBack').addEventListener('click', ()=>{
+  document.getElementById('detailView').classList.remove('active');
+  document.getElementById('homeView').classList.remove('hidden');
+  window.scrollTo(0,0);
+});
+
+document.getElementById('btnFavLg').addEventListener('click', ()=> toggleFavorite(currentDetailId));
+document.getElementById('btnNotify').addEventListener('click', ()=> toggleNotify(currentDetailId));
+
+document.getElementById('btnShare').addEventListener('click', e=>{
+  e.stopPropagation();
+  document.getElementById('shareMenu').classList.toggle('show');
+});
+document.addEventListener('click', e=>{
+  if(!e.target.closest('#btnShare')) document.getElementById('shareMenu').classList.remove('show');
+});
+document.getElementById('shareMenu').addEventListener('click', e=>{
+  const item = e.target.closest('.share-item');
+  if(!item) return;
+  const c = CONTESTS.find(x=>x.id===currentDetailId);
+  const url = 'https://nextori.sn/concours/' + c.id;
+  const text = encodeURIComponent(c.name + ' — ' + c.establishment + ' : ' + url);
+  const platform = item.dataset.share;
+  if(platform==='whatsapp') window.open('https://wa.me/?text='+text, '_blank');
+  else if(platform==='facebook') window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(url), '_blank');
+  else if(platform==='messenger') window.open('https://www.facebook.com/dialog/send?link='+encodeURIComponent(url)+'&redirect_uri='+encodeURIComponent(url), '_blank');
+  else if(platform==='telegram') window.open('https://t.me/share/url?url='+encodeURIComponent(url)+'&text='+encodeURIComponent(c.name), '_blank');
+  else if(platform==='copy'){ navigator.clipboard?.writeText(url); showToast('🔗 Lien copié !'); }
+  document.getElementById('shareMenu').classList.remove('show');
+});
+
+/* ============================= DETAIL TABS ============================= */
+function switchDetailTab(tab){
+  document.querySelectorAll('.dtab-btn').forEach(b=>b.classList.toggle('active', b.dataset.dtab===tab));
+  document.querySelectorAll('.dtab-panel').forEach(p=>p.classList.toggle('active', p.id==='dtab-'+tab));
+}
+document.getElementById('detailTabs').addEventListener('click', e=>{
+  const btn = e.target.closest('.dtab-btn');
+  if(!btn) return;
+  switchDetailTab(btn.dataset.dtab);
+});
+
+/* ============================= INIT ============================= */
+refreshHomeRows();
+</script>
+
+</body>
+</html>

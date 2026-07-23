@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mes Livres — Nextori</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1B2A4A;
+    --ink-soft:#55647F;
+    --gold:#C9971F;
+    --gold-soft:#E7C877;
+    --gold-pale:#FBF1DC;
+    --paper:#FFFFFF;
+    --mist:#E8E8E8;
+    --mist-deep:#D8DAE0;
+    --radius:14px;
+    --shadow: 0 6px 18px rgba(27,42,74,0.08);
+    --shadow-hover: 0 14px 30px rgba(27,42,74,0.14);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Public Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    background:var(--ink);
+    padding:56px 24px 0;
+    overflow:hidden;
+  }
+  .hero-inner{
+    max-width:720px;
+    margin:0 auto;
+    position:relative;
+    z-index:2;
+    text-align:center;
+    padding-bottom:40px;
+  }
+  .eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-family:'Public Sans',sans-serif;
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--gold-soft);
+    margin-bottom:18px;
+  }
+  .eyebrow::before, .eyebrow::after{
+    content:"";
+    width:22px;
+    height:1px;
+    background:var(--gold-soft);
+    opacity:.6;
+  }
+  h1.title{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:clamp(2.4rem, 6vw, 3.4rem);
+    line-height:1.05;
+    margin:0 0 14px;
+    color:#fff;
+  }
+  h1.title em{
+    font-style:italic;
+    font-weight:500;
+    color:var(--gold-soft);
+  }
+  .hero p.lead{
+    font-size:16px;
+    line-height:1.6;
+    color:#C7CEDC;
+    max-width:480px;
+    margin:0 auto;
+  }
+  .free-badge{
+    display:inline-block;
+    margin-top:22px;
+    padding:8px 18px;
+    background:var(--gold);
+    color:var(--ink);
+    font-weight:700;
+    font-size:12px;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    border-radius:999px;
+  }
+
+  /* Bookshelf silhouette — signature element */
+  .shelf{
+    position:relative;
+    height:64px;
+    display:flex;
+    align-items:flex-end;
+    gap:3px;
+    padding:0 6px;
+    z-index:1;
+  }
+  .shelf span{
+    display:block;
+    border-radius:3px 3px 0 0;
+    flex:0 0 auto;
+  }
+  .shelf::after{
+    content:"";
+    position:absolute;
+    left:0; right:0; bottom:0;
+    height:4px;
+    background:var(--gold);
+  }
+
+  /* ---------- INTRO ---------- */
+  .intro{
+    max-width:640px;
+    margin:0 auto;
+    padding:40px 24px 8px;
+    text-align:center;
+  }
+  .intro p{
+    font-size:16px;
+    line-height:1.7;
+    color:var(--ink-soft);
+    margin:0;
+  }
+
+  /* ---------- FILTER TABS ---------- */
+  .filters{
+    max-width:900px;
+    margin:28px auto 0;
+    padding:0 24px;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:10px;
+  }
+  .filter-btn{
+    font-family:'Public Sans',sans-serif;
+    font-size:13px;
+    font-weight:600;
+    color:var(--ink);
+    background:var(--mist);
+    border:1px solid transparent;
+    padding:9px 16px;
+    border-radius:999px;
+    cursor:pointer;
+    transition:background .2s ease, color .2s ease, border-color .2s ease;
+  }
+  .filter-btn:hover{ background:var(--mist-deep); }
+  .filter-btn.active{
+    background:var(--ink);
+    color:#fff;
+    border-color:var(--ink);
+  }
+  .filter-btn.active .count{ color:var(--gold-soft); }
+  .filter-btn .count{ color:var(--ink-soft); font-weight:500; margin-left:4px; }
+
+  /* ---------- CATEGORY SECTIONS ---------- */
+  main{ max-width:900px; margin:0 auto; padding:44px 24px 80px; }
+
+  .category{ margin-bottom:44px; }
+  .category-label{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    margin-bottom:20px;
+  }
+  .category-tab{
+    position:relative;
+    background:var(--gold);
+    color:var(--ink);
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:1.05rem;
+    padding:9px 20px 9px 16px;
+    border-radius:4px 12px 12px 4px;
+  }
+  .category-tab::before{
+    content:"";
+    position:absolute;
+    left:-9px; top:0;
+    width:0; height:0;
+    border-top:19px solid var(--gold);
+    border-left:9px solid transparent;
+  }
+  .category-line{
+    flex:1;
+    height:1px;
+    background:var(--mist-deep);
+  }
+
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:18px;
+  }
+  @media (max-width:680px){
+    .grid{ grid-template-columns:1fr; }
+  }
+
+  /* ---------- BOOK CARD ---------- */
+  .book{
+    background:var(--paper);
+    border:1px solid var(--mist);
+    border-left:5px solid var(--gold);
+    border-radius:var(--radius);
+    padding:20px 22px;
+    box-shadow:var(--shadow);
+    opacity:0;
+    transform:translateY(14px);
+    animation:rise .5s ease forwards;
+    transition:box-shadow .25s ease, transform .25s ease, border-left-color .25s ease;
+  }
+  .book:hover{
+    box-shadow:var(--shadow-hover);
+    transform:translateY(-3px);
+    border-left-color:var(--ink);
+  }
+  .book h3{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:1.15rem;
+    margin:0 0 4px;
+    line-height:1.3;
+  }
+  .book .author{
+    font-style:italic;
+    color:var(--gold);
+    font-weight:600;
+    font-size:.92rem;
+    margin-bottom:10px;
+  }
+  .book .why{
+    font-size:.92rem;
+    line-height:1.55;
+    color:var(--ink-soft);
+    margin:0 0 14px;
+  }
+  .book .meta{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+  }
+  .pill{
+    font-size:.72rem;
+    font-weight:600;
+    padding:4px 10px;
+    border-radius:999px;
+    background:var(--mist);
+    color:var(--ink);
+    white-space:nowrap;
+  }
+  .pill.access{ background:var(--gold-pale); color:#8a6a10; }
+
+  @keyframes rise{ to{ opacity:1; transform:translateY(0); } }
+
+  /* stagger */
+  .grid .book:nth-child(1){ animation-delay:.03s; }
+  .grid .book:nth-child(2){ animation-delay:.11s; }
+
+  @media (prefers-reduced-motion: reduce){
+    .book{ animation:none; opacity:1; transform:none; }
+    .book, .filter-btn{ transition:none; }
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    background:var(--ink);
+    color:#C7CEDC;
+    text-align:center;
+    padding:34px 24px;
+    font-size:13px;
+  }
+  footer strong{ color:#fff; }
+  footer .tagline{
+    display:block;
+    margin-top:6px;
+    color:var(--gold-soft);
+    font-style:italic;
+    font-family:'Fraunces', serif;
+  }
+
+  [hidden]{ display:none !important; }
+
+  .status-msg{
+    text-align:center;
+    color:var(--ink-soft);
+    font-size:14px;
+    padding:30px 24px;
+  }
+  .status-msg.error{ color:#a83232; }
+  .status-msg .retry{
+    display:inline-block;
+    margin-top:10px;
+    background:var(--ink);
+    color:#fff;
+    border:none;
+    padding:8px 16px;
+    border-radius:999px;
+    font-size:13px;
+    font-weight:600;
+    cursor:pointer;
+  }
+</style>
+</head>
+<body>
+
+  <div class="hero">
+    <div class="hero-inner">
+      <span class="eyebrow">Ressource gratuite</span>
+      <h1 class="title">Mes <em>Livres</em> 📚</h1>
+      <p class="lead">Des lectures choisies pour progresser dans tes études et construire ta carrière, quelle que soit ta filière.</p>
+      <span class="free-badge">100% gratuit</span>
+    </div>
+    <div class="shelf" aria-hidden="true">
+      <span style="width:14px;height:38px;background:var(--gold-soft);"></span>
+      <span style="width:20px;height:52px;background:var(--mist);"></span>
+      <span style="width:12px;height:30px;background:var(--gold);"></span>
+      <span style="width:26px;height:46px;background:#3a4a6b;"></span>
+      <span style="width:16px;height:60px;background:var(--gold-soft);"></span>
+      <span style="width:10px;height:34px;background:var(--mist);"></span>
+      <span style="width:22px;height:50px;background:var(--gold);"></span>
+      <span style="width:14px;height:40px;background:#3a4a6b;"></span>
+      <span style="width:18px;height:56px;background:var(--gold-soft);"></span>
+      <span style="width:12px;height:32px;background:var(--mist);"></span>
+      <span style="width:24px;height:48px;background:#3a4a6b;"></span>
+      <span style="width:16px;height:58px;background:var(--gold);"></span>
+      <span style="width:14px;height:36px;background:var(--gold-soft);"></span>
+      <span style="width:20px;height:44px;background:var(--mist);"></span>
+      <span style="width:12px;height:30px;background:#3a4a6b;"></span>
+      <span style="width:18px;height:54px;background:var(--gold);"></span>
+      <span style="width:14px;height:40px;background:var(--gold-soft);"></span>
+      <span style="width:22px;height:50px;background:#3a4a6b;"></span>
+      <span style="width:10px;height:34px;background:var(--mist);"></span>
+      <span style="width:16px;height:46px;background:var(--gold-soft);"></span>
+    </div>
+  </div>
+
+  <div class="intro">
+    <p>Choisis ce qui parle le plus à ta situation du moment. Aucune lecture n'est obligatoire : c'est une boîte à outils, pas un programme.</p>
+  </div>
+
+  <div class="filters" id="filters"></div>
+
+  <main id="catalogue">
+    <p class="status-msg" id="status">Chargement des livres…</p>
+  </main>
+
+  <footer>
+    <strong>NEXTORI</strong> · Sénégal
+    <span class="tagline">Des choix éclairés pour un avenir meilleur</span>
+  </footer>
+
+<script>
+/* =====================================================================
+   CONNEXION À LA BASE DE DONNÉES
+   =====================================================================
+   1) Remplace API_URL ci-dessous par l'URL réelle qui renvoie tes livres
+      (ex: "https://xxxx.supabase.co/rest/v1/livres?select=*").
+   2) Si ton API a besoin d'une clé (ex: clé "anon" Supabase, ou un
+      Bearer token Firebase), mets-la dans API_KEY. Laisse vide sinon.
+   3) Tant que API_URL reste vide (ou si l'appel échoue), la page
+      affiche automatiquement les livres de secours listés dans
+      FALLBACK_BOOKS un peu plus bas, pour que rien ne casse.
+
+   FORMAT ATTENDU (souple) : un tableau JSON d'objets livre, ou un objet
+   { "data": [ ... ] } / { "livres": [ ... ] }. Pour chaque livre, les
+   noms de champs suivants sont reconnus automatiquement (les variantes
+   anglaises ou françaises marchent toutes les deux) :
+     titre       → titre | title
+     auteur      → auteur | author
+     categorie   → categorie | category | catégorie
+     description → description | pourquoi | why | resume
+     acces       → acces | access | accès
+     langue      → langue | language
+   ===================================================================== */
+  const API_URL = "";              // ex: "https://xxxx.supabase.co/rest/v1/livres"
+  const API_KEY = "";              // ex: clé anon Supabase (laisser vide si pas besoin)
+
+  /* Ces livres sont juste un EXEMPLE de secours (informatique) en attendant
+     que ta vraie base de données, avec des livres pour toutes les filières,
+     soit connectée via API_URL ci-dessus. */
+  const FALLBACK_BOOKS = [
+    { titre:"Apprendre à programmer avec Python 3", auteur:"Gérard Swinnen", categorie:"Pour bien démarrer", description:"La référence francophone la plus utilisée pour apprendre Python depuis zéro, claire et progressive.", acces:"Gratuit en ligne", langue:"Français" },
+    { titre:"Automate the Boring Stuff with Python", auteur:"Al Sweigart", categorie:"Pour bien démarrer", description:"Apprend à programmer en résolvant de vrais petits problèmes concrets, très motivant pour débuter.", acces:"Gratuit en ligne", langue:"Anglais simple" },
+    { titre:"The Pragmatic Programmer", auteur:"David Thomas & Andrew Hunt", categorie:"Pour aller plus loin", description:"Un classique mondial sur les bonnes pratiques et l'état d'esprit d'un bon développeur.", acces:"À emprunter", langue:"Anglais" },
+    { titre:"Clean Code", auteur:"Robert C. Martin", categorie:"Pour aller plus loin", description:"Apprend à écrire un code clair et compréhensible : ce qui distingue les bons développeurs.", acces:"À emprunter", langue:"Anglais" },
+    { titre:"So Good They Can't Ignore You", auteur:"Cal Newport", categorie:"Pour construire sa carrière", description:"Pourquoi développer une vraie compétence rare compte plus que « suivre sa passion ».", acces:"À emprunter", langue:"Anglais" },
+    { titre:"The Personal MBA", auteur:"Josh Kaufman", categorie:"Pour construire sa carrière", description:"Bases simples de gestion, très utiles pour qui envisage le freelance ou l'entrepreneuriat.", acces:"À emprunter", langue:"Anglais" },
+    { titre:"Grit", auteur:"Angela Duckworth", categorie:"Pour l'état d'esprit et la motivation", description:"La persévérance compte souvent plus que le talent de départ pour réussir sur la durée.", acces:"À emprunter", langue:"Anglais" },
+    { titre:"Mindset", auteur:"Carol Dweck", categorie:"Pour l'état d'esprit et la motivation", description:"Comment voir ses erreurs comme des occasions d'apprendre plutôt que comme des échecs.", acces:"À emprunter", langue:"Anglais" },
+  ];
+
+  function pick(obj, keys){
+    for (const k of keys){ if (obj[k] !== undefined && obj[k] !== null && obj[k] !== "") return String(obj[k]); }
+    return "";
+  }
+  function normalizeBook(raw){
+    return {
+      titre:       pick(raw, ["titre","title"]),
+      auteur:      pick(raw, ["auteur","author"]),
+      categorie:   pick(raw, ["categorie","category","catégorie"]) || "Autres lectures",
+      description: pick(raw, ["description","pourquoi","why","resume"]),
+      acces:       pick(raw, ["acces","access","accès"]) || "À emprunter",
+      langue:      pick(raw, ["langue","language"]) || "Français",
+    };
+  }
+
+  async function loadBooks(){
+    if (!API_URL) return FALLBACK_BOOKS;
+    try{
+      const headers = {};
+      if (API_KEY){
+        headers["apikey"] = API_KEY;
+        headers["Authorization"] = "Bearer " + API_KEY;
+      }
+      const res = await fetch(API_URL, { headers });
+      if (!res.ok) throw new Error("Réponse API invalide (" + res.status + ")");
+      const json = await res.json();
+      const rawList = Array.isArray(json) ? json : (json.data || json.livres || []);
+      if (!rawList.length) throw new Error("Aucun livre reçu de l'API");
+      return rawList.map(normalizeBook);
+    }catch(err){
+      console.warn("Impossible de charger les livres depuis l'API, utilisation des livres de secours :", err);
+      return FALLBACK_BOOKS;
+    }
+  }
+
+  function slug(str){ return str.trim(); }
+
+  function render(books){
+    const catalogue = document.getElementById("catalogue");
+    const filtersEl = document.getElementById("filters");
+    catalogue.innerHTML = "";
+    filtersEl.innerHTML = "";
+
+    if (!books.length){
+      catalogue.innerHTML = '<p class="status-msg error">Aucun livre à afficher pour le moment.</p>';
+      return;
+    }
+
+    const categories = [...new Set(books.map(b => slug(b.categorie)))];
+
+    const allBtn = document.createElement("button");
+    allBtn.className = "filter-btn active";
+    allBtn.dataset.filter = "all";
+    allBtn.innerHTML = `Tous <span class="count">(${books.length})</span>`;
+    filtersEl.appendChild(allBtn);
+
+    categories.forEach(cat => {
+      const count = books.filter(b => slug(b.categorie) === cat).length;
+      const btn = document.createElement("button");
+      btn.className = "filter-btn";
+      btn.dataset.filter = cat;
+      btn.innerHTML = `${cat.replace(/^Pour /i, "")} <span class="count">(${count})</span>`;
+      filtersEl.appendChild(btn);
+    });
+
+    categories.forEach(cat => {
+      const section = document.createElement("section");
+      section.className = "category";
+      section.dataset.category = cat;
+
+      const label = document.createElement("div");
+      label.className = "category-label";
+      label.innerHTML = `<span class="category-tab">${cat}</span><span class="category-line"></span>`;
+      section.appendChild(label);
+
+      const grid = document.createElement("div");
+      grid.className = "grid";
+
+      books.filter(b => slug(b.categorie) === cat).forEach(b => {
+        const card = document.createElement("article");
+        card.className = "book";
+        const titre = document.createElement("h3");
+        titre.textContent = b.titre;
+        const auteur = document.createElement("div");
+        auteur.className = "author";
+        auteur.textContent = b.auteur;
+        const why = document.createElement("p");
+        why.className = "why";
+        why.textContent = b.description;
+        const meta = document.createElement("div");
+        meta.className = "meta";
+        const pillAccess = document.createElement("span");
+        pillAccess.className = "pill access";
+        pillAccess.textContent = b.acces;
+        const pillLangue = document.createElement("span");
+        pillLangue.className = "pill";
+        pillLangue.textContent = b.langue;
+        meta.append(pillAccess, pillLangue);
+        card.append(titre, auteur, why, meta);
+        grid.appendChild(card);
+      });
+
+      section.appendChild(grid);
+      catalogue.appendChild(section);
+    });
+
+    filtersEl.querySelectorAll(".filter-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        filtersEl.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        const f = btn.dataset.filter;
+        catalogue.querySelectorAll(".category").forEach(sec => {
+          sec.hidden = !(f === "all" || sec.dataset.category === f);
+        });
+      });
+    });
+  }
+
+  loadBooks().then(render);
+</script>
+
+</body>
+</html>

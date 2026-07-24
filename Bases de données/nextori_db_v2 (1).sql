@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : jeu. 23 juil. 2026 à 15:00
+-- Généré le : ven. 24 juil. 2026 à 11:57
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.2.12
 
@@ -88,22 +88,23 @@ CREATE TABLE `metier` (
   `secteur` varchar(100) NOT NULL,
   `niveau_etude` varchar(100) NOT NULL,
   `salaire_min` decimal(12,2) DEFAULT NULL,
-  `salaire_max` decimal(12,2) DEFAULT NULL
+  `salaire_max` decimal(12,2) DEFAULT NULL,
+  `profil_riasec` varchar(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `metier`
 --
 
-INSERT INTO `metier` (`id_metier`, `nom`, `description`, `secteur`, `niveau_etude`, `salaire_min`, `salaire_max`) VALUES
-(1, 'Développeur Web', 'Création de sites et applications web', 'Informatique', 'Licence / Master', 300000.00, 1500000.00),
-(2, 'Data Scientist', 'Analyse de données et intelligence artificielle', 'Informatique', 'Master', 500000.00, 2000000.00),
-(3, 'Ingénieur Génie Civil', 'Construction de bâtiments et infrastructures', 'BTP', 'Master', 400000.00, 1800000.00),
-(4, 'Médecin', 'Diagnostic et traitement des patients', 'Santé', 'Doctorat', 600000.00, 3000000.00),
-(5, 'Avocat', 'Défense juridique et conseils', 'Droit', 'Master', 300000.00, 2000000.00),
-(6, 'Comptable', 'Gestion des finances et comptabilité', 'Finance', 'Licence', 250000.00, 1200000.00),
-(7, 'Marketeur', 'Stratégies marketing et communication', 'Commerce', 'Licence / Master', 250000.00, 1500000.00),
-(8, 'Administrateur Réseau', 'Gestion des réseaux informatiques', 'Informatique', 'Licence / Master', 300000.00, 1400000.00);
+INSERT INTO `metier` (`id_metier`, `nom`, `description`, `secteur`, `niveau_etude`, `salaire_min`, `salaire_max`, `profil_riasec`) VALUES
+(1, 'Développeur Web', 'Création de sites et applications web', 'Informatique', 'Licence / Master', 300000.00, 1500000.00, 'IRA'),
+(2, 'Data Scientist', 'Analyse de données et intelligence artificielle', 'Informatique', 'Master', 500000.00, 2000000.00, 'IRC'),
+(3, 'Ingénieur Génie Civil', 'Construction de bâtiments et infrastructures', 'BTP', 'Master', 400000.00, 1800000.00, 'RIC'),
+(4, 'Médecin', 'Diagnostic et traitement des patients', 'Santé', 'Doctorat', 600000.00, 3000000.00, 'ISR'),
+(5, 'Avocat', 'Défense juridique et conseils', 'Droit', 'Master', 300000.00, 2000000.00, 'ESA'),
+(6, 'Comptable', 'Gestion des finances et comptabilité', 'Finance', 'Licence', 250000.00, 1200000.00, 'CER'),
+(7, 'Marketeur', 'Stratégies marketing et communication', 'Commerce', 'Licence / Master', 250000.00, 1500000.00, 'EAS'),
+(8, 'Administrateur Réseau', 'Gestion des réseaux informatiques', 'Informatique', 'Licence / Master', 300000.00, 1400000.00, 'IRC');
 
 -- --------------------------------------------------------
 
@@ -358,6 +359,272 @@ CREATE TABLE `reponse` (
   `id_proposition` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Déchargement des données de la table `reponse`
+--
+
+INSERT INTO `reponse` (`id_reponse`, `id_test`, `id_proposition`) VALUES
+(1, 2, 5),
+(2, 2, 12),
+(3, 2, 18),
+(4, 2, 23),
+(5, 2, 30),
+(6, 2, 35),
+(7, 2, 38),
+(8, 2, 48),
+(9, 2, 54),
+(10, 2, 59),
+(11, 2, 65),
+(12, 2, 71),
+(13, 2, 77),
+(14, 2, 83),
+(15, 2, 89),
+(16, 2, 94),
+(17, 2, 102),
+(18, 2, 108),
+(19, 2, 114),
+(20, 2, 118),
+(21, 3, 5),
+(22, 3, 12),
+(23, 3, 16),
+(24, 3, 23),
+(25, 3, 29),
+(26, 3, 35),
+(27, 3, 42),
+(28, 3, 47),
+(29, 3, 54),
+(30, 3, 60),
+(31, 3, 66),
+(32, 3, 71),
+(33, 3, 77),
+(34, 3, 83),
+(35, 3, 89),
+(36, 3, 94),
+(37, 3, 99),
+(38, 3, 105),
+(39, 3, 112),
+(40, 3, 118),
+(41, 4, 6),
+(42, 4, 11),
+(43, 4, 17),
+(44, 4, 23),
+(45, 4, 29),
+(46, 4, 36),
+(47, 4, 42),
+(48, 4, 48),
+(49, 4, 54),
+(50, 4, 59),
+(51, 4, 66),
+(52, 4, 72),
+(53, 4, 77),
+(54, 4, 83),
+(55, 4, 90),
+(56, 4, 95),
+(57, 4, 101),
+(58, 4, 108),
+(59, 4, 114),
+(60, 4, 119),
+(61, 5, 5),
+(62, 5, 10),
+(63, 5, 16),
+(64, 5, 22),
+(65, 5, 28),
+(66, 5, 34),
+(67, 5, 42),
+(68, 5, 47),
+(69, 5, 54),
+(70, 5, 58),
+(71, 5, 65),
+(72, 5, 70),
+(73, 5, 77),
+(74, 5, 83),
+(75, 5, 88),
+(76, 5, 94),
+(77, 5, 99),
+(78, 5, 105),
+(79, 5, 112),
+(80, 5, 118),
+(81, 6, 6),
+(82, 6, 11),
+(83, 6, 16),
+(84, 6, 23),
+(85, 6, 30),
+(86, 6, 35),
+(87, 6, 42),
+(88, 6, 47),
+(89, 6, 53),
+(90, 6, 59),
+(91, 6, 65),
+(92, 6, 71),
+(93, 6, 77),
+(94, 6, 83),
+(95, 6, 88),
+(96, 6, 95),
+(97, 6, 101),
+(98, 6, 108),
+(99, 6, 114),
+(100, 6, 116),
+(101, 7, 5),
+(102, 7, 11),
+(103, 7, 16),
+(104, 7, 23),
+(105, 7, 28),
+(106, 7, 35),
+(107, 7, 37),
+(108, 7, 46),
+(109, 7, 53),
+(110, 7, 59),
+(111, 7, 64),
+(112, 7, 71),
+(113, 7, 75),
+(114, 7, 82),
+(115, 7, 88),
+(116, 7, 95),
+(117, 7, 99),
+(118, 7, 106),
+(119, 7, 114),
+(120, 7, 116),
+(121, 8, 6),
+(122, 8, 11),
+(123, 8, 18),
+(124, 8, 23),
+(125, 8, 28),
+(126, 8, 35),
+(127, 8, 42),
+(128, 8, 46),
+(129, 8, 52),
+(130, 8, 58),
+(131, 8, 64),
+(132, 8, 70),
+(133, 8, 76),
+(134, 8, 82),
+(135, 8, 88),
+(136, 8, 94),
+(137, 8, 100),
+(138, 8, 106),
+(139, 8, 112),
+(140, 8, 118),
+(141, 9, 6),
+(142, 9, 10),
+(143, 9, 18),
+(144, 9, 22),
+(145, 9, 28),
+(146, 9, 35),
+(147, 9, 38),
+(148, 9, 48),
+(149, 9, 53),
+(150, 9, 59),
+(151, 9, 65),
+(152, 9, 71),
+(153, 9, 77),
+(154, 9, 83),
+(155, 9, 89),
+(156, 9, 96),
+(157, 9, 102),
+(158, 9, 107),
+(159, 9, 113),
+(160, 9, 119),
+(161, 10, 5),
+(162, 10, 11),
+(163, 10, 17),
+(164, 10, 24),
+(165, 10, 29),
+(166, 10, 35),
+(167, 10, 38),
+(168, 10, 47),
+(169, 10, 53),
+(170, 10, 58),
+(171, 10, 65),
+(172, 10, 71),
+(173, 10, 76),
+(174, 10, 83),
+(175, 10, 89),
+(176, 10, 95),
+(177, 10, 101),
+(178, 10, 108),
+(179, 10, 113),
+(180, 10, 119),
+(181, 11, 6),
+(182, 11, 12),
+(183, 11, 17),
+(184, 11, 23),
+(185, 11, 28),
+(186, 11, 35),
+(187, 11, 37),
+(188, 11, 46),
+(189, 11, 52),
+(190, 11, 58),
+(191, 11, 64),
+(192, 11, 71),
+(193, 11, 77),
+(194, 11, 82),
+(195, 11, 88),
+(196, 11, 94),
+(197, 11, 99),
+(198, 11, 106),
+(199, 11, 112),
+(200, 11, 118),
+(201, 12, 5),
+(202, 12, 11),
+(203, 12, 18),
+(204, 12, 24),
+(205, 12, 29),
+(206, 12, 35),
+(207, 12, 37),
+(208, 12, 47),
+(209, 12, 54),
+(210, 12, 57),
+(211, 12, 65),
+(212, 12, 71),
+(213, 12, 76),
+(214, 12, 83),
+(215, 12, 87),
+(216, 12, 94),
+(217, 12, 100),
+(218, 12, 106),
+(219, 12, 112),
+(220, 12, 118),
+(221, 13, 5),
+(222, 13, 11),
+(223, 13, 16),
+(224, 13, 22),
+(225, 13, 28),
+(226, 13, 33),
+(227, 13, 37),
+(228, 13, 46),
+(229, 13, 52),
+(230, 13, 58),
+(231, 13, 64),
+(232, 13, 70),
+(233, 13, 76),
+(234, 13, 82),
+(235, 13, 88),
+(236, 13, 95),
+(237, 13, 101),
+(238, 13, 106),
+(239, 13, 112),
+(240, 13, 119),
+(241, 14, 6),
+(242, 14, 12),
+(243, 14, 17),
+(244, 14, 20),
+(245, 14, 29),
+(246, 14, 34),
+(247, 14, 42),
+(248, 14, 46),
+(249, 14, 52),
+(250, 14, 58),
+(251, 14, 64),
+(252, 14, 71),
+(253, 14, 75),
+(254, 14, 82),
+(255, 14, 88),
+(256, 14, 94),
+(257, 14, 100),
+(258, 14, 107),
+(259, 14, 114),
+(260, 14, 119);
+
 -- --------------------------------------------------------
 
 --
@@ -367,6 +634,7 @@ CREATE TABLE `reponse` (
 CREATE TABLE `test_riasec` (
   `id_test` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
+  `id_questionnaire` int(11) NOT NULL,
   `date_test` datetime NOT NULL DEFAULT current_timestamp(),
   `score_R` int(11) NOT NULL DEFAULT 0,
   `score_I` int(11) NOT NULL DEFAULT 0,
@@ -376,6 +644,25 @@ CREATE TABLE `test_riasec` (
   `score_C` int(11) NOT NULL DEFAULT 0,
   `profil_dominant` varchar(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `test_riasec`
+--
+
+INSERT INTO `test_riasec` (`id_test`, `id_user`, `id_questionnaire`, `date_test`, `score_R`, `score_I`, `score_A`, `score_S`, `score_E`, `score_C`, `profil_dominant`) VALUES
+(2, 1, 1, '2026-07-23 13:39:06', 0, 1, 5, 3, 5, 6, 'CA'),
+(3, 1, 1, '2026-07-23 14:05:38', 1, 1, 5, 3, 6, 4, 'EA'),
+(4, 1, 1, '2026-07-23 14:19:42', 2, 1, 4, 4, 9, 0, 'EA'),
+(5, 1, 1, '2026-07-23 14:43:37', 0, 1, 5, 3, 5, 6, 'CA'),
+(6, 1, 1, '2026-07-23 15:17:16', 2, 1, 7, 1, 6, 3, 'AE'),
+(7, 1, 1, '2026-07-23 15:29:00', 3, 1, 8, 4, 4, 0, 'AS'),
+(8, 1, 1, '2026-07-23 16:11:18', 0, 4, 5, 4, 5, 2, 'AE'),
+(9, 1, 1, '2026-07-23 16:34:16', 1, 1, 6, 4, 4, 4, 'AS'),
+(10, 1, 1, '2026-07-23 16:55:10', 2, 1, 5, 3, 5, 4, 'AE'),
+(11, 1, 1, '2026-07-23 18:45:58', 0, 1, 7, 6, 4, 2, 'AS'),
+(12, 1, 1, '2026-07-23 18:49:28', 2, 4, 4, 2, 5, 3, 'EI'),
+(13, 1, 1, '2026-07-23 19:10:24', 1, 2, 9, 4, 3, 1, 'AS'),
+(14, 1, 1, '2026-07-23 19:12:49', 1, 1, 5, 4, 6, 3, 'EA');
 
 -- --------------------------------------------------------
 
@@ -450,6 +737,13 @@ CREATE TABLE `utilisateur` (
   `niveau_etude` varchar(100) NOT NULL,
   `date_creation` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `utilisateur`
+--
+
+INSERT INTO `utilisateur` (`id_user`, `nom`, `email`, `mot_de_passe`, `pays`, `niveau_etude`, `date_creation`) VALUES
+(1, 'Utilisateur Test', 'test@nextori.com', '$2y$10$abcdefghijklmnopqrstuv123456789012345678901234567890', 'Sénégal', 'Licence 2', '2026-07-23 13:37:00');
 
 --
 -- Index pour les tables déchargées
@@ -532,7 +826,8 @@ ALTER TABLE `reponse`
 --
 ALTER TABLE `test_riasec`
   ADD PRIMARY KEY (`id_test`),
-  ADD KEY `fk_test_user` (`id_user`);
+  ADD KEY `fk_test_user` (`id_user`),
+  ADD KEY `fk_test_questionnaire` (`id_questionnaire`);
 
 --
 -- Index pour la table `universite`
@@ -611,13 +906,13 @@ ALTER TABLE `recommandation`
 -- AUTO_INCREMENT pour la table `reponse`
 --
 ALTER TABLE `reponse`
-  MODIFY `id_reponse` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_reponse` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=261;
 
 --
 -- AUTO_INCREMENT pour la table `test_riasec`
 --
 ALTER TABLE `test_riasec`
-  MODIFY `id_test` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_test` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT pour la table `universite`
@@ -629,7 +924,7 @@ ALTER TABLE `universite`
 -- AUTO_INCREMENT pour la table `utilisateur`
 --
 ALTER TABLE `utilisateur`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Contraintes pour les tables déchargées
@@ -685,6 +980,7 @@ ALTER TABLE `reponse`
 -- Contraintes pour la table `test_riasec`
 --
 ALTER TABLE `test_riasec`
+  ADD CONSTRAINT `fk_test_questionnaire` FOREIGN KEY (`id_questionnaire`) REFERENCES `questionnaire` (`id_questionnaire`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_test_user` FOREIGN KEY (`id_user`) REFERENCES `utilisateur` (`id_user`) ON DELETE CASCADE;
 
 --

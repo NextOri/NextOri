@@ -24,7 +24,7 @@
 
     background:#0D1B2A;
 
-    padding:35px 25px 120px;
+    padding:35px 25px 80px;
 
     border-bottom-left-radius:25px;
 
@@ -76,6 +76,7 @@
 .statistics-section,
 .welcome-card,
 .orientation-path,
+.action-button-section,
 .quick-actions,
 .project-card,
 .help-card{
@@ -89,7 +90,7 @@
 
 .level-card{
 
-    margin-top:-80px;
+    margin-top:-60px;
 
 }
 
@@ -109,7 +110,7 @@
 
     box-shadow:0 10px 25px rgba(13,27,42,0.08);
 
-    padding:20px;
+    padding:16px;
 
     margin-bottom:18px;
 
@@ -219,7 +220,7 @@
 
     grid-template-columns:repeat(3,1fr);
 
-    gap:15px;
+    gap:12px;
 
 }
 
@@ -231,7 +232,7 @@
 
     border-radius:18px;
 
-    padding:20px;
+    padding:16px;
 
     text-align:center;
 
@@ -282,65 +283,217 @@
 }
 
 
-/* ===========================
-   CARTE BIENVENUE
-=========================== */
+/* ===============================
+   WELCOME CARD - NEXTORI
+================================ */
 
-.welcome-card h2{
 
-    color:#0D1B2A;
+.welcome-card{
 
-    font-size:26px;
+background:#FFFFFF;
 
-    margin-bottom:15px;
+border-radius:24px;
+
+padding:30px;
+
+margin:35px auto 18 px;
+
+box-shadow:0 12px 35px rgba(13,27,42,0.08);
+
+display:flex;
+
+flex-direction:column;
+
+gap:25px;
 
 }
 
 
+/* Partie principale */
 
-.welcome-card p{
+.welcome-content{
 
-    color:#0D1B2A;
+display:flex;
 
-    line-height:1.6;
+align-items:flex-start;
 
-    margin-bottom:25px;
+gap:20px;
 
 }
 
 
+/* Icône */
 
-/* Bouton principal */
+.welcome-icon{
+
+width:65px;
+
+height:65px;
+
+border-radius:20px;
+
+background:#1E3A8A;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+font-size:32px;
+
+flex-shrink:0;
+
+box-shadow:
+0 10px 25px rgba(30,58,138,0.25);
+
+}
+
+
+/* Texte */
+
+.welcome-content h2{
+
+font-size:26px;
+
+font-weight:700;
+
+color:#0D1B2A;
+
+margin-bottom:12px;
+
+}
+
+
+.welcome-content p{
+
+font-size:15px;
+
+line-height:1.8;
+
+color:#555;
+
+}
+
+
+/* Zone action */
+
+.welcome-action{
+
+background:#F2F4F7;
+
+border-radius:18px;
+
+padding:18px 20px;
+
+display:flex;
+
+align-items:center;
+
+justify-content:space-between;
+
+gap:15px;
+
+}
+
+
+/* Petit message */
+
+.welcome-info{
+
+display:flex;
+
+align-items:center;
+
+gap:12px;
+
+}
+
+
+.welcome-info span{
+
+font-size:25px;
+
+}
+
+
+.welcome-info p{
+
+font-size:14px;
+
+color:#0D1B2A;
+
+font-weight:600;
+
+}
+
+
+/* Bouton */
 
 .primary-dashboard-button{
 
-    background:#1E3A8A;
+background:#1E3A8A;
 
-    color:#FFFFFF;
+color:#FFFFFF;
 
-    border:none;
+border:none;
 
-    padding:14px 25px;
+border-radius:14px;
 
-    border-radius:12px;
+padding:14px 25px;
 
-    font-size:16px;
+font-size:15px;
 
-    font-weight:700;
+font-weight:600;
 
-    cursor:pointer;
+cursor:pointer;
 
-    transition:0.3s;
+transition:0.3s;
+
+box-shadow:
+0 8px 20px rgba(30,58,138,0.25);
 
 }
-
 
 
 .primary-dashboard-button:hover{
 
-    background:#0D1B2A;
+transform:translateY(-2px);
 
-    transform:translateY(-3px);
+background:#0D1B2A;
+
+}
+
+
+/* Responsive */
+
+@media(max-width:768px){
+
+
+.welcome-content{
+
+flex-direction:column;
+
+align-items:center;
+
+text-align:center;
+
+}
+
+
+.welcome-action{
+
+flex-direction:column;
+
+}
+
+
+.primary-dashboard-button{
+
+width:100%;
+
+}
+
 
 }
 
@@ -522,76 +675,99 @@
 
 }
 
+.future-plan-card{
 
+display:flex;
 
-/* ===========================
-   AIDE
-=========================== */
+align-items:center;
 
+gap:18px;
 
-.help-card{
-    background:#1E3A8A;
-    width:min(94%, 980px);
-    margin:20px auto;
-    padding:20px;
-    border-radius:18px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:20px;
-    box-shadow:0 10px 25px rgba(13,27,42,0.08);
-}
+padding:18px;
 
-.help-card-content{
-    flex:1;
-}
+margin:20px 0;
 
+background:#f8fafc;
 
+border-radius:15px;
 
-.help-card h2{
-    color:#FFFFFF;
-    margin:0 0 8px;
-    font-size:24px;
-}
-
-.help-card p{
-    color:#FFFFFF;
-    margin:0;
-    line-height:1.5;
-}
-
-
-
-
-.help-button{
-    background:#F4B400;
-    color:#0D1B2A;
-    border:none;
-    padding:12px 20px;
-    border-radius:12px;
-    font-weight:700;
-    cursor:pointer;
-    white-space:nowrap;
-}
-
-
-
-.help-button:hover{
-
-    background:#FFFFFF;
+border:1px solid #e5e7eb;
 
 }
 
-@media (max-width: 700px) {
-    .help-card{
-        flex-direction:column;
-        align-items:flex-start;
-    }
+.future-icon{
 
-    .help-button{
-        width:100%;
-    }
+font-size:40px;
+
 }
+
+.future-content h3{
+
+margin-bottom:8px;
+
+color:#1e3a8a;
+
+font-size:18px;
+
+}
+
+.future-content p{
+
+font-size:14px;
+
+color:#555;
+
+line-height:1.6;
+
+}
+
+.future-button{
+
+width:100%;
+
+padding:14px;
+
+border:none;
+
+border-radius:12px;
+
+background:#1e3a8a;
+
+color:white;
+
+font-weight:600;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+.future-button:hover{
+
+transform:translateY(-1px);
+
+
+
+}
+
+.premium-note{
+
+margin-top:12px;
+
+text-align:center;
+
+font-size:13px;
+
+color:#666;
+
+font-style:italic;
+
+}
+
+
+
+
 
 
 /* ===========================
@@ -713,67 +889,564 @@
 
 
 
-/* ===========================
-   ACTION PRINCIPALE
-=========================== */
+
+/* ==================================
+   ACTION BUTTON SECTION - NEXTORI
+================================== */
 
 
 .action-button-section{
-
-    width:min(90%, 980px);
-
-    margin:20px auto;
-
-    background:#1E3A8A;
-
-    border-radius:22px;
-
-    padding:24px 20px;
-
+    width:min(94%, 980px);
+    margin:35px auto;
+    background:#FFFFFF;
+    border-radius:24px;
+    padding:35px 30px;
     text-align:center;
+    box-shadow:0 12px 35px rgba(13,27,42,0.08);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:18px;
+}
+
+.action-button-section h2{
+    font-size:28px;
+    font-weight:700;
+    color:#0D1B2A;
+    margin:0;
+}
+
+.action-button-section p{
+    max-width:500px;
+    font-size:15px;
+    line-height:1.8;
+    color:#555;
+}
+
+.dashboard-page .start-test-button{
+    background:#1E3A8A;
+    color:#FFFFFF;
+    border:none;
+    border-radius:15px;
+    padding:15px 35px;
+    font-size:16px;
+    font-weight:600;
+    cursor:pointer;
+    margin:0 auto;
+    box-shadow:0 10px 25px rgba(30,58,138,0.25);
+}
+
+/* Icône */
+
+.action-icon{
+
+width:70px;
+
+height:70px;
+
+border-radius:22px;
+
+background:#F4B400;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+font-size:34px;
+
+box-shadow:
+0 10px 25px rgba(244,180,0,0.25);
 
 }
 
+
+
+
+
+
+.start-test-button:hover{
+
+transform:translateY(-3px);
+
+}
+
+
+/* Mobile */
+
+@media(max-width:768px){
+
+.action-button-section{
+
+padding:25px 20px;
+
+}
 
 
 .action-button-section h2{
 
-    color:#FFFFFF;
-
-    margin-bottom:15px;
+font-size:24px;
 
 }
-
-
-
-.action-button-section p{
-
-    color:#FFFFFF;
-
-    margin-bottom:25px;
-
-    line-height:1.5;
-
-}
-
 
 
 .start-test-button{
 
-    background:#F4B400;
-
-    color:#0D1B2A;
-
-    border:none;
-
-    padding:15px 30px;
-
-    border-radius:12px;
-
-    font-weight:700;
-
-    cursor:pointer;
-
-    font-size:16px;
+width:100%;
 
 }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* ===========================
+   HELP CARD - NEXTORI
+=========================== */
+
+.help-card{
+
+background:#ffffff;
+
+border-radius:22px;
+
+padding:28px;
+
+margin:35px auto 18px;
+
+box-shadow:0 10px 35px rgba(0,0,0,.06);
+
+display:flex;
+
+flex-direction:column;
+
+gap:28px;
+
+overflow:hidden;
+
+}
+
+
+/* ===========================
+   Partie supérieure
+=========================== */
+
+.help-top{
+
+display:flex;
+
+align-items:flex-start;
+
+gap:20px;
+
+}
+
+.help-icon{
+
+width:64px;
+
+height:64px;
+
+border-radius:18px;
+
+background:var(--primary-color);
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+font-size:30px;
+
+color:#fff;
+
+flex-shrink:0;
+
+box-shadow:0 10px 30px rgba(0,87,217,.20);
+
+transition:.3s;
+
+}
+
+.help-card:hover .help-icon{
+
+transform:translateY(-3px);
+
+}
+
+
+/* ===========================
+   Texte
+=========================== */
+
+.help-card-content{
+
+flex:1;
+
+}
+
+.help-card-content h2{
+
+font-size:24px;
+
+font-weight:700;
+
+color:#173B6D;
+
+margin-bottom:12px;
+
+}
+
+.help-card-content p{
+
+font-size:15px;
+
+line-height:1.8;
+
+color:#666;
+
+}
+
+
+/* ===========================
+   Carte intérieure
+=========================== */
+
+.help-soon{
+
+background:#F7F9FC;
+
+border:1px solid #E8EEF8;
+
+border-radius:18px;
+
+padding:22px;
+
+display:flex;
+
+flex-direction:column;
+
+gap:18px;
+
+}
+
+
+/* ===========================
+   Badge
+=========================== */
+
+.help-badge{
+
+display:inline-flex;
+
+align-items:center;
+
+gap:10px;
+
+width:fit-content;
+
+padding:8px 18px;
+
+border-radius:40px;
+
+background:rgba(0,87,217,.10);
+
+color:var(--primary-color);
+
+font-size:13px;
+
+font-weight:600;
+
+}
+
+.help-dot{
+
+width:10px;
+
+height:10px;
+
+border-radius:50%;
+
+background:#22C55E;
+
+box-shadow:0 0 10px rgba(34,197,94,.45);
+
+}
+
+
+/* ===========================
+   Texte Premium
+=========================== */
+
+.help-soon-text{
+
+font-size:15px;
+
+line-height:1.8;
+
+color:#555;
+
+}
+
+
+/* ===========================
+   Bouton
+=========================== */
+
+.help-button{
+
+align-self:flex-start;
+
+padding:14px 26px;
+
+border:none;
+
+border-radius:14px;
+
+background:#1E3A8A;
+
+color:#fff;
+
+font-size:15px;
+
+font-weight:600;
+
+cursor:pointer;
+
+transition:.3s;
+
+box-shadow:0 8px 25px rgba(0,87,217,.18);
+
+}
+
+.help-button:hover{
+
+transform:translateY(-2px);
+
+box-shadow:0 14px 35px rgba(0,87,217,.28);
+
+}
+
+
+/* ===========================
+   Responsive
+=========================== */
+
+@media(max-width:768px){
+
+.help-card{
+
+padding:22px;
+
+}
+
+.help-top{
+
+flex-direction:column;
+
+align-items:center;
+
+text-align:center;
+
+}
+
+.help-card-content{
+
+text-align:center;
+
+}
+
+.help-button{
+
+width:100%;
+
+justify-content:center;
+
+align-self:stretch;
+
+}
+
+.help-soon{
+
+padding:18px;
+
+}
+
+}
+
+/* .help-card{
+    background:#1E3A8A;
+    width:min(94%, 980px);
+    margin:20px auto;
+    padding:20px;
+    border-radius:18px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+    box-shadow:0 10px 25px rgba(13,27,42,0.08);
+}
+
+.help-card-content{
+    flex:1;
+}
+
+
+
+.help-card h2{
+    color:#FFFFFF;
+    margin:0 0 8px;
+    font-size:24px;
+}
+
+.help-card p{
+    color:#FFFFFF;
+    margin:0;
+    line-height:1.5;
+}
+
+
+
+
+.help-button{
+    background:#F4B400;
+    color:#0D1B2A;
+    border:none;
+    padding:12px 20px;
+    border-radius:12px;
+    font-weight:700;
+    cursor:pointer;
+    white-space:nowrap;
+}
+
+
+
+.help-button:hover{
+
+    background:#FFFFFF;
+
+}
+
+@media (max-width: 700px) {
+    .help-card{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .help-button{
+        width:100%;
+    }
+}
+
+.help-top{
+
+display:flex;
+
+align-items:flex-start;
+
+gap:18px;
+
+margin-bottom:22px;
+
+}
+
+.help-icon{
+
+width:58px;
+
+height:58px;
+
+border-radius:16px;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+font-size:28px;
+
+background:var(--primary-color);
+
+color:white;
+
+flex-shrink:0;
+
+box-shadow:0 10px 25px rgba(0,0,0,.12);
+
+}
+
+.help-soon{
+
+margin-top:10px;
+
+padding:18px;
+
+border-radius:16px;
+
+background:#F8FAFC;
+
+border:1px solid #E5E7EB;
+
+}
+
+.help-badge{
+
+display:inline-flex;
+
+align-items:center;
+
+gap:8px;
+
+padding:8px 14px;
+
+border-radius:30px;
+
+font-size:13px;
+
+font-weight:600;
+
+background:rgba(0,87,217,.08);
+
+color:var(--primary-color);
+
+margin-bottom:15px;
+
+}
+
+.help-dot{
+
+width:8px;
+
+height:8px;
+
+border-radius:50%;
+
+background:#22C55E;
+
+}
+
+.help-soon-text{
+
+font-size:14px;
+
+line-height:1.7;
+
+color:#5F6368;
+
+margin-bottom:18px;
+
+}
+
+*/

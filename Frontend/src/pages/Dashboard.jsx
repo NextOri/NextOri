@@ -12,6 +12,10 @@ function Dashboard() {
 
     const [aDejaTeste, setADejaTeste] = useState(false);
 
+    const [dashboardDataState, setDashboardDataState] = useState(null);
+
+    const [chargementDashboard, setChargementDashboard] = useState(true);
+
     useEffect(() => {
 
      fetch("http://localhost/NextOri/backend/api/routes/resultats.php?id_user=1")
@@ -33,6 +37,119 @@ function Dashboard() {
         });
 
       }, []);
+
+      useEffect(() => {
+
+    fetch(
+        "http://localhost/NextOri/backend/api/routes/dashboard.php?id_user=1"
+    )
+
+    .then(response => response.json())
+
+    .then(data => {
+
+        if(data.success){
+
+            setDashboardDataState(data.data);
+
+        }
+
+        setChargementDashboard(false);
+
+    })
+
+    .catch(error => {
+
+        console.error(
+            "Erreur Dashboard :",
+            error
+        );
+
+        setChargementDashboard(false);
+
+    });
+
+}, []);
+  /* Modification: const [dashboardData, setDashboardData] = useState(null); par const [dashboardDataState, setDashboardDataState] = useState(null);
+      et setDashboardData(data.data); par setDashboardDataState(data.data);*/
+
+      const dashboardData = {
+
+    utilisateur: {
+
+        nom: "Laurent",
+
+        niveau: "Explorateur",
+
+        niveauNumero: 1,
+
+        progression: 60
+
+    },
+
+    statistiques: {
+
+        points: 120,
+
+        serie: 7,
+
+        badges: 3
+
+    },
+
+    parcours: {
+
+        etapeActuelle: 3
+
+    },
+
+    projetAvenir: {
+
+        disponible: false
+
+    }
+
+};
+
+const parcours = [
+
+    {
+        titre: "Créer mon profil",
+        description: "Informations personnelles complétées"
+    },
+
+    {
+        titre: "Passer le test RIASEC",
+        description: "Découvrir ses intérêts professionnels"
+    },
+
+    {
+        titre: "Découvrir mon profil",
+        description: "Analyser mes résultats"
+    },
+
+    {
+        titre: "Explorer les métiers",
+        description: "Trouver les carrières adaptées"
+    },
+
+    {
+        titre: "Choisir une formation",
+        description: "Découvrir les filières"
+    },
+
+    {
+        titre: "Trouver une université",
+        description: "Explorer les établissements"
+    }
+
+];
+
+   if(chargementDashboard){
+
+    return <p>Chargement du tableau de bord...</p>;
+
+ }
 
     return (
 
@@ -64,21 +181,27 @@ function Dashboard() {
 
     <div className="level-header">
 
-        <h2>Explorateur</h2>
+        <h2>{dashboardData.utilisateur.niveau}</h2>
 
-        <span>Niveau 1</span>
+        <span>
+       Niveau {dashboardData.utilisateur.niveauNumero}
+        </span>
 
     </div>
 
     <div className="progress-bar">
 
-        <div className="progress-fill"></div>
-
+        <div
+    className="progress-fill"
+    style={{
+        width: `${dashboardData.utilisateur.progression}%`
+    }}
+      ></div>
     </div>
 
     <p className="progress-text">
 
-        Progression : 60%
+        Progression : {dashboardData.utilisateur.progression}%
 
     </p>
 
@@ -94,7 +217,7 @@ function Dashboard() {
 
         <h3>⭐</h3>
 
-        <h2>120</h2>
+         <h2>{dashboardData.statistiques.points}</h2>
 
         <p>Points</p>
 
@@ -104,7 +227,7 @@ function Dashboard() {
 
         <h3>🔥</h3>
 
-        <h2>7</h2>
+        <h2>{dashboardData.statistiques.serie}</h2>
 
         <p>Jours</p>
 
@@ -114,7 +237,7 @@ function Dashboard() {
 
         <h3>🏅</h3>
 
-        <h2>3</h2>
+        <h2>{dashboardData.statistiques.badges}</h2>
 
         <p>Badges</p>
 
@@ -126,22 +249,54 @@ function Dashboard() {
 
             {/* BIENVENUE */}
 
-            <section className="welcome-card">
+           <section className="welcome-card">
 
-    <h2>
-        Bienvenue sur NextOri 👋
-    </h2>
+    <div className="welcome-content">
 
-    <p>
-        Construisez votre avenir en découvrant les métiers,
-        formations et universités qui correspondent à votre profil.
-    </p>
+        <div className="welcome-icon">
+            👋
+        </div>
 
-    <button className="primary-dashboard-button">
+        <div>
 
-        Commencer mon parcours
+            <h2>
+                Bonjour {dashboardData.utilisateur.nom} 👋
+            </h2>
 
-    </button>
+            <p>
+                Bienvenue dans votre espace d'orientation NextOri.
+                Suivez votre parcours et construisez votre avenir
+                professionnel étape par étape.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div className="welcome-action">
+
+        <div className="welcome-info">
+
+            <span>
+                🚀
+            </span>
+
+            <p>
+                Continuez votre parcours d'orientation
+            </p>
+
+        </div>
+
+
+        <button className="primary-dashboard-button">
+
+            Continuer mon parcours
+
+        </button>
+
+    </div>
+
 
 </section>
 
@@ -156,137 +311,58 @@ function Dashboard() {
 
 
     <div className="path-container">
+       {
+    parcours.map((etape, index) => {
 
+        const numero = index + 1;
 
-        <div className="path-item completed">
+        const estTerminee =
+            numero < dashboardData.parcours.etapeActuelle;
 
-            <div className="path-circle">
-                ✓
-            </div>
+        const estActive =
+            numero === dashboardData.parcours.etapeActuelle;
 
-            <div>
+        return (
 
-                <h3>
-                    Créer mon profil
-                </h3>
+            <div
+                key={numero}
+                className={`path-item ${
+                    estTerminee
+                        ? "completed"
+                        : estActive
+                        ? "active"
+                        : ""
+                }`}
+            >
 
-                <p>
-                    Informations personnelles complétées
-                </p>
+                <div className="path-circle">
 
-            </div>
+                    {
+                        estTerminee
+                            ? "✓"
+                            : numero
+                    }
 
-        </div>
+                </div>
 
+                <div>
 
+                    <h3>{etape.titre}</h3>
 
-        <div className="path-item completed">
+                    <p>{etape.description}</p>
 
-            <div className="path-circle">
-                ✓
-            </div>
-
-            <div>
-
-                <h3>
-                    Passer le test RIASEC
-                </h3>
-
-                <p>
-                    Découvrir ses intérêts professionnels
-                </p>
-
-            </div>
-
-        </div>
-
-
-
-        <div className="path-item active">
-
-            <div className="path-circle">
-                3
-            </div>
-
-            <div>
-
-                <h3>
-                    Découvrir mon profil
-                </h3>
-
-                <p>
-                    Analyser mes résultats
-                </p>
+                </div>
 
             </div>
 
-        </div>
+        );
 
+    })
+}
 
+       
 
-        <div className="path-item">
-
-            <div className="path-circle">
-                4
-            </div>
-
-            <div>
-
-                <h3>
-                    Explorer les métiers
-                </h3>
-
-                <p>
-                    Trouver les carrières adaptées
-                </p>
-
-            </div>
-
-        </div>
-
-
-
-        <div className="path-item">
-
-            <div className="path-circle">
-                5
-            </div>
-
-            <div>
-
-                <h3>
-                    Choisir une formation
-                </h3>
-
-                <p>
-                    Découvrir les filières
-                </p>
-
-            </div>
-
-        </div>
-
-
-
-        <div className="path-item">
-
-            <div className="path-circle">
-                6
-            </div>
-
-            <div>
-
-                <h3>
-                    Trouver une université
-                </h3>
-
-                <p>
-                    Explorer les établissements
-                </p>
-
-            </div>
-
-        </div>
+     
 
 
     </div>
@@ -380,7 +456,7 @@ function Dashboard() {
 
     <p>
         Découvrez votre profil d'orientation
-        et construisez votre avenir professionnel.
+        et construisez votre avenir professionnel avec NextOri.
     </p>
 
 
@@ -404,81 +480,113 @@ function Dashboard() {
             <section className="project-card">
 
     <h2>
-        Mon projet d'avenir 🚀
-    </h2>
+    Mon plan d'avenir 🚀
+</h2>
 
+<p>
+    Recevez un plan personnalisé construit à partir de votre profil
+    RIASEC, de vos recommandations et de vos objectifs professionnels.
+</p>
 
-    <p>
-        Construisez progressivement votre projet
-        professionnel grâce aux recommandations NextOri.
-    </p>
+<div className="future-plan-card">
 
+    <div className="future-icon">
 
-    <div className="project-steps">
-
-
-        <div className="project-step">
-
-            <span>1</span>
-
-            <p>
-                Découvrir mes métiers
-            </p>
-
-        </div>
-
-
-
-        <div className="project-step">
-
-            <span>2</span>
-
-            <p>
-                Choisir une formation
-            </p>
-
-        </div>
-
-
-
-        <div className="project-step">
-
-            <span>3</span>
-
-            <p>
-                Trouver une université
-            </p>
-
-        </div>
-
+        🧭
 
     </div>
 
+    <div className="future-content">
 
-</section>
+        <h3>
+
+            Votre feuille de route personnalisée
+
+        </h3>
+
+        <p>
+
+            Découvrez les étapes à suivre pour atteindre votre métier de
+            rêve : compétences à développer, formations recommandées,
+            universités adaptées et conseils personnalisés.
+
+        </p>
+
+    </div>
+
+ </div>
+
+ <button className="future-button">
+
+    Découvrir mon plan personnalisé
+
+ </button>
+
+ <p className="premium-note">
+
+    🔒 Disponible prochainement avec NextOri Premium
+
+   </p>
+
+   </section>
 
 
 
             {/* BESOIN D'AIDE */}
 
-          <section className="help-card">
+         <section className="help-card">
 
-    <div className="help-card-content">
+    <div className="help-top">
 
-        <h2>
-            Besoin d'aide ?
-        </h2>
+        <div className="help-icon">
 
-        <p>
-            Nos conseillers en orientation seront bientôt
-            disponibles pour vous accompagner.
-        </p>
+            💬
+
+        </div>
+
+        <div className="help-card-content">
+
+            <h2>
+
+                Besoin d'aide ?
+
+            </h2>
+
+            <p>
+
+                Nos conseillers seront bientôt disponibles pour répondre
+                à vos questions et vous accompagner dans votre orientation.
+
+            </p>
+
+        </div>
 
     </div>
 
-    <button className="help-button">
-        En savoir plus
-    </button>
+    <div className="help-soon">
+
+        <div className="help-badge">
+
+            <span className="help-dot"></span>
+
+            Disponible très bientôt
+
+        </div>
+
+        <p className="help-soon-text">
+
+            Le coaching personnalisé sera disponible dans une prochaine
+            mise à jour de NextOri.
+
+        </p>
+
+        <button className="help-button">
+
+            🔔 Me notifier
+
+        </button>
+
+    </div>
 
 </section>
 

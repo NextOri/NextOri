@@ -34,11 +34,41 @@ class DashboardService
         $points += 50;
     }
 
-    // Les autres actions seront ajoutées plus tard
-    // +20 Consultation résultats
-    // +10 Consultation profil
-    // +10 Consultation formation
-    // +10 Consultation université
+    // 3. Profil consulté (+20)
+$sql = "SELECT COUNT(*) FROM historique WHERE id_user = ? AND action = 'PROFIL_CONSULTE'";
+$requete = $this->connexion->prepare($sql);
+$requete->execute([$idUser]);
+
+if ($requete->fetchColumn() > 0) {
+    $points += 20;
+}
+
+// 4. Métiers consultés (+20)
+$sql = "SELECT COUNT(*) FROM historique WHERE id_user = ? AND action = 'METIERS_CONSULTES'";
+$requete = $this->connexion->prepare($sql);
+$requete->execute([$idUser]);
+
+if ($requete->fetchColumn() > 0) {
+    $points += 20;
+}
+
+// 5. Formation consultée (+10)
+$sql = "SELECT COUNT(*) FROM historique WHERE id_user = ? AND action = 'FORMATION_CONSULTEE'";
+$requete = $this->connexion->prepare($sql);
+$requete->execute([$idUser]);
+
+if ($requete->fetchColumn() > 0) {
+    $points += 10;
+}
+
+// 6. Université consultée (+10)
+$sql = "SELECT COUNT(*) FROM historique WHERE id_user = ? AND action = 'UNIVERSITES_CONSULTEES'";
+$requete = $this->connexion->prepare($sql);
+$requete->execute([$idUser]);
+
+if ($requete->fetchColumn() > 0) {
+    $points += 10;
+}
 
     return $points;
    }
@@ -51,31 +81,31 @@ class DashboardService
 
             "nom" => "Explorateur",
             "numero" => 1,
-            "progression" => $points
+            "progression" => $points 
 
         ];
 
     }
 
-    elseif ($points < 250) {
+    elseif ($points < 200) {
 
         return [
 
             "nom" => "Découvreur",
             "numero" => 2,
-            "progression" => intval((($points - 100) / 150) * 100)
+            "progression" => intval($points - 100)
 
         ];
 
     }
 
-    elseif ($points < 500) {
+    elseif ($points < 300) {
 
         return [
 
             "nom" => "Visionnaire",
             "numero" => 3,
-            "progression" => intval((($points - 250) / 250) * 100)
+            "progression" => intval($points - 200) 
 
         ];
 

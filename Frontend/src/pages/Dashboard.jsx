@@ -111,45 +111,58 @@ function Dashboard() {
 
 };
 
-const parcours = [
 
-    {
-        titre: "Créer mon profil",
-        description: "Informations personnelles complétées"
-    },
-
-    {
-        titre: "Passer le test RIASEC",
-        description: "Découvrir ses intérêts professionnels"
-    },
-
-    {
-        titre: "Découvrir mon profil",
-        description: "Analyser mes résultats"
-    },
-
-    {
-        titre: "Explorer les métiers",
-        description: "Trouver les carrières adaptées"
-    },
-
-    {
-        titre: "Choisir une formation",
-        description: "Découvrir les filières"
-    },
-
-    {
-        titre: "Trouver une université",
-        description: "Explorer les établissements"
-    }
-
-];
 
    if(chargementDashboard){
 
     return <p>Chargement du tableau de bord...</p>;
 
  }
+   const parcours = [
+
+    {
+        numero: 1,
+        titre: "Créer mon profil",
+        description: "Informations personnelles complétées",
+        termine: dashboardDataState.parcours.profil
+    },
+
+    {
+        numero: 2,
+        titre: "Passer le test RIASEC",
+        description: "Découvrir ses intérêts professionnels",
+        termine: dashboardDataState.parcours.test
+    },
+
+    {
+        numero: 3,
+        titre: "Découvrir mon profil",
+        description: "Analyser mes résultats",
+        termine: dashboardDataState.parcours.profilConsulte
+    },
+
+    {
+        numero: 4,
+        titre: "Explorer les métiers",
+        description: "Trouver les carrières adaptées",
+        termine: dashboardDataState.parcours.metiersConsultes
+    },
+
+    {
+        numero: 5,
+        titre: "Choisir une formation",
+        description: "Découvrir les filières",
+        termine: dashboardDataState.parcours.formationConsulte
+    },
+
+    {
+        numero: 6,
+        titre: "Trouver une université",
+        description: "Explorer les établissements",
+        termine: dashboardDataState.parcours.universiteConsulte
+    }
+
+];
 
     return (
 
@@ -181,10 +194,10 @@ const parcours = [
 
     <div className="level-header">
 
-        <h2>{dashboardData.utilisateur.niveau}</h2>
+        <h2>{dashboardDataState.niveau.nom}</h2>
 
         <span>
-       Niveau {dashboardData.utilisateur.niveauNumero}
+       Niveau {dashboardDataState.niveau.numero}
         </span>
 
     </div>
@@ -194,14 +207,14 @@ const parcours = [
         <div
     className="progress-fill"
     style={{
-        width: `${dashboardData.utilisateur.progression}%`
+        width: `${dashboardDataState.niveau.progression}%`
     }}
       ></div>
     </div>
 
     <p className="progress-text">
 
-        Progression : {dashboardData.utilisateur.progression}%
+        Progression : {dashboardDataState.niveau.progression}%
 
     </p>
 
@@ -217,7 +230,7 @@ const parcours = [
 
         <h3>⭐</h3>
 
-         <h2>{dashboardData.statistiques.points}</h2>
+         <h2>{dashboardDataState.statistiques.points}</h2>
 
         <p>Points</p>
 
@@ -227,7 +240,7 @@ const parcours = [
 
         <h3>🔥</h3>
 
-        <h2>{dashboardData.statistiques.serie}</h2>
+        <h2>{dashboardDataState.statistiques.serie}</h2>
 
         <p>Jours</p>
 
@@ -237,7 +250,7 @@ const parcours = [
 
         <h3>🏅</h3>
 
-        <h2>{dashboardData.statistiques.badges}</h2>
+        <h2>{dashboardDataState.statistiques.badges}</h2>
 
         <p>Badges</p>
 
@@ -260,7 +273,7 @@ const parcours = [
         <div>
 
             <h2>
-                Bonjour {dashboardData.utilisateur.nom} 👋
+                Bonjour {dashboardDataState.utilisateur.nom} 👋
             </h2>
 
             <p>
@@ -310,63 +323,72 @@ const parcours = [
     </h2>
 
 
-    <div className="path-container">
-       {
-    parcours.map((etape, index) => {
+  <div className="path-container">
 
-        const numero = index + 1;
+{
+parcours.map((etape, index) => {
 
-        const estTerminee =
-            numero < dashboardData.parcours.etapeActuelle;
 
-        const estActive =
-            numero === dashboardData.parcours.etapeActuelle;
+const estTermine = etape.termine;
 
-        return (
 
-            <div
-                key={numero}
-                className={`path-item ${
-                    estTerminee
-                        ? "completed"
-                        : estActive
-                        ? "active"
-                        : ""
-                }`}
-            >
+const estActif =
+    !estTermine &&
+    parcours
+    .slice(0, index)
+    .every(item => item.termine);
 
-                <div className="path-circle">
 
-                    {
-                        estTerminee
-                            ? "✓"
-                            : numero
-                    }
+return (
 
-                </div>
+<div
+key={etape.numero}
+className={`path-item ${
+    estTermine ? "completed" 
+    :estActif ? "active"
+    :""
 
-                <div>
+}`}
+>
 
-                    <h3>{etape.titre}</h3>
 
-                    <p>{etape.description}</p>
+<div className="path-circle">
 
-                </div>
-
-            </div>
-
-        );
-
-    })
+{
+estTermine
+?
+"✓"
+:
+etape.numero
 }
 
-       
-
-     
+</div>
 
 
-    </div>
+<div>
 
+      <h3>
+     {etape.titre}
+    </h3>
+
+
+<p>
+{etape.description}
+</p>
+
+
+</div>
+
+
+</div>
+
+)
+
+})
+
+}
+
+</div>
 </section>
 
 

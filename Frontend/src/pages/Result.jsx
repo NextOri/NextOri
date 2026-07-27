@@ -71,7 +71,7 @@ console.log("DATA RESULT :", resultatInitial);
     
 }, [resultat]);
 
-//  fetch("http://localhost/NextOri/backend/api/routes/resultats.php?id_user=1")
+
 
 
     /*
@@ -412,6 +412,75 @@ console.log("DATA RESULT :", resultatInitial);
 
 };
 
+   const enregistrerAction = async (action) => {
+
+    try {
+
+        await fetch(
+            "http://localhost/NextOri/backend/api/routes/historique.php",
+            {
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+
+                    id_user: 1,
+
+                    action: action
+
+                })
+
+            }
+        );
+
+
+    } catch(error) {
+
+        console.error(
+            "Erreur historique :",
+            error
+        );
+
+    }
+
+};
+    
+    const consulterProfil = async () => {
+
+    await enregistrerAction(
+        "PROFIL_CONSULTE"
+    );
+
+
+    navigate("/profil-riasec", {
+
+        state:{
+            resultat: resultat
+        }
+
+    });
+
+    };
+     const consulterFormation = async (metier, resultat) => {
+
+    await enregistrerAction(
+        "FORMATION_CONSULTEE"
+    );
+
+
+    navigate("/formations", {
+
+        state: {
+            metier: metier,
+            resultat: resultat
+        }
+
+    });
+
+    };
 
 
     /*
@@ -636,19 +705,7 @@ console.log("DATA RESULT :", resultatInitial);
 
                     className="profile-button"
 
-                    onClick={()=>navigate(
-
-                        "/profil-riasec",
-
-                        {
-
-                            state: {
-                                resultat: resultat
-                            }
-
-                        }
-
-                    )}
+                    onClick={consulterProfil}
 
                 >
 
@@ -953,30 +1010,16 @@ console.log("DATA RESULT :", resultatInitial);
 
 
                         <button
-
-                        className="job-button"
-
-                        onClick={()=>navigate(
-
-                            "/formations",
-
-                            {
-
-                                state:{
-                                    metier: metier,
-
-                                    resultat: resultat
-                                }
-
-                            }
-
-                        )}
-
-                        >
-
-                            Explorer cette carrière
-
-                        </button>
+               className="job-button"
+                onClick={() =>
+                consulterFormation(
+                                metier,
+                               resultat
+        )
+    }
+        >
+    Explorer cette carrière
+       </button>
 
 
 
@@ -1163,26 +1206,16 @@ resultat.recommandations.secondaires.length > 0 ? (
 
 
                 <button
-
-                className="job-button"
-
-                onClick={()=>navigate(
-
-                    "/formations",
-
-                    {
-
-                        state:metier
-
-                    }
-
-                )}
-
-                >
-
-                    Explorer cette carrière
-
-                </button>
+    className="job-button"
+        onClick={() =>
+           consulterFormation(
+            metier,
+            resultat
+        )
+              }
+           >
+    Explorer cette carrière
+              </button>
 
 
             </article>

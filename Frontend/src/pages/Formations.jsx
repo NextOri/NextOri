@@ -154,6 +154,65 @@ function Formations(){
 
     },[metier]);
 
+    const consulterUniversite = async (
+    formation,
+    metier,
+    resultat
+) => {
+
+    await enregistrerAction(
+        "UNIVERSITES_CONSULTEES"
+    );
+
+
+    navigate("/universites", {
+
+        state: {
+            filiere: formation,
+            metier,
+            resultat
+        }
+
+    });
+
+};
+const enregistrerAction = async (action) => {
+
+    try {
+
+        await fetch(
+            "http://localhost/NextOri/backend/api/routes/historique.php",
+            {
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+
+                    id_user: 1,
+
+                    action: action
+
+                })
+
+            }
+        );
+
+
+    } catch(error) {
+
+        console.error(
+            "Erreur historique :",
+            error
+        );
+
+    }
+
+};
+
+
     return(
 
 
@@ -321,29 +380,18 @@ function Formations(){
 
 
 
-                        <button
-
-                        className="university-button"
-
-                        onClick={()=>navigate("/universites",{
-
-                            state:{
-
-                                filiere: formation,
-
-                                metier,
-
-                                resultat
-
-                            }
-
-                        })}
-
-                        >
-
-                            Voir les universités
-
-                        </button>
+                       <button
+     className="university-button"
+     onClick={() =>
+        consulterUniversite(
+            formation,
+            metier,
+            resultat
+        )
+     }
+     >
+      Voir les universités
+         </button>
 
 
 

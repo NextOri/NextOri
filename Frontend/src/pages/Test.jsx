@@ -142,15 +142,18 @@ function suivant() {
 
         envoyerReponses(reponses)
 
-            .then((resultat) => {
-                console.log("RESULTAT AVANT NAVIGATION :", resultat);
+            .then(async (resultat) => {
+
+                await enregistrerAction(
+                    "METIERS_CONSULTES"
+                )
 
                 navigate("/result", {
                     state:{
                         data: resultat
                     }
                 });
-                console.log("RESULTAT APRES NAVIGATION :", resultat);
+                
 
             })
 
@@ -165,6 +168,41 @@ function suivant() {
     }
 
 }
+
+const enregistrerAction = async (action) => {
+
+    try {
+
+        await fetch(
+            "http://localhost/NextOri/backend/api/routes/historique.php",
+            {
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+
+                    id_user: 1,
+
+                    action: action
+
+                })
+            }
+        );
+
+
+    } catch(error) {
+
+        console.error(
+            "Erreur historique :",
+            error
+        );
+
+    }
+
+};
    
 function precedent(){
 

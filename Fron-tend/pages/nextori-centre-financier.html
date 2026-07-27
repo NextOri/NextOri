@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Centre Financier NextOri — Espace Fondateurs</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js"></script>
+<style>
+:root{--navy:#0D1B2A;--blue:#1E3A8A;--blue-l:#2c4fa8;--white:#F2F4F7;--gold:#F4B400;--gold-d:#d9a300;
+--gray-100:#eef1f6;--gray-200:#e3e7ee;--gray-400:#9aa4b2;--gray-500:#6b7688;--gray-700:#384153;--gray-800:#1c2433;
+--green:#16a34a;--red:#e0433f;--orange:#f97316;--radius:18px;}
+*{box-sizing:border-box;}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--white);color:var(--gray-800);}
+button{font-family:inherit;}
+img{max-width:100%;}
+
+/* ===== Access gate ===== */
+#gateScreen{min-height:100vh;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 30% 20%,#16264a 0%,var(--navy) 60%);padding:20px;}
+.gate-box{background:#fff;border-radius:24px;padding:40px 34px;max-width:400px;width:100%;box-shadow:0 30px 70px rgba(0,0,0,0.4);text-align:center;}
+.gate-lock{width:64px;height:64px;border-radius:18px;background:var(--navy);color:var(--gold);display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto 18px;}
+.gate-box h1{font-size:19px;font-weight:800;color:var(--navy);margin:0 0 6px;}
+.gate-box p{font-size:12.5px;color:var(--gray-500);margin:0 0 22px;line-height:1.5;}
+.gate-box input{width:100%;border:1.5px solid var(--gray-200);border-radius:12px;padding:13px 16px;font-size:14px;text-align:center;letter-spacing:2px;outline:none;margin-bottom:12px;}
+.gate-box input:focus{border-color:var(--gold);}
+.gate-btn{width:100%;background:var(--gold);color:var(--navy);border:none;border-radius:999px;padding:13px;font-size:14px;font-weight:800;cursor:pointer;}
+.gate-error{color:var(--red);font-size:12px;font-weight:700;margin-top:10px;display:none;}
+.gate-hint{margin-top:16px;font-size:10.5px;color:var(--gray-400);}
+
+/* ===== App shell ===== */
+#appScreen{display:none;}
+#appScreen.active{display:flex;min-height:100vh;}
+.sidebar{width:260px;flex-shrink:0;background:linear-gradient(180deg,var(--navy) 0%,#081120 100%);color:#fff;display:flex;flex-direction:column;position:fixed;top:0;left:0;bottom:0;padding:20px 14px;overflow-y:auto;z-index:20;}
+.brand{display:flex;align-items:center;gap:10px;padding:0 8px 20px;margin-bottom:6px;border-bottom:1px solid rgba(255,255,255,0.08);}
+.brand-logo{width:36px;height:36px;border-radius:10px;background:var(--gold);display:flex;align-items:center;justify-content:center;font-weight:900;color:var(--navy);font-size:15px;flex-shrink:0;}
+.brand-name{font-weight:800;font-size:14.5px;}
+.brand-sub{font-size:9.5px;color:var(--gold);font-weight:800;letter-spacing:0.6px;text-transform:uppercase;}
+.founder-chip{display:flex;align-items:center;gap:9px;background:rgba(244,180,0,0.1);border:1px solid rgba(244,180,0,0.25);border-radius:12px;padding:9px 11px;margin:14px 0;}
+.founder-chip img{width:30px;height:30px;border-radius:999px;}
+.founder-chip .fn{font-size:11.5px;font-weight:800;color:#fff;}
+.founder-chip .fr{font-size:9.5px;color:var(--gold);font-weight:700;}
+.nav-group{display:flex;flex-direction:column;gap:2px;}
+.nav-sec-label{font-size:9.5px;font-weight:800;color:#5c6b8a;text-transform:uppercase;letter-spacing:0.6px;padding:14px 12px 4px;}
+.nav-item{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:9px;color:#c3cde6;font-size:12.5px;font-weight:600;cursor:pointer;border:none;background:none;width:100%;text-align:left;transition:all .15s ease;}
+.nav-item:hover{background:rgba(255,255,255,0.06);color:#fff;}
+.nav-item.active{background:var(--gold);color:var(--navy);font-weight:800;}
+.nav-item .ic{font-size:14.5px;width:18px;text-align:center;flex-shrink:0;}
+.main{margin-left:260px;flex:1;min-width:0;}
+.topbar{position:sticky;top:0;z-index:10;background:#fff;border-bottom:1px solid var(--gray-200);padding:14px 26px;display:flex;align-items:center;gap:16px;}
+.topbar-title{font-size:15px;font-weight:800;color:var(--navy);display:flex;align-items:center;gap:8px;}
+.private-tag{background:#fee2e2;color:var(--red);font-size:10px;font-weight:800;padding:3px 9px;border-radius:999px;}
+.topbar-right{margin-left:auto;display:flex;align-items:center;gap:14px;font-size:12px;color:var(--gray-500);font-weight:600;}
+.content{padding:24px 26px 60px;}
+.view{display:none;}
+.view.active{display:block;animation:fadeIn .35s ease;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+.page-title{font-size:20px;font-weight:800;color:var(--navy);margin:0 0 2px;}
+.page-sub{font-size:13px;color:var(--gray-500);margin:0 0 20px;}
+
+/* ===== Reusable cards/tables ===== */
+.kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:20px;}
+.stat-card{background:#fff;border:1px solid var(--gray-200);border-radius:var(--radius);padding:16px;box-shadow:0 1px 3px rgba(13,27,42,0.05);transition:box-shadow .2s ease,transform .2s ease;}
+.stat-card:hover{box-shadow:0 8px 22px rgba(13,27,42,0.08);transform:translateY(-2px);}
+.stat-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
+.stat-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:16px;}
+.stat-trend{font-size:11px;font-weight:800;padding:3px 8px;border-radius:999px;}
+.trend-up{background:#dcfce7;color:var(--green);}
+.trend-down{background:#fee2e2;color:var(--red);}
+.trend-neutral{background:var(--gray-100);color:var(--gray-500);}
+.stat-value{font-size:21px;font-weight:900;color:var(--navy);}
+.stat-label{font-size:11.5px;color:var(--gray-500);font-weight:600;margin-top:2px;}
+.panel{background:#fff;border:1px solid var(--gray-200);border-radius:var(--radius);padding:20px;box-shadow:0 1px 3px rgba(13,27,42,0.05);margin-bottom:16px;}
+.panel-title{font-size:14.5px;font-weight:800;color:var(--navy);margin:0 0 3px;display:flex;align-items:center;gap:8px;}
+.panel-sub{font-size:11.5px;color:var(--gray-500);margin:0 0 14px;}
+.chart-box{position:relative;height:250px;}
+.two-col{display:grid;grid-template-columns:2fr 1fr;gap:16px;}
+.two-col-even{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+table{width:100%;border-collapse:collapse;}
+thead th{text-align:left;font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:.4px;color:var(--gray-500);padding:0 10px 10px;border-bottom:1px solid var(--gray-200);}
+tbody td{padding:11px 10px;font-size:12.5px;color:var(--gray-700);border-bottom:1px solid var(--gray-100);vertical-align:middle;}
+tbody tr:hover{background:var(--gray-100);}
+tbody tr:last-child td{border-bottom:none;}
+.status-pill{display:inline-block;font-size:10.5px;font-weight:800;padding:3px 10px;border-radius:999px;}
+.status-active{background:#dcfce7;color:var(--green);}
+.status-pending{background:#fef3c7;color:#b45309;}
+.status-blocked{background:#fee2e2;color:var(--red);}
+.status-info{background:#dbeafe;color:#1d4ed8;}
+.page-toolbar{display:flex;align-items:center;gap:10px;margin-bottom:16px;flex-wrap:wrap;}
+.filter-select,.filter-input{border:1px solid var(--gray-200);border-radius:10px;padding:9px 13px;font-size:12px;font-weight:600;color:var(--gray-700);background:#fff;}
+.btn-primary{margin-left:auto;background:var(--navy);color:#fff;border:none;font-size:12.5px;font-weight:700;padding:10px 17px;border-radius:10px;cursor:pointer;}
+.btn-primary:hover{background:var(--blue);}
+.btn-gold{background:var(--gold);color:var(--navy);border:none;font-size:12.5px;font-weight:800;padding:10px 17px;border-radius:10px;cursor:pointer;}
+.btn-outline{background:#fff;border:1px solid var(--gray-200);color:var(--navy);font-size:11.5px;font-weight:700;padding:8px 13px;border-radius:9px;cursor:pointer;}
+.btn-outline:hover{background:var(--gray-100);}
+.icon-btn{width:28px;height:28px;border-radius:8px;border:1px solid var(--gray-200);background:#fff;cursor:pointer;font-size:12px;display:flex;align-items:center;justify-content:center;}
+.icon-btn:hover{background:var(--gray-100);}
+.tabs{display:flex;gap:4px;background:var(--gray-100);padding:4px;border-radius:12px;width:fit-content;margin-bottom:18px;overflow-x:auto;max-width:100%;}
+.tab-btn{flex-shrink:0;border:none;background:none;padding:9px 16px;border-radius:9px;font-size:12px;font-weight:700;color:var(--gray-500);cursor:pointer;white-space:nowrap;}
+.tab-btn.active{background:#fff;color:var(--navy);box-shadow:0 1px 4px rgba(13,27,42,0.12);}
+.tab-panel{display:none;animation:fadeIn .3s ease;}
+.tab-panel.active{display:block;}
+
+/* progress / budget bars */
+.budget-row{margin-bottom:16px;}
+.budget-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;font-size:12.5px;}
+.budget-cat{font-weight:700;color:var(--gray-800);display:flex;align-items:center;gap:6px;}
+.budget-nums{color:var(--gray-500);font-size:11.5px;}
+.budget-track{background:var(--gray-100);border-radius:999px;height:10px;overflow:hidden;}
+.budget-fill{height:100%;border-radius:999px;transition:width 1s ease;}
+
+/* status dots */
+.dot-green{color:var(--green);}
+.dot-yellow{color:#d97706;}
+.dot-red{color:var(--red);}
+
+/* Documents grid */
+.doc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;}
+.doc-card{background:#fff;border:1px solid var(--gray-200);border-radius:14px;padding:14px;display:flex;gap:12px;align-items:flex-start;}
+.doc-icon{width:40px;height:40px;border-radius:10px;background:var(--gray-100);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+.doc-name{font-size:12.5px;font-weight:700;color:var(--gray-800);}
+.doc-meta{font-size:10.5px;color:var(--gray-500);margin-top:2px;}
+
+/* Alerts */
+.alert-item{display:flex;gap:12px;align-items:flex-start;padding:13px 15px;border-radius:14px;margin-bottom:10px;border:1px solid;}
+.alert-item.warn{background:#fff7ed;border-color:#fed7aa;}
+.alert-item.danger{background:#fef2f2;border-color:#fecaca;}
+.alert-item.info{background:#eff6ff;border-color:#bfdbfe;}
+.alert-item.success{background:#f0fdf4;border-color:#bbf7d0;}
+.alert-icon{font-size:17px;flex-shrink:0;}
+.alert-text{font-size:12.5px;color:var(--gray-800);font-weight:600;}
+.alert-time{font-size:10.5px;color:var(--gray-500);margin-top:2px;}
+
+/* Decisions kanban */
+.kanban{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
+.kanban-col{background:var(--gray-100);border-radius:16px;padding:12px;min-height:120px;}
+.kanban-col-title{font-size:11.5px;font-weight:800;color:var(--gray-700);margin-bottom:10px;display:flex;align-items:center;justify-content:space-between;}
+.kanban-count{background:#fff;color:var(--gray-500);font-size:10px;font-weight:800;padding:2px 8px;border-radius:999px;}
+.decision-card{background:#fff;border-radius:12px;padding:11px 13px;margin-bottom:9px;box-shadow:0 1px 3px rgba(13,27,42,0.06);position:relative;}
+.decision-card.pinned{border-left:3px solid var(--gold);}
+.decision-title{font-size:12px;font-weight:800;color:var(--gray-800);margin-bottom:4px;}
+.decision-meta{font-size:10px;color:var(--gray-500);display:flex;gap:6px;flex-wrap:wrap;align-items:center;}
+.priority-tag{font-size:9.5px;font-weight:800;padding:2px 7px;border-radius:999px;}
+.priority-high{background:#fee2e2;color:var(--red);}
+.priority-med{background:#fef3c7;color:#b45309;}
+.priority-low{background:#dcfce7;color:var(--green);}
+.pin-star{position:absolute;top:9px;right:10px;font-size:11px;}
+
+/* Vision */
+.vision-block{background:linear-gradient(135deg,var(--navy),var(--blue));color:#fff;border-radius:var(--radius);padding:22px;margin-bottom:16px;}
+.vision-block h3{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;color:var(--gold);margin:0 0 8px;}
+.vision-block p{font-size:13.5px;line-height:1.6;margin:0;color:#e2e8f0;}
+.objectif-row{margin-bottom:16px;}
+.objectif-top{display:flex;justify-content:space-between;font-size:12.5px;margin-bottom:6px;}
+.objectif-label{font-weight:700;color:var(--gray-800);}
+.objectif-pct{font-weight:800;color:var(--blue);}
+
+/* Coffre-fort */
+.vault-locked{text-align:center;padding:50px 20px;}
+.vault-lock-icon{width:70px;height:70px;border-radius:20px;background:var(--navy);color:var(--gold);display:flex;align-items:center;justify-content:center;font-size:30px;margin:0 auto 16px;}
+.vault-content{display:none;}
+.vault-content.show{display:block;}
+.vault-row{display:flex;justify-content:space-between;padding:11px 0;border-bottom:1px solid var(--gray-100);font-size:12.5px;}
+.vault-row:last-child{border-bottom:none;}
+.vault-row .vk{color:var(--gray-500);font-weight:700;}
+.vault-row .vv{color:var(--gray-800);font-weight:700;}
+
+/* Modal */
+.modal-overlay{position:fixed;inset:0;background:rgba(13,27,42,0.55);display:none;align-items:center;justify-content:center;z-index:80;padding:20px;}
+.modal-overlay.show{display:flex;}
+.modal-box{background:#fff;border-radius:20px;padding:24px;max-width:460px;width:100%;max-height:85vh;overflow-y:auto;box-shadow:0 20px 50px rgba(0,0,0,0.3);}
+.modal-title{font-size:16px;font-weight:800;color:var(--navy);margin:0 0 4px;}
+.modal-sub{font-size:12px;color:var(--gray-500);margin:0 0 16px;}
+.form-group{margin-bottom:13px;}
+.form-group label{display:block;font-size:11.5px;font-weight:700;color:var(--gray-700);margin-bottom:5px;}
+.form-group input,.form-group select,.form-group textarea{width:100%;border:1.5px solid var(--gray-200);border-radius:10px;padding:9px 12px;font-size:12.5px;font-family:inherit;outline:none;}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--gold);}
+.form-row2{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.modal-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:6px;}
+.modal-cancel{background:var(--gray-100);border:none;color:var(--gray-700);border-radius:10px;padding:10px 18px;font-size:12.5px;font-weight:700;cursor:pointer;}
+.modal-submit{background:var(--navy);border:none;color:#fff;border-radius:10px;padding:10px 18px;font-size:12.5px;font-weight:700;cursor:pointer;}
+
+.toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(20px);background:var(--navy);color:#fff;padding:13px 22px;border-radius:999px;font-size:13px;font-weight:700;box-shadow:0 10px 30px rgba(13,27,42,0.35);opacity:0;pointer-events:none;transition:opacity .3s ease,transform .3s ease;z-index:200;white-space:nowrap;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+@media (max-width:1100px){.kpi-row{grid-template-columns:repeat(2,1fr);}.two-col,.two-col-even{grid-template-columns:1fr;}.kanban{grid-template-columns:1fr 1fr;}}
+@media (max-width:640px){.kanban{grid-template-columns:1fr;}.form-row2{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<!-- ============ ACCESS GATE ============ -->
+<div id="gateScreen">
+  <div class="gate-box">
+    <div class="gate-lock">🔒</div>
+    <h1>Centre Financier NextOri</h1>
+    <p>Espace strictement réservé au Fondateur et au Co-fondateur. Merci de saisir le code d'accès Super Administrateur.</p>
+    <input type="password" id="gatePassword" placeholder="Code d'accès" />
+    <button class="gate-btn" id="gateSubmit">Déverrouiller l'accès</button>
+    <div class="gate-error" id="gateError">❌ Code incorrect. Réessaie ou contacte l'autre fondateur.</div>
+    <div class="gate-hint">Accès à usage de démonstration — code : NEXTORI2026</div>
+  </div>
+</div>
+
+<!-- ============ APP ============ -->
+<div id="appScreen">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-logo">N</div>
+      <div><div class="brand-name">NextOri</div><div class="brand-sub">Centre Financier</div></div>
+    </div>
+    <div class="founder-chip">
+      <img src="https://ui-avatars.com/api/?name=Ndeye+Awa+Niane&background=F4B400&color=0D1B2A&bold=true" />
+      <div><div class="fn">Ndeye Awa Niane</div><div class="fr">★ Fondatrice — Super Admin</div></div>
+    </div>
+    <nav class="nav-group" id="navGroup">
+      <div class="nav-sec-label">Vue d'ensemble</div>
+      <button class="nav-item active" data-view="dashboard"><span class="ic">📊</span>Tableau de bord</button>
+      <div class="nav-sec-label">Argent</div>
+      <button class="nav-item" data-view="revenus"><span class="ic">💰</span>Revenus</button>
+      <button class="nav-item" data-view="depenses"><span class="ic">📉</span>Dépenses</button>
+      <button class="nav-item" data-view="abonnements"><span class="ic">🔁</span>Abonnements</button>
+      <button class="nav-item" data-view="paiements"><span class="ic">💳</span>Paiements</button>
+      <button class="nav-item" data-view="budget"><span class="ic">🧮</span>Budget annuel</button>
+      <button class="nav-item" data-view="previsions"><span class="ic">🔮</span>Prévisions</button>
+      <div class="nav-sec-label">Structure</div>
+      <button class="nav-item" data-view="partenaires"><span class="ic">🤝</span>Partenaires</button>
+      <button class="nav-item" data-view="historique"><span class="ic">🕓</span>Historique financier</button>
+      <button class="nav-item" data-view="documents"><span class="ic">📁</span>Documents</button>
+      <button class="nav-item" data-view="alertes"><span class="ic">🔔</span>Alertes intelligentes</button>
+      <button class="nav-item" data-view="securite"><span class="ic">🛡️</span>Sécurité</button>
+      <div class="nav-sec-label">⭐ Espace Fondateurs</div>
+      <button class="nav-item" data-view="decisions"><span class="ic">🗳️</span>Décisions des Fondateurs</button>
+      <button class="nav-item" data-view="vision"><span class="ic">🧭</span>Vision NextOri</button>
+      <button class="nav-item" data-view="coffre"><span class="ic">🔐</span>Coffre-Fort NextOri</button>
+    </nav>
+  </aside>
+
+  <div class="main">
+    <div class="topbar">
+      <div class="topbar-title">🔒 Centre Financier <span class="private-tag">Privé — Fondateurs uniquement</span></div>
+      <div class="topbar-right"><span id="topDate">—</span></div>
+    </div>
+
+    <div class="content">
+
+      <!-- ================= DASHBOARD ================= -->
+      <div class="view active" id="view-dashboard">
+        <h1 class="page-title">Tableau de bord financier</h1>
+        <p class="page-sub">Vue d'ensemble de la santé financière de NextOri</p>
+        <div class="kpi-row">
+          <div class="stat-card"><div class="stat-top"><div class="stat-icon" style="background:#dcfce7;">💰</div><span class="stat-trend trend-up">+12%</span></div><div class="stat-value">3 240 000 FCFA</div><div class="stat-label">Solde actuel</div></div>
+          <div class="stat-card"><div class="stat-top"><div class="stat-icon" style="background:#eff6ff;">📈</div><span class="stat-trend trend-up">+8,4%</span></div><div class="stat-value">1 480 000 FCFA</div><div class="stat-label">Revenus du mois</div></div>
+          <div class="stat-card"><div class="stat-top"><div class="stat-icon" style="background:#fef2f2;">📉</div><span class="stat-trend trend-down">+3,1%</span></div><div class="stat-value">960 000 FCFA</div><div class="stat-label">Dépenses du mois</div></div>
+          <div class="stat-card"><div class="stat-top"><div class="stat-icon" style="background:#fef3c7;">💵</div><span class="stat-trend trend-up">+14%</span></div><div class="stat-value">520 000 FCFA</div><div class="stat-label">Bénéfice net</div></div>
+        </div>
+        <div class="kpi-row" style="grid-template-columns:repeat(2,1fr);">
+          <div class="stat-card"><div class="stat-top"><div class="stat-icon" style="background:#ede9fe;">📅</div></div><div class="stat-value">2 780 000 FCFA</div><div class="stat-label">Trésorerie disponible (3 mois de fonctionnement)</div></div>
+          <div class="stat-card"><div class="stat-top"><div class="stat-icon" style="background:#e0f2fe;">📊</div><span class="stat-trend trend-up">Mois précédent : 1 365 000 FCFA</span></div><div class="stat-value">+8,4% vs mois dernier</div><div class="stat-label">Comparaison des revenus</div></div>
+        </div>
+        <div class="panel">
+          <div class="panel-title">📈 Évolution mensuelle</div>
+          <div class="panel-sub">Revenus vs Dépenses sur les 12 derniers mois</div>
+          <div class="chart-box"><canvas id="chartEvolution"></canvas></div>
+        </div>
+      </div>
+
+      <!-- ================= REVENUS ================= -->
+      <div class="view" id="view-revenus">
+        <h1 class="page-title">Revenus</h1>
+        <p class="page-sub">Paiements utilisateurs, abonnements, accompagnements, partenariats et plus</p>
+        <div class="page-toolbar">
+          <select class="filter-select" id="revFilterMonth"><option value="">Tous les mois</option><option>Janvier</option><option>Février</option><option>Mars</option><option>Avril</option><option>Mai</option><option>Juin</option><option>Juillet</option></select>
+          <select class="filter-select" id="revFilterCat"><option value="">Toutes les catégories</option></select>
+          <button class="btn-primary">+ Ajouter un revenu</button>
+        </div>
+        <div class="panel"><table><thead><tr><th>Date</th><th>Origine</th><th>Catégorie</th><th>Montant</th><th>Mode de paiement</th><th>Statut</th></tr></thead><tbody id="revenusBody"></tbody></table></div>
+      </div>
+
+      <!-- ================= DEPENSES ================= -->
+      <div class="view" id="view-depenses">
+        <h1 class="page-title">Dépenses</h1>
+        <p class="page-sub">Toutes les sorties d'argent de NextOri, par catégorie</p>
+        <div class="two-col">
+          <div class="panel">
+            <div class="page-toolbar" style="margin-bottom:12px;">
+              <select class="filter-select" id="depFilterCat"><option value="">Toutes les catégories</option></select>
+              <button class="btn-primary">+ Ajouter une dépense</button>
+            </div>
+            <table><thead><tr><th>Dépense</th><th>Catégorie</th><th>Montant</th><th>Date</th><th>Statut</th><th>Facture</th></tr></thead><tbody id="depensesBody"></tbody></table>
+          </div>
+          <div class="panel">
+            <div class="panel-title">Répartition des dépenses</div>
+            <div class="chart-box" style="height:280px;"><canvas id="chartDepenses"></canvas></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= ABONNEMENTS ================= -->
+      <div class="view" id="view-abonnements">
+        <h1 class="page-title">Gestion des abonnements</h1>
+        <p class="page-sub">Tous les services et outils utilisés par NextOri</p>
+        <div class="panel"><table><thead><tr><th>Service</th><th>Date d'achat</th><th>Expiration</th><th>Prix</th><th>Fréquence</th><th>Statut</th></tr></thead><tbody id="abosBody"></tbody></table></div>
+      </div>
+
+      <!-- ================= PAIEMENTS ================= -->
+      <div class="view" id="view-paiements">
+        <h1 class="page-title">Paiements reçus</h1>
+        <p class="page-sub">Historique de tous les paiements encaissés par NextOri</p>
+        <div class="tabs" id="paiementTabs">
+          <button class="tab-btn active" data-tab="tous">Tous</button>
+          <button class="tab-btn" data-tab="orange">Orange Money</button>
+          <button class="tab-btn" data-tab="wave">Wave</button>
+          <button class="tab-btn" data-tab="carte">Carte bancaire</button>
+          <button class="tab-btn" data-tab="virement">Virement</button>
+          <button class="tab-btn" data-tab="especes">Espèces</button>
+        </div>
+        <div class="panel"><table><thead><tr><th>Nom</th><th>Montant</th><th>Date</th><th>Mode</th><th>Référence</th><th>Statut</th><th>Reçu</th></tr></thead><tbody id="paiementsBody"></tbody></table></div>
+      </div>
+
+      <!-- ================= BUDGET ================= -->
+      <div class="view" id="view-budget">
+        <h1 class="page-title">Budget annuel 2026</h1>
+        <p class="page-sub">Suivi du budget prévu vs consommé, par catégorie</p>
+        <div class="panel" id="budgetPanel"></div>
+      </div>
+
+      <!-- ================= PREVISIONS ================= -->
+      <div class="view" id="view-previsions">
+        <h1 class="page-title">Prévisions financières</h1>
+        <p class="page-sub">Simulation automatique du chiffre d'affaires selon la croissance</p>
+        <div class="tabs" id="previsionTabs">
+          <button class="tab-btn active" data-tab="p1">1 mois</button>
+          <button class="tab-btn" data-tab="p3">3 mois</button>
+          <button class="tab-btn" data-tab="p6">6 mois</button>
+          <button class="tab-btn" data-tab="p12">12 mois</button>
+        </div>
+        <div class="kpi-row" id="previsionKpis"></div>
+        <div class="panel">
+          <div class="panel-title">🔮 Simulateur automatique</div>
+          <div class="panel-sub">Estime le chiffre d'affaires selon la croissance de la communauté</div>
+          <div class="form-row2">
+            <div class="form-group"><label>Nouveaux utilisateurs</label><input type="number" id="simUsers" value="2000" /></div>
+            <div class="form-group"><label>Abonnements Premium</label><input type="number" id="simPremium" value="150" /></div>
+          </div>
+          <div class="form-row2">
+            <div class="form-group"><label>Nouveaux partenaires</label><input type="number" id="simPartners" value="5" /></div>
+            <div class="form-group"><label>Prix moyen Premium (FCFA)</label><input type="number" id="simPrice" value="3000" /></div>
+          </div>
+          <button class="btn-gold" id="btnSimulate">Simuler le chiffre d'affaires</button>
+          <div class="stat-card" style="margin-top:16px;"><div class="stat-label">Chiffre d'affaires estimé</div><div class="stat-value" id="simResult" style="font-size:26px;">—</div></div>
+        </div>
+      </div>
+
+      <!-- ================= PARTENAIRES ================= -->
+      <div class="view" id="view-partenaires">
+        <h1 class="page-title">Gestion des partenaires</h1>
+        <p class="page-sub">Investisseurs, sponsors et partenaires stratégiques</p>
+        <div class="page-toolbar"><button class="btn-primary">+ Ajouter un partenaire</button></div>
+        <div class="panel"><table><thead><tr><th>Nom</th><th>Entreprise</th><th>Type</th><th>Montant investi</th><th>Date</th><th>Statut</th></tr></thead><tbody id="partenairesBody"></tbody></table></div>
+      </div>
+
+      <!-- ================= HISTORIQUE ================= -->
+      <div class="view" id="view-historique">
+        <h1 class="page-title">Historique financier</h1>
+        <p class="page-sub">🔒 Journal complet et inaltérable — aucune opération ne peut être supprimée</p>
+        <div class="panel" id="historiquePanel"></div>
+      </div>
+
+      <!-- ================= DOCUMENTS ================= -->
+      <div class="view" id="view-documents">
+        <h1 class="page-title">Documents financiers</h1>
+        <p class="page-sub">Factures, contrats, reçus et justificatifs</p>
+        <div class="page-toolbar">
+          <div class="filter-input" style="display:flex;align-items:center;gap:8px;flex:1;max-width:320px;">
+            <span>🔎</span><input type="text" id="docSearch" placeholder="Rechercher un document..." style="border:none;outline:none;flex:1;font-size:12.5px;" />
+          </div>
+          <select class="filter-select" id="docSort"><option value="date">Trier par date</option><option value="nom">Trier par nom</option></select>
+          <button class="btn-primary">+ Téléverser un document</button>
+        </div>
+        <div class="doc-grid" id="docGrid"></div>
+      </div>
+
+      <!-- ================= ALERTES ================= -->
+      <div class="view" id="view-alertes">
+        <h1 class="page-title">Alertes intelligentes</h1>
+        <p class="page-sub">Notifications automatiques liées à la gestion financière</p>
+        <div id="alertesList"></div>
+      </div>
+
+      <!-- ================= SECURITE ================= -->
+      <div class="view" id="view-securite">
+        <h1 class="page-title">Sécurité du Centre Financier</h1>
+        <p class="page-sub">Protection renforcée de l'espace fondateurs</p>
+        <div class="panel">
+          <div class="panel-title">🔐 Double authentification</div>
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:6px 0;">
+            <div style="font-size:12.5px;color:var(--gray-700);">Exiger un code de vérification à chaque connexion au Centre Financier</div>
+            <label style="position:relative;width:42px;height:24px;flex-shrink:0;"><input type="checkbox" checked style="opacity:0;width:0;height:0;" id="toggle2fa"/><span style="position:absolute;inset:0;background:var(--gold);border-radius:999px;cursor:pointer;"></span></label>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel-title">💻 Historique des connexions</div>
+          <div class="panel-sub">Toutes les connexions récentes à l'espace fondateurs</div>
+          <table><thead><tr><th>Fondateur</th><th>Adresse IP</th><th>Date</th><th>Heure</th><th>Appareil</th><th>Action</th></tr></thead><tbody id="connexionsBody"></tbody></table>
+        </div>
+      </div>
+
+      <!-- ================= DECISIONS ================= -->
+      <div class="view" id="view-decisions">
+        <h1 class="page-title">Décisions des Fondateurs ⭐</h1>
+        <p class="page-sub">Espace de gouvernance interne — visible uniquement par les fondateurs</p>
+        <div class="page-toolbar"><button class="btn-primary" id="btnNewDecision">+ Nouvelle décision</button></div>
+        <div class="kanban" id="kanbanBoard"></div>
+      </div>
+
+      <!-- ================= VISION ================= -->
+      <div class="view" id="view-vision">
+        <h1 class="page-title">Vision NextOri 🧭</h1>
+        <p class="page-sub">Mission, vision, valeurs et objectifs de l'entreprise</p>
+        <div class="two-col-even">
+          <div class="vision-block"><h3>🎯 Mission</h3><p>Aider chaque jeune sénégalais à mieux comprendre son profil, découvrir les parcours qui lui correspondent et prendre des décisions éclairées pour son avenir.</p></div>
+          <div class="vision-block"><h3>🔭 Vision</h3><p>Devenir la plateforme de référence en Afrique francophone dans l'orientation scolaire et professionnelle.</p></div>
+        </div>
+        <div class="panel">
+          <div class="panel-title">💎 Nos valeurs</div>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;">
+            <span class="status-pill status-info">Excellence</span><span class="status-pill status-info">Innovation</span><span class="status-pill status-info">Intégrité</span><span class="status-pill status-info">Respect</span><span class="status-pill status-info">Accessibilité</span><span class="status-pill status-info">Professionnalisme</span><span class="status-pill status-info">Impact</span>
+          </div>
+        </div>
+        <div class="two-col-even">
+          <div class="panel">
+            <div class="panel-title">🎯 Objectifs par horizon</div>
+            <div class="objectif-row"><div class="objectif-top"><span class="objectif-label">Court terme (0-12 mois)</span><span class="objectif-pct">62%</span></div><div class="budget-track"><div class="budget-fill" style="width:62%;background:var(--blue);"></div></div></div>
+            <div class="objectif-row"><div class="objectif-top"><span class="objectif-label">Moyen terme (1-3 ans)</span><span class="objectif-pct">24%</span></div><div class="budget-track"><div class="budget-fill" style="width:24%;background:var(--blue);"></div></div></div>
+            <div class="objectif-row"><div class="objectif-top"><span class="objectif-label">Long terme (3-5 ans)</span><span class="objectif-pct">8%</span></div><div class="budget-track"><div class="budget-fill" style="width:8%;background:var(--blue);"></div></div></div>
+          </div>
+          <div class="panel">
+            <div class="panel-title">📅 Objectifs du mois &amp; de l'année</div>
+            <div class="objectif-row"><div class="objectif-top"><span class="objectif-label">Objectif du mois : 500 nouveaux utilisateurs</span><span class="objectif-pct">71%</span></div><div class="budget-track"><div class="budget-fill" style="width:71%;background:var(--gold);"></div></div></div>
+            <div class="objectif-row"><div class="objectif-top"><span class="objectif-label">Objectif de l'année : 25 000 utilisateurs</span><span class="objectif-pct">50%</span></div><div class="budget-track"><div class="budget-fill" style="width:50%;background:var(--gold);"></div></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= COFFRE-FORT ================= -->
+      <div class="view" id="view-coffre">
+        <h1 class="page-title">Coffre-Fort NextOri 🔐</h1>
+        <p class="page-sub">Informations sensibles de l'entreprise — accès protégé par mot de passe</p>
+        <div class="panel">
+          <div id="vaultLocked" class="vault-locked">
+            <div class="vault-lock-icon">🔐</div>
+            <p style="font-size:13px;color:var(--gray-500);margin:0 0 16px;">Ce contenu est chiffré. Confirme ton identité pour l'ouvrir.</p>
+            <input type="password" id="vaultPassword" placeholder="Mot de passe du coffre-fort" style="max-width:280px;margin:0 auto 12px;display:block;border:1.5px solid var(--gray-200);border-radius:10px;padding:11px 14px;text-align:center;outline:none;" />
+            <button class="btn-gold" id="vaultUnlock">Déverrouiller le coffre-fort</button>
+            <div class="gate-hint" style="margin-top:12px;">Démo — mot de passe : COFFRE-NEXTORI</div>
+          </div>
+          <div id="vaultContent" class="vault-content">
+            <div class="panel-title">🏢 Informations de l'entreprise</div>
+            <div class="vault-row"><span class="vk">Raison sociale</span><span class="vv">NextOri SARL (en cours de constitution)</span></div>
+            <div class="vault-row"><span class="vk">RCCM</span><span class="vv">En attente d'immatriculation</span></div>
+            <div class="vault-row"><span class="vk">NINEA</span><span class="vv">En attente d'attribution</span></div>
+            <div class="vault-row"><span class="vk">Compte bancaire principal</span><span class="vv">•••• •••• •••• 4821 — Banque Atlantique</span></div>
+            <div class="vault-row"><span class="vk">Compte Mobile Money</span><span class="vv">Orange Money — •••• •• 45 67</span></div>
+            <div style="margin-top:18px;" class="panel-title">📄 Documents juridiques</div>
+            <div class="vault-row"><span class="vk">Statuts de la société</span><span class="vv"><button class="btn-outline">Télécharger</button></span></div>
+            <div class="vault-row"><span class="vk">Contrat de partenariat UCAD (projet)</span><span class="vv"><button class="btn-outline">Télécharger</button></span></div>
+            <div style="margin-top:18px;" class="panel-title">📞 Contacts importants</div>
+            <div class="vault-row"><span class="vk">Avocat / Conseil juridique</span><span class="vv">Me. Cabinet Diallo &amp; Associés</span></div>
+            <div class="vault-row"><span class="vk">Expert-comptable</span><span class="vv">À désigner</span></div>
+            <div style="margin-top:18px;" class="panel-title">📝 Notes confidentielles</div>
+            <div class="vault-row"><span class="vk">Dernière note</span><span class="vv">"Finaliser le dossier RCCM avant fin Août 2026" — N. Niane</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- New decision modal -->
+<div class="modal-overlay" id="decisionModal">
+  <div class="modal-box">
+    <div class="modal-title">🗳️ Nouvelle décision</div>
+    <p class="modal-sub">Visible uniquement par les fondateurs de NextOri</p>
+    <div class="form-group"><label>Titre</label><input type="text" id="decTitle" placeholder="Ex : Lancer le partenariat avec l'UCAD" /></div>
+    <div class="form-group"><label>Description</label><textarea rows="3" id="decDesc" placeholder="Détails de la décision..."></textarea></div>
+    <div class="form-row2">
+      <div class="form-group"><label>Catégorie</label><select id="decCat"><option>Stratégie</option><option>Technique</option><option>Finance</option><option>Partenariat</option><option>Marketing</option></select></div>
+      <div class="form-group"><label>Priorité</label><select id="decPrio"><option value="priority-high">Haute</option><option value="priority-med">Moyenne</option><option value="priority-low">Basse</option></select></div>
+    </div>
+    <div class="form-row2">
+      <div class="form-group"><label>Responsable</label><select id="decResp"><option>Ndeye Awa Niane</option><option>Laurent Denbin Massoya</option></select></div>
+      <div class="form-group"><label>Échéance</label><input type="date" id="decDate" /></div>
+    </div>
+    <div class="modal-actions">
+      <button class="modal-cancel" id="decCancel">Annuler</button>
+      <button class="modal-submit" id="decSubmit">Créer la décision</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ============= ACCESS GATE ============= */
+document.getElementById('gateSubmit').addEventListener('click', unlockGate);
+document.getElementById('gatePassword').addEventListener('keypress', e=>{ if(e.key==='Enter') unlockGate(); });
+function unlockGate(){
+  const val = document.getElementById('gatePassword').value.trim().toUpperCase();
+  if(val === 'NEXTORI2026'){
+    document.getElementById('gateScreen').style.display = 'none';
+    document.getElementById('appScreen').classList.add('active');
+    initApp();
+  } else {
+    document.getElementById('gateError').style.display = 'block';
+  }
+}
+
+/* ============= TOAST ============= */
+function showToast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(window._toastTimer);
+  window._toastTimer = setTimeout(()=>t.classList.remove('show'), 2600);
+}
+
+/* ============= NAV SWITCHING ============= */
+document.querySelectorAll('.nav-item[data-view]').forEach(item=>{
+  item.addEventListener('click', ()=>{
+    document.querySelectorAll('.nav-item[data-view]').forEach(i=>i.classList.remove('active'));
+    item.classList.add('active');
+    document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+    document.getElementById('view-'+item.dataset.view).classList.add('active');
+    if(item.dataset.view==='dashboard' && window._evolutionChart) window._evolutionChart.resize();
+    if(item.dataset.view==='depenses' && window._depensesChart) window._depensesChart.resize();
+  });
+});
+
+/* ============= GENERIC TABS ============= */
+document.querySelectorAll('.tabs').forEach(group=>{
+  const btns = group.querySelectorAll('.tab-btn');
+  btns.forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      btns.forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      const parent = group.parentElement;
+      parent.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+      const target = parent.querySelector('#tab-'+btn.dataset.tab);
+      if(target) target.classList.add('active');
+      if(group.id==='paiementTabs') renderPaiements(btn.dataset.tab);
+      if(group.id==='previsionTabs') renderPrevisions(btn.dataset.tab);
+    });
+  });
+});
+
+/* ============= DATA ============= */
+const REVENUS = [
+  {date:'12 Juil. 2026', origine:'Chat conseiller — Awa Ndiaye', cat:'Accompagnements', montant:8000, mode:'Orange Money', statut:'Payé'},
+  {date:'11 Juil. 2026', origine:'Abonnement Premium — Moussa Diop', cat:'Abonnements Premium', montant:3000, mode:'Wave', statut:'Payé'},
+  {date:'10 Juil. 2026', origine:'Partenariat ISM', cat:'Partenariats', montant:250000, mode:'Virement', statut:'Payé'},
+  {date:'9 Juil. 2026', origine:'Appel conseiller — Fatou Sarr', cat:'Accompagnements', montant:10000, mode:'Wave', statut:'Payé'},
+  {date:'8 Juil. 2026', origine:'Publicité bannière — Sponsor local', cat:'Publicités', montant:50000, mode:'Virement', statut:'Payé'},
+  {date:'6 Juil. 2026', origine:'Vente guide PDF ESP', cat:'Vente de documents', montant:2000, mode:'Orange Money', statut:'Payé'},
+  {date:'5 Juil. 2026', origine:'Formation "Business Plan" — 12 inscrits', cat:'Vente de formations', montant:300000, mode:'Wave', statut:'Payé'},
+  {date:'3 Juil. 2026', origine:'Commission partenariat UCAD', cat:'Commissions', montant:45000, mode:'Virement', statut:'En attente'},
+  {date:'1 Juil. 2026', origine:'Appel vidéo conseiller — Ibrahima Fall', cat:'Accompagnements', montant:15000, mode:'Carte bancaire', statut:'Payé'},
+  {date:'28 Juin 2026', origine:'Don / soutien communautaire', cat:'Autres revenus', montant:20000, mode:'Espèces', statut:'Payé'}
+];
+const DEPENSES = [
+  {nom:'Hébergement serveur (mensuel)', cat:'🌐 Hébergement', montant:45000, date:'1 Juil. 2026', statut:'Payé', facture:true},
+  {nom:'Nom de domaine nextori.sn', cat:'🌍 Nom de domaine', montant:15000, date:'15 Juin 2026', statut:'Payé', facture:true},
+  {nom:'Campagne Facebook Ads', cat:'📢 Publicités Facebook', montant:120000, date:'5 Juil. 2026', statut:'Payé', facture:true},
+  {nom:'Campagne TikTok Ads', cat:'📢 Publicités TikTok', montant:90000, date:'6 Juil. 2026', statut:'Payé', facture:false},
+  {nom:'Crédit SMS (2000 unités)', cat:'📱 SMS', montant:60000, date:'3 Juil. 2026', statut:'Payé', facture:true},
+  {nom:'Abonnement WhatsApp Business API', cat:'💬 WhatsApp Business', montant:35000, date:'1 Juil. 2026', statut:'Payé', facture:true},
+  {nom:'Crédit API Claude / IA', cat:'🤖 IA', montant:80000, date:'2 Juil. 2026', statut:'Payé', facture:true},
+  {nom:'Développeur freelance (mission ponctuelle)', cat:'💻 Développement', montant:250000, date:'10 Juil. 2026', statut:'Payé', facture:true},
+  {nom:'Refonte identité visuelle', cat:'🎨 Design', montant:75000, date:'20 Juin 2026', statut:'Payé', facture:true},
+  {nom:'Shooting photo équipe', cat:'📸 Communication', montant:40000, date:'18 Juin 2026', statut:'Payé', facture:false},
+  {nom:'Frais de constitution (juridique)', cat:'🧾 Juridique', montant:150000, date:'25 Juin 2026', statut:'En attente', facture:true},
+  {nom:'Salaire développeur (partiel)', cat:'👨‍💼 Salaires', montant:400000, date:'30 Juin 2026', statut:'Payé', facture:false},
+  {nom:'Location bureau (mensuel)', cat:'🏢 Bureau', montant:150000, date:'1 Juil. 2026', statut:'Payé', facture:true},
+  {nom:'Déplacement salon étudiant Thiès', cat:'🚗 Déplacements', montant:35000, date:'8 Juil. 2026', statut:'Payé', facture:false},
+  {nom:'Fournitures diverses', cat:'📦 Divers', montant:18000, date:'9 Juil. 2026', statut:'Payé', facture:false}
+];
+const ABONNEMENTS = [
+  {service:'🌐 Hébergement (OVH)', achat:'1 Jan. 2026', expire:'1 Août 2026', prix:'45 000 FCFA', freq:'Mensuel', jours:6},
+  {service:'🌍 Nom de domaine nextori.sn', achat:'15 Juin 2025', expire:'15 Juin 2027', prix:'15 000 FCFA', freq:'Annuel', jours:330},
+  {service:'🔌 API Claude (Anthropic)', achat:'1 Juil. 2026', expire:'1 Août 2026', prix:'80 000 FCFA', freq:'Mensuel', jours:6},
+  {service:'💬 WhatsApp Business API', achat:'1 Juil. 2026', expire:'1 Août 2026', prix:'35 000 FCFA', freq:'Mensuel', jours:6},
+  {service:'📱 Fournisseur SMS', achat:'20 Juin 2026', expire:'20 Juil. 2026', prix:'60 000 FCFA', freq:'Mensuel', jours:-4},
+  {service:'📧 Google Workspace', achat:'1 Jan. 2026', expire:'1 Jan. 2027', prix:'6 000 FCFA/mois', freq:'Annuel', jours:160},
+  {service:'☁️ Cloud (stockage)', achat:'1 Mai 2026', expire:'1 Août 2026', prix:'20 000 FCFA', freq:'Mensuel', jours:6},
+  {service:'🎨 Figma (équipe)', achat:'1 Juin 2026', expire:'1 Juil. 2027', prix:'12 000 FCFA', freq:'Annuel', jours:346}
+];
+const PAIEMENTS = [
+  {nom:'Awa Ndiaye', montant:'8 000 FCFA', date:'12 Juil. 2026', mode:'orange', modeLabel:'Orange Money', ref:'OM-88213', statut:'Confirmé'},
+  {nom:'Moussa Diop', montant:'3 000 FCFA', date:'11 Juil. 2026', mode:'wave', modeLabel:'Wave', ref:'WV-44120', statut:'Confirmé'},
+  {nom:'ISM (partenariat)', montant:'250 000 FCFA', date:'10 Juil. 2026', mode:'virement', modeLabel:'Virement', ref:'VIR-9081', statut:'Confirmé'},
+  {nom:'Fatou Sarr', montant:'10 000 FCFA', date:'9 Juil. 2026', mode:'wave', modeLabel:'Wave', ref:'WV-44098', statut:'Confirmé'},
+  {nom:'Ibrahima Fall', montant:'15 000 FCFA', date:'1 Juil. 2026', mode:'carte', modeLabel:'Carte bancaire', ref:'CB-33210', statut:'Confirmé'},
+  {nom:'Association étudiante (don)', montant:'20 000 FCFA', date:'28 Juin 2026', mode:'especes', modeLabel:'Espèces', ref:'ESP-0012', statut:'Confirmé'}
+];
+const PARTENAIRES = [
+  {nom:'Cheikh Tidiane Sy', ent:'ISM Dakar', type:'Partenariat éducatif', montant:'250 000 FCFA', date:'10 Juil. 2026', statut:'Actif'},
+  {nom:'Fatoumata Traoré', ent:'Orange Sénégal', type:'Sponsoring communication', montant:'—', date:'En discussion', statut:'En négociation'},
+  {nom:'Abdou Karim Ba', ent:'Investisseur privé', type:'Investissement seed', montant:'2 000 000 FCFA', date:'Prévu Sept. 2026', statut:'En attente'}
+];
+const HISTORIQUE = [
+  {txt:'Revenu enregistré : Partenariat ISM — 250 000 FCFA', date:'10 Juil. 2026, 14:02'},
+  {txt:'Dépense enregistrée : Développeur freelance — 250 000 FCFA', date:'10 Juil. 2026, 10:15'},
+  {txt:'Abonnement renouvelé : Hébergement OVH — 45 000 FCFA', date:'1 Juil. 2026, 09:00'},
+  {txt:'Revenu enregistré : Formation Business Plan — 300 000 FCFA', date:'5 Juil. 2026, 16:40'},
+  {txt:'Paiement confirmé : Awa Ndiaye — 8 000 FCFA (Orange Money)', date:'12 Juil. 2026, 11:20'}
+];
+const DOCUMENTS = [
+  {nom:'Facture hébergement Juillet', type:'Facture', icon:'🧾', date:'1 Juil. 2026'},
+  {nom:'Contrat partenariat ISM', type:'Contrat', icon:'📄', date:'10 Juil. 2026'},
+  {nom:'Reçu paiement Awa Ndiaye', type:'Reçu', icon:'🧾', date:'12 Juil. 2026'},
+  {nom:'Statuts de la société', type:'Juridique', icon:'⚖️', date:'2 Juin 2026'},
+  {nom:'Justificatif publicité Facebook', type:'Justificatif', icon:'📢', date:'5 Juil. 2026'},
+  {nom:'Facture développeur freelance', type:'Facture', icon:'🧾', date:'10 Juil. 2026'}
+];
+const CONNEXIONS = [
+  {nom:'Ndeye Awa Niane', ip:'102.44.21.18', date:'12 Juil. 2026', heure:'09:12', appareil:'MacBook Pro — Chrome', connu:true},
+  {nom:'Laurent Denbin Massoya', ip:'41.82.10.9', date:'11 Juil. 2026', heure:'21:40', appareil:'iPhone 14 — Safari', connu:true},
+  {nom:'Inconnu', ip:'196.15.88.3', date:'9 Juil. 2026', heure:'03:12', appareil:'Windows — Firefox', connu:false}
+];
+
+/* ============= RENDER FUNCTIONS ============= */
+function money(n){ return n.toLocaleString('fr-FR') + ' FCFA'; }
+
+function renderRevenus(){
+  const cats = [...new Set(REVENUS.map(r=>r.cat))];
+  const sel = document.getElementById('revFilterCat');
+  cats.forEach(c=>{ const o=document.createElement('option'); o.textContent=c; sel.appendChild(o); });
+  const body = document.getElementById('revenusBody');
+  function draw(){
+    const cat = sel.value;
+    const list = REVENUS.filter(r=> !cat || r.cat===cat);
+    body.innerHTML = list.map(r=>`<tr><td>${r.date}</td><td>${r.origine}</td><td><span class="status-pill status-info">${r.cat}</span></td><td><strong>${money(r.montant)}</strong></td><td>${r.mode}</td><td><span class="status-pill ${r.statut==='Payé'?'status-active':'status-pending'}">${r.statut}</span></td></tr>`).join('');
+  }
+  sel.addEventListener('change', draw);
+  document.getElementById('revFilterMonth').addEventListener('change', draw);
+  draw();
+}
+
+function renderDepenses(){
+  const cats = [...new Set(DEPENSES.map(d=>d.cat))];
+  const sel = document.getElementById('depFilterCat');
+  cats.forEach(c=>{ const o=document.createElement('option'); o.textContent=c; sel.appendChild(o); });
+  const body = document.getElementById('depensesBody');
+  function draw(){
+    const cat = sel.value;
+    const list = DEPENSES.filter(d=> !cat || d.cat===cat);
+    body.innerHTML = list.map(d=>`<tr><td>${d.nom}</td><td>${d.cat}</td><td><strong>${money(d.montant)}</strong></td><td>${d.date}</td><td><span class="status-pill ${d.statut==='Payé'?'status-active':'status-pending'}">${d.statut}</span></td><td>${d.facture?'<button class="btn-outline">📎 Voir</button>':'—'}</td></tr>`).join('');
+  }
+  sel.addEventListener('change', draw);
+  draw();
+
+  // Doughnut chart by category
+  const byCat = {};
+  DEPENSES.forEach(d=>{ byCat[d.cat] = (byCat[d.cat]||0) + d.montant; });
+  const labels = Object.keys(byCat);
+  const data = Object.values(byCat);
+  const colors = ['#0D1B2A','#1E3A8A','#F4B400','#16a34a','#e0433f','#f97316','#8b5cf6','#0891b2','#db2777','#65a30d','#7c2d12','#334155','#d97706','#0369a1','#4d7c0f'];
+  window._depensesChart = new Chart(document.getElementById('chartDepenses'), {
+    type:'doughnut',
+    data:{ labels, datasets:[{ data, backgroundColor: colors.slice(0,labels.length), borderWidth:2, borderColor:'#fff' }] },
+    options:{ responsive:true, maintainAspectRatio:false, cutout:'62%', plugins:{ legend:{ position:'bottom', labels:{ boxWidth:9, font:{size:9.5} } } } }
+  });
+}
+
+function renderAbonnements(){
+  const body = document.getElementById('abosBody');
+  body.innerHTML = ABONNEMENTS.map(a=>{
+    let statut, cls;
+    if(a.jours < 0){ statut='🔴 Expiré'; cls='status-blocked'; }
+    else if(a.jours <= 10){ statut='🟡 Expire bientôt'; cls='status-pending'; }
+    else { statut='🟢 Actif'; cls='status-active'; }
+    return `<tr><td>${a.service}</td><td>${a.achat}</td><td>${a.expire}</td><td>${a.prix}</td><td>${a.freq}</td><td><span class="status-pill ${cls}">${statut}</span></td></tr>`;
+  }).join('');
+}
+
+function renderPaiements(mode){
+  mode = mode || 'tous';
+  const body = document.getElementById('paiementsBody');
+  const list = mode==='tous' ? PAIEMENTS : PAIEMENTS.filter(p=>p.mode===mode);
+  body.innerHTML = list.length ? list.map(p=>`<tr><td>${p.nom}</td><td><strong>${p.montant}</strong></td><td>${p.date}</td><td>${p.modeLabel}</td><td>${p.ref}</td><td><span class="status-pill status-active">${p.statut}</span></td><td><button class="btn-outline">⬇️ Reçu</button></td></tr>`).join('') : '<tr><td colspan="7" style="text-align:center;color:var(--gray-400);padding:20px;">Aucun paiement pour ce mode</td></tr>';
+}
+
+function renderBudget(){
+  const budget = [
+    {cat:'💻 Développement', prevu:2000000, consomme:1450000},
+    {cat:'📢 Marketing & Publicité', prevu:1500000, consomme:980000},
+    {cat:'👨‍💼 Salaires', prevu:3000000, consomme:1600000},
+    {cat:'🏢 Bureau & fonctionnement', prevu:900000, consomme:750000},
+    {cat:'🧾 Juridique', prevu:400000, consomme:150000},
+    {cat:'📦 Divers & imprévus', prevu:500000, consomme:180000}
+  ];
+  const panel = document.getElementById('budgetPanel');
+  panel.innerHTML = budget.map(b=>{
+    const pct = Math.round((b.consomme/b.prevu)*100);
+    const color = pct>90?'#e0433f':pct>70?'#f97316':'#1E3A8A';
+    return `<div class="budget-row"><div class="budget-top"><span class="budget-cat">${b.cat}</span><span class="budget-nums">${money(b.consomme)} / ${money(b.prevu)} (reste ${money(b.prevu-b.consomme)})</span></div><div class="budget-track"><div class="budget-fill" style="width:${pct}%;background:${color};"></div></div></div>`;
+  }).join('');
+}
+
+function renderPrevisions(period){
+  period = period || 'p1';
+  const data = {
+    p1: {ca:'1 850 000 FCFA', users:'+2 000', premium:'150', partners:'5'},
+    p3: {ca:'6 200 000 FCFA', users:'+7 500', premium:'520', partners:'14'},
+    p6: {ca:'14 800 000 FCFA', users:'+18 000', premium:'1 340', partners:'26'},
+    p12:{ca:'34 500 000 FCFA', users:'+45 000', premium:'3 200', partners:'50'}
+  }[period];
+  document.getElementById('previsionKpis').innerHTML = `
+    <div class="stat-card"><div class="stat-top"><div class="stat-icon" style="background:#dcfce7;">💰</div></div><div class="stat-value">${data.ca}</div><div class="stat-label">Chiffre d'affaires prévisionnel</div></div>
+    <div class="stat-card"><div class="stat-top"><div class="stat-icon" style="background:#eff6ff;">👥</div></div><div class="stat-value">${data.users}</div><div class="stat-label">Utilisateurs attendus</div></div>
+    <div class="stat-card"><div class="stat-top"><div class="stat-icon" style="background:#fef3c7;">⭐</div></div><div class="stat-value">${data.premium}</div><div class="stat-label">Abonnements Premium estimés</div></div>
+    <div class="stat-card"><div class="stat-top"><div class="stat-icon" style="background:#ede9fe;">🤝</div></div><div class="stat-value">${data.partners}</div><div class="stat-label">Nouveaux partenaires estimés</div></div>
+  `;
+}
+
+document.getElementById('btnSimulate').addEventListener('click', ()=>{
+  const users = parseFloat(document.getElementById('simUsers').value)||0;
+  const premium = parseFloat(document.getElementById('simPremium').value)||0;
+  const partners = parseFloat(document.getElementById('simPartners').value)||0;
+  const price = parseFloat(document.getElementById('simPrice').value)||0;
+  const revenuPremium = premium * price;
+  const revenuPartenaires = partners * 200000;
+  const revenuCoaching = users * 0.04 * 8000; // hypothèse : 4% des nouveaux utilisateurs prennent un coaching
+  const total = revenuPremium + revenuPartenaires + revenuCoaching;
+  document.getElementById('simResult').textContent = money(Math.round(total));
+  showToast('🔮 Simulation mise à jour');
+});
+
+function renderPartenaires(){
+  document.getElementById('partenairesBody').innerHTML = PARTENAIRES.map(p=>{
+    const cls = p.statut==='Actif'?'status-active':p.statut==='En négociation'?'status-info':'status-pending';
+    return `<tr><td>${p.nom}</td><td>${p.ent}</td><td>${p.type}</td><td><strong>${p.montant}</strong></td><td>${p.date}</td><td><span class="status-pill ${cls}">${p.statut}</span></td></tr>`;
+  }).join('');
+}
+
+function renderHistorique(){
+  document.getElementById('historiquePanel').innerHTML = HISTORIQUE.map(h=>`<div style="display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--gray-100);"><div style="width:8px;height:8px;border-radius:999px;background:var(--blue);margin-top:6px;flex-shrink:0;"></div><div><div style="font-size:13px;color:var(--gray-800);">${h.txt}</div><div style="font-size:11px;color:var(--gray-400);margin-top:2px;">${h.date}</div></div></div>`).join('');
+}
+
+function renderDocuments(){
+  const grid = document.getElementById('docGrid');
+  function draw(){
+    const q = document.getElementById('docSearch').value.toLowerCase();
+    const sortBy = document.getElementById('docSort').value;
+    let list = DOCUMENTS.filter(d=>d.nom.toLowerCase().includes(q));
+    if(sortBy==='nom') list = [...list].sort((a,b)=>a.nom.localeCompare(b.nom));
+    grid.innerHTML = list.map(d=>`<div class="doc-card"><div class="doc-icon">${d.icon}</div><div><div class="doc-name">${d.nom}</div><div class="doc-meta">${d.type} · ${d.date}</div><button class="btn-outline" style="margin-top:8px;">⬇️ Télécharger</button></div></div>`).join('');
+  }
+  document.getElementById('docSearch').addEventListener('input', draw);
+  document.getElementById('docSort').addEventListener('change', draw);
+  draw();
+}
+
+function renderAlertes(){
+  const alerts = [
+    {type:'warn', icon:'⚠️', text:'Le fournisseur SMS expire dans 4 jours — pense à renouveler.', time:'Il y a 2 heures'},
+    {type:'warn', icon:'⚠️', text:'L\'hébergement OVH expire dans 6 jours.', time:'Il y a 5 heures'},
+    {type:'danger', icon:'🚨', text:'Budget publicité Facebook dépassé de 12% ce mois-ci.', time:'Hier'},
+    {type:'danger', icon:'🚨', text:'Trésorerie faible détectée sur la catégorie "Marketing".', time:'Hier'},
+    {type:'success', icon:'✅', text:'Paiement reçu : Partenariat ISM — 250 000 FCFA.', time:'10 Juil. 2026'},
+    {type:'info', icon:'ℹ️', text:'Dépense importante enregistrée : Développeur freelance — 250 000 FCFA.', time:'10 Juil. 2026'}
+  ];
+  document.getElementById('alertesList').innerHTML = alerts.map(a=>`<div class="alert-item ${a.type}"><span class="alert-icon">${a.icon}</span><div><div class="alert-text">${a.text}</div><div class="alert-time">${a.time}</div></div></div>`).join('');
+}
+
+function renderSecurite(){
+  document.getElementById('connexionsBody').innerHTML = CONNEXIONS.map(c=>`<tr><td>${c.nom}</td><td>${c.ip}</td><td>${c.date}</td><td>${c.heure}</td><td>${c.appareil}</td><td>${c.connu?'<span class="status-pill status-active">Connu</span>':'<button class="btn-outline" style="color:var(--red);border-color:#fecaca;">🚫 Déconnecter</button>'}</td></tr>`).join('');
+}
+
+/* ============= DECISIONS KANBAN ============= */
+let DECISIONS = [
+  {title:'Finaliser le dossier RCCM', desc:'Immatriculation officielle de NextOri SARL', cat:'Stratégie', prio:'priority-high', resp:'Ndeye Awa Niane', date:'20 Juil. 2026', status:'encours', pinned:true},
+  {title:'Recruter un développeur backend', desc:'Renforcer l\'équipe technique avant le lancement', cat:'Technique', prio:'priority-high', resp:'Laurent Denbin Massoya', date:'1 Août 2026', status:'afaire', pinned:true},
+  {title:'Négocier le partenariat Orange Sénégal', desc:'Sponsoring de la campagne de lancement', cat:'Partenariat', prio:'priority-med', resp:'Ndeye Awa Niane', date:'15 Août 2026', status:'afaire', pinned:false},
+  {title:'Valider l\'identité visuelle finale', desc:'Logo, couleurs et charte graphique', cat:'Marketing', prio:'priority-low', resp:'Laurent Denbin Massoya', date:'5 Juil. 2026', status:'termine', pinned:false},
+  {title:'Choisir l\'hébergeur définitif', desc:'Comparer OVH, AWS et solutions locales', cat:'Technique', prio:'priority-med', resp:'Laurent Denbin Massoya', date:'—', status:'annule', pinned:false}
+];
+const KANBAN_COLS = [{key:'afaire', label:'📋 À faire'}, {key:'encours', label:'🔄 En cours'}, {key:'termine', label:'✅ Terminé'}, {key:'annule', label:'❌ Annulé'}];
+function renderKanban(){
+  const board = document.getElementById('kanbanBoard');
+  board.innerHTML = KANBAN_COLS.map(col=>{
+    const items = DECISIONS.filter(d=>d.status===col.key).sort((a,b)=> (b.pinned?1:0) - (a.pinned?1:0));
+    return `<div class="kanban-col"><div class="kanban-col-title">${col.label}<span class="kanban-count">${items.length}</span></div>${items.map(d=>`
+      <div class="decision-card ${d.pinned?'pinned':''}">
+        ${d.pinned?'<span class="pin-star">📌</span>':''}
+        <div class="decision-title">${d.title}</div>
+        <div class="decision-meta"><span class="priority-tag ${d.prio}">${d.prio==='priority-high'?'Haute':d.prio==='priority-med'?'Moyenne':'Basse'}</span><span>${d.cat}</span></div>
+        <div class="decision-meta" style="margin-top:5px;">👤 ${d.resp} · 📅 ${d.date}</div>
+      </div>`).join('') || '<div style="font-size:11px;color:var(--gray-400);text-align:center;padding:10px;">Aucune décision</div>'}</div>`;
+  }).join('');
+}
+document.getElementById('btnNewDecision').addEventListener('click', ()=> document.getElementById('decisionModal').classList.add('show'));
+document.getElementById('decCancel').addEventListener('click', ()=> document.getElementById('decisionModal').classList.remove('show'));
+document.getElementById('decisionModal').addEventListener('click', e=>{ if(e.target.id==='decisionModal') e.currentTarget.classList.remove('show'); });
+document.getElementById('decSubmit').addEventListener('click', ()=>{
+  const title = document.getElementById('decTitle').value.trim();
+  if(!title){ showToast('✍️ Merci de renseigner un titre'); return; }
+  DECISIONS.unshift({
+    title, desc:document.getElementById('decDesc').value.trim(), cat:document.getElementById('decCat').value,
+    prio:document.getElementById('decPrio').value, resp:document.getElementById('decResp').value,
+    date:document.getElementById('decDate').value || '—', status:'afaire', pinned:false
+  });
+  document.getElementById('decisionModal').classList.remove('show');
+  document.getElementById('decTitle').value=''; document.getElementById('decDesc').value='';
+  renderKanban();
+  showToast('✅ Décision créée dans "À faire"');
+});
+
+/* ============= COFFRE-FORT ============= */
+document.getElementById('vaultUnlock').addEventListener('click', ()=>{
+  const val = document.getElementById('vaultPassword').value.trim().toUpperCase();
+  if(val === 'COFFRE-NEXTORI'){
+    document.getElementById('vaultLocked').style.display = 'none';
+    document.getElementById('vaultContent').classList.add('show');
+  } else {
+    showToast('❌ Mot de passe du coffre-fort incorrect');
+  }
+});
+
+/* ============= EVOLUTION CHART ============= */
+function renderEvolutionChart(){
+  const months = ['Août','Sep','Oct','Nov','Déc','Jan','Fév','Mar','Avr','Mai','Juin','Juil'];
+  window._evolutionChart = new Chart(document.getElementById('chartEvolution'), {
+    type:'line',
+    data:{ labels:months, datasets:[
+      { label:'Revenus', data:[320000,410000,480000,520000,610000,700000,830000,920000,1050000,1180000,1365000,1480000], borderColor:'#1E3A8A', backgroundColor:'rgba(30,58,138,0.08)', fill:true, tension:.4, pointRadius:3, pointBackgroundColor:'#F4B400', borderWidth:2.5 },
+      { label:'Dépenses', data:[280000,310000,350000,390000,420000,480000,540000,610000,700000,790000,870000,960000], borderColor:'#e0433f', backgroundColor:'rgba(224,67,63,0.06)', fill:true, tension:.4, pointRadius:3, pointBackgroundColor:'#e0433f', borderWidth:2.5 }
+    ]},
+    options:{ responsive:true, maintainAspectRatio:false, plugins:{legend:{display:true, position:'bottom', labels:{boxWidth:10,font:{size:11}}}}, scales:{ y:{ grid:{color:'#eef1f6'}, ticks:{callback:v=>(v/1000)+'k'} }, x:{ grid:{display:false} } } }
+  });
+}
+
+/* ============= INIT ============= */
+function initApp(){
+  const d = new Date();
+  document.getElementById('topDate').textContent = d.toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+  if(typeof Chart !== 'undefined'){
+    Chart.defaults.font.family = "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif";
+    Chart.defaults.color = '#6b7688';
+  } else {
+    console.warn('Chart.js non chargé (pas de connexion internet ?) — les graphiques seront masqués mais le reste de la page fonctionne.');
+  }
+  const steps = [renderEvolutionChart, renderRevenus, renderDepenses, renderAbonnements,
+    ()=>renderPaiements('tous'), renderBudget, ()=>renderPrevisions('p1'), renderPartenaires,
+    renderHistorique, renderDocuments, renderAlertes, renderSecurite, renderKanban];
+  steps.forEach(fn => {
+    try { fn(); } catch(err) { console.error('Erreur pendant l\'initialisation :', fn.name, err); }
+  });
+}
+</script>
+</body>
+</html>

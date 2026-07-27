@@ -9,6 +9,8 @@ import "../styles/Test.css";
 
 import AnswerCard from "../components/AnswerCard";
 
+import { enregistrerAction } from "../services/historiqueService";
+
 
 
 
@@ -169,40 +171,6 @@ function suivant() {
 
 }
 
-const enregistrerAction = async (action) => {
-
-    try {
-
-        await fetch(
-            "http://localhost/NextOri/backend/api/routes/historique.php",
-            {
-                method: "POST",
-
-                headers: {
-                    "Content-Type": "application/json"
-                },
-
-                body: JSON.stringify({
-
-                    id_user: 1,
-
-                    action: action
-
-                })
-            }
-        );
-
-
-    } catch(error) {
-
-        console.error(
-            "Erreur historique :",
-            error
-        );
-
-    }
-
-};
    
 function precedent(){
 

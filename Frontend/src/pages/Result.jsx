@@ -5,6 +5,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 import "../styles/Result.css";
 
+import { enregistrerAction } from "../services/historiqueService";
+
 
 
 
@@ -412,41 +414,7 @@ console.log("DATA RESULT :", resultatInitial);
 
 };
 
-   const enregistrerAction = async (action) => {
-
-    try {
-
-        await fetch(
-            "http://localhost/NextOri/backend/api/routes/historique.php",
-            {
-                method: "POST",
-
-                headers: {
-                    "Content-Type": "application/json"
-                },
-
-                body: JSON.stringify({
-
-                    id_user: 1,
-
-                    action: action
-
-                })
-
-            }
-        );
-
-
-    } catch(error) {
-
-        console.error(
-            "Erreur historique :",
-            error
-        );
-
-    }
-
-};
+  
     
     const consulterProfil = async () => {
 

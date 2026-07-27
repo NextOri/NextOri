@@ -20,6 +20,8 @@ import {
 
 } from "react-icons/md";
 
+import { enregistrerAction } from "../services/historiqueService";
+
 
 function Formations(){
 
@@ -174,41 +176,6 @@ function Formations(){
         }
 
     });
-
-};
-const enregistrerAction = async (action) => {
-
-    try {
-
-        await fetch(
-            "http://localhost/NextOri/backend/api/routes/historique.php",
-            {
-                method: "POST",
-
-                headers: {
-                    "Content-Type": "application/json"
-                },
-
-                body: JSON.stringify({
-
-                    id_user: 1,
-
-                    action: action
-
-                })
-
-            }
-        );
-
-
-    } catch(error) {
-
-        console.error(
-            "Erreur historique :",
-            error
-        );
-
-    }
 
 };
 

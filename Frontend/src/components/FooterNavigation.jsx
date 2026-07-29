@@ -57,7 +57,7 @@ function FooterNavigation() {
 
 
 
-            <NavLink to="/universites-catalogue">
+            <NavLink to="/universite-catalogue">
 
                 <span>🏛</span>
 

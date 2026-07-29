@@ -7,6 +7,7 @@ import Result from "./pages/Result";
 import ProfilRiasec from "./pages/Profil-Riasec";
 import Formations from "./pages/Formations";
 import Universites from "./pages/Universites";
+import Metiers from "./pages/Metiers";
 
 
 function App() {
@@ -31,6 +32,8 @@ function App() {
             <Route path="/universites" element={<Universites />} />
 
             <Route path="/profil-riasec" element={<ProfilRiasec />} />
+
+            <Route path="/metiers" element={<Metiers />} />
             
 
         </Routes>

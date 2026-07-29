@@ -1,4 +1,4 @@
-function Filiere(){
+function Filieres(){
 
     return (
 
@@ -18,4 +18,4 @@ function Filiere(){
 
 }
 
-export default Filiere;
+export default Filieres;

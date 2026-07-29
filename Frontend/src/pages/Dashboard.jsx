@@ -2,6 +2,8 @@ import "./../styles/Dashboard.css";
 
 import FooterNavigation from "../components/FooterNavigation";
 
+import OrientationNotification from "../components/OrientationNotification";
+
 import { useNavigate } from "react-router-dom";
 
 import { useEffect, useState } from "react";
@@ -70,46 +72,7 @@ function Dashboard() {
     });
 
 }, []);
-  /* Modification: const [dashboardData, setDashboardData] = useState(null); par const [dashboardDataState, setDashboardDataState] = useState(null);
-      et setDashboardData(data.data); par setDashboardDataState(data.data);*/
-
-      const dashboardData = {
-
-    utilisateur: {
-
-        nom: "Laurent",
-
-        niveau: "Explorateur",
-
-        niveauNumero: 1,
-
-        progression: 60
-
-    },
-
-    statistiques: {
-
-        points: 120,
-
-        serie: 7,
-
-        badges: 3
-
-    },
-
-    parcours: {
-
-        etapeActuelle: 3
-
-    },
-
-    projetAvenir: {
-
-        disponible: false
-
-    }
-
-};
+  
 
 
 
@@ -152,17 +115,48 @@ function Dashboard() {
         numero: 5,
         titre: "Choisir une formation",
         description: "Découvrir les filières",
-        termine: dashboardDataState.parcours.formationConsulte
+        termine: dashboardDataState.parcours.formationConsultee
     },
 
     {
         numero: 6,
         titre: "Trouver une université",
         description: "Explorer les établissements",
-        termine: dashboardDataState.parcours.universiteConsulte
+        termine: dashboardDataState.parcours.universitesConsultees
     }
 
+    
+
 ];
+
+const getEtapeActuelle = (parcours) => {
+
+    if (!parcours.profil) {
+        return 1;
+    }
+
+    if (!parcours.test) {
+        return 1;
+    }
+
+    if (!parcours.profilConsulte) {
+        return 2;
+    }
+
+    if (!parcours.metiersConsultes) {
+        return 3;
+    }
+
+    if (!parcours.formationConsultee) {
+        return 4;
+    }
+
+    if (!parcours.universitesConsultees) {
+        return 5;
+    }
+
+    return 6;
+};
 
     return (
 
@@ -186,6 +180,11 @@ function Dashboard() {
 
             </section>
 
+ 
+
+     <OrientationNotification 
+    etape={getEtapeActuelle(dashboardDataState.parcours)}
+/>
 
 
             {/* NIVEAU */}
@@ -257,6 +256,8 @@ function Dashboard() {
     </div>
 
 </section>
+
+
 
 
 
@@ -552,6 +553,8 @@ etape.numero
 
    </section>
 
+   
+   
 
 
             {/* BESOIN D'AIDE */}
@@ -607,6 +610,59 @@ etape.numero
             🔔 Me notifier
 
         </button>
+
+    </div>
+
+</section>
+
+
+{/* BADGES */}
+<section className="badges-section">
+
+    <div className="badges-header">
+
+        <div className="badges-title">
+
+            <h2>🏅 Mes badges</h2>
+
+            <p>
+                Débloquez des récompenses en progressant dans votre parcours d'orientation.
+            </p>
+
+        </div>
+
+    </div>
+
+    <div className="badges-container">
+
+        {dashboardDataState.liste_badges.map((badge, index) => (
+
+            <div
+                key={index}
+                className="badge-card"
+            >
+
+                <div className="badge-icon">
+
+                    {badge.icone}
+
+                </div>
+
+                <p className="badge-name">
+
+                    {badge.nom}
+
+                </p>
+
+                <p className="badge-status">
+
+                    Débloqué ✓
+
+                </p>
+
+            </div>
+
+        ))}
 
     </div>
 

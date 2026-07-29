@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : ven. 24 juil. 2026 à 11:57
+-- Généré le : mer. 29 juil. 2026 à 12:50
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.2.12
 
@@ -75,6 +75,31 @@ CREATE TABLE `historique` (
   `date_action` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Déchargement des données de la table `historique`
+--
+
+INSERT INTO `historique` (`id_historique`, `id_user`, `action`, `date_action`) VALUES
+(2, 1, 'METIERS_CONSULTES', '2026-07-27 18:06:26'),
+(5, 1, 'FORMATION_CONSULTEE', '2026-07-27 18:35:30'),
+(6, 1, 'FORMATION_CONSULTEE', '2026-07-27 18:39:22'),
+(7, 1, 'UNIVERSITE_CONSULTEE', '2026-07-27 18:48:02'),
+(8, 1, 'UNIVERSITE_CONSULTEE', '2026-07-27 18:48:11'),
+(9, 1, 'UNIVERSITE_CONSULTEE', '2026-07-27 18:49:01'),
+(10, 1, 'FORMATION_CONSULTEE', '2026-07-27 18:50:52'),
+(11, 1, 'UNIVERSITE_CONSULTEE', '2026-07-27 18:50:53'),
+(12, 1, 'FORMATION_CONSULTEE', '2026-07-27 18:54:15'),
+(13, 1, 'UNIVERSITES_CONSULTEES', '2026-07-27 18:54:17'),
+(15, 1, 'FORMATION_CONSULTEE', '2026-07-27 19:04:09'),
+(16, 1, 'METIERS_CONSULTES', '2026-07-27 19:06:52'),
+(17, 1, 'FORMATION_CONSULTEE', '2026-07-27 19:08:20'),
+(18, 1, 'UNIVERSITES_CONSULTEES', '2026-07-27 19:08:22'),
+(19, 1, 'FORMATION_CONSULTEE', '2026-07-28 16:30:28'),
+(20, 1, 'UNIVERSITES_CONSULTEES', '2026-07-28 16:30:31'),
+(24, 1, 'FORMATION_CONSULTEE', '2026-07-28 17:46:50'),
+(25, 1, 'UNIVERSITES_CONSULTEES', '2026-07-28 17:46:52'),
+(27, 1, 'PROFIL_CONSULTE', '2026-07-28 18:56:34');
+
 -- --------------------------------------------------------
 
 --
@@ -89,22 +114,23 @@ CREATE TABLE `metier` (
   `niveau_etude` varchar(100) NOT NULL,
   `salaire_min` decimal(12,2) DEFAULT NULL,
   `salaire_max` decimal(12,2) DEFAULT NULL,
-  `profil_riasec` varchar(3) NOT NULL
+  `profil_riasec` varchar(3) NOT NULL,
+  `tendance` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `metier`
 --
 
-INSERT INTO `metier` (`id_metier`, `nom`, `description`, `secteur`, `niveau_etude`, `salaire_min`, `salaire_max`, `profil_riasec`) VALUES
-(1, 'Développeur Web', 'Création de sites et applications web', 'Informatique', 'Licence / Master', 300000.00, 1500000.00, 'IRA'),
-(2, 'Data Scientist', 'Analyse de données et intelligence artificielle', 'Informatique', 'Master', 500000.00, 2000000.00, 'IRC'),
-(3, 'Ingénieur Génie Civil', 'Construction de bâtiments et infrastructures', 'BTP', 'Master', 400000.00, 1800000.00, 'RIC'),
-(4, 'Médecin', 'Diagnostic et traitement des patients', 'Santé', 'Doctorat', 600000.00, 3000000.00, 'ISR'),
-(5, 'Avocat', 'Défense juridique et conseils', 'Droit', 'Master', 300000.00, 2000000.00, 'ESA'),
-(6, 'Comptable', 'Gestion des finances et comptabilité', 'Finance', 'Licence', 250000.00, 1200000.00, 'CER'),
-(7, 'Marketeur', 'Stratégies marketing et communication', 'Commerce', 'Licence / Master', 250000.00, 1500000.00, 'EAS'),
-(8, 'Administrateur Réseau', 'Gestion des réseaux informatiques', 'Informatique', 'Licence / Master', 300000.00, 1400000.00, 'IRC');
+INSERT INTO `metier` (`id_metier`, `nom`, `description`, `secteur`, `niveau_etude`, `salaire_min`, `salaire_max`, `profil_riasec`, `tendance`) VALUES
+(1, 'Développeur Web', 'Création de sites et applications web', 'Informatique', 'Bac+3', 300000.00, 1500000.00, 'IRA', 'Forte croissance'),
+(2, 'Data Scientist', 'Analyse de données et intelligence artificielle', 'Informatique', 'Bac+5', 500000.00, 2000000.00, 'IRC', 'Très forte croissance'),
+(3, 'Ingénieur Génie Civil', 'Construction de bâtiments et infrastructures', 'Génie Civil', 'Bac+5', 400000.00, 1800000.00, 'RIC', 'En croissance'),
+(4, 'Médecin', 'Diagnostic et traitement des patients', 'Santé', 'Bac+7+', 600000.00, 3000000.00, 'ISR', 'Stable'),
+(5, 'Avocat', 'Défense juridique et conseils', 'Droit', 'Bac+5', 300000.00, 2000000.00, 'ESA', 'Stable'),
+(6, 'Comptable', 'Gestion des finances et comptabilité', 'Finance et Comptabilité', 'Bac+3', 250000.00, 1200000.00, 'CER', 'Stable'),
+(7, 'Marketeur', 'Stratégies marketing et communication', 'Marketing et Commerce', 'Bac+3', 250000.00, 1500000.00, 'EAS', 'Forte croissance'),
+(8, 'Administrateur Réseau', 'Gestion des réseaux informatiques', 'Télécommunications et Réseaux', 'Bac+3', 300000.00, 1400000.00, 'IRC', 'Forte croissance');
 
 -- --------------------------------------------------------
 
@@ -623,7 +649,87 @@ INSERT INTO `reponse` (`id_reponse`, `id_test`, `id_proposition`) VALUES
 (257, 14, 100),
 (258, 14, 107),
 (259, 14, 114),
-(260, 14, 119);
+(260, 14, 119),
+(261, 15, 2),
+(262, 15, 10),
+(263, 15, 14),
+(264, 15, 19),
+(265, 15, 25),
+(266, 15, 34),
+(267, 15, 38),
+(268, 15, 48),
+(269, 15, 54),
+(270, 15, 60),
+(271, 15, 66),
+(272, 15, 72),
+(273, 15, 78),
+(274, 15, 84),
+(275, 15, 90),
+(276, 15, 96),
+(277, 15, 102),
+(278, 15, 108),
+(279, 15, 114),
+(280, 15, 118),
+(281, 16, 5),
+(282, 16, 10),
+(283, 16, 17),
+(284, 16, 21),
+(285, 16, 28),
+(286, 16, 33),
+(287, 16, 37),
+(288, 16, 45),
+(289, 16, 51),
+(290, 16, 58),
+(291, 16, 62),
+(292, 16, 70),
+(293, 16, 76),
+(294, 16, 81),
+(295, 16, 86),
+(296, 16, 95),
+(297, 16, 97),
+(298, 16, 103),
+(299, 16, 111),
+(300, 16, 120),
+(301, 17, 5),
+(302, 17, 10),
+(303, 17, 17),
+(304, 17, 24),
+(305, 17, 28),
+(306, 17, 33),
+(307, 17, 37),
+(308, 17, 46),
+(309, 17, 53),
+(310, 17, 58),
+(311, 17, 63),
+(312, 17, 70),
+(313, 17, 75),
+(314, 17, 84),
+(315, 17, 89),
+(316, 17, 94),
+(317, 17, 102),
+(318, 17, 106),
+(319, 17, 114),
+(320, 17, 119),
+(321, 18, 5),
+(322, 18, 11),
+(323, 18, 16),
+(324, 18, 23),
+(325, 18, 28),
+(326, 18, 34),
+(327, 18, 42),
+(328, 18, 48),
+(329, 18, 53),
+(330, 18, 59),
+(331, 18, 66),
+(332, 18, 72),
+(333, 18, 76),
+(334, 18, 83),
+(335, 18, 89),
+(336, 18, 95),
+(337, 18, 99),
+(338, 18, 106),
+(339, 18, 114),
+(340, 18, 119);
 
 -- --------------------------------------------------------
 
@@ -662,7 +768,11 @@ INSERT INTO `test_riasec` (`id_test`, `id_user`, `id_questionnaire`, `date_test`
 (11, 1, 1, '2026-07-23 18:45:58', 0, 1, 7, 6, 4, 2, 'AS'),
 (12, 1, 1, '2026-07-23 18:49:28', 2, 4, 4, 2, 5, 3, 'EI'),
 (13, 1, 1, '2026-07-23 19:10:24', 1, 2, 9, 4, 3, 1, 'AS'),
-(14, 1, 1, '2026-07-23 19:12:49', 1, 1, 5, 4, 6, 3, 'EA');
+(14, 1, 1, '2026-07-23 19:12:49', 1, 1, 5, 4, 6, 3, 'EA'),
+(15, 1, 1, '2026-07-24 14:14:12', 4, 1, 0, 5, 6, 4, 'ES'),
+(16, 1, 1, '2026-07-26 00:21:29', 2, 4, 2, 7, 3, 2, 'SI'),
+(17, 1, 1, '2026-07-27 18:06:25', 4, 1, 5, 5, 2, 3, 'AS'),
+(18, 1, 1, '2026-07-27 19:06:50', 2, 1, 5, 4, 7, 1, 'EA');
 
 -- --------------------------------------------------------
 
@@ -870,7 +980,7 @@ ALTER TABLE `filiere`
 -- AUTO_INCREMENT pour la table `historique`
 --
 ALTER TABLE `historique`
-  MODIFY `id_historique` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_historique` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT pour la table `metier`
@@ -906,13 +1016,13 @@ ALTER TABLE `recommandation`
 -- AUTO_INCREMENT pour la table `reponse`
 --
 ALTER TABLE `reponse`
-  MODIFY `id_reponse` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=261;
+  MODIFY `id_reponse` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=341;
 
 --
 -- AUTO_INCREMENT pour la table `test_riasec`
 --
 ALTER TABLE `test_riasec`
-  MODIFY `id_test` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id_test` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT pour la table `universite`

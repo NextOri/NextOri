@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mer. 29 juil. 2026 à 12:50
+-- Généré le : mer. 29 juil. 2026 à 16:29
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.2.12
 
@@ -98,7 +98,8 @@ INSERT INTO `historique` (`id_historique`, `id_user`, `action`, `date_action`) V
 (20, 1, 'UNIVERSITES_CONSULTEES', '2026-07-28 16:30:31'),
 (24, 1, 'FORMATION_CONSULTEE', '2026-07-28 17:46:50'),
 (25, 1, 'UNIVERSITES_CONSULTEES', '2026-07-28 17:46:52'),
-(27, 1, 'PROFIL_CONSULTE', '2026-07-28 18:56:34');
+(27, 1, 'PROFIL_CONSULTE', '2026-07-28 18:56:34'),
+(28, 1, 'PROFIL_CONSULTE', '2026-07-29 13:04:05');
 
 -- --------------------------------------------------------
 
@@ -110,6 +111,8 @@ CREATE TABLE `metier` (
   `id_metier` int(11) NOT NULL,
   `nom` varchar(150) NOT NULL,
   `description` text NOT NULL,
+  `presentation` text DEFAULT NULL,
+  `competences` text DEFAULT NULL,
   `secteur` varchar(100) NOT NULL,
   `niveau_etude` varchar(100) NOT NULL,
   `salaire_min` decimal(12,2) DEFAULT NULL,
@@ -122,15 +125,15 @@ CREATE TABLE `metier` (
 -- Déchargement des données de la table `metier`
 --
 
-INSERT INTO `metier` (`id_metier`, `nom`, `description`, `secteur`, `niveau_etude`, `salaire_min`, `salaire_max`, `profil_riasec`, `tendance`) VALUES
-(1, 'Développeur Web', 'Création de sites et applications web', 'Informatique', 'Bac+3', 300000.00, 1500000.00, 'IRA', 'Forte croissance'),
-(2, 'Data Scientist', 'Analyse de données et intelligence artificielle', 'Informatique', 'Bac+5', 500000.00, 2000000.00, 'IRC', 'Très forte croissance'),
-(3, 'Ingénieur Génie Civil', 'Construction de bâtiments et infrastructures', 'Génie Civil', 'Bac+5', 400000.00, 1800000.00, 'RIC', 'En croissance'),
-(4, 'Médecin', 'Diagnostic et traitement des patients', 'Santé', 'Bac+7+', 600000.00, 3000000.00, 'ISR', 'Stable'),
-(5, 'Avocat', 'Défense juridique et conseils', 'Droit', 'Bac+5', 300000.00, 2000000.00, 'ESA', 'Stable'),
-(6, 'Comptable', 'Gestion des finances et comptabilité', 'Finance et Comptabilité', 'Bac+3', 250000.00, 1200000.00, 'CER', 'Stable'),
-(7, 'Marketeur', 'Stratégies marketing et communication', 'Marketing et Commerce', 'Bac+3', 250000.00, 1500000.00, 'EAS', 'Forte croissance'),
-(8, 'Administrateur Réseau', 'Gestion des réseaux informatiques', 'Télécommunications et Réseaux', 'Bac+3', 300000.00, 1400000.00, 'IRC', 'Forte croissance');
+INSERT INTO `metier` (`id_metier`, `nom`, `description`, `presentation`, `competences`, `secteur`, `niveau_etude`, `salaire_min`, `salaire_max`, `profil_riasec`, `tendance`) VALUES
+(1, 'Développeur Web', 'Création de sites et applications web', 'Le développeur web conçoit, développe et maintient des sites internet et des applications web. Il transforme les besoins des utilisateurs en solutions numériques grâce aux technologies du développement web.', 'HTML, CSS, JavaScript, PHP, bases de données, frameworks web, logique de programmation, résolution de problèmes', 'Informatique', 'Bac+3', 300000.00, 1500000.00, 'IRA', 'Forte croissance'),
+(2, 'Data Scientist', 'Analyse de données et intelligence artificielle', 'Le data scientist analyse de grandes quantités de données afin d\'extraire des informations utiles et aider les organisations à prendre de meilleures décisions. Il utilise les statistiques, la programmation et l\'intelligence artificielle.', 'Python, statistiques, analyse de données, machine learning, intelligence artificielle, bases de données, visualisation de données', 'Informatique', 'Bac+5', 500000.00, 2000000.00, 'IRC', 'Très forte croissance'),
+(3, 'Ingénieur Génie Civil', 'Construction de bâtiments et infrastructures', 'L\'ingénieur génie civil conçoit, planifie et supervise la réalisation des infrastructures comme les bâtiments, les routes et les ouvrages publics. Il veille au respect des normes techniques et de sécurité.', 'Conception technique, calculs de structures, AutoCAD, gestion de projet, résistance des matériaux, analyse des plans, travail en équipe', 'Génie Civil', 'Bac+5', 400000.00, 1800000.00, 'RIC', 'En croissance'),
+(4, 'Médecin', 'Diagnostic et traitement des patients', 'Le médecin diagnostique, traite et accompagne les patients afin de préserver leur santé. Il utilise ses connaissances scientifiques et médicales pour prévenir et soigner les maladies.', 'Diagnostic médical, connaissances en sciences de la santé, écoute, communication, analyse clinique, prise de décision, éthique professionnelle', 'Santé', 'Bac+7+', 600000.00, 3000000.00, 'ISR', 'Stable'),
+(5, 'Avocat', 'Défense juridique et conseils', 'L\'avocat conseille et représente ses clients dans les affaires juridiques. Il analyse les lois, prépare des dossiers et défend les intérêts des personnes ou des organisations devant les institutions compétentes.', 'Connaissance du droit, analyse juridique, argumentation, rédaction juridique, communication, négociation, esprit critique', 'Droit', 'Bac+5', 300000.00, 2000000.00, 'ESA', 'Stable'),
+(6, 'Comptable', 'Gestion des finances et comptabilité', 'Le comptable assure la gestion des opérations financières d\'une organisation. Il enregistre les transactions, prépare les documents comptables et contribue au suivi de la situation financière.', 'Comptabilité générale, analyse financière, Excel, logiciels comptables, rigueur, organisation, gestion des chiffres', 'Finance et Comptabilité', 'Bac+3', 250000.00, 1200000.00, 'CER', 'Stable'),
+(7, 'Marketeur', 'Stratégies marketing et communication', 'Le marketeur étudie les besoins des consommateurs et développe des stratégies pour promouvoir des produits ou services. Il participe à la communication, à la publicité et au développement commercial.', 'Étude de marché, communication, stratégie marketing, réseaux sociaux, analyse des données, créativité, gestion de projet', 'Marketing et Commerce', 'Bac+3', 250000.00, 1500000.00, 'EAS', 'Forte croissance'),
+(8, 'Administrateur Réseau', 'Gestion des réseaux informatiques', 'L\'administrateur réseau installe, configure et assure la maintenance des réseaux informatiques d\'une organisation. Il garantit la disponibilité, la sécurité et la performance des systèmes connectés.', 'Configuration réseau, TCP/IP, cybersécurité, systèmes Linux et Windows, maintenance informatique, résolution de problèmes, surveillance réseau', 'Télécommunications et Réseaux', 'Bac+3', 300000.00, 1400000.00, 'IRC', 'Forte croissance');
 
 -- --------------------------------------------------------
 
@@ -980,7 +983,7 @@ ALTER TABLE `filiere`
 -- AUTO_INCREMENT pour la table `historique`
 --
 ALTER TABLE `historique`
-  MODIFY `id_historique` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id_historique` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT pour la table `metier`

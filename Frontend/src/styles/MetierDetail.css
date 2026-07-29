@@ -115,7 +115,7 @@
     gap:15px;
 }
 
-.filiere-card{
+.metier-filiere-card{
     background:#1E3A8A;
     color:white;
     padding:12px 18px;
@@ -124,7 +124,7 @@
     transition:.3s;
 }
 
-.filiere-card:hover{
+.metier-filiere-card:hover{
     background:#F4B400;
     color:#0D1B2A;
     transform:scale(1.05);

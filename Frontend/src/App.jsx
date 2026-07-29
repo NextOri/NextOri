@@ -9,6 +9,8 @@ import Formations from "./pages/Formations";
 import Universites from "./pages/Universites";
 import Metiers from "./pages/Metiers";
 import MetierDetail from "./pages/MetierDetail";
+import Filieres from "./pages/Filieres";
+import FiliereDetail from "./pages/FiliereDetail";
 
 
 function App() {
@@ -37,7 +39,10 @@ function App() {
             <Route path="/metiers" element={<Metiers />} />
             
             <Route path="/metiers/:id_metier" element={<MetierDetail />} />
+
+            <Route path="/filieres" element={<Filieres />} />
             
+            <Route path="/filieres/:id_filiere" element={<FiliereDetail />} />
 
         </Routes>
       

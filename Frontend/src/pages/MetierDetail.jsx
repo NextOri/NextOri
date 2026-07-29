@@ -256,7 +256,7 @@ function MetierDetail() {
                             
                             <div 
                                 key={filiere.id_filiere}
-                                className="filiere-card"
+                                className="metier-filiere-card"
                             >
 
                                 🎓 {filiere.nom}

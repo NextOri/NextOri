@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import "../styles/Metiers.css";
 import FooterNavigation from "../components/FooterNavigation";
+import { useNavigate } from "react-router-dom";
 
 
 function Metiers() {
-
+     
+    const navigate = useNavigate();
     // 1) États
     const [metiers, setMetiers] = useState([]);
     const [recherche, setRecherche] = useState("");
@@ -337,10 +339,14 @@ function Metiers() {
 
     </span>
 
+
       </p>
 
 
-                    <button className="metier-button">
+                    <button className="metier-button"
+                    onClick={() => navigate(`/metiers/${metier.id_metier}`)}
+                    >
+                        
 
                         Voir détails →
 
@@ -351,6 +357,7 @@ function Metiers() {
             ))
 
         )
+
 
         :
 

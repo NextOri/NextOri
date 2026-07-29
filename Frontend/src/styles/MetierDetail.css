@@ -1,0 +1,308 @@
+.metier-detail-page{
+    max-width:1000px;
+    margin:20px auto 100px;
+    padding:20px;
+    background:#F2F4F7;
+    min-height:100vh;
+}
+
+/* ===== HEADER ===== */
+
+.metier-detail-header{
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 100;
+
+    background: #FFFFFF;
+
+    border-radius: 18px;
+
+    padding: 30px;
+
+    text-align: center;
+
+    box-shadow: 0 10px 25px rgba(0,0,0,.12);
+
+    margin-bottom: 25px;
+
+    border-top: 6px solid #F4B400;
+
+    backdrop-filter: blur(10px);
+
+}
+
+.metier-detail-header h1{
+    color:#0D1B2A;
+    font-size:2rem;
+    margin-bottom:10px;
+}
+
+.metier-detail-header p{
+    color:#555;
+    font-size:1rem;
+}
+
+.metier-tendance{
+    display:inline-block;
+    margin:15px 0;
+    padding:8px 18px;
+    background:#EAF7EE;
+    color:#2E7D32;
+    font-weight:bold;
+    border-radius:30px;
+}
+
+/* ===== SECTIONS ===== */
+
+.detail-section{
+    background:#FFFFFF;
+    margin-bottom:20px;
+    border-radius:18px;
+    padding:25px;
+    box-shadow:0 6px 18px rgba(0,0,0,.06);
+}
+
+.detail-section h2{
+    color:#1E3A8A;
+    margin-bottom:18px;
+    border-left:5px solid #F4B400;
+    padding-left:12px;
+}
+
+.detail-section p{
+    color:#444;
+    line-height:1.8;
+    text-align:justify;
+}
+
+/* ===== INFORMATIONS ===== */
+
+.infos-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:18px;
+}
+
+.infos-grid div{
+    background:#F8F9FC;
+    padding:18px;
+    border-radius:15px;
+    text-align:center;
+    border:1px solid #E2E8F0;
+    transition:.3s;
+}
+
+.infos-grid div:hover{
+    transform:translateY(-4px);
+    box-shadow:0 8px 18px rgba(0,0,0,.08);
+}
+
+.infos-grid strong{
+    display:block;
+    margin-top:10px;
+    color:#0D1B2A;
+    font-size:1rem;
+}
+
+/* ===== FILIERES ===== */
+
+.filieres-container{
+    display:flex;
+    flex-wrap:wrap;
+    gap:15px;
+}
+
+.filiere-card{
+    background:#1E3A8A;
+    color:white;
+    padding:12px 18px;
+    border-radius:30px;
+    font-weight:600;
+    transition:.3s;
+}
+
+.filiere-card:hover{
+    background:#F4B400;
+    color:#0D1B2A;
+    transform:scale(1.05);
+}
+
+/* ===== BOUTON ===== */
+
+.retour-btn{
+    width:100%;
+    margin-top:15px;
+    margin-bottom:20px;
+    padding:15px;
+    border:none;
+    border-radius:14px;
+    background:#0D1B2A;
+    color:white;
+    font-size:1rem;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.retour-btn:hover{
+    background:#F4B400;
+    color:#0D1B2A;
+}
+
+/*=====COMPETENCES ======*/
+
+.competences-container{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:12px;
+
+    margin-top:15px;
+
+}
+
+
+
+.competence-badge{
+
+    background:#F4B400;
+
+    color:#0D1B2A;
+
+    padding:10px 18px;
+
+    border-radius:25px;
+
+    font-weight:600;
+
+    font-size:.95rem;
+
+    transition:.3s;
+
+    cursor:default;
+
+}
+
+
+
+.competence-badge:hover{
+
+    background:#1E3A8A;
+
+    color:white;
+
+    transform:translateY(-2px);
+
+}
+
+/*====CHARGEMENT METIER =====*/
+
+.loading-container{
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    min-height:60vh;
+
+}
+
+.loading-spinner{
+
+    width:50px;
+
+    height:50px;
+
+    border:5px solid #F2F4F7;
+
+    border-top:5px solid #F4B400;
+
+    border-radius:50%;
+
+    animation:rotation 1s linear infinite;
+
+    margin-bottom:15px;
+
+}
+
+@keyframes rotation{
+
+    from{
+        transform:rotate(0deg);
+    }
+
+    to{
+        transform:rotate(360deg);
+    }
+
+}
+
+/*=== METIER INTROUVABLE ====*/
+
+.metier-introuvable{
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    min-height:60vh;
+
+    text-align:center;
+
+}
+
+.metier-introuvable h2{
+
+    color:#0D1B2A;
+
+    margin-bottom:15px;
+
+}
+
+.metier-introuvable p{
+
+    color:#666;
+
+    margin-bottom:25px;
+
+    max-width:450px;
+
+}
+
+
+
+
+/* ===== RESPONSIVE ===== */
+
+@media(max-width:768px){
+
+.metier-detail-page{
+    padding:15px;
+}
+
+.metier-detail-header{
+    padding:20px;
+}
+
+.metier-detail-header h1{
+    font-size:1.6rem;
+}
+
+.detail-section{
+    padding:18px;
+}
+
+}

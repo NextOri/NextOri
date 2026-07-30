@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mer. 29 juil. 2026 à 16:29
+-- Généré le : jeu. 30 juil. 2026 à 13:23
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.2.12
 
@@ -44,23 +44,25 @@ CREATE TABLE `filiere` (
   `id_filiere` int(11) NOT NULL,
   `nom` varchar(150) NOT NULL,
   `description` text NOT NULL,
+  `presentation` text DEFAULT NULL,
   `domaine` varchar(100) NOT NULL,
-  `duree` varchar(50) NOT NULL
+  `duree` varchar(50) NOT NULL,
+  `competences_developpees` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `filiere`
 --
 
-INSERT INTO `filiere` (`id_filiere`, `nom`, `description`, `domaine`, `duree`) VALUES
-(1, 'Informatique', 'Étude des systèmes informatiques, développement et réseaux', 'Sciences & Technologies', '3 ans'),
-(2, 'Génie Civil', 'Construction et infrastructures', 'Ingénierie', '3 ans'),
-(3, 'Médecine', 'Études médicales et santé humaine', 'Santé', '6 à 8 ans'),
-(4, 'Droit', 'Étude des lois et du système juridique', 'Sciences Juridiques', '4 ans'),
-(5, 'Gestion', 'Management et administration des entreprises', 'Économie & Gestion', '3 ans'),
-(6, 'Finance', 'Analyse financière et comptabilité', 'Économie & Gestion', '3 ans'),
-(7, 'Marketing', 'Stratégies commerciales et communication', 'Commerce', '3 ans'),
-(8, 'Électronique', 'Systèmes électroniques et embarqués', 'Technologie', '3 ans');
+INSERT INTO `filiere` (`id_filiere`, `nom`, `description`, `presentation`, `domaine`, `duree`, `competences_developpees`) VALUES
+(1, 'Informatique', 'Étude des systèmes informatiques, développement et réseaux', 'Formation orientée vers les sciences informatiques, la programmation, les bases de données, les réseaux et le développement de solutions numériques.', 'Sciences & Technologies', '3 ans', 'Programmation, Bases de données, Développement Web, Réseaux, Algorithmique, Résolution de problèmes'),
+(2, 'Génie Civil', 'Construction et infrastructures', 'Formation spécialisée dans la conception, la construction et la gestion des infrastructures telles que les bâtiments, les routes et les ponts.', 'Ingénierie', '3 ans', 'Calcul des structures, DAO, Gestion de chantier, Topographie, Résistance des matériaux, Organisation'),
+(3, 'Médecine', 'Études médicales et santé humaine', 'Formation dédiée aux sciences médicales, au diagnostic, à la prévention et au traitement des maladies afin d’améliorer la santé des populations.', 'Santé', '6 à 8 ans', 'Diagnostic, Anatomie, Soins médicaux, Communication, Esprit d’analyse, Prise de décision'),
+(4, 'Droit', 'Étude des lois et du système juridique', 'Formation permettant de comprendre les règles juridiques, les institutions et les procédures afin de défendre les droits et conseiller les organisations.', 'Droit & Sciences Juridiques', '4 ans', 'Analyse juridique, Argumentation, Plaidoirie, Rédaction, Négociation, Esprit critique'),
+(5, 'Gestion', 'Management et administration des entreprises', 'Formation axée sur la gestion des organisations, la planification, le management et la coordination des ressources humaines, matérielles et financières.', 'Économie & Gestion', '3 ans', 'Management, Organisation, Leadership, Gestion de projet, Communication, Planification'),
+(6, 'Finance', 'Analyse financière et comptabilité', 'Formation spécialisée dans la gestion financière, les investissements, la comptabilité et l’analyse économique des entreprises.', 'Économie & Gestion', '3 ans', 'Analyse financière, Comptabilité, Gestion budgétaire, Fiscalité, Investissement, Excel'),
+(7, 'Marketing', 'Stratégies commerciales et communication', 'Formation consacrée à la compréhension des marchés, du comportement des consommateurs et à la promotion des produits et services.', 'Commerce & Communication', '3 ans', 'Marketing digital, Étude de marché, Communication, Vente, Stratégie commerciale, Créativité'),
+(8, 'Électronique', 'Systèmes électroniques et embarqués', 'Formation orientée vers la conception, le développement et la maintenance des systèmes électroniques et des équipements intelligents.', 'Sciences & Technologies', '3 ans', 'Électronique analogique, Électronique numérique, Microcontrôleurs, Maintenance, Automatisation, Électricité');
 
 -- --------------------------------------------------------
 
@@ -99,7 +101,11 @@ INSERT INTO `historique` (`id_historique`, `id_user`, `action`, `date_action`) V
 (24, 1, 'FORMATION_CONSULTEE', '2026-07-28 17:46:50'),
 (25, 1, 'UNIVERSITES_CONSULTEES', '2026-07-28 17:46:52'),
 (27, 1, 'PROFIL_CONSULTE', '2026-07-28 18:56:34'),
-(28, 1, 'PROFIL_CONSULTE', '2026-07-29 13:04:05');
+(28, 1, 'PROFIL_CONSULTE', '2026-07-29 13:04:05'),
+(29, 1, 'FORMATION_CONSULTEE', '2026-07-29 14:52:46'),
+(30, 1, 'UNIVERSITES_CONSULTEES', '2026-07-29 14:52:48'),
+(31, 1, 'FORMATION_CONSULTEE', '2026-07-29 14:53:33'),
+(32, 1, 'FORMATION_CONSULTEE', '2026-07-29 14:53:46');
 
 -- --------------------------------------------------------
 
@@ -790,19 +796,21 @@ CREATE TABLE `universite` (
   `type` enum('publique','privee') NOT NULL,
   `pays` varchar(100) NOT NULL,
   `ville` varchar(100) NOT NULL,
-  `site_web` varchar(255) DEFAULT NULL
+  `region` varchar(100) DEFAULT NULL,
+  `site_web` varchar(255) DEFAULT NULL,
+  `logo` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `universite`
 --
 
-INSERT INTO `universite` (`id_universite`, `nom`, `description`, `type`, `pays`, `ville`, `site_web`) VALUES
-(1, 'UCAD', 'Université Cheikh Anta Diop de Dakar, la plus grande université du Sénégal', 'publique', 'Sénégal', 'Dakar', 'https://www.ucad.sn'),
-(2, 'UGB', 'Université Gaston Berger de Saint-Louis', 'publique', 'Sénégal', 'Saint-Louis', 'https://www.ugb.sn'),
-(3, 'UIDT', 'Université Iba Der Thiam de Thiès', 'publique', 'Sénégal', 'Thiès', 'https://www.uidt.sn'),
-(4, 'ESP', 'École Supérieure Polytechnique de Dakar', 'publique', 'Sénégal', 'Dakar', 'https://www.esp.sn'),
-(5, 'SUPDECO', 'Institut privé spécialisé en management et commerce', 'privee', 'Sénégal', 'Dakar', 'https://www.supdeco.sn');
+INSERT INTO `universite` (`id_universite`, `nom`, `description`, `type`, `pays`, `ville`, `region`, `site_web`, `logo`) VALUES
+(1, 'UCAD', 'Université Cheikh Anta Diop de Dakar, la plus grande université du Sénégal', 'publique', 'Sénégal', 'Dakar', 'Dakar', 'https://www.ucad.sn', '/assets/logos/ucad.png'),
+(2, 'UGB', 'Université Gaston Berger de Saint-Louis', 'publique', 'Sénégal', 'Saint-Louis', 'Saint-Louis', 'https://www.ugb.sn', '/assets/logos/ugb.png'),
+(3, 'UIDT', 'Université Iba Der Thiam de Thiès', 'publique', 'Sénégal', 'Thiès', 'Thiès', 'https://www.uidt.sn', '/assets/logos/uidt.png'),
+(4, 'ESP', 'École Supérieure Polytechnique de Dakar', 'publique', 'Sénégal', 'Dakar', 'Dakar', 'https://www.esp.sn', '/assets/logos/esp.png'),
+(5, 'SUPDECO', 'Institut privé spécialisé en management et commerce', 'privee', 'Sénégal', 'Dakar', 'Dakar', 'https://www.supdeco.sn', '/assets/logos/supdeco.png');
 
 -- --------------------------------------------------------
 
@@ -983,7 +991,7 @@ ALTER TABLE `filiere`
 -- AUTO_INCREMENT pour la table `historique`
 --
 ALTER TABLE `historique`
-  MODIFY `id_historique` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id_historique` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT pour la table `metier`

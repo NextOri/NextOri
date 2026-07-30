@@ -1,0 +1,453 @@
+/* =========================================
+   UNIVERSITE DETAIL - STYLE PREMIUM NEXTORI
+========================================= */
+
+
+.no-universite-detail-page {
+
+    min-height:100vh;
+
+    background:#F2F4F7;
+
+    padding-bottom:90px;
+
+    color:#0D1B2A;
+
+}
+
+
+
+/* ================= HEADER ================= */
+
+
+.no-universite-detail-header {
+
+
+    position: sticky;
+    top: 0;
+    z-index: 100;
+
+    background:
+    linear-gradient(
+        135deg,
+        #0D1B2A,
+        #1E3A8A
+    );
+
+    
+
+    color:white;
+
+    padding:30px 25px;
+
+    text-align:center;
+
+    border-radius:0 0 35px 35px;
+
+   
+
+    overflow:hidden;
+
+}
+
+
+
+/* effet lumineux discret */
+
+.no-universite-detail-header::before {
+
+    content:"";
+
+    position:absolute;
+
+    width:250px;
+
+    height:250px;
+
+    background:#F4B400;
+
+    opacity:0.15;
+
+    border-radius:50%;
+
+    top:-100px;
+
+    right:-80px;
+
+}
+
+
+
+.no-universite-detail-logo {
+
+    width:150px;
+
+    max-width:100%;
+
+    height:150px;
+
+    object-fit:contain;
+
+    background:#FFFFFF;
+
+    padding:20px;
+
+    border-radius:30px;
+
+     box-shadow:
+    0 15px 35px rgba(13,27,42,0.18);
+
+    position:relative;
+
+    animation:apparitionLogo .8s ease;
+
+    transition:.3s ease;
+
+}
+
+
+
+.no-universite-detail-logo:hover {
+
+    transform:scale(1.05);
+
+}
+
+
+@keyframes apparitionLogo {
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(-20px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+
+
+.no-universite-detail-header h1 {
+
+    margin-top:25px;
+
+    font-size:2.2rem;
+
+}
+
+
+
+.no-universite-detail-type {
+
+    display:inline-block;
+
+    margin-top:15px;
+
+    padding:8px 20px;
+
+    border-radius:30px;
+
+    background:#F4B400;
+
+    color:#0D1B2A;
+
+    font-weight:700;
+
+}
+
+
+
+/* ================= CONTENT ================= */
+
+
+.no-universite-detail-content {
+
+    max-width:1100px;
+
+    margin:40px auto;
+
+    padding:0 20px;
+
+}
+
+
+
+/* sections */
+
+
+.no-universite-detail-content section {
+
+    background:white;
+
+    padding:30px;
+
+    margin-bottom:25px;
+
+    border-radius:25px;
+
+    box-shadow:
+    0 10px 25px rgba(13,27,42,0.08);
+
+    transition:.3s ease;
+
+}
+
+
+.no-universite-detail-content section:hover {
+
+    transform:translateY(-5px);
+
+}
+
+
+
+/* titres */
+
+
+.no-universite-detail-content h2 {
+
+    color:#1E3A8A;
+
+    margin-bottom:18px;
+
+    font-size:1.5rem;
+
+}
+
+
+
+.no-universite-detail-content p {
+
+    line-height:1.8;
+
+    color:#444;
+
+}
+
+
+
+/* ================= INFORMATIONS ================= */
+
+
+.no-universite-detail-informations p {
+
+    margin:10px 0;
+
+}
+
+
+
+/* bouton site web */
+
+
+.no-universite-detail-site-button {
+
+    display:inline-block;
+
+    margin-top:20px;
+
+    padding:12px 25px;
+
+    border-radius:30px;
+
+    background:#1E3A8A;
+
+    color:white;
+
+    text-decoration:none;
+
+    font-weight:600;
+
+    transition:.3s;
+
+}
+
+
+
+.no-universite-detail-site-button:hover {
+
+    background:#F4B400;
+
+    color:#0D1B2A;
+
+}
+
+
+
+/* ================= FILIERES ================= */
+
+
+.no-universite-detail-filieres-grid {
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(240px,1fr));
+
+    gap:20px;
+
+}
+
+
+
+.no-universite-detail-filiere-card {
+
+    background:#F2F4F7;
+
+    border-radius:20px;
+
+    padding:25px;
+
+    border-left:5px solid #F4B400;
+
+    transition:.3s;
+
+}
+
+
+
+.no-universite-detail-filiere-card:hover {
+
+    transform:translateY(-8px);
+
+    box-shadow:
+    0 15px 30px rgba(13,27,42,0.12);
+
+}
+
+
+
+.no-universite-detail-filiere-card h3 {
+
+    color:#0D1B2A;
+
+}
+
+
+
+.no-universite-detail-button {
+
+    margin-top:15px;
+
+    border:none;
+
+    background:#0D1B2A;
+
+    color:white;
+
+    padding:10px 18px;
+
+    border-radius:25px;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+
+
+.no-universite-detail-button:hover {
+
+    background:#F4B400;
+
+    color:#0D1B2A;
+
+}
+
+
+
+/* ================= MOBILE ================= */
+
+
+@media(max-width:600px){
+
+
+    .no-universite-detail-header {
+
+        padding:40px 15px;
+
+    }
+
+
+    .no-universite-detail-header h1 {
+
+        font-size:1.7rem;
+
+    }
+
+
+    .no-universite-detail-logo {
+
+        width:100px;
+
+        height:100px;
+
+    }
+
+
+    .no-universite-detail-content {
+
+        padding:0 15px;
+
+    }
+
+
+    .no-universite-detail-content section {
+
+        padding:22px;
+
+    }
+
+}
+
+.no-universite-detail-retour {
+
+    display:flex;
+
+    justify-content:center;
+
+    margin:40px 0 20px;
+
+}
+
+
+.no-universite-detail-retour-button {
+
+    background:#FFFFFF;
+
+    color:#0D1B2A;
+
+    border:2px solid #1E3A8A;
+
+    padding:12px 30px;
+
+    border-radius:30px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.3s ease;
+
+}
+
+
+.no-universite-detail-retour-button:hover {
+
+    background:#1E3A8A;
+
+    color:#FFFFFF;
+
+    transform:translateY(-3px);
+
+}

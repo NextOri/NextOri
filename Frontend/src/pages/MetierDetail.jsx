@@ -285,7 +285,7 @@ function MetierDetail() {
 
             </button>
 
-            <div className="footer-spacing"></div>
+            
 
               <FooterNavigation />
 

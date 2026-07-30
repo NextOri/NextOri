@@ -18,26 +18,26 @@
 =========================== */
 
 .filieres-header{
+    max-width: 1250px;
 
-    
+    width: min(100%, 1250px);
 
-    background:#FFFFFF;
+    margin: 0 auto 25px;
+
+    background:#0D1B2A;
 
     padding:25px;
 
     border-radius:22px;
 
     text-align:center;
-
+    
     box-shadow:0 10px 30px rgba(0,0,0,.08);
-
-    margin-bottom:25px;
-
 }
 
 .filieres-header h1{
 
-    color:#0D1B2A;
+    color:#FFFFFF;
 
     font-size:2rem;
 
@@ -47,10 +47,22 @@
 
 .filieres-header p{
 
-    color:#666;
+    color:#FFFFFF;
 
     font-size:1rem;
 
+}
+
+/* ===== Largeur des divisions et section ======*/
+
+.filieres-filtres,
+.filieres-count,
+.filieres-list,
+
+.aucune-filiere {
+    max-width: 1250px;
+    width: min(100%, 1250px);
+    margin: 0 auto;
 }
 
 
@@ -133,29 +145,26 @@
    COMPTEUR
 =========================== */
 
-.filieres-count{
+.filieres-count {
+    display: flex;
 
-    display:inline-flex;
+    justify-content: flex-start;
 
-    align-items:center;
+    align-items: center;
 
-    gap:10px;
+    gap: 10px;
 
-    background:#EAF1FF;
+    max-width: 1250px;
 
-    color:#1E3A8A;
+    width: min(100%, 1250px);
 
-    padding:12px 18px;
-
-    border-radius:30px;
-
-    font-weight:700;
-
-    margin-bottom:25px;
-
+    margin: 0 auto 25px;
+    
+    color: #1E3A8A;
+    padding: 12px 18px;
+    border-radius: 30px;
+    font-weight: 700;
 }
-
-
 /* ===========================
    LISTE
 =========================== */

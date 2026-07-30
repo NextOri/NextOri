@@ -11,6 +11,8 @@ import Metiers from "./pages/Metiers";
 import MetierDetail from "./pages/MetierDetail";
 import Filieres from "./pages/Filieres";
 import FiliereDetail from "./pages/FiliereDetail";
+import UniversiteCatalogue from "./pages/UniversiteCatalogue";
+import UniversiteDetail from "./pages/UniversiteDetail";
 
 
 function App() {
@@ -43,6 +45,10 @@ function App() {
             <Route path="/filieres" element={<Filieres />} />
             
             <Route path="/filieres/:id_filiere" element={<FiliereDetail />} />
+
+            <Route path="/universite-catalogue" element={<UniversiteCatalogue />} />
+
+            <Route path="/universite-catalogue/:id_universite" element={<UniversiteDetail />} />
 
         </Routes>
       

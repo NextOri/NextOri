@@ -1,0 +1,964 @@
+/*=====================================================
+=            UNIVERSITE CATALOGUE - NEXTORI           =
+======================================================*/
+
+.no-universite-catalogue-page{
+    min-height:100vh;
+    background:#F2F4F7;
+    padding-bottom:110px;
+}
+
+
+/*=========================
+=        HERO HEADER      =
+=========================*/
+
+.no-universite-catalogue-header{
+
+    
+
+    background:linear-gradient(
+        135deg,
+        #0D1B2A 0%,
+        #1E3A8A 100%
+    );
+
+    color:#FFFFFF;
+
+    padding:70px 25px 55px;
+
+    text-align:center;
+
+    border-bottom-left-radius:35px;
+    border-bottom-right-radius:35px;
+
+    box-shadow:0 10px 30px rgba(13,27,42,.15);
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+
+/* décoration discrète */
+
+.no-universite-catalogue-header::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:260px;
+    height:260px;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.05);
+
+    top:-120px;
+    right:-70px;
+
+}
+
+.no-universite-catalogue-header::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:180px;
+    height:180px;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.05);
+
+    bottom:-90px;
+    left:-50px;
+
+}
+
+
+.no-universite-catalogue-header h1{
+
+    font-size:2.2rem;
+
+    font-weight:800;
+
+    margin-bottom:12px;
+
+    letter-spacing:.5px;
+
+    position:relative;
+
+    z-index:2;
+
+}
+
+.no-universite-catalogue-header p{
+
+    max-width:650px;
+
+    margin:auto;
+
+    font-size:1rem;
+
+    line-height:1.8;
+
+    opacity:.92;
+
+    position:relative;
+
+    z-index:2;
+
+}
+
+
+
+/*=========================
+=        TOOLBAR          =
+=========================*/
+
+.no-universite-catalogue-toolbar {
+    width: min(1250px, 94%);
+    margin: -28px auto 30px;
+    background: #FFFFFF;
+    border-radius: 22px;
+    padding: 22px;
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 12px 35px rgba(13,27,42,.08);
+    position: sticky;
+    top: 0;
+    z-index: 20;
+}
+
+/*=========================
+=      SEARCH INPUT       =
+=========================*/
+
+.no-universite-catalogue-search{
+
+    flex:1;
+
+    min-width:320px;
+
+    border:none;
+
+    outline:none;
+
+    background:#F2F4F7;
+
+    border-radius:16px;
+
+    padding:16px 20px;
+
+    font-size:.97rem;
+
+    transition:.25s;
+
+}
+
+
+.no-universite-catalogue-search:focus{
+
+    background:#FFFFFF;
+
+    box-shadow:
+        0 0 0 3px rgba(30,58,138,.12);
+
+}
+
+
+
+/*=========================
+=        FILTERS          =
+=========================*/
+
+.no-universite-catalogue-filter{
+
+    min-width:180px;
+
+    border:none;
+
+    outline:none;
+
+    background:#F2F4F7;
+
+    border-radius:16px;
+
+    padding:16px;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+    font-size:.95rem;
+
+}
+
+
+.no-universite-catalogue-filter:hover{
+
+    background:#FFFFFF;
+
+}
+
+
+.no-universite-catalogue-filter:focus{
+
+    box-shadow:
+        0 0 0 3px rgba(30,58,138,.12);
+
+}
+
+
+
+/*=========================
+=        COUNTER          =
+=========================*/
+
+.no-universite-catalogue-counter{
+
+    width:min(1200px,92%);
+
+    margin:auto;
+
+    margin-bottom:25px;
+
+    font-size:.95rem;
+
+    font-weight:600;
+
+    color:#1E3A8A;
+
+}
+
+/*==========================================
+=            UNIVERSITES GRID              =
+==========================================*/
+
+.no-universite-catalogue-grid{
+
+    width:min(1250px,94%);
+
+    margin:auto;
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(auto-fit,minmax(310px,1fr));
+
+    gap:28px;
+
+    padding-bottom:40px;
+
+}
+
+
+
+/*==========================================
+=            UNIVERSITY CARD              =
+==========================================*/
+
+.no-universite-catalogue-card{
+
+    background:#FFFFFF;
+
+    border-radius:24px;
+
+    padding:30px;
+
+    position:relative;
+
+    overflow:hidden;
+
+    transition:.35s ease;
+
+    border:1px solid rgba(13,27,42,.05);
+
+    box-shadow:
+        0 10px 25px rgba(13,27,42,.06);
+
+}
+
+
+.no-universite-catalogue-card:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:
+        0 20px 45px rgba(13,27,42,.12);
+
+}
+
+
+
+/* petite ligne orange */
+
+.no-universite-catalogue-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+
+    left:0;
+
+    width:100%;
+
+    height:5px;
+
+    background:#F4B400;
+
+}
+
+
+
+/*==========================================
+=               LOGO                      =
+==========================================*/
+
+.no-universite-catalogue-logo{
+
+    width:95px;
+
+    height:95px;
+
+    margin:auto;
+
+    margin-bottom:22px;
+
+    background:#F2F4F7;
+
+    border-radius:20px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    overflow:hidden;
+
+    border:2px solid rgba(30,58,138,.08);
+
+}
+
+
+.no-universite-catalogue-logo img{
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:contain;
+
+    padding:12px;
+
+}
+
+
+
+/*==========================================
+=               TITLES                    =
+==========================================*/
+
+.no-universite-catalogue-card h2{
+
+    text-align:center;
+
+    color:#0D1B2A;
+
+    font-size:1.45rem;
+
+    font-weight:800;
+
+    margin-bottom:10px;
+
+    letter-spacing:.5px;
+
+}
+
+
+.no-universite-catalogue-description{
+
+    text-align:center;
+
+    color:#5E6572;
+
+    font-size:.93rem;
+
+    line-height:1.6;
+
+    min-height:58px;
+
+    margin-bottom:18px;
+
+}
+
+
+
+/*==========================================
+=              TYPE BADGE                 =
+==========================================*/
+
+.no-universite-catalogue-type{
+
+    display:block;
+
+    width:fit-content;
+
+    margin:auto;
+
+    margin-bottom:18px;
+
+    padding:8px 18px;
+
+    border-radius:999px;
+
+    font-size:.82rem;
+
+    font-weight:700;
+
+    text-transform:uppercase;
+
+    letter-spacing:.4px;
+
+}
+
+
+.no-universite-catalogue-type.publique{
+
+    background:rgba(30,58,138,.10);
+
+    color:#1E3A8A;
+
+}
+
+
+.no-universite-catalogue-type.privee{
+
+    background:rgba(244,180,0,.15);
+
+    color:#B88700;
+
+}
+
+
+
+/*==========================================
+=           LOCATION BLOCK                =
+==========================================*/
+
+.no-universite-catalogue-localisation{
+
+    background:#F2F4F7;
+
+    border-radius:14px;
+
+    padding:14px;
+
+    text-align:center;
+
+    font-size:.92rem;
+
+    color:#49505A;
+
+    margin-bottom:25px;
+
+}
+
+
+
+/*==========================================
+=            DETAIL BUTTON                =
+==========================================*/
+
+.no-universite-catalogue-button{
+
+    width:100%;
+
+    border:none;
+
+    cursor:pointer;
+
+    border-radius:15px;
+
+    background:#0D1B2A;
+
+    color:#FFFFFF;
+
+    padding:15px;
+
+    font-size:.95rem;
+
+    font-weight:700;
+
+    transition:.30s;
+
+}
+
+
+.no-universite-catalogue-button:hover{
+
+    background:#1E3A8A;
+
+}
+
+
+/*==========================================
+=            CARD ANIMATION               =
+==========================================*/
+
+.no-universite-catalogue-card{
+
+    animation:fadeCard .55s ease forwards;
+
+    opacity:0;
+
+}
+
+
+.no-universite-catalogue-card:nth-child(1){
+
+    animation-delay:.05s;
+
+}
+
+.no-universite-catalogue-card:nth-child(2){
+
+    animation-delay:.10s;
+
+}
+
+.no-universite-catalogue-card:nth-child(3){
+
+    animation-delay:.15s;
+
+}
+
+.no-universite-catalogue-card:nth-child(4){
+
+    animation-delay:.20s;
+
+}
+
+.no-universite-catalogue-card:nth-child(5){
+
+    animation-delay:.25s;
+
+}
+
+
+@keyframes fadeCard{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(35px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+
+/*==========================================
+=           HERO ANIMATION                =
+==========================================*/
+
+.no-universite-catalogue-header::before{
+
+    animation:floatCircle1 12s ease-in-out infinite;
+
+}
+
+.no-universite-catalogue-header::after{
+
+    animation:floatCircle2 16s ease-in-out infinite;
+
+}
+
+
+@keyframes floatCircle1{
+
+    0%{
+
+        transform:translateY(0);
+
+    }
+
+    50%{
+
+        transform:translateY(18px);
+
+    }
+
+    100%{
+
+        transform:translateY(0);
+
+    }
+
+}
+
+
+@keyframes floatCircle2{
+
+    0%{
+
+        transform:translateY(0);
+
+    }
+
+    50%{
+
+        transform:translateY(-18px);
+
+    }
+
+    100%{
+
+        transform:translateY(0);
+
+    }
+
+}
+
+
+/*==========================================
+=         SEARCH MICRO EFFECT             =
+==========================================*/
+
+.no-universite-catalogue-search{
+
+    transition:
+        .25s,
+        transform .25s;
+
+}
+
+
+.no-universite-catalogue-search:hover{
+
+    transform:translateY(-2px);
+
+}
+
+
+
+/*==========================================
+=          FILTER MICRO EFFECT            =
+==========================================*/
+
+.no-universite-catalogue-filter{
+
+    transition:
+        .25s,
+        transform .25s;
+
+}
+
+
+.no-universite-catalogue-filter:hover{
+
+    transform:translateY(-2px);
+
+}
+
+
+
+/*==========================================
+=          BUTTON EFFECT                  =
+==========================================*/
+
+.no-universite-catalogue-button{
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+
+.no-universite-catalogue-button::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+
+    left:-120%;
+
+    width:120%;
+
+    height:100%;
+
+    background:
+
+        linear-gradient(
+
+            90deg,
+
+            transparent,
+
+            rgba(255,255,255,.18),
+
+            transparent
+
+        );
+
+    transition:.6s;
+
+}
+
+
+.no-universite-catalogue-button:hover::before{
+
+    left:120%;
+
+}
+
+
+
+/*==========================================
+=          RESPONSIVE TABLET             =
+==========================================*/
+
+@media(max-width:900px){
+
+.no-universite-catalogue-toolbar{
+
+    flex-direction:column;
+
+    align-items:stretch;
+
+}
+
+
+.no-universite-catalogue-search{
+
+    min-width:100%;
+
+}
+
+
+.no-universite-catalogue-filter{
+
+    width:100%;
+
+}
+
+}
+
+
+
+/*==========================================
+=          RESPONSIVE MOBILE             =
+==========================================*/
+
+@media(max-width:600px){
+
+.no-universite-catalogue-header{
+
+    padding:55px 20px 45px;
+
+}
+
+
+.no-universite-catalogue-header h1{
+
+    font-size:1.8rem;
+
+}
+
+
+.no-universite-catalogue-header p{
+
+    font-size:.92rem;
+
+}
+
+
+.no-universite-catalogue-card{
+
+    padding:22px;
+
+}
+
+
+.no-universite-catalogue-logo{
+
+    width:80px;
+
+    height:80px;
+
+}
+
+
+.no-universite-catalogue-card h2{
+
+    font-size:1.25rem;
+
+}
+
+}
+
+
+/* ===============================
+   BLOC 4 - FINITION PREMIUM
+   Glassmorphism léger
+================================ */
+
+
+/* Cartes universités */
+
+.no-universite-catalogue-card{
+
+    background:rgba(255,255,255,0.75);
+
+    backdrop-filter:blur(8px);
+
+    -webkit-backdrop-filter:blur(8px);
+
+    border:1px solid rgba(255,255,255,0.5);
+
+    box-shadow:
+        0 10px 30px rgba(13,27,42,0.08);
+
+}
+
+
+
+/* Effet profondeur au survol */
+
+.no-universite-catalogue-card:hover{
+
+    box-shadow:
+        0 18px 40px rgba(13,27,42,0.15);
+
+}
+
+
+
+/* Logo */
+
+.no-universite-catalogue-logo{
+
+    background:#FFFFFF;
+
+    border-radius:18px;
+
+    padding:10px;
+
+    box-shadow:
+        0 5px 15px rgba(13,27,42,0.08);
+
+}
+
+
+
+/* Description */
+
+.no-universite-catalogue-description{
+
+    color:#444;
+
+    line-height:1.7;
+
+}
+
+
+
+/* Localisation */
+
+.no-universite-catalogue-localisation{
+
+    align-items:center;
+
+    gap:20px;
+
+    color:#1E3A8A;
+
+    font-weight:600;
+
+}
+
+
+
+/* Bouton détail */
+
+.no-universite-catalogue-button{
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+
+.no-universite-catalogue-button::after{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+
+    left:-100%;
+
+    width:50%;
+
+    height:100%;
+
+    background:
+    linear-gradient(
+        120deg,
+        transparent,
+        rgba(255,255,255,0.4),
+        transparent
+    );
+
+    transition:.5s;
+
+}
+
+
+.no-universite-catalogue-button:hover::after{
+
+    left:120%;
+
+}
+
+
+
+/* Accessibilité mouvement réduit */
+
+@media(prefers-reduced-motion:reduce){
+
+    .no-universite-catalogue-card,
+    .no-universite-catalogue-button{
+
+        animation:none;
+
+        transition:none;
+
+    }
+
+}
+

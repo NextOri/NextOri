@@ -22,27 +22,37 @@
 
 .metiers-header{
 
+    background:#0D1B2A;
+
+    padding:25px;
+
+    border-radius:22px;
+
     text-align:center;
 
-    margin-bottom:30px;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+    margin-bottom:25px;
+
 
 }
 
 
 .metiers-header h1{
 
-    color:#0D1B2A;
+    color:#FFFFFF;
 
-    font-size:2.2rem;
+    font-size:2rem;
 
     margin-bottom:10px;
+
 
 }
 
 
 .metiers-header p{
 
-    color:#555;
+    color:#FFFFFF;
 
     font-size:1rem;
 

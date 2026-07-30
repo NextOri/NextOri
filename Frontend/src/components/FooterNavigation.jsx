@@ -1,8 +1,30 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import "../styles/FooterNavigation.css";
+import React from "react";
+
+
 
 
 function FooterNavigation() {
+
+    const navigate = useNavigate();
+
+    const handleProfileClick = () => {
+
+    const utilisateur = localStorage.getItem("utilisateur");
+
+
+    if (utilisateur) {
+
+        navigate("/profil");
+
+    } else {
+
+        navigate("/connexion");
+
+    }
+
+     };
 
     return (
 
@@ -69,15 +91,15 @@ function FooterNavigation() {
 
 
 
-            <NavLink to="/profil">
+            <NavLink 
+    to="/profil"
+    onClick={handleProfileClick}
+                   >
+    <span>👤</span>
 
-                <span>👤</span>
+    <p>Profil</p>
 
-                <p>
-                    Profil
-                </p>
-
-            </NavLink>
+       </NavLink>
 
 
         </footer>

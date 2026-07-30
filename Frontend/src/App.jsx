@@ -13,6 +13,9 @@ import Filieres from "./pages/Filieres";
 import FiliereDetail from "./pages/FiliereDetail";
 import UniversiteCatalogue from "./pages/UniversiteCatalogue";
 import UniversiteDetail from "./pages/UniversiteDetail";
+import Inscription from "./pages/Inscription";
+import Connexion from "./pages/Connexion";
+import Profil from "./pages/Profil";
 
 
 function App() {
@@ -49,6 +52,13 @@ function App() {
             <Route path="/universite-catalogue" element={<UniversiteCatalogue />} />
 
             <Route path="/universite-catalogue/:id_universite" element={<UniversiteDetail />} />
+
+            <Route path="/inscription" element={<Inscription />} />
+
+            <Route path="/connexion" element={<Connexion />} />
+
+            <Route path="/profil" element={<Profil />} />
+
 
         </Routes>
       

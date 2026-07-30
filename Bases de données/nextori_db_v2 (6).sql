@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : jeu. 30 juil. 2026 à 13:23
+-- Généré le : jeu. 30 juil. 2026 à 19:30
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.2.12
 
@@ -105,7 +105,12 @@ INSERT INTO `historique` (`id_historique`, `id_user`, `action`, `date_action`) V
 (29, 1, 'FORMATION_CONSULTEE', '2026-07-29 14:52:46'),
 (30, 1, 'UNIVERSITES_CONSULTEES', '2026-07-29 14:52:48'),
 (31, 1, 'FORMATION_CONSULTEE', '2026-07-29 14:53:33'),
-(32, 1, 'FORMATION_CONSULTEE', '2026-07-29 14:53:46');
+(32, 1, 'FORMATION_CONSULTEE', '2026-07-29 14:53:46'),
+(33, 1, 'METIERS_CONSULTES', '2026-07-30 13:13:25'),
+(34, 1, 'FORMATION_CONSULTEE', '2026-07-30 13:13:37'),
+(35, 1, 'UNIVERSITES_CONSULTEES', '2026-07-30 13:13:40'),
+(36, 1, 'FORMATION_CONSULTEE', '2026-07-30 13:14:16'),
+(37, 1, 'UNIVERSITES_CONSULTEES', '2026-07-30 13:14:19');
 
 -- --------------------------------------------------------
 
@@ -738,7 +743,27 @@ INSERT INTO `reponse` (`id_reponse`, `id_test`, `id_proposition`) VALUES
 (337, 18, 99),
 (338, 18, 106),
 (339, 18, 114),
-(340, 18, 119);
+(340, 18, 119),
+(341, 19, 6),
+(342, 19, 12),
+(343, 19, 17),
+(344, 19, 22),
+(345, 19, 27),
+(346, 19, 34),
+(347, 19, 38),
+(348, 19, 46),
+(349, 19, 51),
+(350, 19, 59),
+(351, 19, 64),
+(352, 19, 71),
+(353, 19, 77),
+(354, 19, 82),
+(355, 19, 89),
+(356, 19, 96),
+(357, 19, 101),
+(358, 19, 108),
+(359, 19, 112),
+(360, 19, 117);
 
 -- --------------------------------------------------------
 
@@ -781,7 +806,8 @@ INSERT INTO `test_riasec` (`id_test`, `id_user`, `id_questionnaire`, `date_test`
 (15, 1, 1, '2026-07-24 14:14:12', 4, 1, 0, 5, 6, 4, 'ES'),
 (16, 1, 1, '2026-07-26 00:21:29', 2, 4, 2, 7, 3, 2, 'SI'),
 (17, 1, 1, '2026-07-27 18:06:25', 4, 1, 5, 5, 2, 3, 'AS'),
-(18, 1, 1, '2026-07-27 19:06:50', 2, 1, 5, 4, 7, 1, 'EA');
+(18, 1, 1, '2026-07-27 19:06:50', 2, 1, 5, 4, 7, 1, 'EA'),
+(19, 1, 1, '2026-07-30 13:13:23', 0, 3, 7, 4, 3, 3, 'AS');
 
 -- --------------------------------------------------------
 
@@ -811,6 +837,31 @@ INSERT INTO `universite` (`id_universite`, `nom`, `description`, `type`, `pays`,
 (3, 'UIDT', 'Université Iba Der Thiam de Thiès', 'publique', 'Sénégal', 'Thiès', 'Thiès', 'https://www.uidt.sn', '/assets/logos/uidt.png'),
 (4, 'ESP', 'École Supérieure Polytechnique de Dakar', 'publique', 'Sénégal', 'Dakar', 'Dakar', 'https://www.esp.sn', '/assets/logos/esp.png'),
 (5, 'SUPDECO', 'Institut privé spécialisé en management et commerce', 'privee', 'Sénégal', 'Dakar', 'Dakar', 'https://www.supdeco.sn', '/assets/logos/supdeco.png');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `universite_detail`
+--
+
+CREATE TABLE `universite_detail` (
+  `id_detail` int(11) NOT NULL,
+  `id_universite` int(11) NOT NULL,
+  `presentation` text DEFAULT NULL,
+  `conditions_admission` text DEFAULT NULL,
+  `bourses` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Déchargement des données de la table `universite_detail`
+--
+
+INSERT INTO `universite_detail` (`id_detail`, `id_universite`, `presentation`, `conditions_admission`, `bourses`) VALUES
+(1, 1, 'L\'Université Cheikh Anta Diop de Dakar (UCAD) est l\'une des principales universités publiques du Sénégal. Créée en 1957, elle propose des formations dans plusieurs domaines comme les sciences, la santé, le droit, l\'économie, les lettres et les technologies.', 'L\'admission se fait généralement après l\'obtention du baccalauréat. Certaines formations peuvent avoir des conditions particulières comme une sélection sur dossier, un concours ou des critères spécifiques selon les facultés.', 'Les étudiants peuvent bénéficier de bourses nationales attribuées selon les critères du ministère de l\'Enseignement supérieur et de la Recherche.'),
+(2, 2, 'L\'Université Gaston Berger de Saint-Louis (UGB) est une université publique créée en 1990. Elle est reconnue pour ses formations en sciences, technologies, économie, gestion, lettres et sciences humaines.', 'L\'accès se fait principalement après le baccalauréat. Certaines filières peuvent appliquer des critères de sélection selon la capacité d\'accueil et les exigences pédagogiques.', 'Les étudiants peuvent bénéficier de bourses publiques selon les critères nationaux définis par les autorités de l\'enseignement supérieur.'),
+(3, 3, 'L\'Université Iba Der Thiam de Thiès (UIDT) est une université publique située dans la région de Thiès. Elle développe des formations orientées vers les sciences, technologies, ingénierie, économie et autres domaines professionnels.', 'L\'admission est généralement ouverte aux titulaires du baccalauréat. Certaines formations peuvent demander des conditions spécifiques ou une sélection selon la filière choisie.', 'Les étudiants peuvent accéder aux dispositifs de bourses nationales selon les conditions établies par les organismes compétents.'),
+(4, 4, 'L\'École Supérieure Polytechnique (ESP) de Dakar est une grande école publique spécialisée dans les formations scientifiques, techniques et d\'ingénierie. Elle forme des professionnels dans plusieurs domaines liés à l\'industrie et aux technologies.', 'L\'admission peut se faire après le baccalauréat ou après certains diplômes selon le niveau de formation. Plusieurs parcours utilisent une sélection sur dossier ou concours.', 'Les étudiants peuvent bénéficier de bourses publiques selon leur situation et les critères nationaux.'),
+(5, 5, 'Le Groupe Supdeco Dakar est un établissement privé d\'enseignement supérieur spécialisé dans les domaines du management, de la gestion, du commerce, de la finance et du marketing.', 'L\'admission se fait généralement sur étude de dossier après le baccalauréat ou selon le niveau d\'études pour les formations avancées.', 'L\'établissement peut proposer des aides financières, réductions ou facilités de paiement selon les programmes et les conditions internes.');
 
 -- --------------------------------------------------------
 
@@ -864,7 +915,12 @@ CREATE TABLE `utilisateur` (
 --
 
 INSERT INTO `utilisateur` (`id_user`, `nom`, `email`, `mot_de_passe`, `pays`, `niveau_etude`, `date_creation`) VALUES
-(1, 'Utilisateur Test', 'test@nextori.com', '$2y$10$abcdefghijklmnopqrstuv123456789012345678901234567890', 'Sénégal', 'Licence 2', '2026-07-23 13:37:00');
+(1, 'Utilisateur Test', 'test@nextori.com', '$2y$10$abcdefghijklmnopqrstuv123456789012345678901234567890', 'Sénégal', 'Licence 2', '2026-07-23 13:37:00'),
+(2, 'Laurent Test', 'laurent.test@gmail.com', '$2y$10$155JCoTkU8I.ATABJ08OoeBPSrK8ZOgWFtn0d.oCIlkGgynE8h3x2', 'Sénégal', 'Licence 2', '2026-07-30 14:43:51'),
+(3, 'Nouvel Utilisateur', 'nouveau@gmail.com', '$2y$10$V2kTNRyyq8QOgRiMb0c/CO8Z5oQsGc.lAtQ2KYO5iIRaNHQ4hLA2a', 'Sénégal', 'Licence 2', '2026-07-30 15:16:42'),
+(4, 'Test Front', 'front@test.com', '$2y$10$kktLTDJ7HCR1RYtUTU3.ZOH6DTZNNVJalKsdQxlcppFQ/oA3Gyy5G', 'Sénégal', 'Licence 2', '2026-07-30 15:51:58'),
+(7, 'Utilisateur Auto', 'auto@test.com', '$2y$10$5Zy2NS0UroqBYSfy3OhG7Op.LXPB6oizpiK95RsuleZChI3BJCVjy', 'Sénégal', 'Licence 2', '2026-07-30 17:22:25'),
+(8, 'Ndeye Awa NIANE', 'niane@gmail.com', '$2y$10$OyN4FQz3UggXR3FiBJ3Yv.b.HkinTkuS7.uM07CcrFrZiyrNLHyym', 'Sénégal', 'Licence 2', '2026-07-30 17:28:18');
 
 --
 -- Index pour les tables déchargées
@@ -958,6 +1014,13 @@ ALTER TABLE `universite`
   ADD UNIQUE KEY `nom` (`nom`);
 
 --
+-- Index pour la table `universite_detail`
+--
+ALTER TABLE `universite_detail`
+  ADD PRIMARY KEY (`id_detail`),
+  ADD KEY `id_universite` (`id_universite`);
+
+--
 -- Index pour la table `universite_filiere`
 --
 ALTER TABLE `universite_filiere`
@@ -991,7 +1054,7 @@ ALTER TABLE `filiere`
 -- AUTO_INCREMENT pour la table `historique`
 --
 ALTER TABLE `historique`
-  MODIFY `id_historique` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id_historique` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT pour la table `metier`
@@ -1027,13 +1090,13 @@ ALTER TABLE `recommandation`
 -- AUTO_INCREMENT pour la table `reponse`
 --
 ALTER TABLE `reponse`
-  MODIFY `id_reponse` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=341;
+  MODIFY `id_reponse` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=361;
 
 --
 -- AUTO_INCREMENT pour la table `test_riasec`
 --
 ALTER TABLE `test_riasec`
-  MODIFY `id_test` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id_test` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT pour la table `universite`
@@ -1042,10 +1105,16 @@ ALTER TABLE `universite`
   MODIFY `id_universite` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
+-- AUTO_INCREMENT pour la table `universite_detail`
+--
+ALTER TABLE `universite_detail`
+  MODIFY `id_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT pour la table `utilisateur`
 --
 ALTER TABLE `utilisateur`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Contraintes pour les tables déchargées
@@ -1103,6 +1172,12 @@ ALTER TABLE `reponse`
 ALTER TABLE `test_riasec`
   ADD CONSTRAINT `fk_test_questionnaire` FOREIGN KEY (`id_questionnaire`) REFERENCES `questionnaire` (`id_questionnaire`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_test_user` FOREIGN KEY (`id_user`) REFERENCES `utilisateur` (`id_user`) ON DELETE CASCADE;
+
+--
+-- Contraintes pour la table `universite_detail`
+--
+ALTER TABLE `universite_detail`
+  ADD CONSTRAINT `universite_detail_ibfk_1` FOREIGN KEY (`id_universite`) REFERENCES `universite` (`id_universite`) ON DELETE CASCADE;
 
 --
 -- Contraintes pour la table `universite_filiere`

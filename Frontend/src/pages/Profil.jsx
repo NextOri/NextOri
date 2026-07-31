@@ -1,6 +1,17 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import {
+    User,
+    Mail,
+    Globe,
+    GraduationCap,
+    Calendar,
+    LogOut
+} from "lucide-react";
+
+import "../styles/Profil.css";
+import FooterNavigation from "../components/FooterNavigation";
 
 function Profil() {
 
@@ -22,91 +33,264 @@ function Profil() {
 
         setUtilisateur(null);
 
+        navigate("/connexion")
+
     };
 
+    const getInitiales = (nom) => {
+
+    if (!nom) return "";
+
+    const noms = nom.trim().split(" ");
+
+    const premier = noms[0][0];
+
+    const dernier = noms[noms.length - 1][0];
+
+    return (premier + dernier).toUpperCase();
+
+   };
 
 
-   if (!utilisateur) {
+
+ if (!utilisateur) {
 
     return (
 
-        <div>
-
-            <h1>
-                Profil
-            </h1>
+        <div className="non-connecte-profil-page">
 
 
-            <p>
-                Vous devez être connecté pour accéder à votre profil.
-            </p>
+            <div className="profil-non-connecte">
 
 
-            <button
-                onClick={() => navigate("/connexion")}
-            >
-                Se connecter
-            </button>
+                <div className="profil-non-connecte-icon">
+                    ?
+                </div>
+
+
+                <h1>
+                    Profil
+                </h1>
+
+
+                <p>
+                    Vous devez être connecté pour accéder à votre profil.
+                </p>
+
+
+
+                <button
+                    className="profil-login-button"
+                    onClick={() => navigate("/connexion")}
+                >
+                    Se connecter
+                </button>
+
+
+            </div>
+
+            <FooterNavigation />
 
 
         </div>
 
     );
 
-}
+   }
 
 
 
-    return (
+  return (
 
-        <div>
+<div className="profile-page">
+
+
+    <div className="profile-container">
+
+
+        {/* En-tête profil */}
+
+        <section className="profile-header">
+
+
+            <div className="profile-avatar">
+
+                {getInitiales(utilisateur.nom)}
+
+            </div>
+
 
             <h1>
-                Mon Profil
+                {utilisateur.nom}
             </h1>
 
 
-            <div>
-
-                <p>
-                    <strong>Nom :</strong> {utilisateur.nom}
-                </p>
+            <p>
+                {utilisateur.email}
+            </p>
 
 
-                <p>
-                    <strong>Email :</strong> {utilisateur.email}
-                </p>
+        </section>
 
 
-                <p>
-                    <strong>Pays :</strong> {utilisateur.pays}
-                </p>
 
 
-                <p>
-                    <strong>Niveau d'étude :</strong> {utilisateur.niveau_etude}
-                </p>
+        {/* Informations personnelles */}
+
+        <section className="profile-section">
 
 
-                <p>
-                    <strong>Date de création :</strong> {utilisateur.date_creation}
-                </p>
+            <h2>
+                Informations personnelles
+            </h2>
 
+
+
+            <div className="info-item">
+
+                <User />
+
+                <div>
+                    <span>Nom complet</span>
+                    <strong>
+                        {utilisateur.nom}
+                    </strong>
+                </div>
 
             </div>
 
 
 
-            <button onClick={handleLogout}>
 
-                Se déconnecter
+            <div className="info-item">
 
-            </button>
+                <Mail />
+
+                <div>
+                    <span>Email</span>
+                    <strong>
+                        {utilisateur.email}
+                    </strong>
+                </div>
+
+            </div>
 
 
-        </div>
 
-    );
+
+            <div className="info-item">
+
+                <Globe />
+
+                <div>
+                    <span>Pays</span>
+                    <strong>
+                        {utilisateur.pays}
+                    </strong>
+                </div>
+
+            </div>
+
+
+
+
+            <div className="info-item">
+
+                <GraduationCap />
+
+                <div>
+                    <span>Niveau d'étude</span>
+                    <strong>
+                        {utilisateur.niveau_etude}
+                    </strong>
+                </div>
+
+            </div>
+
+
+
+
+            <div className="info-item">
+
+                <Calendar />
+
+                <div>
+                    <span>Membre depuis</span>
+                    <strong>
+                        {utilisateur.date_creation}
+                    </strong>
+                </div>
+
+            </div>
+
+
+
+        </section>
+
+
+
+
+        {/* Futur parcours */}
+
+        <section className="profile-section future-section">
+
+
+            <h2>
+                Mon parcours NextOri
+            </h2>
+
+
+            <div className="future-card">
+
+                Résultats RIASEC
+
+            </div>
+
+
+            <div className="future-card">
+
+                Métiers recommandés
+
+            </div>
+
+
+            <div className="future-card">
+
+                Filières et universités
+
+            </div>
+
+
+        </section>
+
+
+
+
+        {/* Action */}
+
+        <button
+            className="logout-button"
+            onClick={handleLogout}
+        >
+
+            <LogOut />
+
+            Se déconnecter
+
+        </button>
+
+       
+
+
+
+    </div>
+
+   
+       <FooterNavigation />
+
+ </div>
+
+ );
 
 }
 

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { login } from "../services/AuthService";
 import { useNavigate } from "react-router-dom";
+import "../styles/Auth.css"
 
 function Connexion() {
 
@@ -75,19 +76,34 @@ function Connexion() {
 
 
 
-    return (
+   return (
 
-        <div>
+    <div className="auth-page">
+
+        <div className="auth-card">
+
+            <div className="auth-logo">
+                NextOri
+            </div>
+
 
             <h1>
-                Connexion
+                Bon retour 👋
             </h1>
+
+
+            <p className="auth-description">
+                Connectez-vous pour poursuivre votre orientation.
+            </p>
+
 
 
             <form onSubmit={handleSubmit}>
 
 
+
                 <input
+                    className="auth-input"
                     type="email"
                     name="email"
                     placeholder="Email"
@@ -96,7 +112,9 @@ function Connexion() {
                 />
 
 
+
                 <input
+                    className="auth-input"
                     type="password"
                     name="mot_de_passe"
                     placeholder="Mot de passe"
@@ -105,9 +123,14 @@ function Connexion() {
                 />
 
 
-                <button type="submit">
+
+                <button
+                    className="auth-button"
+                    type="submit"
+                >
                     Se connecter
                 </button>
+
 
 
             </form>
@@ -116,7 +139,7 @@ function Connexion() {
 
             {message && (
 
-                <p>
+                <p className="auth-message">
                     {message}
                 </p>
 
@@ -124,23 +147,27 @@ function Connexion() {
 
 
 
-            {utilisateur && (
+            <p className="auth-footer-text">
+                Vous n'avez pas encore de compte ?
+            </p>
 
-                <div>
 
-                    <h3>
-                        Bienvenue {utilisateur.nom}
-                    </h3>
+            <button
+                className="auth-link-button"
+                type="button"
+                onClick={() => navigate("/inscription")}
+            >
+                Créer mon compte
+            </button>
 
-                </div>
-
-            )}
 
 
         </div>
 
-    );
 
+    </div>
+
+);
 }
 
 

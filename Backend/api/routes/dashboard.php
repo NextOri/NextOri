@@ -1,29 +1,29 @@
 <?php
 
 header("Content-Type: application/json");
-header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Origin: http://localhost:5173");
+header("Access-Control-Allow-Credentials: true");
 header("Access-Control-Allow-Methods: GET");
 header("Access-Control-Allow-Headers: Content-Type");
+session_start();
 
 require_once __DIR__ . "/../../Controllers/DashboardController.php";
 
 try {
 
-    if (!isset($_GET["id_user"])) {
+    
+   if (!isset($_SESSION["id_user"])) {
+    http_response_code(401);
 
-        echo json_encode([
+    echo json_encode([
+        "success" => false,
+        "message" => "Utilisateur non connecté."
+    ]);
 
-            "success" => false,
-            "message" => "Paramètre id_user manquant."
-
-        ]);
-
-        exit;
-
+    exit;
     }
 
-    $idUser = (int) $_GET["id_user"];
-
+    $idUser = (int) $_SESSION["id_user"];
     $controller = new DashboardController();
 
     $resultat = $controller->recupererDashboard($idUser);

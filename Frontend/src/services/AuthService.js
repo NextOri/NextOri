@@ -7,6 +7,7 @@ export async function login(email, mot_de_passe) {
         `${API_URL}/login.php`,
         {
             method: "POST",
+            credentials: "include",
             headers: {
                 "Content-Type": "application/json"
             },
@@ -29,6 +30,7 @@ export async function register(utilisateur) {
         `${API_URL}/register.php`,
         {
             method: "POST",
+            credentials: "include",
             headers: {
                 "Content-Type": "application/json"
             },

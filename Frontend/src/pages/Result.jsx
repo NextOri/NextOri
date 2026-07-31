@@ -49,7 +49,12 @@ console.log("DATA RESULT :", resultatInitial);
     if (!resultat) {
         setChargement(true);
 
-        fetch("http://localhost/NextOri/backend/api/routes/resultats.php?id_user=1")
+       fetch(
+    "http://localhost/NextOri/backend/api/routes/resultats.php",
+    {
+        credentials: "include"
+    }
+   )
             .then(response => response.json())
             .then(data => {
 

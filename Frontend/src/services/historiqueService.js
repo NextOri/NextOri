@@ -8,6 +8,8 @@ export const enregistrerAction = async (action) => {
         const response = await fetch(
             API_URL,
             {
+                credentials: "include",
+
                 method: "POST",
 
                 headers: {
@@ -15,8 +17,6 @@ export const enregistrerAction = async (action) => {
                 },
 
                 body: JSON.stringify({
-
-                    id_user: 1,
 
                     action: action
 

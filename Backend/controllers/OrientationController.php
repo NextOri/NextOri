@@ -18,6 +18,7 @@ class OrientationController
     public function executer(): void
     {
         header("Access-Control-Allow-Origin: http://localhost:5173");
+        header("Access-Control-Allow-Credentials: true");
         header("Access-Control-Allow-Methods: POST, OPTIONS");
         header("Access-Control-Allow-Headers: Content-Type");
         if ($_SERVER["REQUEST_METHOD"] === "OPTIONS") {
@@ -27,6 +28,19 @@ class OrientationController
         header("Content-Type: application/json; charset=UTF-8");
 
         try {
+
+            session_start();
+
+            if (!isset($_SESSION["id_user"])) {
+                ApiResponse::error(
+                    401,
+                    "Utilisateur non connecté."
+                );
+
+                return;
+            }
+
+            $idUser = (int) $_SESSION["id_user"];
 
             // Lecture des données JSON envoyées
             $json = file_get_contents("php://input");
@@ -47,11 +61,11 @@ class OrientationController
             }
 
             // Vérification des paramètres obligatoires
-            if (
-                !isset($donnees["id_user"]) ||
-                !isset($donnees["id_questionnaire"]) ||
-                !isset($donnees["reponses"])
-            ) {
+         
+         if (
+         !isset($donnees["id_questionnaire"]) ||
+         !isset($donnees["reponses"])
+         ) {
 
                 ApiResponse::error(
                     400,
@@ -77,7 +91,7 @@ class OrientationController
             // Exécution du moteur NextOri
             $resultat = $this->orientationService->executerOrientation(
 
-                (int)$donnees["id_user"],
+                $idUser,
 
                 (int)$donnees["id_questionnaire"],
 
@@ -121,10 +135,7 @@ class OrientationController
      */
     private function validerDonnees(array $donnees): ?string
     {
-        // id_user
-        if (!is_int($donnees["id_user"]) || $donnees["id_user"] <= 0) {
-            return "id_user invalide.";
-        }
+        
 
         // id_questionnaire
         if (!is_int($donnees["id_questionnaire"]) || $donnees["id_questionnaire"] <= 0) {
@@ -155,46 +166,56 @@ class OrientationController
     }
 
     /**
- * Retourne le dernier résultat d'orientation d'un utilisateur.
- */
-public function recupererDernierResultat(): void
-{
+     * Retourne le dernier résultat d'orientation d'un utilisateur.
+     */
+    public function recupererDernierResultat(): void
+    {
 
-    header("Access-Control-Allow-Origin: http://localhost:5173");
 
-    header("Content-Type: application/json; charset=UTF-8");
 
-    try {
+        header("Access-Control-Allow-Origin: http://localhost:5173");
+        header("Access-Control-Allow-Credentials: true");
+        header("Content-Type: application/json; charset=UTF-8");
 
-        // Temporaire : utilisateur unique
-        $idUser = 1;
+        session_start();
 
-        $resultat = $this->orientationService
-                         ->recupererDernierResultat($idUser);
+        try {
 
-        if ($resultat === null) {
+            if (!isset($_SESSION["id_user"])) {
+                ApiResponse::error(
+                    "Utilisateur non connecté.",
+                    401
+                    
+                );
+
+                return;
+            }
+
+            $idUser = (int) $_SESSION["id_user"];
+
+            $resultat = $this->orientationService
+                ->recupererDernierResultat($idUser);
+
+            if ($resultat === null) {
+
+                ApiResponse::error(
+                    404,
+                    "Aucun résultat disponible."
+                );
+
+                return;
+            }
+
+            ApiResponse::success(
+                $resultat,
+                "Dernier résultat récupéré avec succès."
+            );
+        } catch (Throwable $e) {
 
             ApiResponse::error(
-                404,
-                "Aucun résultat disponible."
+                500,
+                $e->getMessage()
             );
-
-            return;
         }
-
-        ApiResponse::success(
-            $resultat,
-            "Dernier résultat récupéré avec succès."
-        );
-
-    } catch (Throwable $e) {
-
-        ApiResponse::error(
-            500,
-            $e->getMessage()
-        );
-
     }
-
-}
 }

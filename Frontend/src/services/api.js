@@ -77,6 +77,8 @@ export async function envoyerReponses(reponses){
 
             method:"POST",
 
+            credentials: "include",
+
             headers:{
 
                 "Content-Type":"application/json"
@@ -84,8 +86,6 @@ export async function envoyerReponses(reponses){
             },
 
             body:JSON.stringify({
-
-                id_user:1,
 
                 id_questionnaire:1,
 

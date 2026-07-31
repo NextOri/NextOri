@@ -20,7 +20,13 @@ function Dashboard() {
 
     useEffect(() => {
 
-     fetch("http://localhost/NextOri/backend/api/routes/resultats.php?id_user=1")
+    fetch(
+     "http://localhost/NextOri/backend/api/routes/resultats.php",
+    {
+        credentials: "include"
+    }
+    )
+         
         .then(response => response.json())
         .then(data => {
 
@@ -43,9 +49,11 @@ function Dashboard() {
       useEffect(() => {
 
     fetch(
-        "http://localhost/NextOri/backend/api/routes/dashboard.php?id_user=1"
-    )
-
+    "http://localhost/NextOri/backend/api/routes/dashboard.php",
+    {
+        credentials: "include"
+    }
+   )
     .then(response => response.json())
 
     .then(data => {

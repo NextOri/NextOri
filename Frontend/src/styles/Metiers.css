@@ -10,7 +10,7 @@
 
     padding:20px;
 
-    padding-bottom: 90px;
+    padding-bottom: 75px;
 
 }
 
@@ -168,6 +168,8 @@
     grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
 
     gap:25px;
+
+    margin-bottom: 40px;
 
 }
 

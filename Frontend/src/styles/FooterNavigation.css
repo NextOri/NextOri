@@ -90,3 +90,37 @@
     color:#F4B400;
 
 }
+
+
+@media (max-width: 768px) {
+    .footer-navigation {
+        height: 60px;
+        gap: 1rem;
+        padding: 0 10px;
+    }
+
+    .footer-navigation a {
+        width: auto;
+        font-size: 11px;
+    }
+
+    .footer-navigation span {
+        font-size: 20px;
+        margin-bottom: 2px;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer-navigation {
+        height: 55px;
+        gap: 0.8rem;
+    }
+
+    .footer-navigation a {
+        font-size: 10px;
+    }
+
+    .footer-navigation span {
+        font-size: 18px;
+    }
+}

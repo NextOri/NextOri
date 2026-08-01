@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../styles/Filieres.css";
 import FooterNavigation from "../components/FooterNavigation";
+import Footer from "../components/Footer";
 import { useNavigate } from "react-router-dom";
 
 function Filieres() {
@@ -71,18 +72,25 @@ function Filieres() {
         )
 
     ];
+   
+    const normaliserTexte = (texte) => {
 
+    return texte
+        .normalize("NFD") 
+        .replace(/[\u0300-\u036f]/g, "")
+        .toLowerCase()
+        .trim();
+
+    };
 
 
     const resultats = filieres.filter((filiere) => {
 
         const rechercheOK =
-
-            filiere.nom
-
-                .toLowerCase()
-
-                .includes(recherche.toLowerCase());
+    normaliserTexte(filiere.nom)
+        .includes(
+            normaliserTexte(recherche)
+        );
 
 
 
@@ -393,6 +401,8 @@ function Filieres() {
                 }
 
             </div>
+
+            <Footer />
 
             <FooterNavigation />
 

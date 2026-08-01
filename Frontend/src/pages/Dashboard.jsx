@@ -4,6 +4,8 @@ import FooterNavigation from "../components/FooterNavigation";
 
 import OrientationNotification from "../components/OrientationNotification";
 
+import Footer from "../components/Footer";
+
 import { useNavigate } from "react-router-dom";
 
 import { useEffect, useState } from "react";
@@ -292,49 +294,61 @@ const getEtapeActuelle = (parcours) => {
             👋
         </div>
 
+
         <div>
 
             <h2>
                 Bonjour {dashboardDataState.utilisateur.nom} 👋
             </h2>
 
+
             <p>
                 Bienvenue dans votre espace d'orientation NextOri.
-                Suivez votre parcours et construisez votre avenir
-                professionnel étape par étape.
             </p>
 
+
+            
         </div>
 
     </div>
 
 
-    <div className="welcome-action">
 
-        <div className="welcome-info">
+    <div className="welcome-about">
 
-            <span>
-                🚀
-            </span>
-
-            <p>
-                Continuez votre parcours d'orientation
-            </p>
-
-        </div>
+        <h3>
+            À propos de NextOri
+        </h3>
 
 
-        <button className="primary-dashboard-button">
+       <p>
+        NextOri est une plateforme d'accompagnement à 
+        l'orientation qui aide les étudiants et les futurs 
+        étudiants à mieux construire leur avenir académique 
+        et professionnel.
+    </p>
 
-            Continuer mon parcours
 
-        </button>
+    <p>
+        Grâce à une analyse de vos centres d'intérêt et de 
+        votre profil, NextOri vous aide à découvrir des 
+        métiers adaptés, explorer des formations 
+        correspondantes et trouver des universités qui 
+        peuvent accompagner votre parcours.
+    </p>
+
+
+    <p>
+        Notre objectif est de rendre l'orientation plus 
+        simple, personnalisée et accessible afin de vous 
+        aider à prendre de meilleures décisions pour votre 
+        avenir.
+    </p>
 
     </div>
 
 
 </section>
-
 
 
             {/* PARCOURS */}
@@ -689,8 +703,8 @@ etape.numero
 
 </section>
 
-
-
+  <Footer />
+         
             {/* FOOTER */}
 
             <FooterNavigation />

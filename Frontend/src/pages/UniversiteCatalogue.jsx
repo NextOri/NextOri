@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 
 import FooterNavigation from "../components/FooterNavigation";
 
+import Footer from "../components/Footer";
+
 import "../styles/UniversiteCatalogue.css";
 
 import { afficherTypeUniversite } from "../utils/universiteUtils";
@@ -37,14 +39,24 @@ export default function UniversiteCatalogue() {
       .finally(() => setLoading(false));
   }, []);
 
+  const normaliserTexte = (texte) => {
+
+    return texte
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .toLowerCase()
+        .trim();
+
+  };
+
   const regions = useMemo(() => {
     return [...new Set(universites.map((u) => u.region))].sort();
   }, [universites]);
 
   const universitesFiltrees = universites.filter((universite) => {
     const recherche =
-      universite.nom.toLowerCase().includes(search.toLowerCase()) ||
-      universite.description.toLowerCase().includes(search.toLowerCase());
+      normaliserTexte(universite.nom).includes(normaliserTexte(search)) ||
+      normaliserTexte(universite.description).includes(normaliserTexte(search));
 
     const type =
       selectedType === "" || universite.type === selectedType;
@@ -176,6 +188,8 @@ export default function UniversiteCatalogue() {
         ))}
 
       </div>
+
+      <Footer />
 
       <FooterNavigation />
 

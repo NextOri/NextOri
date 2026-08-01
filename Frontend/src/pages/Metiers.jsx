@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../styles/Metiers.css";
 import FooterNavigation from "../components/FooterNavigation";
+import Footer from "../components/Footer";
 import { useNavigate } from "react-router-dom";
 
 
@@ -109,15 +110,25 @@ function Metiers() {
         ...new Set(metiers.map((metier) => metier.niveau_etude))
     ];
 
+  
+    const normaliserTexte = (texte) => {
 
+    return texte
+        .normalize("NFD") 
+        .replace(/[\u0300-\u036f]/g, "")
+        .toLowerCase()
+        .trim();
+
+    };
 
     const resultats = metiers.filter((metier) => {
 
 
         const rechercheOK =
-            metier.nom
-            .toLowerCase()
-            .includes(recherche.toLowerCase());
+    normaliserTexte(metier.nom)
+        .includes(
+            normaliserTexte(recherche)
+        );
 
 
         const secteurOK =
@@ -387,6 +398,8 @@ function Metiers() {
     }
 
 </div>
+
+<Footer />
 
 <FooterNavigation />
 

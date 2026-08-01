@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../styles/Filieres.css";
 import FooterNavigation from "../components/FooterNavigation";
-import Footer from "../components/Footer";
+
 import { useNavigate } from "react-router-dom";
 
 function Filieres() {
@@ -402,7 +402,7 @@ function Filieres() {
 
             </div>
 
-            <Footer />
+          
 
             <FooterNavigation />
 

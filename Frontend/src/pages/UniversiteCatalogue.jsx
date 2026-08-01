@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import FooterNavigation from "../components/FooterNavigation";
 
-import Footer from "../components/Footer";
+
 
 import "../styles/UniversiteCatalogue.css";
 
@@ -189,7 +189,7 @@ export default function UniversiteCatalogue() {
 
       </div>
 
-      <Footer />
+      
 
       <FooterNavigation />
 

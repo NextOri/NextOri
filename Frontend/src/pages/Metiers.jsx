@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../styles/Metiers.css";
 import FooterNavigation from "../components/FooterNavigation";
-import Footer from "../components/Footer";
+
 import { useNavigate } from "react-router-dom";
 
 
@@ -399,7 +399,7 @@ function Metiers() {
 
 </div>
 
-<Footer />
+
 
 <FooterNavigation />
 

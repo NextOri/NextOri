@@ -2,16 +2,12 @@
    PAGE
 =========================== */
 
-.metiers-page{
-
-    max-width:1200px;
-
-    margin:30px auto;
-
-    padding:20px;
-
+.metiers-page {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 20px;
     padding-bottom: 75px;
-
 }
 
 

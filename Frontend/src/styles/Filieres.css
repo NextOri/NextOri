@@ -2,14 +2,12 @@
    PAGE
 =========================== */
 
-.filieres-page{
-
-    background:#F2F4F7;
-
-    min-height:100vh;
-
-    padding:30px 20px 120px;
-
+.filieres-page {
+    width: 100%;
+    min-height: 100vh;
+    background: #F2F4F7;
+    padding: 30px 20px 120px;
+    margin: 0;
 }
 
 

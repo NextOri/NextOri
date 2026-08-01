@@ -47,30 +47,23 @@ function Footer() {
 
    <div className="site-footer-link-list">
 
-    <Link to="/">
-        Accueil
-    </Link>
+   <Link to="/">Accueil</Link>
 
+<span className="footer-separator">•</span>
 
-    <Link to="/test">
-        Test RIASEC
-    </Link>
+<Link to="/test">Test RIASEC</Link>
 
+<span className="footer-separator">•</span>
 
-    <Link to="/metiers">
-        Métiers
-    </Link>
+<Link to="/metiers">Métiers</Link>
 
+<span className="footer-separator">•</span>
 
-    <Link to="/filieres">
-        Formations
-    </Link>
+<Link to="/filieres">Formations</Link>
 
+<span className="footer-separator">•</span>
 
-    <Link to="/universite-catalogue">
-        Universités
-    </Link>
-
+<Link to="/universite-catalogue">Universités</Link>
 </div>
 
 </div>

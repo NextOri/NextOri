@@ -12,6 +12,7 @@ import {
 
 import "../styles/Profil.css";
 import FooterNavigation from "../components/FooterNavigation";
+import { logout } from "../services/AuthService";
 
 function Profil() {
 
@@ -27,15 +28,17 @@ function Profil() {
 
 
 
-    const handleLogout = () => {
+    const handleLogout = async () => {
 
+    try {
+        await logout();
+    } finally {
         localStorage.removeItem("utilisateur");
-
         setUtilisateur(null);
+        navigate("/connexion");
+    }
 
-        navigate("/connexion")
-
-    };
+   };
 
     const getInitiales = (nom) => {
 

@@ -54,14 +54,27 @@ function Dashboard() {
         credentials: "include"
     }
    )
-    .then(response => response.json())
+    .then(async response => {
 
+        const data = await response.json();
+
+        if (response.status === 401) {
+            localStorage.removeItem("utilisateur");
+            navigate("/connexion", { replace: true });
+            return null;
+        }
+
+        return data;
+
+    })
     .then(data => {
 
-        if(data.success){
+        if (!data) {
+            return;
+        }
 
+        if (data.success) {
             setDashboardDataState(data.data);
-
         }
 
         setChargementDashboard(false);

@@ -59,3 +59,17 @@ export async function getProfile(id_user) {
     return await response.json();
 
 }
+
+
+export async function logout() {
+
+    const response = await fetch(
+        `${API_URL}/logout.php`,
+        {
+            method: "POST",
+            credentials: "include"
+        }
+    );
+
+    return await response.json();
+}

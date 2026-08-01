@@ -54,26 +54,44 @@ console.log("DATA RESULT :", resultatInitial);
     {
         credentials: "include"
     }
-   )
-            .then(response => response.json())
-            .then(data => {
+)
+    .then(async response => {
 
-                if (data.success) {
+        const data = await response.json();
 
-                    setResultat(data.data);
-                    setChargement(false);
+        if (response.status === 401) {
+            localStorage.removeItem("utilisateur");
+            navigate("/connexion", { replace: true });
+            return null;
+        }
 
-                }
+        return data;
 
-            })
-            .catch(error => {
+    })
+    .then(data => {
 
-                console.error(
-                    "Erreur récupération résultat :",
-                    error
-                );
+        if (!data) {
+            return;
+        }
 
-            });
+        if (data.success) {
+            setResultat(data.data);
+        }
+
+        setChargement(false);
+
+    })
+    .catch(error => {
+
+        console.error(
+            "Erreur récupération résultat :",
+            error
+        );
+
+        setChargement(false);
+
+    });
+    
     }
     
 }, [resultat]);

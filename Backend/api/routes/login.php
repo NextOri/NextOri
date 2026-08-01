@@ -2,6 +2,13 @@
 
 require_once __DIR__ . "/../../services/UserService.php";
 
+session_set_cookie_params([
+    "lifetime" => 60 * 60 * 24 * 7,
+    "path" => "/",
+    "secure" => false,
+    "httponly" => true,
+    "samesite" => "Lax"
+]);
 
 session_start();
 

@@ -1,6 +1,14 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import "../styles/FooterNavigation.css";
 import React from "react";
+import {
+    FaHome,
+    FaClipboardList,
+    FaBriefcase,
+    FaGraduationCap,
+    FaUniversity,
+    FaUser
+} from "react-icons/fa";
 
 
 
@@ -33,7 +41,9 @@ function FooterNavigation() {
 
             <NavLink to="/dashboard">
 
-                <span>🏠</span>
+                <span>
+                    <FaHome />
+                </span>
 
                 <p>
                     Accueil
@@ -45,7 +55,9 @@ function FooterNavigation() {
 
             <NavLink to="/test">
 
-                <span>🧪</span>
+                <span>
+                    <FaClipboardList />
+                </span>
 
                 <p>
                     Test
@@ -57,7 +69,9 @@ function FooterNavigation() {
 
             <NavLink to="/metiers">
 
-                <span>💼</span>
+                <span>
+                    <FaBriefcase />
+                </span>
 
                 <p>
                     Métiers
@@ -69,7 +83,9 @@ function FooterNavigation() {
 
             <NavLink to="/filieres">
 
-                <span>🎓</span>
+                <span>
+                    <FaGraduationCap />
+                </span>
 
                 <p>
                     Formations
@@ -81,7 +97,9 @@ function FooterNavigation() {
 
             <NavLink to="/universite-catalogue">
 
-                <span>🏛</span>
+                <span>
+                    <FaUniversity />
+                </span>
 
                 <p>
                     Universités
@@ -95,7 +113,9 @@ function FooterNavigation() {
     to="/profil"
     onClick={handleProfileClick}
                    >
-    <span>👤</span>
+    <span>
+        <FaUser />
+    </span>
 
     <p>Profil</p>
 

@@ -131,9 +131,9 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    box-shadow: 0 12px 35px rgba(13,27,42,.08);
+    box-shadow: 0 12px 35px rgba(13, 27, 42, .08);
     position: sticky;
-    top: 0;
+    top: 0px;
     z-index: 20;
 }
 

@@ -6,6 +6,8 @@ export const afficherTypeUniversite = (type) => {
 
         "publique": "Publique",
 
+        "parapublique": "Parapublique",
+
         "parapublic": "Parapublic",
 
         "privee": "Privée",

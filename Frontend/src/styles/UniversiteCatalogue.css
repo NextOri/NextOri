@@ -312,7 +312,7 @@
 
     width:100%;
 
-    height:5px;
+    height:6px;
 
     background:#F4B400;
 
@@ -450,7 +450,13 @@
 
 }
 
+.no-universite-catalogue-type.parapublique{
 
+    background:rgba(16,185,129,.12);
+
+    color:#10B981;
+
+}
 
 /*==========================================
 =           LOCATION BLOCK                =

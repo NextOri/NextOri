@@ -106,6 +106,7 @@ export default function UniversiteCatalogue() {
           <option value="">Tous les types</option>
           <option value="publique">Publique</option>
           <option value="privee">Privée</option>
+          <option value="parapublique">Parapublique</option>
         </select>
 
         <select

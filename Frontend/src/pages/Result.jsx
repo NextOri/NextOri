@@ -49,26 +49,49 @@ console.log("DATA RESULT :", resultatInitial);
     if (!resultat) {
         setChargement(true);
 
-        fetch("http://localhost/NextOri/backend/api/routes/resultats.php?id_user=1")
-            .then(response => response.json())
-            .then(data => {
+       fetch(
+    "http://localhost/NextOri/backend/api/routes/resultats.php",
+    {
+        credentials: "include"
+    }
+)
+    .then(async response => {
 
-                if (data.success) {
+        const data = await response.json();
 
-                    setResultat(data.data);
-                    setChargement(false);
+        if (response.status === 401) {
+            localStorage.removeItem("utilisateur");
+            navigate("/connexion", { replace: true });
+            return null;
+        }
 
-                }
+        return data;
 
-            })
-            .catch(error => {
+    })
+    .then(data => {
 
-                console.error(
-                    "Erreur récupération résultat :",
-                    error
-                );
+        if (!data) {
+            return;
+        }
 
-            });
+        if (data.success) {
+            setResultat(data.data);
+        }
+
+        setChargement(false);
+
+    })
+    .catch(error => {
+
+        console.error(
+            "Erreur récupération résultat :",
+            error
+        );
+
+        setChargement(false);
+
+    });
+    
     }
     
 }, [resultat]);

@@ -2,6 +2,10 @@ import "./../styles/Dashboard.css";
 
 import FooterNavigation from "../components/FooterNavigation";
 
+import OrientationNotification from "../components/OrientationNotification";
+
+import Footer from "../components/Footer";
+
 import { useNavigate } from "react-router-dom";
 
 import { useEffect, useState } from "react";
@@ -18,7 +22,13 @@ function Dashboard() {
 
     useEffect(() => {
 
-     fetch("http://localhost/NextOri/backend/api/routes/resultats.php?id_user=1")
+    fetch(
+     "http://localhost/NextOri/backend/api/routes/resultats.php",
+    {
+        credentials: "include"
+    }
+    )
+         
         .then(response => response.json())
         .then(data => {
 
@@ -41,17 +51,32 @@ function Dashboard() {
       useEffect(() => {
 
     fetch(
-        "http://localhost/NextOri/backend/api/routes/dashboard.php?id_user=1"
-    )
+    "http://localhost/NextOri/backend/api/routes/dashboard.php",
+    {
+        credentials: "include"
+    }
+   )
+    .then(async response => {
 
-    .then(response => response.json())
+        const data = await response.json();
 
+        if (response.status === 401) {
+            localStorage.removeItem("utilisateur");
+            navigate("/connexion", { replace: true });
+            return null;
+        }
+
+        return data;
+
+    })
     .then(data => {
 
-        if(data.success){
+        if (!data) {
+            return;
+        }
 
+        if (data.success) {
             setDashboardDataState(data.data);
-
         }
 
         setChargementDashboard(false);
@@ -70,46 +95,7 @@ function Dashboard() {
     });
 
 }, []);
-  /* Modification: const [dashboardData, setDashboardData] = useState(null); par const [dashboardDataState, setDashboardDataState] = useState(null);
-      et setDashboardData(data.data); par setDashboardDataState(data.data);*/
-
-      const dashboardData = {
-
-    utilisateur: {
-
-        nom: "Laurent",
-
-        niveau: "Explorateur",
-
-        niveauNumero: 1,
-
-        progression: 60
-
-    },
-
-    statistiques: {
-
-        points: 120,
-
-        serie: 7,
-
-        badges: 3
-
-    },
-
-    parcours: {
-
-        etapeActuelle: 3
-
-    },
-
-    projetAvenir: {
-
-        disponible: false
-
-    }
-
-};
+  
 
 
 
@@ -152,17 +138,48 @@ function Dashboard() {
         numero: 5,
         titre: "Choisir une formation",
         description: "Découvrir les filières",
-        termine: dashboardDataState.parcours.formationConsulte
+        termine: dashboardDataState.parcours.formationConsultee
     },
 
     {
         numero: 6,
         titre: "Trouver une université",
         description: "Explorer les établissements",
-        termine: dashboardDataState.parcours.universiteConsulte
+        termine: dashboardDataState.parcours.universitesConsultees
     }
 
+    
+
 ];
+
+const getEtapeActuelle = (parcours) => {
+
+    if (!parcours.profil) {
+        return 1;
+    }
+
+    if (!parcours.test) {
+        return 1;
+    }
+
+    if (!parcours.profilConsulte) {
+        return 2;
+    }
+
+    if (!parcours.metiersConsultes) {
+        return 3;
+    }
+
+    if (!parcours.formationConsultee) {
+        return 4;
+    }
+
+    if (!parcours.universitesConsultees) {
+        return 5;
+    }
+
+    return 6;
+};
 
     return (
 
@@ -186,6 +203,11 @@ function Dashboard() {
 
             </section>
 
+ 
+
+     <OrientationNotification 
+    etape={getEtapeActuelle(dashboardDataState.parcours)}
+/>
 
 
             {/* NIVEAU */}
@@ -260,6 +282,8 @@ function Dashboard() {
 
 
 
+
+
             {/* BIENVENUE */}
 
            <section className="welcome-card">
@@ -270,49 +294,61 @@ function Dashboard() {
             👋
         </div>
 
+
         <div>
 
             <h2>
                 Bonjour {dashboardDataState.utilisateur.nom} 👋
             </h2>
 
+
             <p>
                 Bienvenue dans votre espace d'orientation NextOri.
-                Suivez votre parcours et construisez votre avenir
-                professionnel étape par étape.
             </p>
 
+
+            
         </div>
 
     </div>
 
 
-    <div className="welcome-action">
 
-        <div className="welcome-info">
+    <div className="welcome-about">
 
-            <span>
-                🚀
-            </span>
-
-            <p>
-                Continuez votre parcours d'orientation
-            </p>
-
-        </div>
+        <h3>
+            À propos de NextOri
+        </h3>
 
 
-        <button className="primary-dashboard-button">
+       <p>
+        NextOri est une plateforme d'accompagnement à 
+        l'orientation qui aide les étudiants et les futurs 
+        étudiants à mieux construire leur avenir académique 
+        et professionnel.
+    </p>
 
-            Continuer mon parcours
 
-        </button>
+    <p>
+        Grâce à une analyse de vos centres d'intérêt et de 
+        votre profil, NextOri vous aide à découvrir des 
+        métiers adaptés, explorer des formations 
+        correspondantes et trouver des universités qui 
+        peuvent accompagner votre parcours.
+    </p>
+
+
+    <p>
+        Notre objectif est de rendre l'orientation plus 
+        simple, personnalisée et accessible afin de vous 
+        aider à prendre de meilleures décisions pour votre 
+        avenir.
+    </p>
 
     </div>
 
 
 </section>
-
 
 
             {/* PARCOURS */}
@@ -552,6 +588,8 @@ etape.numero
 
    </section>
 
+   
+   
 
 
             {/* BESOIN D'AIDE */}
@@ -613,7 +651,60 @@ etape.numero
 </section>
 
 
+{/* BADGES */}
+<section className="badges-section">
 
+    <div className="badges-header">
+
+        <div className="badges-title">
+
+            <h2>🏅 Mes badges</h2>
+
+            <p>
+                Débloquez des récompenses en progressant dans votre parcours d'orientation.
+            </p>
+
+        </div>
+
+    </div>
+
+    <div className="badges-container">
+
+        {dashboardDataState.liste_badges.map((badge, index) => (
+
+            <div
+                key={index}
+                className="badge-card"
+            >
+
+                <div className="badge-icon">
+
+                    {badge.icone}
+
+                </div>
+
+                <p className="badge-name">
+
+                    {badge.nom}
+
+                </p>
+
+                <p className="badge-status">
+
+                    Débloqué ✓
+
+                </p>
+
+            </div>
+
+        ))}
+
+    </div>
+
+</section>
+
+  <Footer />
+         
             {/* FOOTER */}
 
             <FooterNavigation />

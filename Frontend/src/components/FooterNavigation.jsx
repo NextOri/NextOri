@@ -1,8 +1,38 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import "../styles/FooterNavigation.css";
+import React from "react";
+import {
+    FaHome,
+    FaClipboardList,
+    FaBriefcase,
+    FaGraduationCap,
+    FaUniversity,
+    FaUser
+} from "react-icons/fa";
+
+
 
 
 function FooterNavigation() {
+
+    const navigate = useNavigate();
+
+    const handleProfileClick = () => {
+
+    const utilisateur = localStorage.getItem("utilisateur");
+
+
+    if (utilisateur) {
+
+        navigate("/profil");
+
+    } else {
+
+        navigate("/connexion");
+
+    }
+
+     };
 
     return (
 
@@ -11,7 +41,9 @@ function FooterNavigation() {
 
             <NavLink to="/dashboard">
 
-                <span>🏠</span>
+                <span>
+                    <FaHome />
+                </span>
 
                 <p>
                     Accueil
@@ -23,7 +55,9 @@ function FooterNavigation() {
 
             <NavLink to="/test">
 
-                <span>🧪</span>
+                <span>
+                    <FaClipboardList />
+                </span>
 
                 <p>
                     Test
@@ -35,7 +69,9 @@ function FooterNavigation() {
 
             <NavLink to="/metiers">
 
-                <span>💼</span>
+                <span>
+                    <FaBriefcase />
+                </span>
 
                 <p>
                     Métiers
@@ -47,7 +83,9 @@ function FooterNavigation() {
 
             <NavLink to="/filieres">
 
-                <span>🎓</span>
+                <span>
+                    <FaGraduationCap />
+                </span>
 
                 <p>
                     Formations
@@ -57,9 +95,11 @@ function FooterNavigation() {
 
 
 
-            <NavLink to="/universites-catalogue">
+            <NavLink to="/universite-catalogue">
 
-                <span>🏛</span>
+                <span>
+                    <FaUniversity />
+                </span>
 
                 <p>
                     Universités
@@ -69,15 +109,17 @@ function FooterNavigation() {
 
 
 
-            <NavLink to="/profil">
+            <NavLink 
+    to="/profil"
+    onClick={handleProfileClick}
+                   >
+    <span>
+        <FaUser />
+    </span>
 
-                <span>👤</span>
+    <p>Profil</p>
 
-                <p>
-                    Profil
-                </p>
-
-            </NavLink>
+       </NavLink>
 
 
         </footer>

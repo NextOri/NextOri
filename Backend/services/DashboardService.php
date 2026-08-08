@@ -72,7 +72,94 @@ if ($requete->fetchColumn() > 0) {
 
     return $points;
    }
+ 
 
+   private function calculerBadges(int $idUser): array
+{
+    $badges = [];
+
+    // 1. Premier Pas
+    $sql = "SELECT COUNT(*) FROM utilisateur WHERE id_user = ?";
+    $requete = $this->connexion->prepare($sql);
+    $requete->execute([$idUser]);
+
+    if ($requete->fetchColumn() > 0) {
+        $badges[] = [
+            "nom" => "Premier Pas",
+            "icone" => "👤"
+        ];
+    }
+
+    // 2. Explorateur
+    $sql = "SELECT COUNT(*) FROM test_riasec WHERE id_user = ?";
+    $requete = $this->connexion->prepare($sql);
+    $requete->execute([$idUser]);
+
+    if ($requete->fetchColumn() > 0) {
+        $badges[] = [
+            "nom" => "Explorateur",
+            "icone" => "🧠"
+        ];
+    }
+
+    // 3. Connaissance de soi
+    $sql = "SELECT COUNT(*) FROM historique
+            WHERE id_user = ?
+            AND action = 'PROFIL_CONSULTE'";
+    $requete = $this->connexion->prepare($sql);
+    $requete->execute([$idUser]);
+
+    if ($requete->fetchColumn() > 0) {
+        $badges[] = [
+            "nom" => "Connaissance de soi",
+            "icone" => "🎯"
+        ];
+    }
+
+    // 4. Découvreur de métiers
+    $sql = "SELECT COUNT(*) FROM historique
+            WHERE id_user = ?
+            AND action = 'METIERS_CONSULTES'";
+    $requete = $this->connexion->prepare($sql);
+    $requete->execute([$idUser]);
+
+    if ($requete->fetchColumn() > 0) {
+        $badges[] = [
+            "nom" => "Découvreur de métiers",
+            "icone" => "💼"
+        ];
+    }
+
+    // 5. Choix de carrière
+    $sql = "SELECT COUNT(*) FROM historique
+            WHERE id_user = ?
+            AND action = 'FORMATION_CONSULTEE'";
+    $requete = $this->connexion->prepare($sql);
+    $requete->execute([$idUser]);
+
+    if ($requete->fetchColumn() > 0) {
+        $badges[] = [
+            "nom" => "Choix de carrière",
+            "icone" => "🎓"
+        ];
+    }
+
+    // 6. Prêt pour l'université
+    $sql = "SELECT COUNT(*) FROM historique
+            WHERE id_user = ?
+            AND action = 'UNIVERSITES_CONSULTEES'";
+    $requete = $this->connexion->prepare($sql);
+    $requete->execute([$idUser]);
+
+    if ($requete->fetchColumn() > 0) {
+        $badges[] = [
+            "nom" => "Prêt pour l'université",
+            "icone" => "🏛️"
+        ];
+    }
+
+    return $badges;
+}
    private function calculerNiveau(int $points): array
    {
     if ($points < 100) {
@@ -130,15 +217,7 @@ if ($requete->fetchColumn() > 0) {
 
     return 1;
     }
-         private function calculerBadges(int $idUser): int
-    {
-    /*
-     * V1 :
-     * Les badges seront ajoutés plus tard.
-     */
-
-    return 0;
-    }
+         
 
     private function calculerParcours(int $idUser): array
 {
@@ -223,13 +302,13 @@ if ($requete->fetchColumn() > 0) {
         ),
 
 
-        "formationConsulte" => in_array(
+        "formationConsultee" => in_array(
             "FORMATION_CONSULTEE",
             $actions
         ),
 
 
-        "universiteConsulte" => in_array(
+        "universitesConsultees" => in_array(
             "UNIVERSITES_CONSULTEES",
             $actions
         )
@@ -237,13 +316,7 @@ if ($requete->fetchColumn() > 0) {
     ];
 
 }
-   /*$profilConsulte = false;
-
-    $metiers = false;
-
-    $formations = false;
-
-    $universites = false;*/
+   
 
     public function recupererDashboard(int $idUser): ?array
     {
@@ -288,10 +361,12 @@ if ($requete->fetchColumn() > 0) {
 
                 "serie" => $serie,
 
-                "badges" => $badges
+                "badges" => count($badges)
 
             ],
-            "parcours" => $parcours
+            "parcours" => $parcours,
+
+            "liste_badges" => $badges,
 
         ];
     }

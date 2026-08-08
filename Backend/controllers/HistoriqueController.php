@@ -21,6 +21,22 @@ class HistoriqueController
     public function enregistrer()
     {
 
+    
+     
+
+     if (!isset($_SESSION["id_user"])) {
+    http_response_code(401);
+
+    echo json_encode([
+        "success" => false,
+        "message" => "Utilisateur non connecté."
+    ]);
+
+    return;
+}
+
+$idUser = (int) $_SESSION["id_user"];
+
         $data = json_decode(
             file_get_contents("php://input"),
             true
@@ -28,7 +44,7 @@ class HistoriqueController
 
 
         $resultat = $this->historiqueService->enregistrerAction(
-            $data["id_user"],
+            $idUser,
             $data["action"]
         );
 

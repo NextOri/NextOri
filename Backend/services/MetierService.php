@@ -319,7 +319,7 @@ private function separerMetiers(array $metiers): array
 
         "principaux" => array_slice($metiers, 0, 5),
 
-        "secondaires" => array_slice($metiers, 5)
+        "secondaires" => array_slice($metiers, 5, 5)
 
     ];
 }

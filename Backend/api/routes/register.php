@@ -59,12 +59,15 @@ if (
 
 $userService = new UserService();
 
+$idSerie = $donnees["id_serie"] ?? null;
+
 $resultat = $userService->register(
     $donnees["nom"],
     $donnees["email"],
     $donnees["mot_de_passe"],
     $donnees["pays"],
-    $donnees["niveau_etude"]
+    $donnees["niveau_etude"],
+    $idSerie
 );
 
 if ($resultat) {

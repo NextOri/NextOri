@@ -66,6 +66,35 @@ class TestRepository
     }
 
     /**
+ * Récupère la série de l'utilisateur ayant effectué le test.
+ */
+    
+  public function recupererSerieParTest(int $idTest): ?int
+  {
+    $sql = "
+        SELECT u.id_serie
+        FROM test_riasec t
+        INNER JOIN utilisateur u
+            ON u.id_user = t.id_user
+        WHERE t.id_test = :id_test
+    ";
+
+    $statement = $this->connection->prepare($sql);
+
+    $statement->execute([
+        ":id_test" => $idTest
+    ]);
+
+    $resultat = $statement->fetch(PDO::FETCH_ASSOC);
+
+    if (!$resultat || $resultat["id_serie"] === null) {
+        return null;
+    }
+
+    return (int) $resultat["id_serie"];
+    }
+
+    /**
  * Retourne le dernier test effectué par un utilisateur.
  */
 public function obtenirDernierTestUtilisateur(

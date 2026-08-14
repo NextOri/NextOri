@@ -43,9 +43,10 @@ class UserService
     string $email,
     string $motDePasse,
     string $pays,
-    string $niveauEtude
-    ): array|bool
-    {
+    string $niveauEtude,
+    ?int $idSerie = null
+): array|bool
+{
 
     // Vérifier si l'email existe déjà
     if ($this->emailExiste($email)) {
@@ -70,7 +71,8 @@ class UserService
             email,
             mot_de_passe,
             pays,
-            niveau_etude
+            niveau_etude,
+            id_serie
         )
         VALUES
         (
@@ -78,7 +80,8 @@ class UserService
             :email,
             :mot_de_passe,
             :pays,
-            :niveau_etude
+            :niveau_etude,
+            :id_serie
         )
     ";
 
@@ -91,6 +94,11 @@ class UserService
     $stmt->bindParam(":mot_de_passe", $motDePasseHash);
     $stmt->bindParam(":pays", $pays);
     $stmt->bindParam(":niveau_etude", $niveauEtude);
+    $stmt->bindParam(
+    ":id_serie",
+    $idSerie,
+    $idSerie === null ? PDO::PARAM_NULL : PDO::PARAM_INT
+    );
 
 
     if ($stmt->execute()) {
@@ -157,6 +165,7 @@ class UserService
             email,
             pays,
             niveau_etude,
+            id_serie,
             date_creation
         FROM utilisateur
         WHERE id_user = :id_user

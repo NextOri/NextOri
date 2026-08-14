@@ -7,6 +7,7 @@ require_once __DIR__ . "/TestResultService.php";
 require_once __DIR__ . "/MetierService.php";
 require_once __DIR__ . "/FiliereService.php";
 require_once __DIR__ . "/UniversiteService.php";
+require_once __DIR__ . "/UserService.php";
 
 
 class OrientationService
@@ -19,6 +20,7 @@ class OrientationService
     private MetierService $metierService;
     private FiliereService $filiereService;
     private UniversiteService $universiteService;
+    private UserService $userService;
     
 
 
@@ -39,6 +41,8 @@ class OrientationService
         $this->filiereService = new FiliereService();
 
         $this->universiteService = new UniversiteService();
+
+        $this->userService = new UserService();
 
     }
 
@@ -200,6 +204,12 @@ class OrientationService
 
     }
 
+    $utilisateur =
+    $this->userService->getUserById($idUser);
+
+     $idSerie =
+    $utilisateur["id_serie"] ?? null;
+
 
     // 2. Récupérer le profil enregistré
 
@@ -225,7 +235,8 @@ class OrientationService
     $metiers =
         $this->metierService
              ->obtenirRecommandations(
-                 $profilPrincipal
+                 $profilPrincipal,
+                    $idSerie
              );
 
 
@@ -329,6 +340,12 @@ class OrientationService
         $profilPrincipal =
             $profil["profil"]["profil_principal"];
 
+            $utilisateur =
+    $this->userService->getUserById($idUser);
+
+$idSerie =
+    $utilisateur["id_serie"] ?? null;
+
 
 
 
@@ -340,7 +357,8 @@ class OrientationService
         $metiers =
             $this->metierService
                  ->obtenirRecommandations(
-                     $profilPrincipal
+                     $profilPrincipal,
+                        $idSerie
                  );
 
 

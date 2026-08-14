@@ -3,6 +3,7 @@
 require_once __DIR__ . "/../repositories/MetierRepository.php";
 
 
+
 class MetierService
 {
     private MetierRepository $metierRepository;
@@ -18,11 +19,25 @@ class MetierService
     /**
      * Recherche les métiers compatibles avec un profil RIASEC utilisateur
      */
-    public function rechercherMetiersCompatibles(string $profil): array
-    {
+    public function rechercherMetiersCompatibles(
+        string $profil,
+        ?int $idSerie = null
+    ): array {
+        // Si l'utilisateur possède une série,
+        // on ne travaille que sur les métiers compatibles.
+        if ($idSerie !== null) {
 
-        $metiers = $this->metierRepository->recupererTousLesMetiers();
+            $metiers =
+                $this->metierRepository
+                ->recupererMetiersParSerie($idSerie);
+        } else {
 
+            // Collégien ou utilisateur sans série :
+            // tous les métiers restent disponibles.
+            $metiers =
+                $this->metierRepository
+                ->recupererMetiersAccessiblesAuTest();
+        }
 
         foreach ($metiers as &$metier) {
 
@@ -46,7 +61,6 @@ class MetierService
                     $profil,
                     $profilMetier
                 );
-
         }
 
 
@@ -60,7 +74,7 @@ class MetierService
          * 2 - Nombre de correspondances décroissant
          */
 
-        usort($metiers, function($a, $b) {
+        usort($metiers, function ($a, $b) {
 
 
             if ($a["score_compatibilite"] != $b["score_compatibilite"]) {
@@ -68,20 +82,17 @@ class MetierService
                 return $b["score_compatibilite"]
                     <=>
                     $a["score_compatibilite"];
-
             }
 
 
             return $b["nombre_correspondances"]
                 <=>
                 $a["nombre_correspondances"];
-
         });
 
 
 
         return $metiers;
-
     }
 
 
@@ -90,86 +101,71 @@ class MetierService
 
 
     /**
-     * Algorithme de compatibilité NextOri V1
+     * Calcule la compatibilité entre le profil RIASEC
+     * de l'utilisateur et celui du métier.
      *
-     * Première lettre du profil :
-     * Position 1 = 4 points
-     * Position 2 = 2 points
-     * Position 3 = 1 point
+     * Logique NextOri V1 :
      *
-     * Deuxième lettre du profil :
-     * Position 2 = 4 points
-     * Position 1 = 2 points
-     * Position 3 = 1 point
+     * Première lettre utilisateur :
+     * position 1 = 4 points
+     * position 2 = 2 points
+     * position 3 = 1 point
+     *
+     * Deuxième lettre utilisateur :
+     * position 2 = 4 points
+     * position 1 = 2 points
+     * position 3 = 1 point
      */
-
     private function calculerCompatibilite(
         string $profilUtilisateur,
         string $profilMetier
-    ): int
-    {
+    ): int {
+        $profilUtilisateur = strtoupper(trim($profilUtilisateur));
+        $profilMetier = strtoupper(trim($profilMetier));
 
+        if ($profilUtilisateur === '' || $profilMetier === '') {
+            return 0;
+        }
 
         $score = 0;
 
+        /*
+     * Première lettre du profil utilisateur
+     */
+        if (isset($profilUtilisateur[0])) {
 
-        $premiereLettre = $profilUtilisateur[0];
+            $lettre = $profilUtilisateur[0];
 
-        $deuxiemeLettre = $profilUtilisateur[1];
+            $position = strpos($profilMetier, $lettre);
 
-
-
-        // Traitement de la première lettre
-
-        $position = strpos(
-            $profilMetier,
-            $premiereLettre
-        );
-
-
-        if ($position === 0) {
-
-            $score += 4;
-
-        } elseif ($position === 1) {
-
-            $score += 2;
-
-        } elseif ($position === 2) {
-
-            $score += 1;
-
+            if ($position === 0) {
+                $score += 4;
+            } elseif ($position === 1) {
+                $score += 2;
+            } elseif ($position === 2) {
+                $score += 1;
+            }
         }
 
+        /*
+     * Deuxième lettre du profil utilisateur
+     */
+        if (isset($profilUtilisateur[1])) {
 
+            $lettre = $profilUtilisateur[1];
 
+            $position = strpos($profilMetier, $lettre);
 
-        // Traitement de la deuxième lettre
-
-        $position = strpos(
-            $profilMetier,
-            $deuxiemeLettre
-        );
-
-
-        if ($position === 1) {
-
-            $score += 4;
-
-        } elseif ($position === 0) {
-
-            $score += 2;
-
-        } elseif ($position === 2) {
-
-            $score += 1;
-
+            if ($position === 1) {
+                $score += 2;
+            } elseif ($position === 0) {
+                $score += 2;
+            } elseif ($position === 2) {
+                $score += 1;
+            }
         }
-
-
 
         return $score;
-
     }
 
 
@@ -186,8 +182,7 @@ class MetierService
     private function compterCorrespondances(
         string $profilUtilisateur,
         string $profilMetier
-    ): int
-    {
+    ): int {
 
 
         $nombre = 0;
@@ -197,7 +192,6 @@ class MetierService
         if (strpos($profilMetier, $profilUtilisateur[0]) !== false) {
 
             $nombre++;
-
         }
 
 
@@ -205,202 +199,198 @@ class MetierService
         if (strpos($profilMetier, $profilUtilisateur[1]) !== false) {
 
             $nombre++;
-
         }
 
 
 
         return $nombre;
-
     }
     /**
- * Retourne les métiers principaux et secondaires
- */
-public function obtenirRecommandations(string $profil): array
-{
+     * Retourne les métiers principaux et secondaires
+     */
+    public function obtenirRecommandations(
+        string $profil,
+        ?int $idSerie = null
+    ): array {
+        $metiers =
+            $this->rechercherMetiersCompatibles(
+                $profil,
+                $idSerie
+            );
 
-    $metiers = $this->rechercherMetiersCompatibles($profil);
+        // Suppression des métiers incompatibles
+        $metiers = $this->filtrerMetiersCompatibles($metiers);
 
-    // Suppression des métiers incompatibles
-    $metiers = $this->filtrerMetiersCompatibles($metiers);
+        // Séparation en principaux et secondaires
+        return $this->separerMetiers($metiers);
+    }
+    /**
+     * Prépare les données finales pour le frontend
+     */
+    public function formaterRecommandations(
+        string $profil,
+        ?int $idSerie = null
+    ): array {
+        $recommandations =
+            $this->obtenirRecommandations(
+                $profil,
+                $idSerie
+            );
 
-    // Séparation en principaux et secondaires
-    return $this->separerMetiers($metiers);
+        return [
 
-}
-/**
- * Prépare les données finales pour le frontend
- */
-public function formaterRecommandations(string $profil): array
-{
+            "profil" => $profil,
 
-    $recommandations = $this->obtenirRecommandations($profil);
-
-
-    return [
-
-        "profil" => $profil,
-
-        "metiers_principaux" =>
+            "metiers_principaux" =>
             $this->formaterMetiers(
                 $recommandations["principaux"]
             ),
 
-
-        "metiers_secondaires" =>
+            "metiers_secondaires" =>
             $this->formaterMetiers(
                 $recommandations["secondaires"]
             )
-
-    ];
-
-}
+        ];
+    }
 
 
 
+    /**
+     * Nettoie les informations envoyées au frontend
+     */
+    private function formaterMetiers(array $metiers): array
+    {
 
-/**
- * Nettoie les informations envoyées au frontend
- */
-private function formaterMetiers(array $metiers): array
-{
-
-    $resultat = [];
-
-
-    foreach ($metiers as $metier) {
+        $resultat = [];
 
 
-        $resultat[] = [
+        foreach ($metiers as $metier) {
 
-            "id" => $metier["id_metier"],
 
-            "nom" => $metier["nom"],
+            $resultat[] = [
 
-            "profil_riasec" =>
+                "id" => $metier["id_metier"],
+
+                "nom" => $metier["nom"],
+
+                "profil_riasec" =>
                 $metier["profil_riasec"],
 
-            "score" =>
+                "score" =>
                 $metier["score_compatibilite"]
 
-        ];
-
-    }
-
-
-    return $resultat;
-
-}
-/**
- * Supprime les métiers dont la compatibilité est nulle.
- */
-private function filtrerMetiersCompatibles(array $metiers): array
-{
-    $resultat = [];
-
-    foreach ($metiers as $metier) {
-
-        if ($metier["score_compatibilite"] > 0) {
-
-            $resultat[] = $metier;
-
+            ];
         }
 
+
+        return $resultat;
     }
+    /**
+     * Supprime les métiers dont la compatibilité est nulle.
+     */
+    private function filtrerMetiersCompatibles(array $metiers): array
+    {
+        $resultat = [];
 
-    return $resultat;
-}
-/**
- * Sépare les métiers en principaux et secondaires.
- */
-private function separerMetiers(array $metiers): array
-{
-    return [
+        foreach ($metiers as $metier) {
 
-        "principaux" => array_slice($metiers, 0, 5),
+            if ($metier["score_compatibilite"] > 0) {
 
-        "secondaires" => array_slice($metiers, 5, 5)
+                $resultat[] = $metier;
+            }
+        }
 
-    ];
-}
-/**
- * Construit la recommandation complète :
- * Métier → Filières → Universités
- */
-public function construireDetailsMetiers(
-    array $metiers
-): array
-{
+        return $resultat;
+    }
+    /**
+     * Sépare les métiers en principaux et secondaires
+     * selon leur compatibilité relative avec le meilleur score.
+     */
+    /**
+     * Sépare les métiers en principaux et secondaires.
+     */
+    private function separerMetiers(array $metiers): array
+    {
+        return [
 
-    $resultat = [];
+            "principaux" => array_slice($metiers, 0, 5),
 
+            "secondaires" => array_slice($metiers, 5, 5)
 
-    foreach ($metiers as $metier) {
+        ];
+    }
+    /**
+     * Construit la recommandation complète :
+     * Métier → Filières → Universités
+     */
+    public function construireDetailsMetiers(
+        array $metiers
+    ): array {
 
-
-        $filieres = [];
-
-
-
-        $listeFilieres =
-            (new FiliereService())
-            ->rechercherFilieresParMetier(
-                $metier["id_metier"]
-            );
+        $resultat = [];
 
 
+        foreach ($metiers as $metier) {
 
-        foreach ($listeFilieres as $filiere) {
+
+            $filieres = [];
 
 
-            $universites =
-                (new UniversiteService())
-                ->rechercherUniversitesParFiliere(
-                    $filiere["id_filiere"]
+
+            $listeFilieres =
+                (new FiliereService())
+                ->rechercherFilieresParMetier(
+                    $metier["id_metier"]
                 );
 
 
 
-            $filieres[] = [
+            foreach ($listeFilieres as $filiere) {
 
-                "id_filiere" =>
+
+                $universites =
+                    (new UniversiteService())
+                    ->rechercherUniversitesParFiliere(
+                        $filiere["id_filiere"]
+                    );
+
+
+
+                $filieres[] = [
+
+                    "id_filiere" =>
                     $filiere["id_filiere"],
 
-                "nom" =>
+                    "nom" =>
                     $filiere["nom"],
 
-                "description" =>
+                    "description" =>
                     $filiere["description"],
 
-                "domaine" =>
+                    "domaine" =>
                     $filiere["domaine"],
 
-                "duree" =>
+                    "duree" =>
                     $filiere["duree"],
 
-                "universites" =>
+                    "universites" =>
                     $universites
 
-            ];
+                ];
+            }
 
+
+
+            $resultat[] = [
+
+                "metier" => $metier,
+
+                "filieres" => $filieres
+
+            ];
         }
 
 
-
-        $resultat[] = [
-
-            "metier" => $metier,
-
-            "filieres" => $filieres
-
-        ];
-
+        return $resultat;
     }
-
-
-    return $resultat;
-
- }
-
-
 }

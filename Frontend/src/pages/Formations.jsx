@@ -162,10 +162,15 @@ function Formations(){
     resultat
 ) => {
 
+    // Action générale : progression / badges
     await enregistrerAction(
         "UNIVERSITES_CONSULTEES"
     );
 
+    // Action détaillée : historique
+    await enregistrerAction(
+        `FORMATION_CONSULTEE: ${formation.nom}`
+    );
 
     navigate("/universites", {
 

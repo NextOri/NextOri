@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import FooterNavigation from "../components/FooterNavigation";
 import "../styles/universite-detail.css";
 import { afficherTypeUniversite } from "../utils/universiteUtils";
+import { enregistrerAction } from "../services/historiqueService";
 
 function UniversiteDetail() {
 
@@ -94,14 +95,19 @@ function UniversiteDetail() {
     {
         universite.site_web &&
         (
-            <a
-                href={universite.site_web}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="no-universite-detail-site-button"
-            >
-                Visiter le site officiel
-            </a>
+           <a
+    href={universite.site_web}
+    target="_blank"
+    rel="noopener noreferrer"
+    className="no-universite-detail-site-button"
+    onClick={() =>
+        enregistrerAction(
+            `UNIVERSITE_CONSULTEE: ${universite.nom}`
+        )
+    }
+>
+    Visiter le site officiel
+</a>
         )
        }
 
@@ -142,14 +148,21 @@ function UniversiteDetail() {
 
                                 <p>{filiere.duree}</p>
 
-                                <button
-                                    className="no-universite-detail-button"
-                                    onClick={() => {
-                                        window.location.href = `/filieres/${filiere.id_filiere}`;
-                                    }}
-                                >
-                                    Voir la filière
-                                </button>
+                               <button
+    className="no-universite-detail-button"
+    onClick={async () => {
+
+        await enregistrerAction(
+            `FORMATION_CONSULTEE: ${filiere.nom}`
+        );
+
+        window.location.href =
+            `/filieres/${filiere.id_filiere}`;
+
+    }}
+>
+    Voir la filière
+</button>
 
                             </div>
 

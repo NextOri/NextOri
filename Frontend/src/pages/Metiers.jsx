@@ -3,6 +3,7 @@ import "../styles/Metiers.css";
 import FooterNavigation from "../components/FooterNavigation";
 
 import { useNavigate } from "react-router-dom";
+import { enregistrerAction } from "../services/historiqueService";
 
 
 function Metiers() {
@@ -354,14 +355,20 @@ function Metiers() {
       </p>
 
 
-                    <button className="metier-button"
-                    onClick={() => navigate(`/metiers/${metier.id_metier}`)}
-                    >
-                        
+                    <button
+    className="metier-button"
+    onClick={async () => {
 
-                        Voir détails →
+        await enregistrerAction(
+            `METIER_CONSULTE: ${metier.nom}`
+        );
 
-                    </button>
+        navigate(`/metiers/${metier.id_metier}`);
+
+    }}
+>
+    Voir détails →
+</button>
 
                 </div>
 

@@ -218,4 +218,48 @@ class OrientationController
             );
         }
     }
+
+    /**
+ * Retourne l'historique des tests d'un utilisateur.
+ */
+public function recupererHistoriqueTests(): void
+{
+    header("Access-Control-Allow-Origin: http://localhost:5173");
+    header("Access-Control-Allow-Credentials: true");
+    header("Content-Type: application/json; charset=UTF-8");
+
+    if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+    }
+
+    try {
+
+        if (!isset($_SESSION["id_user"])) {
+
+            ApiResponse::error(
+                "Utilisateur non connecté.",
+                401
+            );
+
+            return;
+        }
+
+        $idUser = (int) $_SESSION["id_user"];
+
+        $tests = $this->orientationService
+            ->obtenirHistoriqueTests($idUser);
+
+        ApiResponse::success(
+            $tests,
+            "Historique des tests récupéré avec succès."
+        );
+
+    } catch (Throwable $e) {
+
+        ApiResponse::error(
+            500,
+            $e->getMessage()
+        );
+    }
+}
 }

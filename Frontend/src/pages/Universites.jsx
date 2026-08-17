@@ -17,6 +17,7 @@ import {
 import { MdLocationCity } from "react-icons/md";
 
 import "../styles/Universites.css";
+import { enregistrerAction } from "../services/historiqueService";
 
 
 
@@ -338,25 +339,21 @@ function Universites(){
 
 
 
-                            <a
-
-                                href={universite.site_web}
-
-                                target="_blank"
-
-                                rel="noopener noreferrer"
-
-                                className="site-button"
-
-                            >
-
-                                <FaGlobe />
-
-                                {" "}
-
-                                Visiter le site web
-
-                            </a>
+                           <a
+    href={universite.site_web}
+    target="_blank"
+    rel="noopener noreferrer"
+    className="site-button"
+    onClick={() =>
+        enregistrerAction(
+            `UNIVERSITE_CONSULTEE: ${universite.nom}`
+        )
+    }
+>
+    <FaGlobe />
+    {" "}
+    Visiter le site web
+</a>
 
 
 

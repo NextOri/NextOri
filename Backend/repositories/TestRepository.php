@@ -129,4 +129,44 @@ public function obtenirDernierTestUtilisateur(
     return $test ?: null;
 
 }
+
+/**
+ * Récupère tous les tests effectués par un utilisateur.
+ */
+public function obtenirTousLesTestsUtilisateur(
+    int $idUser
+): array
+{
+
+    $sql = "
+
+        SELECT
+            id_test,
+            id_user,
+            id_questionnaire,
+            date_test,
+            score_R,
+            score_I,
+            score_A,
+            score_S,
+            score_E,
+            score_C,
+            profil_dominant
+
+        FROM test_riasec
+
+        WHERE id_user = :user
+
+        ORDER BY date_test DESC
+
+    ";
+
+    $statement = $this->connection->prepare($sql);
+
+    $statement->execute([
+        ":user" => $idUser
+    ]);
+
+    return $statement->fetchAll(PDO::FETCH_ASSOC);
+}
 }

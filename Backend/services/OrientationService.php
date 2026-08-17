@@ -284,6 +284,19 @@ class OrientationService
 
 }
 
+/**
+ * Retourne tous les tests effectués par un utilisateur.
+ */
+public function obtenirHistoriqueTests(
+    int $idUser
+): array
+{
+    return $this->testService
+                ->obtenirTousLesTestsUtilisateur(
+                    $idUser
+                );
+}
+
 
 
     /**

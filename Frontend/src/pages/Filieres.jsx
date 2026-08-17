@@ -3,6 +3,7 @@ import "../styles/Filieres.css";
 import FooterNavigation from "../components/FooterNavigation";
 
 import { useNavigate } from "react-router-dom";
+import { enregistrerAction } from "../services/historiqueService";
 
 function Filieres() {
 
@@ -351,20 +352,19 @@ function Filieres() {
                                     </p>
 
                                     <button
+    className="filiere-button"
+    onClick={async () => {
 
-                                        className="filiere-button"
+        await enregistrerAction(
+            `FORMATION_CONSULTEE: ${filiere.nom}`
+        );
 
-                                        onClick={() =>
+        navigate(`/filieres/${filiere.id_filiere}`);
 
-                                            navigate(`/filieres/${filiere.id_filiere}`)
-
-                                        }
-
-                                    >
-
-                                        Voir détails →
-
-                                    </button>
+    }}
+>
+    Voir détails →
+</button>
 
                                 </div>
 

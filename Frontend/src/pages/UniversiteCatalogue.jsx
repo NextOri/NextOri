@@ -8,6 +8,7 @@ import FooterNavigation from "../components/FooterNavigation";
 import "../styles/UniversiteCatalogue.css";
 
 import { afficherTypeUniversite } from "../utils/universiteUtils";
+import { enregistrerAction } from "../services/historiqueService";
 
 const API_URL =
   "http://localhost/nextori/backend/api/routes/universite-catalogue.php";
@@ -177,9 +178,12 @@ export default function UniversiteCatalogue() {
 
             <button
               className="no-universite-catalogue-button"
-              onClick={() =>
-                navigate(`/universite-catalogue/${universite.id_universite}`)
-              }
+              onClick={async() => {
+                await enregistrerAction(
+                  `/UNIVERSITE_CONSULTEE: ${universite.nom}`
+                );
+                navigate(`/universite-catalogue/${universite.id_universite}`);
+              }}
             >
               Voir les détails →
             </button>

@@ -40,4 +40,17 @@ public function obtenirDernierTestUtilisateur(
                 );
 
 }
+
+/**
+ * Retourne tous les tests effectués par un utilisateur.
+ */
+public function obtenirTousLesTestsUtilisateur(
+    int $idUser
+): array
+{
+    return $this->testRepository
+                ->obtenirTousLesTestsUtilisateur(
+                    $idUser
+                );
+}
 }

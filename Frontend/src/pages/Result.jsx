@@ -458,20 +458,22 @@ console.log("DATA RESULT :", resultatInitial);
      const consulterFormation = async (metier, resultat) => {
 
     await enregistrerAction(
+        `METIER_CONSULTE: ${metier.nom}`
+    );
+
+    // Cette action générale reste uniquement pour la progression
+    await enregistrerAction(
         "FORMATION_CONSULTEE"
     );
 
-
     navigate("/formations", {
-
         state: {
             metier: metier,
             resultat: resultat
         }
-
     });
 
-    };
+};
 
 
     /*

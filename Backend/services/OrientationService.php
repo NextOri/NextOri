@@ -285,6 +285,99 @@ class OrientationService
 }
 
 /**
+ * Retourne un test précis avec son profil
+ * et ses recommandations.
+ */
+public function obtenirTestParId(
+    int $idTest,
+    int $idUser
+): ?array
+{
+    // 1. Récupérer le test précis
+    $test = $this->testService->obtenirTestParId(
+        $idTest,
+        $idUser
+    );
+
+    if ($test === null) {
+        return null;
+    }
+
+
+    // 2. Récupérer l'utilisateur
+    $utilisateur = $this->userService->getUserById($idUser);
+
+    $idSerie = $utilisateur["id_serie"] ?? null;
+
+
+    // 3. Profil dominant enregistré dans le test
+    $profilPrincipal = $test["profil_dominant"];
+
+
+    // 4. Récupérer les scores du test
+    $scores = [
+
+        "R" => $test["score_R"],
+        "I" => $test["score_I"],
+        "A" => $test["score_A"],
+        "S" => $test["score_S"],
+        "E" => $test["score_E"],
+        "C" => $test["score_C"]
+
+    ];
+
+
+    // 5. Rechercher les métiers recommandés
+    // exactement comme pour le dernier résultat
+    $metiers =
+        $this->metierService
+             ->obtenirRecommandations(
+                 $profilPrincipal,
+                 $idSerie
+             );
+
+
+    // 6. Ajouter les filières et universités
+    $metiersPrincipaux =
+        $this->enrichirMetiersAvecFormations(
+            $metiers["principaux"]
+        );
+
+
+    $metiersSecondaires =
+        $this->enrichirMetiersAvecFormations(
+            $metiers["secondaires"]
+        );
+
+
+    // 7. Retourner la même structure que le résultat normal
+    return [
+
+        "id_test" => $test["id_test"],
+
+        "date_test" => $test["date_test"],
+
+        "profil" => [
+
+            "principal" => $profilPrincipal,
+
+            "scores" => $scores
+
+        ],
+
+        "recommandations" => [
+
+            "principaux" => $metiersPrincipaux,
+
+            "secondaires" => $metiersSecondaires
+
+        ]
+
+    ];
+}
+
+
+/**
  * Retourne tous les tests effectués par un utilisateur.
  */
 public function obtenirHistoriqueTests(

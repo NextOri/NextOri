@@ -219,6 +219,97 @@ class OrientationController
         }
     }
 
+
+    /**
+ * Retourne un test précis de l'historique.
+ */
+public function recupererTestParId(): void
+{
+    header("Access-Control-Allow-Origin: http://localhost:5173");
+    header("Access-Control-Allow-Credentials: true");
+    header("Access-Control-Allow-Methods: GET, OPTIONS");
+    header("Access-Control-Allow-Headers: Content-Type");
+    header("Content-Type: application/json; charset=UTF-8");
+
+    if ($_SERVER["REQUEST_METHOD"] === "OPTIONS") {
+        http_response_code(200);
+        return;
+    }
+
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+
+    try {
+
+        if (!isset($_SESSION["id_user"])) {
+
+            ApiResponse::error(
+                "Utilisateur non connecté.",
+                401
+            );
+
+            return;
+        }
+
+        $idUser = (int) $_SESSION["id_user"];
+
+        if (!isset($_GET["id_test"])) {
+
+            ApiResponse::error(
+                "Identifiant du test manquant.",
+                400
+            );
+
+            return;
+        }
+
+        $idTest = filter_var(
+            $_GET["id_test"],
+            FILTER_VALIDATE_INT
+        );
+
+        if ($idTest === false || $idTest <= 0) {
+
+            ApiResponse::error(
+                "Identifiant du test invalide.",
+                400
+            );
+
+            return;
+        }
+
+        $test = $this->orientationService
+            ->obtenirTestParId(
+                $idTest,
+                $idUser
+            );
+
+        if ($test === null) {
+
+            ApiResponse::error(
+                "Test introuvable.",
+                404
+            );
+
+            return;
+        }
+
+        ApiResponse::success(
+            $test,
+            "Test historique récupéré avec succès."
+        );
+
+    } catch (Throwable $e) {
+
+        ApiResponse::error(
+            $e->getMessage(),
+            500
+        );
+    }
+}
+
+
     /**
  * Retourne l'historique des tests d'un utilisateur.
  */

@@ -17,6 +17,8 @@ import Inscription from "./pages/Inscription";
 import Connexion from "./pages/Connexion";
 import Profil from "./pages/Profil";
 import ProtectedRoute from "./components/ProtectedRoute";
+import HistoriqueTests from "./pages/HistoriqueTests";
+import ResultatHistorique from "./pages/ResultatHistorique";
 
 
 function App() {
@@ -57,6 +59,10 @@ function App() {
     <Route path="/universite-catalogue/:id_universite" element={<UniversiteDetail />} />
 
     <Route path="/profil" element={<Profil />} />
+
+    <Route path="/historique-tests" element={<HistoriqueTests />} />
+    
+    <Route path="/resultat-test/:id_test" element={<ResultatHistorique />} />
 
     </Route>
 

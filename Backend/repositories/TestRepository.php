@@ -130,6 +130,47 @@ public function obtenirDernierTestUtilisateur(
 
 }
 
+
+/**
+ * Retourne un test précis par son identifiant.
+ */
+public function obtenirTestParId(
+    int $idTest,
+    int $idUser
+): ?array
+{
+    $sql = "
+        SELECT
+            id_test,
+            id_user,
+            id_questionnaire,
+            date_test,
+            score_R,
+            score_I,
+            score_A,
+            score_S,
+            score_E,
+            score_C,
+            profil_dominant
+        FROM test_riasec
+        WHERE id_test = :id_test
+        AND id_user = :id_user
+        LIMIT 1
+    ";
+
+    $statement = $this->connection->prepare($sql);
+
+    $statement->execute([
+        ":id_test" => $idTest,
+        ":id_user" => $idUser
+    ]);
+
+    $test = $statement->fetch(PDO::FETCH_ASSOC);
+
+    return $test ?: null;
+}
+
+
 /**
  * Récupère tous les tests effectués par un utilisateur.
  */

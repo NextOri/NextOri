@@ -41,6 +41,21 @@ public function obtenirDernierTestUtilisateur(
 
 }
 
+
+/**
+ * Retourne un test précis par son identifiant.
+ */
+public function obtenirTestParId(
+    int $idTest,
+    int $idUser
+): ?array
+{
+    return $this->testRepository->obtenirTestParId(
+        $idTest,
+        $idUser
+    );
+}
+
 /**
  * Retourne tous les tests effectués par un utilisateur.
  */

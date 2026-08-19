@@ -19,7 +19,7 @@ try {
 
     $controller = new OrientationController();
 
-    $controller->recupererHistoriqueTests();
+    $controller->recupererTestParId();
 
 } catch (Throwable $e) {
 

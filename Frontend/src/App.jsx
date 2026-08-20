@@ -19,6 +19,7 @@ import Profil from "./pages/Profil";
 import ProtectedRoute from "./components/ProtectedRoute";
 import HistoriqueTests from "./pages/HistoriqueTests";
 import ResultatHistorique from "./pages/ResultatHistorique";
+import Hesitation from "./pages/Hesitation";
 
 
 function App() {
@@ -63,6 +64,8 @@ function App() {
     <Route path="/historique-tests" element={<HistoriqueTests />} />
     
     <Route path="/resultat-test/:id_test" element={<ResultatHistorique />} />
+
+    <Route path="/hesitation" element={<Hesitation />} />
 
     </Route>
 

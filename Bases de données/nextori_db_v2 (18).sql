@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : ven. 14 août 2026 à 21:12
+-- Généré le : jeu. 20 août 2026 à 16:01
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.2.12
 
@@ -475,7 +475,34 @@ INSERT INTO `historique` (`id_historique`, `id_user`, `action`, `date_action`) V
 (121, 17, 'METIERS_CONSULTES', '2026-08-14 16:17:31'),
 (122, 17, 'METIERS_CONSULTES', '2026-08-14 16:29:34'),
 (123, 17, 'PROFIL_CONSULTE', '2026-08-14 16:41:31'),
-(124, 19, 'METIERS_CONSULTES', '2026-08-14 19:01:05');
+(124, 19, 'METIERS_CONSULTES', '2026-08-14 19:01:05'),
+(125, 19, 'METIERS_CONSULTES', '2026-08-14 19:58:56'),
+(126, 19, 'FORMATION_CONSULTEE', '2026-08-17 12:09:49'),
+(127, 19, 'UNIVERSITES_CONSULTEES', '2026-08-17 12:10:23'),
+(128, 19, 'PROFIL_CONSULTE', '2026-08-17 12:49:34'),
+(129, 19, 'FORMATION_CONSULTEE', '2026-08-17 17:02:41'),
+(130, 19, 'UNIVERSITES_CONSULTEES', '2026-08-17 17:02:44'),
+(131, 19, 'UNIVERSITES_CONSULTEES', '2026-08-17 17:03:55'),
+(132, 19, 'METIER_CONSULTE: Agripreneur', '2026-08-17 17:11:28'),
+(133, 19, 'FORMATION_CONSULTEE', '2026-08-17 17:11:28'),
+(134, 19, 'UNIVERSITES_CONSULTEES', '2026-08-17 17:16:51'),
+(135, 19, 'UNIVERSITES_CONSULTEES', '2026-08-17 17:17:12'),
+(136, 19, 'UNIVERSITES_CONSULTEES', '2026-08-17 17:18:38'),
+(137, 19, 'FORMATION_CONSULTEE: Agronomie', '2026-08-17 17:18:38'),
+(138, 19, 'UNIVERSITE_CONSULTEE: UGB', '2026-08-17 17:24:43'),
+(139, 19, 'UNIVERSITES_CONSULTEES', '2026-08-17 17:26:59'),
+(140, 19, 'FORMATION_CONSULTEE: Agronomie et Production végétale', '2026-08-17 17:26:59'),
+(141, 19, 'UNIVERSITES_CONSULTEES', '2026-08-17 17:27:06'),
+(142, 19, 'FORMATION_CONSULTEE: Entrepreneuriat', '2026-08-17 17:27:06'),
+(143, 19, 'UNIVERSITES_CONSULTEES', '2026-08-17 17:27:47'),
+(144, 19, 'FORMATION_CONSULTEE: Agronomie', '2026-08-17 17:27:47'),
+(145, 19, 'UNIVERSITE_CONSULTEE: UGB', '2026-08-17 17:27:51'),
+(146, 19, 'METIER_CONSULTE: Actuaire', '2026-08-17 17:40:51'),
+(147, 19, 'FORMATION_CONSULTEE: Actuariat', '2026-08-17 17:49:33'),
+(148, 19, '/UNIVERSITE_CONSULTEE:  AFI-UE', '2026-08-17 17:55:21'),
+(149, 19, 'UNIVERSITE_CONSULTEE:  AFI-UE', '2026-08-17 18:00:54'),
+(150, 19, 'FORMATION_CONSULTEE: Génie logistique', '2026-08-17 18:02:24'),
+(151, 17, '/UNIVERSITE_CONSULTEE:  AFI-UE', '2026-08-19 18:56:27');
 
 -- --------------------------------------------------------
 
@@ -2591,7 +2618,27 @@ INSERT INTO `reponse` (`id_reponse`, `id_test`, `id_proposition`) VALUES
 (757, 39, 101),
 (758, 39, 108),
 (759, 39, 111),
-(760, 39, 118);
+(760, 39, 118),
+(761, 40, 6),
+(762, 40, 11),
+(763, 40, 16),
+(764, 40, 23),
+(765, 40, 29),
+(766, 40, 34),
+(767, 40, 40),
+(768, 40, 48),
+(769, 40, 53),
+(770, 40, 57),
+(771, 40, 64),
+(772, 40, 70),
+(773, 40, 76),
+(774, 40, 82),
+(775, 40, 87),
+(776, 40, 94),
+(777, 40, 102),
+(778, 40, 106),
+(779, 40, 111),
+(780, 40, 118);
 
 -- --------------------------------------------------------
 
@@ -2678,7 +2725,8 @@ INSERT INTO `test_riasec` (`id_test`, `id_user`, `id_questionnaire`, `date_test`
 (36, 17, 1, '2026-08-13 19:39:10', 1, 5, 3, 4, 3, 4, 'IS'),
 (37, 17, 1, '2026-08-14 16:17:29', 2, 2, 5, 5, 3, 3, 'AS'),
 (38, 17, 1, '2026-08-14 16:29:33', 1, 2, 3, 8, 2, 4, 'SC'),
-(39, 19, 1, '2026-08-14 19:01:04', 1, 1, 5, 5, 6, 2, 'EA');
+(39, 19, 1, '2026-08-14 19:01:04', 1, 1, 5, 5, 6, 2, 'EA'),
+(40, 19, 1, '2026-08-14 19:58:53', 2, 1, 3, 3, 7, 4, 'EC');
 
 -- --------------------------------------------------------
 
@@ -3781,7 +3829,7 @@ ALTER TABLE `filiere`
 -- AUTO_INCREMENT pour la table `historique`
 --
 ALTER TABLE `historique`
-  MODIFY `id_historique` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=125;
+  MODIFY `id_historique` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=152;
 
 --
 -- AUTO_INCREMENT pour la table `metier`
@@ -3817,7 +3865,7 @@ ALTER TABLE `recommandation`
 -- AUTO_INCREMENT pour la table `reponse`
 --
 ALTER TABLE `reponse`
-  MODIFY `id_reponse` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=761;
+  MODIFY `id_reponse` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=781;
 
 --
 -- AUTO_INCREMENT pour la table `serie`
@@ -3829,7 +3877,7 @@ ALTER TABLE `serie`
 -- AUTO_INCREMENT pour la table `test_riasec`
 --
 ALTER TABLE `test_riasec`
-  MODIFY `id_test` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id_test` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT pour la table `universite`

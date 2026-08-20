@@ -12,7 +12,7 @@
         ),
         #F2F4F7;
 
-    padding: 42px 24px 70px;
+    padding: 42px 24px 110px;
 
     font-family:
         Inter,
@@ -30,7 +30,7 @@
    CONTENEUR PRINCIPAL
    ========================================================= */
 
-.resultat-historique-page > * {
+.resultat-historique-page > *:not(.footer-navigation) {
     width: min(1080px, 100%);
     margin-left: auto;
     margin-right: auto;
@@ -862,6 +862,18 @@
     cursor: pointer;
 }
 
+/* =========================================================
+   Partie Footer
+   ========================================================= */
+.resultat-historique-layout {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.resultat-historique-page {
+    flex: 1;
+}
 
 /* =========================================================
    RESPONSIVE — TABLETTE
@@ -1018,4 +1030,16 @@
         width: 100%;
     }
 
+}
+
+@media (max-width: 768px) {
+    .resultat-historique-page {
+        padding-bottom: 95px;
+    }
+}
+
+@media (max-width: 480px) {
+    .resultat-historique-page {
+        padding-bottom: 90px;
+    }
 }

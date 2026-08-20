@@ -210,4 +210,69 @@ public function obtenirTousLesTestsUtilisateur(
 
     return $statement->fetchAll(PDO::FETCH_ASSOC);
 }
+
+/**
+ * Retourne le numéro chronologique d'un test
+ * pour un utilisateur.
+ *
+ * Le premier test effectué = #1
+ * Le deuxième = #2
+ * etc.
+ *
+ * id_test sert uniquement à départager
+ * deux tests ayant exactement la même date.
+ */
+public function obtenirNumeroTestUtilisateur(
+    int $idTest,
+    int $idUser
+): ?int
+{
+    $sql = "
+        SELECT
+            COUNT(*) + 1 AS numero_test
+        FROM test_riasec
+        WHERE id_user = :id_user
+        AND (
+            date_test < (
+                SELECT date_test
+                FROM test_riasec
+                WHERE id_test = :id_test
+                AND id_user = :id_user_test
+                LIMIT 1
+            )
+            OR (
+                date_test = (
+                    SELECT date_test
+                    FROM test_riasec
+                    WHERE id_test = :id_test_date
+                    AND id_user = :id_user_date
+                    LIMIT 1
+                )
+                AND id_test < :id_test_comparaison
+            )
+        )
+    ";
+
+    $statement = $this->connection->prepare($sql);
+
+    $statement->execute([
+        ":id_user" => $idUser,
+
+        ":id_test" => $idTest,
+        ":id_user_test" => $idUser,
+
+        ":id_test_date" => $idTest,
+        ":id_user_date" => $idUser,
+
+        ":id_test_comparaison" => $idTest
+    ]);
+
+    $resultat = $statement->fetch(PDO::FETCH_ASSOC);
+
+    if (!$resultat) {
+        return null;
+    }
+
+    return (int) $resultat["numero_test"];
+}
 }

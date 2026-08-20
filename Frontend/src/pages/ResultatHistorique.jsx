@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
 import "../styles/ResultatHistorique.css";
+import FooterNavigation from "../components/FooterNavigation";
 
 function ResultatHistorique() {
 
@@ -611,7 +612,7 @@ function ResultatHistorique() {
 
                 <span className="resultat-historique-test-id">
 
-                    Test #{test.id_test}
+                    Test #{test.numero_test}
 
                 </span>
 
@@ -766,6 +767,8 @@ function ResultatHistorique() {
                 </button>
 
             </div>
+
+            <FooterNavigation />
 
 
         </div>

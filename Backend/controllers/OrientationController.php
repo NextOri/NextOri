@@ -285,6 +285,8 @@ public function recupererTestParId(): void
                 $idUser
             );
 
+            
+
         if ($test === null) {
 
             ApiResponse::error(
@@ -294,6 +296,15 @@ public function recupererTestParId(): void
 
             return;
         }
+
+        $numeroTest =
+    $this->orientationService
+        ->obtenirNumeroTestUtilisateur(
+            $idTest,
+            $idUser
+        );
+
+        $test["numero_test"] = $numeroTest;
 
         ApiResponse::success(
             $test,

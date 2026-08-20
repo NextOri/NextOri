@@ -57,6 +57,21 @@ public function obtenirTestParId(
 }
 
 /**
+  * Retourne le numéro du test pour un utilisateur.
+  */
+public function obtenirNumeroTestUtilisateur(
+    int $idTest,
+    int $idUser
+): ?int
+{
+    return $this->testRepository
+                ->obtenirNumeroTestUtilisateur(
+                    $idTest,
+                    $idUser
+                );
+}
+
+/**
  * Retourne tous les tests effectués par un utilisateur.
  */
 public function obtenirTousLesTestsUtilisateur(

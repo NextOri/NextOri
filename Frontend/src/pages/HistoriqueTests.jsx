@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import "../styles/HistoriqueTests.css";
+import FooterNavigation from "../components/FooterNavigation";
 
 function HistoriqueTests() {
 
@@ -161,7 +162,9 @@ function HistoriqueTests() {
 
                 <section className="historique-tests-list">
 
-                    {tests.map((test) => (
+                    {tests.map((test, index) => {
+                        const numeroTest = tests.length - index;
+                        return (
 
                         <article
                             key={test.id_test}
@@ -240,7 +243,7 @@ function HistoriqueTests() {
                             <div className="historique-test-footer">
 
                                 <span>
-                                    Test #{test.id_test}
+                                    Test #{numeroTest}
                                 </span>
 
 
@@ -260,7 +263,8 @@ function HistoriqueTests() {
 
                         </article>
 
-                    ))}
+                    ); 
+                    })}
 
                 </section>
 
@@ -273,6 +277,8 @@ function HistoriqueTests() {
             >
                 ← Retour au profil
             </button>
+
+            <FooterNavigation />
 
         </div>
 

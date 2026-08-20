@@ -4,7 +4,7 @@
 
 .historique-tests-page {
     min-height: 100vh;
-    padding: 50px 7%;
+    padding: 50px 7% 110px;
     background:
         radial-gradient(
             circle at top right,
@@ -498,6 +498,20 @@
 }
 
 
+
+/* =========================================================
+   Partie Footer
+   ========================================================= */
+.historique-tests-layout {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.historique-tests-page {
+    flex: 1;
+}
+
 /* =========================================================
    RESPONSIVE — TABLETTE
    ========================================================= */
@@ -505,7 +519,7 @@
 @media (max-width: 900px) {
 
     .historique-tests-page {
-        padding: 40px 5%;
+        padding: 40px 5% 105px;
     }
 
     .historique-tests-header {
@@ -519,6 +533,8 @@
 }
 
 
+
+
 /* =========================================================
    RESPONSIVE — MOBILE
    ========================================================= */
@@ -526,7 +542,7 @@
 @media (max-width: 600px) {
 
     .historique-tests-page {
-        padding: 28px 18px 40px;
+        padding: 28px 18px 95px;
     }
 
     .historique-tests-header {
@@ -632,4 +648,10 @@
         margin-top: 25px;
     }
 
+}
+
+@media (max-width: 480px) {
+    .historique-tests-page {
+        padding-bottom: 90px;
+    }
 }

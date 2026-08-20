@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import {
@@ -7,7 +7,10 @@ import {
     Globe,
     GraduationCap,
     Calendar,
-    LogOut
+    LogOut,
+    ClipboardList,
+    ArrowRight,
+    BarChart3
 } from "lucide-react";
 
 import "../styles/Profil.css";
@@ -26,6 +29,10 @@ function Profil() {
 
     });
 
+    const [nombreTests, setNombreTests] = useState(0);
+    const [chargementTests, setChargementTests] = useState(true);
+
+
 
 
     const handleLogout = async () => {
@@ -39,6 +46,50 @@ function Profil() {
     }
 
    };
+
+   useEffect(() => {
+
+    const recupererNombreTests = async () => {
+
+        try {
+
+            const response = await fetch(
+                "http://localhost/NextOri/backend/api/routes/historique-tests.php",
+                {
+                    credentials: "include"
+                }
+            );
+
+            const data = await response.json();
+
+            if (data.success) {
+
+                setNombreTests(
+                    Array.isArray(data.data)
+                        ? data.data.length
+                        : 0
+                );
+
+            }
+
+        } catch (error) {
+
+            console.error(
+                "Erreur récupération nombre de tests :",
+                error
+            );
+
+        } finally {
+
+            setChargementTests(false);
+
+        }
+
+    };
+
+    recupererNombreTests();
+
+}, []);
 
     const getInitiales = (nom) => {
 
@@ -230,41 +281,77 @@ function Profil() {
 
         </section>
 
+        <section className="profil-tests-history">
 
+    <div className="profil-tests-history-header">
 
+        <div className="profil-tests-history-title">
 
-        {/* Futur parcours */}
+            <div className="profil-tests-history-icon">
+                <ClipboardList />
+            </div>
 
-        <section className="profile-section future-section">
+            <div>
 
+                <span>
+                    Orientation
+                </span>
 
-            <h2>
-                Mon parcours NextOri
-            </h2>
-
-
-            <div className="future-card">
-
-                Résultats RIASEC
+                <h2>
+                    Mes tests d'orientation
+                </h2>
 
             </div>
 
-
-            <div className="future-card">
-
-                Métiers recommandés
-
-            </div>
+        </div>
 
 
-            <div className="future-card">
+        <div className="profil-tests-history-count">
 
-                Filières et universités
+            <strong>
+                {chargementTests ? "—" : nombreTests}
+            </strong>
 
-            </div>
+            <span>
+                {nombreTests === 1
+                    ? "test effectué"
+                    : "tests effectués"
+                }
+            </span>
+
+        </div>
+
+    </div>
 
 
-        </section>
+    <div className="profil-tests-history-content">
+
+        <div className="profil-tests-history-description">
+
+            <BarChart3 />
+
+            <p>
+                Retrouvez vos résultats, vos scores RIASEC
+                et vos recommandations d'orientation.
+            </p>
+
+        </div>
+
+
+        <button
+            className="profil-tests-history-button"
+            onClick={() => navigate("/historique-tests")}
+        >
+
+            Voir l'historique de mes tests
+
+            <ArrowRight />
+
+        </button>
+
+    </div>
+
+</section>
 
 
 

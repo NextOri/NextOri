@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function Hesitation() {
@@ -12,68 +12,286 @@ function Hesitation() {
     const [questionActuelle, setQuestionActuelle] = useState(0);
     const [reponsesHesitation, setReponsesHesitation] = useState([]);
     const [etapeAnalyse, setEtapeAnalyse] = useState(0);
+    const [analyseTerminee, setAnalyseTerminee] = useState(false);
+
+    useEffect(() => {
+
+    if (etape !== "analyse") {
+        return;
+    }
+
+    const nombreEtapes = 6;
+
+    if (etapeAnalyse >= nombreEtapes - 1) {
+        return;
+    }
+
+    const timer = setTimeout(() => {
+
+        setEtapeAnalyse(
+            (ancienneEtape) => ancienneEtape + 1
+        );
+
+    }, 1800);
+
+    return () => {
+        clearTimeout(timer);
+    };
+
+}, [etape, etapeAnalyse]);
+
+useEffect(() => {
+
+    if (
+        etape !== "analyse" ||
+        etapeAnalyse !== 5
+    ) {
+        return;
+    }
+
+    const timer = setTimeout(() => {
+
+        setEtapeAnalyse(6);
+
+        setAnalyseTerminee(true);
+
+    }, 2500);
+
+    return () => clearTimeout(timer);
+
+}, [etape, etapeAnalyse]);
 
 
     const questionsHesitation = [
     {
-        id: 1,
-        question: "Question 1",
-        reponses: [
-            { id: 1, texte: "Réponse 1" },
-            { id: 2, texte: "Réponse 2" },
-            { id: 3, texte: "Réponse 3" },
-            { id: 4, texte: "Réponse 4" },
-            { id: 5, texte: "Réponse 5" }
-        ]
-    },
+    id: 1,
+
+    question:
+        "Quand tu penses aux options que tu hésites à choisir, qu’est-ce qui t’attire le plus ?",
+
+    reponses: [
+
+        {
+            id: 1,
+            texte:
+                "Le contenu : les activités et ce que je vais réellement faire.",
+            code: "ATTIRANCE_CONTENU"
+        },
+
+        {
+            id: 2,
+            texte:
+                "Le sens : me sentir utile et faire quelque chose qui me correspond.",
+            code: "ATTIRANCE_SENS"
+        },
+
+        {
+            id: 3,
+            texte:
+                "Les possibilités : évolution, débouchés et opportunités.",
+            code: "ATTIRANCE_OPPORTUNITES"
+        },
+
+        {
+            id: 4,
+            texte:
+                "Le cadre : environnement, conditions et façon de travailler.",
+            code: "ATTIRANCE_CADRE"
+        },
+
+        {
+            id: 5,
+            texte:
+                "Le défi : apprendre, progresser et me dépasser.",
+            code: "ATTIRANCE_DEFI"
+        }
+
+    ]
+},
 
     {
-        id: 2,
-        question: "Question 2",
-        reponses: [
-            { id: 1, texte: "Réponse 1" },
-            { id: 2, texte: "Réponse 2" },
-            { id: 3, texte: "Réponse 3" },
-            { id: 4, texte: "Réponse 4" },
-            { id: 5, texte: "Réponse 5" }
-        ]
-    },
+    id: 2,
+
+    question:
+        "Dans quelle situation te sens-tu généralement le plus à l’aise ?",
+
+    reponses: [
+
+        {
+            id: 1,
+            texte:
+                "Résoudre : analyser un problème et trouver une solution.",
+            code: "FORCE_ANALYSER"
+        },
+
+        {
+            id: 2,
+            texte:
+                "Créer : imaginer quelque chose et proposer des idées.",
+            code: "FORCE_CREER"
+        },
+
+        {
+            id: 3,
+            texte:
+                "Aider : écouter, expliquer ou accompagner quelqu’un.",
+            code: "FORCE_AIDER"
+        },
+
+        {
+            id: 4,
+            texte:
+                "Organiser : structurer, planifier et gérer les choses.",
+            code: "FORCE_ORGANISER"
+        },
+
+        {
+            id: 5,
+            texte:
+                "Agir : prendre des initiatives et faire avancer un projet.",
+            code: "FORCE_AGIR"
+        }
+
+    ]
+},
 
     {
-        id: 3,
-        question: "Question 3",
-        reponses: [
-            { id: 1, texte: "Réponse 1" },
-            { id: 2, texte: "Réponse 2" },
-            { id: 3, texte: "Réponse 3" },
-            { id: 4, texte: "Réponse 4" },
-            { id: 5, texte: "Réponse 5" }
-        ]
-    },
+    id: 3,
+
+    question:
+        "Qu’est-ce qui rend ton choix le plus difficile aujourd’hui ?",
+
+    reponses: [
+
+        {
+            id: 1,
+            texte:
+                "J’ai peur de me tromper.",
+            code: "BLOCAGE_ERREUR"
+        },
+
+        {
+            id: 2,
+            texte:
+                "J’ai plusieurs options qui m’intéressent réellement.",
+            code: "BLOCAGE_OPTIONS"
+        },
+
+        {
+            id: 3,
+            texte:
+                "Je manque d’informations pour comparer.",
+            code: "BLOCAGE_INFORMATION"
+        },
+
+        {
+            id: 4,
+            texte:
+                "Je ne suis pas sûr(e) d’avoir le niveau ou les capacités nécessaires.",
+            code: "BLOCAGE_CAPACITES"
+        },
+
+        {
+            id: 5,
+            texte:
+                "Mon entourage influence beaucoup mon choix.",
+            code: "BLOCAGE_ENTOURAGE"
+        }
+
+    ]
+},
 
     {
-        id: 4,
-        question: "Question 4",
-        reponses: [
-            { id: 1, texte: "Réponse 1" },
-            { id: 2, texte: "Réponse 2" },
-            { id: 3, texte: "Réponse 3" },
-            { id: 4, texte: "Réponse 4" },
-            { id: 5, texte: "Réponse 5" }
-        ]
-    },
+    id: 4,
+
+    question:
+        "Si tu devais aujourd’hui donner le plus de poids à un seul critère, lequel serait-ce ?",
+
+    reponses: [
+
+        {
+            id: 1,
+            texte:
+                "Mon intérêt personnel.",
+            code: "CRITERE_INTERET"
+        },
+
+        {
+            id: 2,
+            texte:
+                "Mes capacités et mes points forts.",
+            code: "CRITERE_CAPACITES"
+        },
+
+        {
+            id: 3,
+            texte:
+                "Les débouchés professionnels.",
+            code: "CRITERE_DEBOUCHES"
+        },
+
+        {
+            id: 4,
+            texte:
+                "Les conditions de travail.",
+            code: "CRITERE_CONDITIONS"
+        },
+
+        {
+            id: 5,
+            texte:
+                "La stabilité et la sécurité.",
+            code: "CRITERE_STABILITE"
+        }
+
+    ]
+},
 
     {
-        id: 5,
-        question: "Question 5",
-        reponses: [
-            { id: 1, texte: "Réponse 1" },
-            { id: 2, texte: "Réponse 2" },
-            { id: 3, texte: "Réponse 3" },
-            { id: 4, texte: "Réponse 4" },
-            { id: 5, texte: "Réponse 5" }
-        ]
-    }
+    id: 5,
+
+    question:
+        "Qu’est-ce qui t’aiderait le plus à avancer vers une décision ?",
+
+    reponses: [
+
+        {
+            id: 1,
+            texte:
+                "Mieux comprendre les différences entre mes options.",
+            code: "BESOIN_COMPARAISON"
+        },
+
+        {
+            id: 2,
+            texte:
+                "Vérifier laquelle correspond le mieux à mes forces.",
+            code: "BESOIN_COMPATIBILITE"
+        },
+
+        {
+            id: 3,
+            texte:
+                "Découvrir la réalité du métier ou de la filière.",
+            code: "BESOIN_REALITE"
+        },
+
+        {
+            id: 4,
+            texte:
+                "Vérifier les débouchés et les possibilités d’évolution.",
+            code: "BESOIN_DEBOUCHES"
+        },
+
+        {
+            id: 5,
+            texte:
+                "Me rassurer avant de faire mon choix.",
+            code: "BESOIN_RASSURANCE"
+        }
+
+    ]
+}
 ];
 
     /*
@@ -494,12 +712,13 @@ if (etape === "questions") {
                     );
 
                 return [
-                    ...nouvelles,
-                    {
-                        id_question: question.id,
-                        id_reponse: reponse.id
-                    }
-                ];
+                     ...nouvelles,
+         {
+             id_question: question.id,
+             id_reponse: reponse.id,
+             code: reponse.code
+         }
+        ];
 
             });
 
@@ -631,6 +850,40 @@ if (etape === "analyse") {
 
                 </div>
 
+                {analyseTerminee && (
+
+    <div className="hesitation-analyse-finished">
+
+        <h2>
+            Analyse terminée
+        </h2>
+
+        <p>
+            J'ai terminé l'analyse de ta situation.
+        </p>
+
+        <button
+    type="button"
+    onClick={() => {
+
+    navigate("/resultat-hesitation", {
+        state: {
+            typeChoix,
+            metiersSelectionnes,
+            filieresSelectionnees,
+            reponsesHesitation
+        }
+    });
+
+}}
+>
+    Voir mon analyse →
+</button>
+
+    </div>
+
+)}
+
 
                 <div className="hesitation-analyse-loader">
 
@@ -649,6 +902,8 @@ if (etape === "analyse") {
 }
 
      
+
+
     /*
      * Petit routeur interne du module.
      */

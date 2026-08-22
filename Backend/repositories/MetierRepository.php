@@ -92,4 +92,69 @@ public function recupererMetiersAccessiblesAuTest(): array
 
     return $statement->fetchAll(PDO::FETCH_ASSOC);
 }
+
+
+    /**
+     * Récupérer un métier avec ses critères d'hésitation.
+     */
+    public function recupererMetierAvecCriteres(int $idMetier): ?array
+    {
+        $sql = "
+            SELECT
+                m.id_metier,
+                m.nom,
+                m.description,
+                m.presentation,
+                m.competences,
+                m.secteur,
+                m.niveau_etude,
+                m.salaire_min,
+                m.salaire_max,
+                m.profil_riasec,
+                m.tendance,
+                m.accessible_test
+            FROM metier m
+            WHERE m.id_metier = :id_metier
+            LIMIT 1
+        ";
+
+        $statement = $this->connection->prepare($sql);
+
+        $statement->execute([
+            ":id_metier" => $idMetier
+        ]);
+
+        $metier = $statement->fetch(PDO::FETCH_ASSOC);
+
+        if (!$metier) {
+            return null;
+        }
+
+        $sqlCriteres = "
+            SELECT
+                hc.id_critere,
+                hc.code,
+                hc.nom,
+                hc.categorie,
+                mc.valeur
+            FROM metier_critere mc
+            INNER JOIN hesitation_critere hc
+                ON hc.id_critere = mc.id_critere
+            WHERE mc.id_metier = :id_metier
+              AND hc.actif = 1
+            ORDER BY hc.id_critere ASC
+        ";
+
+        $statementCriteres =
+            $this->connection->prepare($sqlCriteres);
+
+        $statementCriteres->execute([
+            ":id_metier" => $idMetier
+        ]);
+
+        $metier["criteres"] =
+            $statementCriteres->fetchAll(PDO::FETCH_ASSOC);
+
+        return $metier;
+    }
 }

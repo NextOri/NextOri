@@ -21,6 +21,7 @@ import HistoriqueTests from "./pages/HistoriqueTests";
 import ResultatHistorique from "./pages/ResultatHistorique";
 import Hesitation from "./pages/Hesitation";
 import ResultatHesitation from "./pages/ResultatHesitation";
+import DepartagerHesitation from "./pages/DepartagerHesitation";
 
 
 function App() {
@@ -69,6 +70,8 @@ function App() {
     <Route path="/hesitation" element={<Hesitation />} />
 
     <Route path="/resultat-hesitation" element={<ResultatHesitation />} />
+
+    <Route path="/hesitation/departager" element={<DepartagerHesitation />} />
 
     </Route>
 

@@ -1,0 +1,286 @@
+id_filiere;nom
+1;Informatique
+2;Génie Civil
+3;Médecine
+4;Droit
+5;Gestion
+7;Marketing
+8;Électronique
+9;Génie Logiciel
+10;Réseaux et Télécommunications
+11;Cybersécurité
+12;Data Science
+13;Intelligence Artificielle
+14;Systèmes et Réseaux
+15;Informatique de Gestion
+16;Systèmes d’Information
+17;Statistique et Informatique Décisionnelle
+18;Pharmacie
+19;Odontologie
+20;Sciences infirmières
+21;Sage-femme
+22;Biologie médicale
+23;Santé publique
+24;Imagerie médicale
+25;Nutrition et Diététique
+26;Kinésithérapie
+28;Systèmes Embarqués
+29;Mathématiques-Physique-Informatique (MPI)
+31;Médecine vétérinaire
+32;Psychologie
+33;Génie biomédical
+64;Management
+67;Gestion d’entreprise
+68;Gestion des ressources humaines
+69;Génie logistique
+70;Management des affaires internationales
+71;Marketing et communication
+72;Qualité, Hygiène, Sécurité et Environnement (QHSE)
+73;Droit des affaires
+74;Administration publique et territoriale
+75;Management de projet
+76;Master of Business Administration (MBA)
+77;Banque, Assurance, Finance
+78;Transport logistique
+79;Commerce international
+80;Management des organisations
+81;Électrotechnique
+82;Géomètre Topographe
+83;Électromécanique et systèmes automatisés
+84;Géotechnique
+85;Hydraulique et assainissement
+86;Énergie renouvelable
+87;Management de l’environnement et stratégie de développement durable
+88;Informatique industrielle
+89;Génie biologique
+90;Génie des industries chimiques
+91;Génie des industries agroalimentaires
+92;Management des entreprises
+93;Tourisme, Hôtellerie et Langues
+94;Langue appliquée aux affaires
+95;Gestion hôtelière et restauration
+96;Interprétariat de conférence
+97;Audit et Contrôle de Gestion
+98;Administration Économique et Sociale (AES)
+99;Économie et Gestion
+100;Méthodes Informatiques Appliquées à la Gestion des Entreprises (MIAGE)
+101;Sciences Politiques
+102;Gestion de Projets de Développement
+103;Gouvernance Locale et Développement Territorial
+104;Gouvernance Publique et Développement Local
+105;Comptabilité
+106;Comptabilité et Gestion
+107;Réseaux Informatiques
+108;Actuariat
+109;Administration et Gestion des Entreprises
+110;Agronomie
+111;Journalisme
+112;Administration des Affaires
+113;Architecture
+114;Mathématiques Appliquées
+115;Infographie et Multimédia
+116;Maintenance Informatique
+117;Fiscalité
+118;Ingénierie Financière
+119;Management des NTIC
+120;Passation des Marchés
+121;Communication
+122;Créativité Événementielle
+123;Vente et Relation Client
+124;Stratégie de l’Entreprise
+125;Sciences Politiques et Relations Internationales
+126;Sociologie des Organisations
+127;Management appliqué
+128;Droit public
+129;Droit privé
+130;Communication et Leadership
+131;Microfinance
+132;Management de la Distribution Automobile
+133;Maintenance industrielle
+134;Graphisme
+135;Audiovisuel
+136;Management des Systèmes d'Information
+137;Réseaux et Systèmes de Sécurité
+138;Assistanat de Direction
+139;Marketing digital
+140;Management Supply Chain
+141;Systèmes économiques et de gestion
+142;Sciences et Technologies
+143;Internet et Web
+144;Luxury and Hospitality Management
+145;Sciences juridiques
+146;Sciences agroalimentaires
+147;Agronomie et Production végétale
+148;Sciences de l'Information et de la Communication
+149;Études comptables et financières
+150;Droit économique et des affaires
+151;Sciences de gestion
+152;Physique-Chimie
+153;Mathématiques
+154;Langues, Traduction et Interprétariat
+155;Sociologie
+156;Entrepreneuriat
+157;Journalisme et Communication
+158;Génie informatique
+159;Droit des affaires et Fiscalité
+160;Ingénierie immobilière et Gestion foncière
+161;Biologie
+162;Télécommunications
+163;Marketing Management
+164;Marketing Finance
+165;Systèmes et Technologies de l'Information
+166;Logistique et Transit
+167;Professeur de Mathématiques
+168;Professeur de Physique-Chimie
+169;Professeur de Sciences de la Vie et de la Terre
+170;Professeur de Français
+171;Professeur de Géographie
+172;Professeur d'Anglais
+173;Professeur d'Espagnol
+174;Professeur de Philosophie
+175;Professeur d'Éducation Physique et Sportive
+176;Eau, Environnement et Assainissement
+177;Travaux Publics
+178;Marketing Vente
+179;Sciences économiques
+180;Langues
+181;Géographie
+182;Histoire
+183;Philosophie
+184;Physique
+185;Chimie
+186;Sciences de la Vie et de la Terre
+187;Anthropologie
+188;Lettres modernes
+189;Littérature
+190;Métiers des Arts
+191;Cinéma
+192;Socio-anthropologie
+193;Élevage
+194;Aquaculture
+195;Enseignement
+196;Formation
+197;STAPS
+198;Musique
+199;Production animale
+200;Physique appliquée
+201;Arts dramatiques
+202;Génie électrique
+203;Orthoptie
+204;Optique lunetterie
+205;Géomatique
+206;Géo-mesures et Aménagement
+207;Hydrogéologie
+208;Hydrosciences
+209;Environnement
+210;Big Data
+211;Génie mécanique
+212;Génie de données et Technologies Omics
+213;Automatisme industriel
+214;Analyses biologiques
+215;Technologies de l'eau et de l'environnement
+216;Modélisation et traitement informatique des données
+217;Gestion et exploitation durable des ressources forestières et agricoles locales
+218;Mécanique
+219;Thermodynamique
+220;Économie internationale
+221;Politiques publiques et planification du développement
+222;Finance d'entreprise
+223;Entrepreneuriat et Développement (ENDEV)
+224;Langues étrangères appliquées (LEA)
+225;Criminologie
+226;Sciences paramédicales
+227;Santé communautaire
+228;Management juridique environnemental et foncier
+229;Commerce électronique et Cybersécurité
+230;Santé-Environnement
+231;Conseil agricole
+232;Eaux et Forêts
+233;Développement Mobile
+234;Sciences Informatiques et Mathématiques de la Cybersécurité (SIMAC)
+235;Mathématiques Appliquées et Informatique (MAI)
+236;Multimédia Internet et Communication (MIC)
+237;Robotique
+238;Anglais
+239;Sciences de l'éducation
+240;Communication d'entreprise
+241;Agroécologie
+242;Sciences halieutiques
+243;Transformation des agroressources
+244;Gestion de la qualité et sécurité des aliments
+245;Finance rurale
+246;Management des entreprises agricoles et agroalimentaires
+247;Restauration et gastronomie
+248;Production touristique et management culturel
+249;Droit de l'environnement et du foncier
+250;Machinisme agricole
+251;Énergies renouvelables appliquées à l'agriculture
+252;Hydrologie et gestion de l'eau
+253;Amélioration des plantes
+254;Protection des cultures et phytiatrie
+255;Alimentation et nutrition animale
+256;Hydraulique agricole
+257;Aménagement hydro-agricole et infrastructure rurale
+258;Agroforesterie
+259;Gestion de la faune et des aires protégées
+260;Politique agricole
+261;Sociologie des organisations rurales
+262;Agrobusiness
+263;Marketing des produits agricoles
+264;Gestion d’exploitation agricole
+265;Cycle Ingénieur Statisticien Économiste (ISE)
+266;Cycle Analyste Statisticien
+268;Génie industriel
+269;Génie aéronautique
+270;Aérospatial
+271;Diplôme d'État de Docteur Vétérinaire
+272;Biochimie
+273;Pharmacie vétérinaire
+274;Qualité des aliments de l'homme
+275;Gestion et surveillance sanitaire de la faune sauvage
+277;Gestion de l’environnement familial et artisanat textile
+278;Archivistique
+279;Bibliothéconomie
+280;Documentation
+281;Gestion des PME
+282;Commande numérique
+283;Maintenance des équipements biomédicaux
+284;Automobile
+285;Domotique
+286;Froid et climatisation
+287;Développement web
+288;Entrepreneuriat agricole
+289;Art numérique
+290;Gestion administrative
+291;Contact humain
+292;Tourisme et loisirs
+293;Gestion immobilière
+294;Management du sport
+295;Diagnostic et électronique automobile
+296;Maintenance et réparation automobile
+297;Internet des objets
+298;Agriculture
+299;Élevage et aquaculture
+300;Agroéquipements et eau
+301;Commercialisation agroalimentaire et logistique
+302;Tourisme et services
+303;Production végétale
+304;Gestion d’exploitation agroforestière
+305;Gestion d’unité agroalimentaire
+306;Métiers de l’eau
+307;Énergie renouvelable et production durable
+308;Mines et énergie
+309;Agro-alimentaire et eau
+310;Éco-construction
+311;Efficacité énergétique
+312;Construction métallique
+313;Développement territorial
+314;Artisanat
+315;Techniques minières et géologie
+316;Énergie solaire
+317;Agriculture biologique
+318;Écotourisme
+319;Hôtellerie
+320;Droit du numérique
+321;Droit bancaire et financier
+322;Gestion de l'indemnisation

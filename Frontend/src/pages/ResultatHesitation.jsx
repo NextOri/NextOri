@@ -1,392 +1,10 @@
 import { useLocation, useNavigate } from "react-router-dom";
+import { Sparkles } from "lucide-react"
+import { ArrowRight } from "lucide-react";
+import {genererAnalyseHesitation} from "../utils/moteurHesitation";
 
 
-const genererAnalyse = (
-    reponses,
-    typeChoix,
-    options
-) => {
 
-    const codes = reponses.map(
-        (reponse) => reponse.code
-    );
-
-
-    /*
-     * ============================
-     * POINTS FORTS
-     * ============================
-     */
-
-    const pointsForts = [];
-
-
-    const forces = {
-
-        FORCE_ANALYSER: {
-            titre: "Esprit d'analyse",
-            texte:
-                "Tu sembles à l'aise pour comprendre une situation, " +
-                "examiner les différentes possibilités et rechercher " +
-                "une solution avant d'agir."
-        },
-
-        FORCE_CREER: {
-            titre: "Créativité",
-            texte:
-                "Tu sembles particulièrement à l'aise lorsque tu peux " +
-                "imaginer, créer et proposer tes propres idées."
-        },
-
-        FORCE_AIDER: {
-            titre: "Sens du contact",
-            texte:
-                "Tu sembles trouver naturellement ta place dans les " +
-                "situations où il faut écouter, expliquer ou accompagner."
-        },
-
-        FORCE_ORGANISER: {
-            titre: "Organisation",
-            texte:
-                "Tu sembles apprécier les situations qui demandent " +
-                "de structurer, planifier et garder une vision claire."
-        },
-
-        FORCE_AGIR: {
-            titre: "Initiative",
-            texte:
-                "Tu sembles être à l'aise lorsqu'il faut prendre des " +
-                "initiatives et faire avancer concrètement un projet."
-        }
-
-    };
-
-
-    codes.forEach((code) => {
-
-        if (forces[code]) {
-
-            pointsForts.push(
-                forces[code]
-            );
-
-        }
-
-    });
-
-
-    /*
-     * ============================
-     * BLOCAGE PRINCIPAL
-     * ============================
-     */
-
-    const blocages = {
-
-        BLOCAGE_ERREUR: {
-            titre: "La peur de te tromper",
-            texte:
-                "Tu sembles surtout chercher à éviter une mauvaise décision. " +
-                "Cette volonté de bien choisir peut rendre la comparaison " +
-                "plus difficile."
-        },
-
-        BLOCAGE_OPTIONS: {
-            titre: "Plusieurs choix te correspondent",
-            texte:
-                "Ton hésitation ne vient pas forcément d'un manque d'intérêt. " +
-                "Plusieurs possibilités semblent réellement t'attirer."
-        },
-
-        BLOCAGE_INFORMATION: {
-            titre: "Un manque d'informations",
-            texte:
-                "Tu sembles avoir besoin d'informations plus concrètes " +
-                "pour distinguer clairement les différentes possibilités."
-        },
-
-        BLOCAGE_CAPACITES: {
-            titre: "Un doute sur tes capacités",
-            texte:
-                "Une partie de ton hésitation semble liée à la question " +
-                "de savoir si tu possèdes le niveau ou les capacités nécessaires."
-        },
-
-        BLOCAGE_ENTOURAGE: {
-            titre: "L'influence de ton entourage",
-            texte:
-                "Les attentes ou opinions de ton entourage semblent avoir " +
-                "une influence importante sur ta décision."
-        }
-
-    };
-
-
-    const blocageCode =
-        codes.find(
-            (code) => blocages[code]
-        );
-
-
-    const blocage =
-        blocageCode
-            ? blocages[blocageCode]
-            : {
-                titre: "Une décision encore ouverte",
-                texte:
-                    "Ton hésitation semble surtout venir du fait que " +
-                    "plusieurs éléments doivent encore être mis en perspective."
-            };
-
-
-    /*
-     * ============================
-     * CRITÈRE DE DÉCISION
-     * ============================
-     */
-
-    const criteres = {
-
-        CRITERE_INTERET: {
-            titre: "Ton intérêt personnel",
-            texte:
-                "Ce qui t'intéresse réellement semble être un élément " +
-                "central dans ta décision."
-        },
-
-        CRITERE_CAPACITES: {
-            titre: "Tes capacités",
-            texte:
-                "Tu accordes une importance particulière à la cohérence " +
-                "entre tes capacités et le choix que tu feras."
-        },
-
-        CRITERE_DEBOUCHES: {
-            titre: "Les débouchés",
-            texte:
-                "Les possibilités professionnelles et l'évolution future " +
-                "semblent peser fortement dans ta décision."
-        },
-
-        CRITERE_CONDITIONS: {
-            titre: "Les conditions de travail",
-            texte:
-                "Le cadre dans lequel tu travailleras semble être un critère " +
-                "important pour toi."
-        },
-
-        CRITERE_STABILITE: {
-            titre: "La stabilité",
-            texte:
-                "La sécurité et la stabilité semblent occuper une place " +
-                "importante dans ton choix."
-        }
-
-    };
-
-
-    const critereCode =
-        codes.find(
-            (code) => criteres[code]
-        );
-
-
-    const critere =
-        critereCode
-            ? criteres[critereCode]
-            : null;
-
-
-    /*
-     * ============================
-     * BESOIN POUR AVANCER
-     * ============================
-     */
-
-    const besoins = {
-
-        BESOIN_COMPARAISON: {
-            titre: "Comparer tes options",
-            texte:
-                "Tu gagnerais probablement à comparer concrètement " +
-                "les différentes possibilités plutôt qu'à essayer " +
-                "de choisir immédiatement."
-        },
-
-        BESOIN_COMPATIBILITE: {
-            titre: "Vérifier la compatibilité avec tes forces",
-            texte:
-                "Mettre tes points forts en relation avec chacune de " +
-                "tes options pourrait t'aider à réduire ton hésitation."
-        },
-
-        BESOIN_REALITE: {
-            titre: "Découvrir la réalité",
-            texte:
-                "Tu sembles avoir besoin de mieux comprendre ce que " +
-                "chaque métier ou filière implique réellement."
-        },
-
-        BESOIN_DEBOUCHES: {
-            titre: "Vérifier les perspectives",
-            texte:
-                "Les débouchés et les possibilités d'évolution pourraient " +
-                "t'aider à départager tes différentes options."
-        },
-
-        BESOIN_RASSURANCE: {
-            titre: "Te rassurer avant de décider",
-            texte:
-                "Tu sembles avoir besoin d'une vision suffisamment claire " +
-                "pour pouvoir prendre ta décision avec davantage de confiance."
-        }
-
-    };
-
-
-    const besoinCode =
-        codes.find(
-            (code) => besoins[code]
-        );
-
-
-    const besoin =
-        besoinCode
-            ? besoins[besoinCode]
-            : null;
-
-
-    /*
-     * ============================
-     * SYNTHÈSE
-     * ============================
-     */
-
-    const nombreOptions =
-        Array.isArray(options)
-            ? options.length
-            : 0;
-
-
-    const typeTexte =
-        typeChoix === "metier"
-            ? "métiers"
-            : "filières";
-
-
-    let synthese =
-        `Tu hésites actuellement entre ${nombreOptions} ${typeTexte}. `;
-
-
-    if (blocage?.titre) {
-
-        synthese +=
-            `Ton hésitation semble surtout liée à ${blocage.titre.toLowerCase()}. `;
-
-    }
-
-
-    if (critere?.titre) {
-
-        synthese +=
-            `Dans ta décision, ${critere.titre.toLowerCase()} semble particulièrement important. `;
-
-    }
-
-
-    /*
-     * ============================
-     * CONSEILS
-     * ============================
-     */
-
-    const conseils = [];
-
-
-    if (besoin) {
-
-        conseils.push({
-            numero: "01",
-            titre: besoin.titre,
-            texte: besoin.texte
-        });
-
-    }
-
-
-    if (
-        blocageCode === "BLOCAGE_INFORMATION" ||
-        besoinCode === "BESOIN_REALITE"
-    ) {
-
-        conseils.push({
-            numero: "02",
-            titre: "Explore les informations concrètes",
-            texte:
-                `Consulte le catalogue des ${typeTexte} pour comparer ` +
-                "leurs caractéristiques et mieux comprendre leurs différences."
-        });
-
-    } else {
-
-        conseils.push({
-            numero: "02",
-            titre: "Compare tes priorités",
-            texte:
-                "Pour chaque option, demande-toi ce qu'elle t'apporte " +
-                "et ce qui correspond réellement à tes priorités actuelles."
-        });
-
-    }
-
-
-    if (
-        critereCode === "CRITERE_DEBOUCHES" ||
-        besoinCode === "BESOIN_DEBOUCHES"
-    ) {
-
-        conseils.push({
-            numero: "03",
-            titre: "Regarde les perspectives",
-            texte:
-                "Compare les débouchés et les possibilités d'évolution " +
-                "avant de prendre ta décision."
-        });
-
-    } else {
-
-        conseils.push({
-            numero: "03",
-            titre: "Passe de la réflexion à l'exploration",
-            texte:
-                "Utilise maintenant les informations concrètes disponibles " +
-                "pour confronter tes premières impressions à la réalité."
-        });
-
-    }
-
-
-    return {
-
-        pointsForts,
-
-        blocage,
-
-        critere,
-
-        besoin,
-
-        synthese,
-
-        conseils,
-
-        options,
-
-        typeChoix
-
-    };
-
-};
 
 function ResultatHesitation() {
 
@@ -400,16 +18,24 @@ function ResultatHesitation() {
         reponsesHesitation = []
     } = location.state || {};
 
-    const options =
+    console.log("RESULTAT :", {
+    typeChoix,
+    metiersSelectionnes,
+    filieresSelectionnees,
+    reponsesHesitation
+});
+
+   const options =
     typeChoix === "metier"
         ? metiersSelectionnes
         : filieresSelectionnees;
 
-const analyse = genererAnalyse(
-    reponsesHesitation,
+const analyse = genererAnalyseHesitation({
     typeChoix,
-    options
-);
+    metiersSelectionnes,
+    filieresSelectionnees,
+    reponsesHesitation
+});
 
     if (!typeChoix) {
 
@@ -440,51 +66,541 @@ const analyse = genererAnalyse(
             
 
     return (
+    <div className="resultat-hesitation-page">
+
+        {/* =====================================================
+            HERO
+        ===================================================== */}
+
+        <header className="resultat-hesitation-hero">
+
+            <div className="resultat-hesitation-hero-badge">
+                <span className="resultat-hesitation-ai-dot"></span>
+                Analyse personnalisée NextOri
+            </div>
+
+            <p className="resultat-hesitation-eyebrow">
+                J'HÉSITE · RESTITUTION
+            </p>
+
+            <h1>
+                Voici ce que ton hésitation
+                <span> semble révéler.</span>
+            </h1>
+
+            <p className="resultat-hesitation-hero-description">
+                À partir de tes choix et de tes réponses, NextOri
+                a identifié plusieurs éléments qui peuvent t'aider
+                à comprendre ta décision.
+            </p>
+
+        </header>
+
+
+        {/* =====================================================
+            CHOIX ANALYSÉS
+        ===================================================== */}
+
+        <section className="resultat-hesitation-section resultat-hesitation-options-section">
+
+            <div className="resultat-hesitation-section-heading">
+
+                <span className="resultat-hesitation-section-number">
+                    01
+                </span>
+
+                <div>
+                    <p className="resultat-hesitation-section-label">
+                        TON HÉSITATION
+                    </p>
+
+                    <h2>
+                        Les options que tu compares
+                    </h2>
+                </div>
+
+            </div>
+
+
+            <div className="resultat-hesitation-options">
+
+                {analyse.options.map((option) => (
+
+                    <div
+                        className="resultat-hesitation-option"
+                        key={option.id}
+                    >
+
+                        <span className="resultat-hesitation-option-index">
+                            {String(
+                                analyse.options.indexOf(option) + 1
+                            ).padStart(2, "0")}
+                        </span>
+
+                        <strong>
+                            {option.nom}
+                        </strong>
+
+                    </div>
+
+                ))}
+
+            </div>
+
+        </section>
+
+
+        {/* =====================================================
+            SYNTHÈSE PRINCIPALE
+        ===================================================== */}
+
+        <section className="resultat-hesitation-section">
+
+            <div className="resultat-hesitation-section-heading">
+
+                <span className="resultat-hesitation-section-number">
+                    02
+                </span>
+
+                <div>
+                    <p className="resultat-hesitation-section-label">
+                        LECTURE DE TA SITUATION
+                    </p>
+
+                    <h2>
+                        Ce que ton hésitation semble indiquer
+                    </h2>
+                </div>
+
+            </div>
+
+
+            <article className="resultat-hesitation-synthesis-card">
+
+                <div className="resultat-hesitation-synthesis-mark">
+    <Sparkles size={24} strokeWidth={1.8} />
+</div>
+
+                <div>
+
+                    <p>
+                        {analyse.synthese}
+                    </p>
+
+                </div>
+
+            </article>
+
+        </section>
+
+
+        {/* =====================================================
+            SIGNAUX PRINCIPAUX
+        ===================================================== */}
+
+        <section className="resultat-hesitation-section">
+
+            <div className="resultat-hesitation-section-heading">
+
+                <span className="resultat-hesitation-section-number">
+                    03
+                </span>
+
+                <div>
+                    <p className="resultat-hesitation-section-label">
+                        LES SIGNAUX QUI RESSORTENT
+                    </p>
+
+                    <h2>
+                        Plusieurs éléments méritent ton attention
+                    </h2>
+                </div>
+
+            </div>
+
+
+            <div className="resultat-hesitation-signals">
+
+
+                {/* Attirance */}
+
+                {analyse.attirance && (
+
+                    <article className="resultat-hesitation-signal-card">
+
+                        <span className="resultat-hesitation-signal-tag">
+                            Ce qui t'attire
+                        </span>
+
+                        <h3>
+                            {analyse.attirance.titre}
+                        </h3>
+
+                        <p>
+                            {analyse.attirance.description}
+                        </p>
+
+                    </article>
+
+                )}
+
+
+                {/* Force */}
+
+                {analyse.pointsForts?.length > 0 && (
+
+                    <article className="resultat-hesitation-signal-card">
+
+                        <span className="resultat-hesitation-signal-tag">
+                            Un point fort
+                        </span>
+
+                        <h3>
+                            {analyse.pointsForts[0].titre}
+                        </h3>
+
+                        <p>
+                            {analyse.pointsForts[0].description}
+                        </p>
+
+                    </article>
+
+                )}
+
+
+                {/* Critère */}
+
+                {analyse.critere && (
+
+                    <article className="resultat-hesitation-signal-card">
+
+                        <span className="resultat-hesitation-signal-tag">
+                            Ton critère important
+                        </span>
+
+                        <h3>
+                            {analyse.critere.titre}
+                        </h3>
+
+                        <p>
+                            {analyse.critere.description}
+                        </p>
+
+                    </article>
+
+                )}
+
+            </div>
+
+        </section>
+
+
+        {/* =====================================================
+            POINT DE VIGILANCE
+        ===================================================== */}
+
+       <section className="resultat-hesitation-section">
+
+    <div className="resultat-hesitation-section-heading">
+
+        <span className="resultat-hesitation-section-number">
+            04
+        </span>
+
+        <div>
+            <p className="resultat-hesitation-section-label">
+                POINT DE VIGILANCE
+            </p>
+
+            <h2>
+                Ce qui peut compliquer ta décision
+            </h2>
+        </div>
+
+    </div>
+
+
+    <article className="resultat-hesitation-warning">
+
+        <div className="resultat-hesitation-warning-icon">
+            !
+        </div>
+
 
         <div>
 
-            <h1>
-                Résultat de ton analyse
-            </h1>
+            <h3>
+    {analyse.blocage
+        ? analyse.blocage.titre
+        : "Un point reste encore à éclaircir"
+    }
+</h3>
 
-            <p>
-                Type :{" "}
-                {typeChoix === "metier"
-                    ? "Métiers"
-                    : "Filières"
-                }
-            </p>
-
-
-            <h2>
-                Tes choix
-            </h2>
-
-            {options.map((option) => (
-
-                <p key={option.id}>
-                    {option.nom}
-                </p>
-
-            ))}
-
-
-            <h2>
-                Tes réponses
-            </h2>
-
-            {reponsesHesitation.map((reponse) => (
-
-                <p key={reponse.id_question}>
-                    Question {reponse.id_question} :
-                    réponse {reponse.id_reponse}
-                </p>
-
-            ))}
+<p>
+    {analyse.blocage
+        ? analyse.blocage.description
+        : "Tes réponses ne font pas ressortir de difficulté dominante dans ta décision. " +
+          "Cela peut simplement signifier que plusieurs éléments restent encore à mettre en perspective."
+    }
+</p>
 
         </div>
 
-    );
+    </article>
+
+</section>
+
+
+        {/* =====================================================
+            CRITÈRE + BESOIN
+        ===================================================== */}
+
+        <section className="resultat-hesitation-section">
+
+            <div className="resultat-hesitation-section-heading">
+
+                <span className="resultat-hesitation-section-number">
+                    05
+                </span>
+
+                <div>
+                    <p className="resultat-hesitation-section-label">
+                        POUR DÉCIDER
+                    </p>
+
+                    <h2>
+                        Ce qui pourrait t'aider maintenant
+                    </h2>
+                </div>
+
+            </div>
+
+
+            <div className="resultat-hesitation-decision-grid">
+
+
+                {analyse.critere && (
+
+                    <article className="resultat-hesitation-decision-card">
+
+                        <span>
+                            PRIORITÉ
+                        </span>
+
+                        <h3>
+                            {analyse.critere.titre}
+                        </h3>
+
+                        <p>
+                            {analyse.critere.description}
+                        </p>
+
+                    </article>
+
+                )}
+
+
+                {analyse.besoin && (
+
+                    <article className="resultat-hesitation-decision-card resultat-hesitation-decision-card-highlight">
+
+                        <span>
+                            PROCHAINE ACTION
+                        </span>
+
+                        <h3>
+                            {analyse.besoin.titre}
+                        </h3>
+
+                        <p>
+                            {analyse.besoin.description}
+                        </p>
+
+                    </article>
+
+                )}
+
+            </div>
+
+        </section>
+
+
+        {/* =====================================================
+            CONCLUSION
+        ===================================================== */}
+
+        <section className="resultat-hesitation-section">
+
+            <article className="resultat-hesitation-conclusion">
+
+                <p className="resultat-hesitation-conclusion-label">
+                    CE QUE NEXTORI RETIENT
+                </p>
+
+                <h2>
+                    La prochaine étape n'est pas forcément
+                    de trouver le choix parfait.
+                </h2>
+
+                <p>
+                    {analyse.conclusion}
+                </p>
+
+            </article>
+
+        </section>
+
+
+        {/* =====================================================
+            CONSEILS
+        ===================================================== */}
+
+        <section className="resultat-hesitation-section">
+
+            <div className="resultat-hesitation-section-heading">
+
+                <span className="resultat-hesitation-section-number">
+                    06
+                </span>
+
+                <div>
+                    <p className="resultat-hesitation-section-label">
+                        POUR AVANCER
+                    </p>
+
+                    <h2>
+                        Trois pistes concrètes
+                    </h2>
+                </div>
+
+            </div>
+
+
+            <div className="resultat-hesitation-advice-list">
+
+                {analyse.conseils.map(
+                    (conseil, index) => (
+
+                        <article
+                            className="resultat-hesitation-advice"
+                            key={conseil.titre}
+                        >
+
+                            <span className="resultat-hesitation-advice-number">
+                                {String(index + 1).padStart(2, "0")}
+                            </span>
+
+                            <div>
+
+                                <h3>
+                                    {conseil.titre}
+                                </h3>
+
+                                <p>
+                                    {conseil.description}
+                                </p>
+
+                            </div>
+
+                        </article>
+
+                    )
+                )}
+
+            </div>
+
+        </section>
+
+
+        {/* =====================================================
+            FOOTER / ACTIONS
+        ===================================================== */}
+
+        <section className="resultat-hesitation-final">
+
+            <div>
+
+                <p className="resultat-hesitation-final-label">
+                    ET MAINTENANT ?
+                </p>
+
+                <h2>
+                    Transforme ton hésitation
+                    en exploration.
+                </h2>
+
+                <p>
+                    Tu n'as pas besoin de décider immédiatement.
+                    Commence par mieux connaître les options
+                    qui t'intéressent réellement.
+                </p>
+
+            </div>
+
+
+            <div className="resultat-hesitation-actions">
+
+                <button
+                    type="button"
+                    className="resultat-hesitation-secondary-button"
+                    onClick={() =>
+                        navigate("/hesitation")
+                    }
+                >
+                    Refaire mon analyse
+                </button>
+
+
+               <button
+    type="button"
+    className="resultat-hesitation-primary-button"
+    onClick={() => {
+
+        navigate("/hesitation/departager", {
+            state: {
+                typeChoix,
+                metiersSelectionnes,
+                filieresSelectionnees,
+                reponsesHesitation,
+                analyse
+            }
+        });
+
+    }}
+>
+    Départager mes choix
+
+    <span>
+        <ArrowRight size={18} strokeWidth={2} />
+    </span>
+</button>
+
+            </div>
+
+        </section>
+
+
+        {/* =====================================================
+            NOTE MÉTHODOLOGIQUE
+        ===================================================== */}
+
+        <footer className="resultat-hesitation-methodology">
+
+            <span>
+                Analyse NextOri
+            </span>
+
+            <p>
+                Cette restitution est construite à partir de tes
+                réponses et des choix que tu as indiqués. Elle propose
+                des pistes de réflexion et ne constitue pas un diagnostic
+                définitif de ta personnalité ou de ton avenir professionnel.
+            </p>
+
+        </footer>
+
+    </div>
+);
 
 }
 

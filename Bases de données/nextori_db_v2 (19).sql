@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : jeu. 20 août 2026 à 16:01
+-- Généré le : sam. 22 août 2026 à 15:43
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.2.12
 
@@ -345,6 +345,116 @@ INSERT INTO `filiere` (`id_filiere`, `nom`, `description`, `presentation`, `doma
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `hesitation_option`
+--
+
+CREATE TABLE `hesitation_option` (
+  `id_hesitation_option` int(11) NOT NULL,
+  `id_hesitation_test` int(11) NOT NULL,
+  `id_metier` int(11) DEFAULT NULL,
+  `id_filiere` int(11) DEFAULT NULL,
+  `ordre` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `hesitation_question`
+--
+
+CREATE TABLE `hesitation_question` (
+  `id_question` int(11) NOT NULL,
+  `question` text NOT NULL,
+  `ordre` int(11) NOT NULL,
+  `actif` tinyint(1) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Déchargement des données de la table `hesitation_question`
+--
+
+INSERT INTO `hesitation_question` (`id_question`, `question`, `ordre`, `actif`) VALUES
+(1, 'Quand tu penses aux options que tu hésites à choisir, qu’est-ce qui t’attire le plus ?', 1, 1),
+(2, 'Dans quelle situation te sens-tu généralement le plus à l’aise ?', 2, 1),
+(3, 'Qu’est-ce qui rend ton choix le plus difficile aujourd’hui ?', 3, 1),
+(4, 'Si tu devais aujourd’hui donner le plus de poids à un seul critère, lequel serait-ce ?', 4, 1),
+(5, 'Qu’est-ce qui t’aiderait le plus à avancer vers une décision ?', 5, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `hesitation_reponse`
+--
+
+CREATE TABLE `hesitation_reponse` (
+  `id_reponse` int(11) NOT NULL,
+  `id_question` int(11) NOT NULL,
+  `texte` text NOT NULL,
+  `code` varchar(50) NOT NULL,
+  `ordre` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Déchargement des données de la table `hesitation_reponse`
+--
+
+INSERT INTO `hesitation_reponse` (`id_reponse`, `id_question`, `texte`, `code`, `ordre`) VALUES
+(1, 1, 'Le contenu : les activités et ce que je vais réellement faire.', 'ATTIRANCE_CONTENU', 1),
+(2, 1, 'Le sens : me sentir utile et faire quelque chose qui me correspond.', 'ATTIRANCE_SENS', 2),
+(3, 1, 'Les possibilités : évolution, débouchés et opportunités.', 'ATTIRANCE_OPPORTUNITES', 3),
+(4, 1, 'Le cadre : environnement, conditions et façon de travailler.', 'ATTIRANCE_CADRE', 4),
+(5, 1, 'Le défi : apprendre, progresser et me dépasser.', 'ATTIRANCE_DEFI', 5),
+(6, 2, 'Résoudre : analyser un problème et trouver une solution.', 'FORCE_ANALYSER', 1),
+(7, 2, 'Créer : imaginer quelque chose et proposer des idées.', 'FORCE_CREER', 2),
+(8, 2, 'Aider : écouter, expliquer ou accompagner quelqu’un.', 'FORCE_AIDER', 3),
+(9, 2, 'Organiser : structurer, planifier et gérer les choses.', 'FORCE_ORGANISER', 4),
+(10, 2, 'Agir : prendre des initiatives et faire avancer un projet.', 'FORCE_AGIR', 5),
+(11, 3, 'J’ai peur de me tromper.', 'BLOCAGE_ERREUR', 1),
+(12, 3, 'J’ai plusieurs options qui m’intéressent réellement.', 'BLOCAGE_OPTIONS', 2),
+(13, 3, 'Je manque d’informations pour comparer.', 'BLOCAGE_INFORMATION', 3),
+(14, 3, 'Je ne suis pas sûr(e) d’avoir le niveau ou les capacités nécessaires.', 'BLOCAGE_CAPACITES', 4),
+(15, 3, 'Mon entourage influence beaucoup mon choix.', 'BLOCAGE_ENTOURAGE', 5),
+(16, 4, 'Mon intérêt personnel.', 'CRITERE_INTERET', 1),
+(17, 4, 'Mes capacités et mes points forts.', 'CRITERE_CAPACITES', 2),
+(18, 4, 'Les débouchés professionnels.', 'CRITERE_DEBOUCHES', 3),
+(19, 4, 'Les conditions de travail.', 'CRITERE_CONDITIONS', 4),
+(20, 4, 'La stabilité et la sécurité.', 'CRITERE_STABILITE', 5),
+(21, 5, 'Mieux comprendre les différences entre mes options.', 'BESOIN_COMPARAISON', 1),
+(22, 5, 'Vérifier laquelle correspond le mieux à mes forces.', 'BESOIN_COMPATIBILITE', 2),
+(23, 5, 'Découvrir la réalité du métier ou de la filière.', 'BESOIN_REALITE', 3),
+(24, 5, 'Vérifier les débouchés et les possibilités d’évolution.', 'BESOIN_DEBOUCHES', 4),
+(25, 5, 'Me rassurer avant de faire mon choix.', 'BESOIN_RASSURANCE', 5);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `hesitation_reponse_utilisateur`
+--
+
+CREATE TABLE `hesitation_reponse_utilisateur` (
+  `id_reponse_utilisateur` int(11) NOT NULL,
+  `id_hesitation_test` int(11) NOT NULL,
+  `id_question` int(11) NOT NULL,
+  `id_reponse` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `hesitation_test`
+--
+
+CREATE TABLE `hesitation_test` (
+  `id_hesitation_test` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `type_choix` enum('metier','filiere') NOT NULL,
+  `date_creation` datetime NOT NULL DEFAULT current_timestamp(),
+  `statut` enum('en_cours','termine') NOT NULL DEFAULT 'en_cours'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `historique`
 --
 
@@ -502,7 +612,8 @@ INSERT INTO `historique` (`id_historique`, `id_user`, `action`, `date_action`) V
 (148, 19, '/UNIVERSITE_CONSULTEE:  AFI-UE', '2026-08-17 17:55:21'),
 (149, 19, 'UNIVERSITE_CONSULTEE:  AFI-UE', '2026-08-17 18:00:54'),
 (150, 19, 'FORMATION_CONSULTEE: Génie logistique', '2026-08-17 18:02:24'),
-(151, 17, '/UNIVERSITE_CONSULTEE:  AFI-UE', '2026-08-19 18:56:27');
+(151, 17, '/UNIVERSITE_CONSULTEE:  AFI-UE', '2026-08-19 18:56:27'),
+(152, 19, 'METIER_CONSULTE: Administrateur Systèmes', '2026-08-21 11:22:22');
 
 -- --------------------------------------------------------
 
@@ -3702,6 +3813,44 @@ ALTER TABLE `filiere`
   ADD UNIQUE KEY `nom` (`nom`);
 
 --
+-- Index pour la table `hesitation_option`
+--
+ALTER TABLE `hesitation_option`
+  ADD PRIMARY KEY (`id_hesitation_option`),
+  ADD KEY `fk_hesitation_option_test` (`id_hesitation_test`),
+  ADD KEY `fk_hesitation_option_metier` (`id_metier`),
+  ADD KEY `fk_hesitation_option_filiere` (`id_filiere`);
+
+--
+-- Index pour la table `hesitation_question`
+--
+ALTER TABLE `hesitation_question`
+  ADD PRIMARY KEY (`id_question`);
+
+--
+-- Index pour la table `hesitation_reponse`
+--
+ALTER TABLE `hesitation_reponse`
+  ADD PRIMARY KEY (`id_reponse`),
+  ADD KEY `fk_hesitation_reponse_question` (`id_question`);
+
+--
+-- Index pour la table `hesitation_reponse_utilisateur`
+--
+ALTER TABLE `hesitation_reponse_utilisateur`
+  ADD PRIMARY KEY (`id_reponse_utilisateur`),
+  ADD UNIQUE KEY `id_hesitation_test` (`id_hesitation_test`,`id_question`),
+  ADD KEY `fk_hesitation_ru_question` (`id_question`),
+  ADD KEY `fk_hesitation_ru_reponse` (`id_reponse`);
+
+--
+-- Index pour la table `hesitation_test`
+--
+ALTER TABLE `hesitation_test`
+  ADD PRIMARY KEY (`id_hesitation_test`),
+  ADD KEY `fk_hesitation_test_user` (`id_user`);
+
+--
 -- Index pour la table `historique`
 --
 ALTER TABLE `historique`
@@ -3826,10 +3975,40 @@ ALTER TABLE `filiere`
   MODIFY `id_filiere` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=323;
 
 --
+-- AUTO_INCREMENT pour la table `hesitation_option`
+--
+ALTER TABLE `hesitation_option`
+  MODIFY `id_hesitation_option` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `hesitation_question`
+--
+ALTER TABLE `hesitation_question`
+  MODIFY `id_question` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT pour la table `hesitation_reponse`
+--
+ALTER TABLE `hesitation_reponse`
+  MODIFY `id_reponse` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+
+--
+-- AUTO_INCREMENT pour la table `hesitation_reponse_utilisateur`
+--
+ALTER TABLE `hesitation_reponse_utilisateur`
+  MODIFY `id_reponse_utilisateur` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `hesitation_test`
+--
+ALTER TABLE `hesitation_test`
+  MODIFY `id_hesitation_test` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT pour la table `historique`
 --
 ALTER TABLE `historique`
-  MODIFY `id_historique` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=152;
+  MODIFY `id_historique` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=153;
 
 --
 -- AUTO_INCREMENT pour la table `metier`
@@ -3907,6 +4086,34 @@ ALTER TABLE `utilisateur`
 ALTER TABLE `favori`
   ADD CONSTRAINT `fk_favori_metier` FOREIGN KEY (`id_metier`) REFERENCES `metier` (`id_metier`) ON DELETE CASCADE,
   ADD CONSTRAINT `fk_favori_user` FOREIGN KEY (`id_user`) REFERENCES `utilisateur` (`id_user`) ON DELETE CASCADE;
+
+--
+-- Contraintes pour la table `hesitation_option`
+--
+ALTER TABLE `hesitation_option`
+  ADD CONSTRAINT `fk_hesitation_option_filiere` FOREIGN KEY (`id_filiere`) REFERENCES `filiere` (`id_filiere`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_hesitation_option_metier` FOREIGN KEY (`id_metier`) REFERENCES `metier` (`id_metier`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_hesitation_option_test` FOREIGN KEY (`id_hesitation_test`) REFERENCES `hesitation_test` (`id_hesitation_test`) ON DELETE CASCADE;
+
+--
+-- Contraintes pour la table `hesitation_reponse`
+--
+ALTER TABLE `hesitation_reponse`
+  ADD CONSTRAINT `fk_hesitation_reponse_question` FOREIGN KEY (`id_question`) REFERENCES `hesitation_question` (`id_question`) ON DELETE CASCADE;
+
+--
+-- Contraintes pour la table `hesitation_reponse_utilisateur`
+--
+ALTER TABLE `hesitation_reponse_utilisateur`
+  ADD CONSTRAINT `fk_hesitation_ru_question` FOREIGN KEY (`id_question`) REFERENCES `hesitation_question` (`id_question`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_hesitation_ru_reponse` FOREIGN KEY (`id_reponse`) REFERENCES `hesitation_reponse` (`id_reponse`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_hesitation_ru_test` FOREIGN KEY (`id_hesitation_test`) REFERENCES `hesitation_test` (`id_hesitation_test`) ON DELETE CASCADE;
+
+--
+-- Contraintes pour la table `hesitation_test`
+--
+ALTER TABLE `hesitation_test`
+  ADD CONSTRAINT `fk_hesitation_test_user` FOREIGN KEY (`id_user`) REFERENCES `utilisateur` (`id_user`) ON DELETE CASCADE;
 
 --
 -- Contraintes pour la table `historique`

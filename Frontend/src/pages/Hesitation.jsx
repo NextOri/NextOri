@@ -866,14 +866,21 @@ if (etape === "analyse") {
     type="button"
     onClick={() => {
 
-    navigate("/resultat-hesitation", {
-        state: {
-            typeChoix,
-            metiersSelectionnes,
-            filieresSelectionnees,
-            reponsesHesitation
-        }
-    });
+    console.log("DONNÉES ENVOYÉES :", {
+    typeChoix,
+    metiersSelectionnes,
+    filieresSelectionnees,
+    reponsesHesitation
+});
+
+navigate("/resultat-hesitation", {
+    state: {
+        typeChoix,
+        metiersSelectionnes,
+        filieresSelectionnees,
+        reponsesHesitation
+    }
+});
 
 }}
 >

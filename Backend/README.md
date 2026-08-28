@@ -68,7 +68,7 @@ Dans cette phase, nous intégrerons toutes les améliorations que nous avons ide
 ✅ faire en sorte que les universités soient calculées uniquement à partir des filières retenues ;
 ✅ améliorer le classement des recommandations pour qu'il soit plus pertinent.
 
-➡️ Étape 13: Preparation de l'API
+✅ Étape 13: Preparation de l'API
 
 NB: Les repository: Donne-moi les réponses.
     Les services: Compte les scores.
@@ -348,7 +348,7 @@ Resultat apres test
 9. Construction du résultat final
                 │
                 ▼
-10. Retour JSON
+10. Retour de toute le recommandations
 
 
 

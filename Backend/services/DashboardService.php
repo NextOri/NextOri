@@ -86,7 +86,7 @@ if ($requete->fetchColumn() > 0) {
     if ($requete->fetchColumn() > 0) {
         $badges[] = [
             "nom" => "Premier Pas",
-            "icone" => "👤"
+            "icone" => "premier-pas"
         ];
     }
 
@@ -98,7 +98,7 @@ if ($requete->fetchColumn() > 0) {
     if ($requete->fetchColumn() > 0) {
         $badges[] = [
             "nom" => "Explorateur",
-            "icone" => "🧠"
+            "icone" => "explorateur"
         ];
     }
 
@@ -112,7 +112,7 @@ if ($requete->fetchColumn() > 0) {
     if ($requete->fetchColumn() > 0) {
         $badges[] = [
             "nom" => "Connaissance de soi",
-            "icone" => "🎯"
+            "icone" => "connaissance-de-soi"
         ];
     }
 
@@ -126,7 +126,7 @@ if ($requete->fetchColumn() > 0) {
     if ($requete->fetchColumn() > 0) {
         $badges[] = [
             "nom" => "Découvreur de métiers",
-            "icone" => "💼"
+            "icone" => "decouvreur-metiers"
         ];
     }
 
@@ -140,7 +140,7 @@ if ($requete->fetchColumn() > 0) {
     if ($requete->fetchColumn() > 0) {
         $badges[] = [
             "nom" => "Choix de carrière",
-            "icone" => "🎓"
+            "icone" => "choix-carriere"
         ];
     }
 
@@ -154,7 +154,7 @@ if ($requete->fetchColumn() > 0) {
     if ($requete->fetchColumn() > 0) {
         $badges[] = [
             "nom" => "Prêt pour l'université",
-            "icone" => "🏛️"
+            "icone" => "pret-universite"
         ];
     }
 

@@ -5,6 +5,22 @@ import FooterNavigation from "../components/FooterNavigation";
 import { useNavigate } from "react-router-dom";
 import { enregistrerAction } from "../services/historiqueService";
 
+import {
+    FaBriefcase,
+    FaBuilding,
+    FaGraduationCap,
+    FaMoneyBillWave,
+    FaRocket,
+    FaChartLine,
+    FaArrowTrendUp,
+    FaMinus,
+    FaArrowTrendDown,
+    FaChartBar,
+    FaFaceFrown
+} from "react-icons/fa6";
+
+import { FaSearch } from "react-icons/fa";
+
 
 function Metiers() {
      
@@ -53,25 +69,25 @@ function Metiers() {
     switch (tendance) {
 
         case "Très forte croissance":
-            return "🚀";
+            return <FaRocket />;
 
         case "Forte croissance":
-            return "📈";
+            return <FaChartLine />;
 
         case "En croissance":
-            return "↗️";
+            return <FaArrowTrendUp />;
 
         case "Stable":
-            return "➖";
+            return <FaMinus />;
 
         case "En baisse":
-            return "📉";
+            return <FaArrowTrendDown />;
 
         default:
-            return "📊";
+            return <FaChartBar />;
     }
 
-    };
+};
 
      const getTendanceClass = (tendance) => {
 
@@ -163,7 +179,9 @@ function Metiers() {
             <div className="metiers-header">
 
                 <h1>
-                    💼 Catalogue des métiers
+                    <FaBriefcase 
+                    className="metiers-header-icon"
+                    /> Catalogue des métiers
                 </h1>
 
 
@@ -182,7 +200,8 @@ function Metiers() {
 
         <label>
 
-            🔍 Rechercher
+            <FaSearch/>
+             Rechercher
 
         </label>
 
@@ -208,7 +227,8 @@ function Metiers() {
 
         <label>
 
-            🏢 Secteur
+            <FaBuilding/>
+             Secteur
 
         </label>
 
@@ -247,7 +267,8 @@ function Metiers() {
 
         <label>
 
-            🎓 Niveau d'étude
+            <FaGraduationCap/>
+             Niveau d'étude
 
         </label>
 
@@ -318,19 +339,19 @@ function Metiers() {
 
 
                     <p>
-                        <strong>🏢 Secteur :</strong>{" "}
+                        <strong><FaBuilding/> Secteur :</strong>{" "}
                         {metier.secteur}
                     </p>
 
 
                     <p>
-                        <strong>🎓 Niveau d'étude :</strong>{" "}
+                        <strong><FaGraduationCap/> Niveau d'étude :</strong>{" "}
                         {metier.niveau_etude}
                     </p>
 
 
             <p>
-                        <strong>💰 Salaire :</strong>{" "}
+                        <strong><FaMoneyBillWave/> Salaire :</strong>{" "}
                    {metier.salaire_min.toLocaleString("fr-FR")}
                  {" à "}
                  {metier.salaire_max.toLocaleString("fr-FR")}
@@ -385,7 +406,7 @@ function Metiers() {
 
                 <h2>
 
-                    😕 Aucun métier trouvé
+                    <FaFaceFrown/> Aucun métier trouvé
 
                 </h2>
 

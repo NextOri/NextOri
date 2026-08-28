@@ -3,6 +3,17 @@ import { useParams, useNavigate } from "react-router-dom";
 import "../styles/MetierDetail.css";
 import FooterNavigation from "../components/FooterNavigation";
 
+import {
+    FaChartLine,
+    FaGraduationCap,
+    FaMoneyBillWave,
+    FaArrowLeft,
+    FaBriefcase,
+    FaBookOpen,
+    FaCircleInfo
+    
+} from "react-icons/fa6";
+
 
 function MetierDetail() {
 
@@ -87,7 +98,7 @@ function MetierDetail() {
 
         <div className="metier-introuvable">
 
-            <h2>😕 Métier introuvable</h2>
+            <h2><FaCircleInfo /> Métier introuvable</h2>
 
             <p>
 
@@ -100,7 +111,7 @@ function MetierDetail() {
                 onClick={()=>navigate("/metiers")}
             >
 
-                ← Retour aux métiers
+                <FaArrowLeft /> Retour aux métiers
 
             </button>
 
@@ -127,12 +138,18 @@ function MetierDetail() {
 
                 <div className="metier-tendance">
 
-                    📈 {metier.tendance}
+                    <FaChartLine /> {metier.tendance}
 
                 </div>
 
 
-                <p>{metier.secteur}</p>
+                <p className="metier-secteur">
+
+        <FaBriefcase />
+
+        {metier.secteur}
+
+     </p>
 
 
             </div>
@@ -145,7 +162,8 @@ function MetierDetail() {
             <section className="detail-section">
 
 
-                <h2>Présentation du métier</h2>
+                <h2>
+                    <FaBookOpen /> Présentation du métier</h2>
 
 
                 <p>
@@ -164,7 +182,7 @@ function MetierDetail() {
             <section className="detail-section">
 
 
-                <h2>Compétences nécessaires</h2>
+                <h2><FaBriefcase /> Compétences nécessaires</h2>
 
 
                 <div className="competences-container">
@@ -198,36 +216,55 @@ function MetierDetail() {
             <section className="detail-section">
 
 
-                <h2>Informations</h2>
+                <h2><FaCircleInfo /> Informations</h2>
 
 
                 <div className="infos-grid">
 
 
-                    <div>
-                        🎓 Niveau d'étude
-                        <strong>
-                            {metier.niveau_etude}
-                        </strong>
-                    </div>
+                    <div className="info-item">
+
+    <FaGraduationCap />
+
+    <span>
+        Niveau d'étude
+    </span>
+
+    <strong>
+        {metier.niveau_etude}
+    </strong>
+
+</div>
 
 
+<div className="info-item">
 
-                    <div>
-                        💰 Salaire minimum
-                        <strong>
-                            {metier.salaire_min} FCFA
-                        </strong>
-                    </div>
+    <FaMoneyBillWave />
+
+    <span>
+        Salaire minimum
+    </span>
+
+    <strong>
+        {metier.salaire_min} FCFA
+    </strong>
+
+</div>
 
 
+<div className="info-item">
 
-                    <div>
-                        💰 Salaire maximum
-                        <strong>
-                            {metier.salaire_max} FCFA
-                        </strong>
-                    </div>
+    <FaMoneyBillWave />
+
+    <span>
+        Salaire maximum
+    </span>
+
+    <strong>
+        {metier.salaire_max} FCFA
+    </strong>
+
+</div>
 
 
                 </div>
@@ -244,7 +281,7 @@ function MetierDetail() {
             <section className="detail-section">
 
 
-                <h2>Filières liées</h2>
+                <h2><FaGraduationCap /> Filières liées</h2>
 
 
 
@@ -254,14 +291,17 @@ function MetierDetail() {
                     {
                         metier.filieres.map((filiere)=>(
                             
-                            <div 
-                                key={filiere.id_filiere}
-                                className="metier-filiere-card"
-                            >
+                            <button
+    key={filiere.id_filiere}
+    className="metier-filiere-card"
+    onClick={() => navigate(`/filieres/${filiere.id_filiere}`)}
+>
+    <FaGraduationCap />
 
-                                🎓 {filiere.nom}
-
-                            </div>
+    <span>
+        {filiere.nom}
+    </span>
+       </button>
 
                         ))
                     }
@@ -281,7 +321,7 @@ function MetierDetail() {
                 onClick={()=>navigate("/metiers")}
             >
 
-                ← Retour aux métiers
+                <FaArrowLeft /> Retour aux métiers
 
             </button>
 

@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 
-import { data, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
+import { X } from "lucide-react";
 
 import {getQuestions, getPropositions, envoyerReponses} from "../services/api";
 
@@ -207,15 +209,12 @@ function precedent(){
             <div className="test-brand">
 
                 <img
-                    src="/images/logo.png"
+                    src="/images/logo-nextori.jpg"
                     alt="NextOri"
                     className="test-logo"
                 />
 
-                <h1>
-                    NextOri
-                </h1>
-
+                
             </div>
 
             <p>
@@ -258,7 +257,7 @@ function precedent(){
                         aria-label="Fermer l'information"
                     >
 
-                        <X />
+                        <X size={18} strokewidth={2.5}/>
 
                     </button>
 

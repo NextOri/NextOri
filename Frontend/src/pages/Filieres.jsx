@@ -5,6 +5,16 @@ import FooterNavigation from "../components/FooterNavigation";
 import { useNavigate } from "react-router-dom";
 import { enregistrerAction } from "../services/historiqueService";
 
+import {
+    FaSearch,
+    FaTag,
+    FaClock,
+    FaArrowRight,
+    FaFrown,
+    FaGraduationCap
+} from "react-icons/fa";
+
+
 function Filieres() {
 
     const navigate = useNavigate();
@@ -16,7 +26,6 @@ function Filieres() {
     const [domaine, setDomaine] = useState("Tous");
 
     const [duree, setDuree] = useState("Tous");
-
 
 
     useEffect(() => {
@@ -47,7 +56,6 @@ function Filieres() {
     }, []);
 
 
-
     const domaines = [
 
         "Tous",
@@ -61,7 +69,6 @@ function Filieres() {
     ];
 
 
-
     const durees = [
 
         "Tous",
@@ -73,14 +80,15 @@ function Filieres() {
         )
 
     ];
-   
+
+
     const normaliserTexte = (texte) => {
 
-    return texte
-        .normalize("NFD") 
-        .replace(/[\u0300-\u036f]/g, "")
-        .toLowerCase()
-        .trim();
+        return texte
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "")
+            .toLowerCase()
+            .trim();
 
     };
 
@@ -88,31 +96,22 @@ function Filieres() {
     const resultats = filieres.filter((filiere) => {
 
         const rechercheOK =
-    normaliserTexte(filiere.nom)
-        .includes(
-            normaliserTexte(recherche)
-        );
-
+            normaliserTexte(filiere.nom)
+                .includes(
+                    normaliserTexte(recherche)
+                );
 
 
         const domaineOK =
-
             domaine === "Tous"
-
                 ? true
-
                 : filiere.domaine === domaine;
 
 
-
         const dureeOK =
-
             duree === "Tous"
-
                 ? true
-
                 : filiere.duree === duree;
-
 
 
         return rechercheOK && domaineOK && dureeOK;
@@ -120,101 +119,74 @@ function Filieres() {
     });
 
 
-
     return (
 
         <div className="filieres-page">
 
+
             <div className="filieres-header">
 
                 <h1>
-
-                    🎓 Catalogue des filières
-
+                    <FaGraduationCap className="filiere-header-icon" />
+                    Catalogue des filières
                 </h1>
 
                 <p>
-
                     Découvrez les différentes filières,
-
                     leurs domaines et leurs durées.
-
                 </p>
 
             </div>
 
 
-
             <div className="filieres-filtres">
+
 
                 <div className="filtre-item">
 
                     <label>
-
-                        🔍 Rechercher
-
+                        <FaSearch />
+                        Rechercher
                     </label>
 
                     <input
-
                         type="text"
-
                         className="filieres-search"
-
                         placeholder="Ex : Informatique..."
-
                         value={recherche}
-
                         onChange={(e) =>
-
                             setRecherche(e.target.value)
-
                         }
-
                     />
 
                 </div>
 
 
-
                 <div className="filtre-item">
 
                     <label>
-
-                        🏷 Domaine
-
+                        <FaTag />
+                        Domaine
                     </label>
 
                     <select
-
                         value={domaine}
-
                         onChange={(e) =>
-
                             setDomaine(e.target.value)
-
                         }
-
                     >
 
                         {
-
                             domaines.map((item) => (
 
                                 <option
-
                                     key={item}
-
                                     value={item}
-
                                 >
-
                                     {item}
-
                                 </option>
 
                             ))
-
                         }
 
                     </select>
@@ -222,45 +194,31 @@ function Filieres() {
                 </div>
 
 
-
                 <div className="filtre-item">
 
                     <label>
-
-                        ⏳ Durée
-
+                        <FaClock />
+                        Durée
                     </label>
 
                     <select
-
                         value={duree}
-
                         onChange={(e) =>
-
                             setDuree(e.target.value)
-
                         }
-
                     >
 
                         {
-
                             durees.map((item) => (
 
                                 <option
-
                                     key={item}
-
                                     value={item}
-
                                 >
-
                                     {item}
-
                                 </option>
 
                             ))
-
                         }
 
                     </select>
@@ -268,27 +226,19 @@ function Filieres() {
                 </div>
 
             </div>
-
 
 
             <div className="filieres-count">
 
                 {resultats.length}
-
                 {" "}
-
                 filière
-
                 {resultats.length > 1 ? "s" : ""}
-
                 {" "}
-
                 trouvée
-
                 {resultats.length > 1 ? "s" : ""}
 
             </div>
-
 
 
             <div className="filieres-list">
@@ -302,33 +252,28 @@ function Filieres() {
                             resultats.map((filiere) => (
 
                                 <div
-
                                     className="filiere-card"
-
                                     key={filiere.id_filiere}
-
                                 >
 
                                     <h2>
-
                                         {filiere.nom}
-
                                     </h2>
+
 
                                     <div className="filiere-top-bar"></div>
 
+
                                     <p>
-
                                         {filiere.description}
-
                                     </p>
+
 
                                     <p>
 
                                         <strong>
-
-                                            🏷 Domaine :
-
+                                            <FaTag />
+                                            Domaine :
                                         </strong>
 
                                         {" "}
@@ -337,12 +282,12 @@ function Filieres() {
 
                                     </p>
 
+
                                     <p>
 
                                         <strong>
-
-                                            ⏳ Durée :
-
+                                            <FaClock />
+                                            Durée :
                                         </strong>
 
                                         {" "}
@@ -351,20 +296,27 @@ function Filieres() {
 
                                     </p>
 
+
                                     <button
-    className="filiere-button"
-    onClick={async () => {
+                                        className="filiere-button"
+                                        onClick={async () => {
 
-        await enregistrerAction(
-            `FORMATION_CONSULTEE: ${filiere.nom}`
-        );
+                                            await enregistrerAction(
+                                                `FORMATION_CONSULTEE: ${filiere.nom}`
+                                            );
 
-        navigate(`/filieres/${filiere.id_filiere}`);
+                                            navigate(
+                                                `/filieres/${filiere.id_filiere}`
+                                            );
 
-    }}
->
-    Voir détails →
-</button>
+                                        }}
+                                    >
+
+                                        Voir détails
+
+                                        <FaArrowRight />
+
+                                    </button>
 
                                 </div>
 
@@ -380,16 +332,15 @@ function Filieres() {
 
                                 <h2>
 
-                                    😕 Aucune filière trouvée
+                                    <FaFrown />
+                                    Aucune filière trouvée
 
                                 </h2>
 
                                 <p>
 
                                     Essayez un autre mot-clé,
-
                                     un autre domaine
-
                                     ou une autre durée.
 
                                 </p>
@@ -402,7 +353,6 @@ function Filieres() {
 
             </div>
 
-          
 
             <FooterNavigation />
 
@@ -411,5 +361,6 @@ function Filieres() {
     );
 
 }
+
 
 export default Filieres;

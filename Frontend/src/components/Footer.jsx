@@ -42,7 +42,7 @@ function Footer() {
         },
         {
             nom: "Snapchat",
-            url: "https://www.instagram.com/nextori2?utm_source=qr&igsi=MXIzODB6aDEwNnFlaA==",
+            url: "https://www.snapchat.com/add/nextori7?share_id=d9cfIxtQqjo&locale=fr-FR",
             icone: FaSnapchat
         },
         {
@@ -67,19 +67,21 @@ function Footer() {
 
                 {/* Identité */}
 
-                <div className="site-footer-brand">
+               <div className="site-footer-brand">
 
-                    <h2>
-                        NextOri
-                    </h2>
+    <img
+        src="/images/logo-nextori.jpg"
+        alt="NextOri"
+        className="footer-logo"
+    />
 
-                    <p>
-                        Votre plateforme d'accompagnement
-                        à l'orientation académique et
-                        professionnelle.
-                    </p>
+    <p>
+        Votre plateforme d'accompagnement
+        à l'orientation académique et
+        professionnelle.
+    </p>
 
-                </div>
+</div>
 
 
                 {/* Navigation */}

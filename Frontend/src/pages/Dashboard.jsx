@@ -10,6 +10,28 @@ import { useNavigate } from "react-router-dom";
 
 import { useEffect, useState } from "react";
 
+import {
+    Star,
+    Flame,
+    Award,
+    Hand,
+    FlaskConical,
+    BriefcaseBusiness,
+    GraduationCap,
+    Landmark,
+    Compass,
+    Rocket,
+    MessageCircle,
+    Bell,
+    LockKeyhole,
+    UserRound,
+     Target,
+     Brain,
+     University,
+    Check
+} from "lucide-react";
+
+
 function Dashboard() {
 
     const navigate = useNavigate();
@@ -181,6 +203,14 @@ const getEtapeActuelle = (parcours) => {
     return 6;
 };
 
+const badgeIcons = {
+    "premier-pas": UserRound,
+    "explorateur": Brain,
+    "connaissance-de-soi": Target,
+    "decouvreur-metiers": BriefcaseBusiness,
+    "choix-carriere": GraduationCap,
+    "pret-universite": Landmark
+};
     return (
 
         <div className="dashboard-page">
@@ -189,21 +219,27 @@ const getEtapeActuelle = (parcours) => {
 
             <section className="dashboard-header">
 
-                <p className="dashboard-subtitle">
+    <div className="dashboard-brand">
 
-                    Tableau de bord
+        <img
+            src="/images/logo-nextori.jpg"
+            alt="Logo NextOri"
+            className="dashboard-logo"
+        />
 
-                </p>
+        <div>
+            <p className="dashboard-subtitle">
+                Tableau de bord
+            </p>
 
-                <h1>
+            <h1>
+                Next<span>Ori</span>
+            </h1>
+        </div>
 
-                    Next<span>Ori</span>
+    </div>
 
-                </h1>
-
-            </section>
-
- 
+</section> 
 
      <OrientationNotification 
     etape={getEtapeActuelle(dashboardDataState.parcours)}
@@ -250,7 +286,7 @@ const getEtapeActuelle = (parcours) => {
 
     <div className="stat-card">
 
-        <h3>⭐</h3>
+        <h3><Star /></h3>
 
          <h2>{dashboardDataState.statistiques.points}</h2>
 
@@ -260,7 +296,7 @@ const getEtapeActuelle = (parcours) => {
 
     <div className="stat-card">
 
-        <h3>🔥</h3>
+        <h3><Flame /></h3>
 
         <h2>{dashboardDataState.statistiques.serie}</h2>
 
@@ -270,7 +306,7 @@ const getEtapeActuelle = (parcours) => {
 
     <div className="stat-card">
 
-        <h3>🏅</h3>
+        <h3><Award /></h3>
 
         <h2>{dashboardDataState.statistiques.badges}</h2>
 
@@ -291,14 +327,14 @@ const getEtapeActuelle = (parcours) => {
     <div className="welcome-content">
 
         <div className="welcome-icon">
-            👋
+            <Hand />
         </div>
 
 
         <div>
 
             <h2>
-                Bonjour {dashboardDataState.utilisateur.nom} 👋
+                Bonjour {dashboardDataState.utilisateur.nom} 
             </h2>
 
 
@@ -313,41 +349,6 @@ const getEtapeActuelle = (parcours) => {
     </div>
 
 
- {/*
-    <div className="welcome-about">
-
-        <h3>
-            À propos de NextOri
-        </h3>
-
-
-       <p>
-        NextOri est une plateforme d'accompagnement à 
-        l'orientation qui aide les étudiants et les futurs 
-        étudiants à mieux construire leur avenir académique 
-        et professionnel.
-    </p>
-
-
-    <p>
-        Grâce à une analyse de vos centres d'intérêt et de 
-        votre profil, NextOri vous aide à découvrir des 
-        métiers adaptés, explorer des formations 
-        correspondantes et trouver des universités qui 
-        peuvent accompagner votre parcours.
-    </p>
-
-
-    <p>
-        Notre objectif est de rendre l'orientation plus 
-        simple, personnalisée et accessible afin de vous 
-        aider à prendre de meilleures décisions pour votre 
-        avenir.
-    </p>
-
-    </div>
-
-    */}
     
 
 
@@ -396,7 +397,8 @@ className={`path-item ${
 {
 estTermine
 ?
-"✓"
+
+<Check />
 :
 etape.numero
 }
@@ -449,7 +451,7 @@ etape.numero
 
         <div className="action-card">
 
-            <span>🧪</span>
+            <FlaskConical />
 
             <h3>Test RIASEC</h3>
 
@@ -463,7 +465,7 @@ etape.numero
 
         <div className="action-card">
 
-            <span>💼</span>
+            <BriefcaseBusiness />
 
             <h3>Métiers</h3>
 
@@ -477,7 +479,7 @@ etape.numero
 
         <div className="action-card">
 
-            <span>🎓</span>
+            <GraduationCap />
 
             <h3>Formations</h3>
 
@@ -491,7 +493,7 @@ etape.numero
 
         <div className="action-card">
 
-            <span>🏛</span>
+            <Landmark />
 
             <h3>Universités</h3>
 
@@ -512,7 +514,7 @@ etape.numero
       <section className="action-button-section">
 
     <h2>
-        Passez à l'action 🚀
+        Passez à l'action <Rocket />
     </h2>
 
     <p>
@@ -541,7 +543,7 @@ etape.numero
             <section className="project-card">
 
     <h2>
-    Mon plan d'avenir 🚀
+    Mon plan d'avenir <Rocket />
 </h2>
 
 <p>
@@ -553,7 +555,7 @@ etape.numero
 
     <div className="future-icon">
 
-        🧭
+        <Compass />
 
     </div>
 
@@ -585,7 +587,8 @@ etape.numero
 
  <p className="premium-note">
 
-    🔒 Disponible prochainement avec NextOri Premium
+    <LockKeyhole /> 
+    Disponible prochainement avec NextOri Premium
 
    </p>
 
@@ -603,7 +606,7 @@ etape.numero
 
         <div className="help-icon">
 
-            💬
+            <MessageCircle />
 
         </div>
 
@@ -645,7 +648,9 @@ etape.numero
 
         <button className="help-button">
 
-            🔔 Me notifier
+            
+
+           <Bell />  Me notifier
 
         </button>
 
@@ -661,7 +666,7 @@ etape.numero
 
         <div className="badges-title">
 
-            <h2>🏅 Mes badges</h2>
+            <h2><Award /> Mes badges</h2>
 
             <p>
                 Débloquez des récompenses en progressant dans votre parcours d'orientation.
@@ -673,34 +678,34 @@ etape.numero
 
     <div className="badges-container">
 
-        {dashboardDataState.liste_badges.map((badge, index) => (
+        {dashboardDataState.liste_badges.map((badge, index) => {
 
-            <div
-                key={index}
-                className="badge-card"
-            >
+    const IconeBadge = badgeIcons[badge.icone];
 
-                <div className="badge-icon">
+    return (
+        <div
+            key={index}
+            className="badge-card"
+        >
 
-                    {badge.icone}
+            <div className="badge-icon">
 
-                </div>
-
-                <p className="badge-name">
-
-                    {badge.nom}
-
-                </p>
-
-                <p className="badge-status">
-
-                    Débloqué ✓
-
-                </p>
+                {IconeBadge && <IconeBadge />}
 
             </div>
 
-        ))}
+            <p className="badge-name">
+                {badge.nom}
+            </p>
+
+            <p className="badge-status">
+                Débloqué ✓
+            </p>
+
+        </div>
+    );
+
+})}
 
     </div>
 

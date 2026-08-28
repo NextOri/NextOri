@@ -14,6 +14,13 @@
 
 }
 
+.dashboard-page svg {
+    width: 24px;
+    height: 24px;
+    stroke-width: 2;
+    flex-shrink: 0;
+}
+
 
 
 /* ===========================
@@ -65,6 +72,56 @@
 .dashboard-header span{
 
     color:#F4B400;
+
+}
+
+/* ===========================
+   LOGO NEXTORI
+=========================== */
+
+.dashboard-brand{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+}
+
+
+.dashboard-logo{
+
+    width:90px;
+
+    height:100px;
+
+    object-fit:contain;
+
+    flex-shrink:0;
+
+}
+
+
+.dashboard-brand > div{
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+
+.dashboard-brand .dashboard-subtitle{
+
+    margin:0 0 5px;
+
+}
+
+
+.dashboard-brand h1{
+
+    margin:0;
 
 }
 
@@ -260,12 +317,23 @@
 
 
 
-.stat-card h3{
+.stat-card h3 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    margin: 0 auto 10px;
+    border-radius: 16px;
+    background: #FFF4CC;
+    color: #0D1B2A;
+}
 
-    font-size:24px;
-
-    margin-bottom:8px;
-
+.stat-card h3 svg {
+    width: 25px;
+    height: 25px;
+    color: #F4B400;
+    stroke: #F4B400;
 }
 
 
@@ -304,7 +372,7 @@ border-radius:24px;
 
 padding:30px;
 
-margin:35px auto 18 px;
+margin:35px auto 18px;
 
 box-shadow:0 12px 35px rgba(13,27,42,0.08);
 
@@ -332,29 +400,35 @@ gap:20px;
 
 /* Icône */
 
-.welcome-icon{
+.welcome-icon {
+    width: 65px;
+    height: 65px;
 
-width:65px;
+    flex-shrink: 0;
 
-height:65px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-border-radius:20px;
+    border-radius: 20px;
 
-background:#1E3A8A;
+    background: #1E3A8A;
 
-display:flex;
+    color: #FFFFFF;
 
-align-items:center;
+    box-shadow:
+        0 10px 25px rgba(30, 58, 138, 0.25);
+}
 
-justify-content:center;
+.welcome-icon svg {
+    width: 30px;
+    height: 30px;
 
-font-size:32px;
+    color: #FFFFFF;
 
-flex-shrink:0;
+    stroke: #FFFFFF;
 
-box-shadow:
-0 10px 25px rgba(30,58,138,0.25);
-
+    stroke-width: 2;
 }
 
 
@@ -497,6 +571,26 @@ width:100%;
 
     box-shadow:0 8px 20px rgba(13,27,42,0.08);
 
+    position: relative;
+
+}
+
+.action-card > svg {
+    width: 32px;
+    height: 32px;
+
+    margin-bottom: 8px;
+
+    color: #1E3A8A;
+
+    stroke: currentColor;
+
+    stroke-width: 2;
+}
+
+.action-card .action-icon {
+    color: #1E3A8A;
+    stroke: #1E3A8A;
 }
 
 
@@ -509,11 +603,6 @@ width:100%;
 
 
 
-.action-card span{
-
-    font-size:28px;
-
-}
 
 
 
@@ -541,16 +630,30 @@ width:100%;
 =========================== */
 
 
-.project-card h2{
+.project-card h2 {
+    display: flex;
 
-    color:#0D1B2A;
+    align-items: center;
 
-    font-size:26px;
+    gap: 8px;
 
-    margin-bottom:15px;
+    color: #0D1B2A;
 
+    font-size: 26px;
+
+    margin-bottom: 15px;
 }
 
+.project-card h2 svg {
+    width: 25px;
+    height: 25px;
+
+    color: #F4B400;
+
+    stroke: currentColor;
+
+    stroke-width: 2.2;
+}
 
 
 .project-card p{
@@ -641,10 +744,33 @@ border:1px solid #e5e7eb;
 
 }
 
-.future-icon{
+.future-icon {
+    width: 58px;
+    height: 58px;
 
-font-size:40px;
+    flex-shrink: 0;
 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 16px;
+
+    background: #E8EEFF;
+
+    color: #1E3A8A;
+
+    box-shadow:
+        0 8px 20px rgba(30, 58, 138, 0.22);
+}
+
+.future-icon svg {
+    width: 28px;
+    height: 28px;
+
+    stroke: #1E3A8A;
+
+    stroke: #1E3A8A;
 }
 
 .future-content h3{
@@ -697,20 +823,30 @@ transform:translateY(-1px);
 
 }
 
-.premium-note{
+.premium-note {
+    display: flex;
 
-margin-top:12px;
+    margin-top:12px;
 
-text-align:center;
+    align-items: center;
 
-font-size:13px;
+    justify-content: center;
 
-color:#666;
+    gap: 7px;
 
-font-style:italic;
+    color: #6B7280;
 
+    font-size: 13px;
 }
 
+.premium-note svg {
+    width: 17px;
+    height: 17px;
+
+    color: #1E3A8A;
+
+    stroke: #1E3A8A;
+}
 
 
 
@@ -798,6 +934,8 @@ font-style:italic;
 
     background:#F4B400;
 
+    color:#0D1B2A;
+
 }
 
 
@@ -808,6 +946,12 @@ font-style:italic;
 
     color:#FFFFFF;
 
+}
+.path-circle svg {
+    width: 22px;
+    height: 22px;
+
+    
 }
 
 
@@ -862,6 +1006,17 @@ font-style:italic;
     margin:0;
 }
 
+.action-button-section h2 svg,
+.badges-title h2 svg {
+    vertical-align: middle;
+    margin-right: 8px;
+}
+
+.action-button-section h2 svg {
+    color: #F4B400;
+    stroke: #F4B400;
+}
+
 .action-button-section p{
     max-width:500px;
     font-size:15px;
@@ -894,6 +1049,8 @@ border-radius:22px;
 
 background:#F4B400;
 
+color:#0D1B2A;
+
 display:flex;
 
 align-items:center;
@@ -905,6 +1062,13 @@ font-size:34px;
 box-shadow:
 0 10px 25px rgba(244,180,0,0.25);
 
+}
+
+.action-icon svg {
+    width: 30px;
+    height: 30px;
+    color: #0D1B2A;
+    stroke: #0D1B2A;
 }
 
 
@@ -997,32 +1161,30 @@ gap:20px;
 
 }
 
-.help-icon{
+.help-icon {
+    width: 58px;
+    height: 58px;
 
-width:64px;
+    flex-shrink: 0;
 
-height:64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-border-radius:18px;
+    border-radius: 16px;
 
-background:var(--primary-color);
+    background: #1E3A8A;
 
-display:flex;
+    color: #FFFFFF;
+}
 
-align-items:center;
+.help-icon svg {
+    width: 28px;
+    height: 28px;
 
-justify-content:center;
+    color: #FFFFFF;
 
-font-size:30px;
-
-color:#fff;
-
-flex-shrink:0;
-
-box-shadow:0 10px 30px rgba(0,87,217,.20);
-
-transition:.3s;
-
+    stroke: #FFFFFF;
 }
 
 .help-card:hover .help-icon{
@@ -1162,7 +1324,7 @@ border-radius:14px;
 
 background:#1E3A8A;
 
-color:#fff;
+color:#FFFFFF;
 
 font-size:15px;
 
@@ -1174,6 +1336,15 @@ transition:.3s;
 
 box-shadow:0 8px 25px rgba(0,87,217,.18);
 
+}
+
+.help-button svg {
+    width: 19px;
+    height: 19px;
+
+    color: #FFFFFF;
+
+    stroke: #FFFFFF;
 }
 
 .help-button:hover{
@@ -1265,14 +1436,25 @@ padding:18px;
 
 }
 
-.badges-title h2{
+.badges-title h2 {
+    display: flex;
 
-    color:#0D1B2A;
+    align-items: center;
 
-    font-size:28px;
+    gap: 8px;
 
-    font-weight:700;
+    color: #0D1B2A;
+}
 
+.badges-title h2 svg {
+    width: 25px;
+    height: 25px;
+
+    color: #F4B400;
+
+    stroke: #F4B400;
+
+    stroke-width: 2.2;
 }
 
 .badges-title p{
@@ -1347,6 +1529,15 @@ padding:18px;
 
 }
 
+.badge-icon svg {
+    width: 32px;
+    height: 32px;
+
+    color: #0D1B2A;
+
+    stroke-width: 2.2;
+}
+
 .badge-name{
 
     color:#0D1B2A;
@@ -1366,5 +1557,1068 @@ padding:18px;
     font-size:14px;
 
     font-weight:600;
+
+}
+
+
+.statistics-section h3 svg,
+.welcome-icon svg,
+.path-circle svg,
+.action-card > svg,
+.action-button-section h2 svg,
+.future-icon svg,
+.help-icon svg,
+.help-button svg,
+.badges-title h2 svg,
+.premium-note svg {
+    width: 24px;
+    height: 24px;
+}
+
+
+.help-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.premium-note {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+
+/* =========================================
+   RESPONSIVE ICÔNES
+========================================= */
+
+@media (max-width: 768px) {
+
+    .dashboard-page svg {
+        width: 22px;
+        height: 22px;
+    }
+
+    .stat-card h3 {
+        width: 48px;
+        height: 48px;
+    }
+
+    .welcome-icon {
+        width: 58px;
+        height: 58px;
+    }
+
+    .welcome-icon svg {
+        width: 27px;
+        height: 27px;
+    }
+
+    .future-icon {
+        width: 52px;
+        height: 52px;
+    }
+
+    .future-icon svg {
+        width: 25px;
+        height: 25px;
+    }
+
+    .help-icon {
+        width: 58px;
+        height: 58px;
+    }
+
+    .help-icon svg {
+        width: 26px;
+        height: 26px;
+    }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE DASHBOARD - NEXTORI
+========================================================= */
+
+
+/* =========================
+   TABLETTES
+========================= */
+
+@media (max-width: 900px) {
+
+    .level-card,
+    .welcome-card,
+    .orientation-path,
+    .action-button-section,
+    .quick-actions,
+    .project-card,
+    .help-card,
+    .badges-section,
+    .statistics-section {
+
+        width: calc(100% - 32px);
+
+        max-width: none;
+
+    }
+
+
+    .dashboard-header {
+
+        padding: 30px 20px 45px;
+
+    }
+
+
+    .dashboard-header h1 {
+
+        font-size: 34px;
+
+    }
+
+
+    .statistics-section {
+
+        grid-template-columns: repeat(3, 1fr);
+
+    }
+
+
+    .actions-grid {
+
+        grid-template-columns: repeat(2, 1fr);
+
+    }
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 768px) {
+
+    .dashboard-page {
+
+        width: 100%;
+
+        overflow-x: hidden;
+
+        padding-bottom: 75px;
+
+    }
+
+
+    /* =====================
+       HEADER
+    ===================== */
+
+    .dashboard-header {
+
+        padding: 25px 18px 55px;
+
+        border-bottom-left-radius: 22px;
+
+        border-bottom-right-radius: 22px;
+
+    }
+
+
+    .dashboard-subtitle {
+
+        font-size: 14px;
+
+        margin-bottom: 7px;
+
+    }
+
+
+    .dashboard-header h1 {
+
+        font-size: 30px;
+
+        margin: 0;
+
+    }
+
+
+    /* =====================
+       CARTES PRINCIPALES
+    ===================== */
+
+    .level-card,
+    .welcome-card,
+    .orientation-path,
+    .action-button-section,
+    .quick-actions,
+    .project-card,
+    .help-card,
+    .badges-section,
+    .statistics-section {
+
+        width: calc(100% - 28px);
+
+        margin-left: auto;
+
+        margin-right: auto;
+
+        box-sizing: border-box;
+
+    }
+
+
+    /* =====================
+       CARTE NIVEAU
+    ===================== */
+
+    .level-card {
+
+        margin-top: -35px;
+
+        position: relative;
+
+        top: auto;
+
+        z-index: 10;
+
+    }
+
+
+    .level-header {
+
+        gap: 12px;
+
+    }
+
+
+    .level-header h2 {
+
+        font-size: 21px;
+
+    }
+
+
+    .level-header span {
+
+        padding: 7px 12px;
+
+        font-size: 13px;
+
+        white-space: nowrap;
+
+    }
+
+
+    .progress-bar {
+
+        height: 11px;
+
+    }
+
+
+    .progress-text {
+
+        font-size: 14px;
+
+    }
+
+
+    /* =====================
+       STATISTIQUES
+    ===================== */
+
+    .statistics-section {
+
+        display: grid;
+
+        grid-template-columns: repeat(3, 1fr);
+
+        gap: 8px;
+
+        margin-top: 20px;
+
+        margin-bottom: 20px;
+
+    }
+
+
+    .stat-card {
+
+        padding: 14px 7px;
+
+        border-radius: 15px;
+
+    }
+
+
+    .stat-card h3 {
+
+        font-size: 21px;
+
+        margin-bottom: 5px;
+
+    }
+
+
+    .stat-card h2 {
+
+        font-size: 20px;
+
+        margin: 0 0 4px;
+
+    }
+
+
+    .stat-card p {
+
+        font-size: 12px;
+
+    }
+
+
+    /* =====================
+       WELCOME
+    ===================== */
+
+    .welcome-card {
+
+        padding: 22px 18px;
+
+        border-radius: 20px;
+
+    }
+
+
+    .welcome-content {
+
+        flex-direction: column;
+
+        align-items: center;
+
+        text-align: center;
+
+        gap: 14px;
+
+    }
+
+
+    .welcome-icon {
+
+        width: 58px;
+
+        height: 58px;
+
+    }
+
+
+    .welcome-content h2 {
+
+        font-size: 21px;
+
+        margin-bottom: 8px;
+
+    }
+
+
+    .welcome-content p {
+
+        font-size: 14px;
+
+        line-height: 1.7;
+
+    }
+
+
+    /* =====================
+       PARCOURS
+    ===================== */
+
+    .orientation-path {
+
+        padding: 22px 18px;
+
+    }
+
+
+    .orientation-path h2 {
+
+        font-size: 22px;
+
+        margin-bottom: 20px;
+
+    }
+
+
+    .path-container {
+
+        gap: 18px;
+
+    }
+
+
+    .path-item {
+
+        align-items: flex-start;
+
+        gap: 12px;
+
+    }
+
+
+    .path-circle {
+
+        width: 40px;
+
+        height: 40px;
+
+        min-width: 40px;
+
+        font-size: 16px;
+
+    }
+
+
+    .path-item h3 {
+
+        font-size: 15px;
+
+        line-height: 1.4;
+
+    }
+
+
+    .path-item p {
+
+        font-size: 13px;
+
+        line-height: 1.5;
+
+    }
+
+
+    /* =====================
+       ACTIONS RAPIDES
+    ===================== */
+
+    .quick-actions {
+
+        margin-top: 25px;
+
+    }
+
+
+    .quick-actions h2 {
+
+        font-size: 22px;
+
+    }
+
+
+    .actions-grid {
+
+        grid-template-columns: repeat(2, 1fr);
+
+        gap: 10px;
+
+    }
+
+
+    .action-card {
+
+        padding: 17px 10px;
+
+        border-radius: 16px;
+
+        min-width: 0;
+
+    }
+
+
+    .action-card span {
+
+        font-size: 25px;
+
+    }
+
+
+    .action-card h3 {
+
+        font-size: 15px;
+
+        margin: 8px 0;
+
+    }
+
+
+    .action-card p {
+
+        font-size: 12px;
+
+        line-height: 1.5;
+
+    }
+
+
+    /* =====================
+       CTA
+    ===================== */
+
+    .action-button-section {
+
+        padding: 25px 18px;
+
+        border-radius: 20px;
+
+        gap: 14px;
+
+    }
+
+
+    .action-button-section h2 {
+
+        font-size: 22px;
+
+        line-height: 1.3;
+
+    }
+
+
+    .action-button-section p {
+
+        font-size: 14px;
+
+        line-height: 1.7;
+
+        margin: 0;
+
+    }
+
+
+    .dashboard-page .start-test-button {
+
+        width: 100%;
+
+        padding: 14px 20px;
+
+        font-size: 15px;
+
+    }
+
+
+    .action-icon {
+
+        width: 58px;
+
+        height: 58px;
+
+        font-size: 28px;
+
+    }
+
+
+    /* =====================
+       PROJET D'AVENIR
+    ===================== */
+
+    .project-card {
+
+        padding: 22px 18px;
+
+    }
+
+
+    .project-card h2 {
+
+        font-size: 22px;
+
+        line-height: 1.3;
+
+    }
+
+
+    .project-card p {
+
+        font-size: 14px;
+
+        line-height: 1.7;
+
+    }
+
+
+    .future-plan-card {
+
+        flex-direction: column;
+
+        align-items: center;
+
+        text-align: center;
+
+        padding: 18px 14px;
+
+    }
+
+
+    .future-icon {
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        width: 58px;
+
+        height: 58px;
+
+    }
+
+
+    .future-icon svg {
+
+        width: 30px;
+
+        height: 30px;
+
+    }
+
+
+    .future-content h3 {
+
+        font-size: 16px;
+
+    }
+
+
+    .future-content p {
+
+        font-size: 13px;
+
+        line-height: 1.6;
+
+    }
+
+
+    .future-button {
+
+        font-size: 14px;
+
+        padding: 13px;
+
+    }
+
+
+    /* =====================
+       HELP
+    ===================== */
+
+    .help-card {
+
+        padding: 22px 18px;
+
+        border-radius: 20px;
+
+    }
+
+
+    .help-top {
+
+        flex-direction: column;
+
+        align-items: center;
+
+        text-align: center;
+
+        gap: 14px;
+
+    }
+
+
+    .help-icon {
+
+        width: 58px;
+
+        height: 58px;
+
+    }
+
+
+    .help-card-content h2 {
+
+        font-size: 21px;
+
+    }
+
+
+    .help-card-content p {
+
+        font-size: 14px;
+
+        line-height: 1.7;
+
+    }
+
+
+    .help-soon {
+
+        padding: 17px;
+
+        gap: 14px;
+
+    }
+
+
+    .help-badge {
+
+        font-size: 12px;
+
+        padding: 7px 12px;
+
+    }
+
+
+    .help-soon-text {
+
+        font-size: 13px;
+
+        line-height: 1.6;
+
+    }
+
+
+    .help-button {
+
+        width: 100%;
+
+        align-self: stretch;
+
+        padding: 13px;
+
+    }
+
+
+    /* =====================
+       BADGES
+    ===================== */
+
+    .badges-section {
+
+        padding: 22px 16px;
+
+        border-radius: 20px;
+
+    }
+
+
+    .badges-header {
+
+        margin-bottom: 18px;
+
+    }
+
+
+    .badges-title h2 {
+
+        font-size: 22px;
+
+        margin: 0;
+
+    }
+
+
+    .badges-title p {
+
+        font-size: 13px;
+
+        line-height: 1.6;
+
+    }
+
+
+    .badges-container {
+
+        display: grid;
+
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+
+        gap: 10px;
+
+    }
+
+
+    .badge-card {
+
+        padding: 17px 8px;
+
+        border-radius: 15px;
+
+        min-width: 0;
+
+    }
+
+
+    .badge-icon {
+
+        width: 54px;
+
+        height: 54px;
+
+        margin-bottom: 12px;
+
+    }
+
+
+    .badge-icon svg {
+
+        width: 25px;
+
+        height: 25px;
+
+    }
+
+
+    .badge-name {
+
+        font-size: 13px;
+
+        line-height: 1.3;
+
+    }
+
+
+    .badge-status {
+
+        font-size: 11px;
+
+        margin-top: 8px;
+
+    }
+
+
+    /* =====================
+       ICÔNES REACT
+    ===================== */
+
+    .statistics-section h3 svg,
+    .welcome-icon svg,
+    .path-circle svg,
+    .action-card > svg,
+    .action-button-section h2 svg,
+    .future-icon svg,
+    .help-icon svg,
+    .help-button svg,
+    .badges-title h2 svg,
+    .premium-note svg {
+
+        width: 22px;
+
+        height: 22px;
+
+        flex-shrink: 0;
+
+    }
+
+}
+
+
+/* =========================
+   PETITS TÉLÉPHONES
+========================= */
+
+@media (max-width: 480px) {
+
+    .dashboard-header {
+
+        padding: 22px 15px 50px;
+
+    }
+
+
+    .dashboard-header h1 {
+
+        font-size: 27px;
+
+    }
+
+
+    .dashboard-subtitle {
+
+        font-size: 13px;
+
+    }
+
+
+    .level-card,
+    .welcome-card,
+    .orientation-path,
+    .action-button-section,
+    .quick-actions,
+    .project-card,
+    .help-card,
+    .badges-section,
+    .statistics-section {
+
+        width: calc(100% - 20px);
+
+    }
+
+
+    .level-header h2 {
+
+        font-size: 19px;
+
+    }
+
+
+    .level-header span {
+
+        font-size: 12px;
+
+        padding: 6px 10px;
+
+    }
+
+
+    .statistics-section {
+
+        gap: 6px;
+
+    }
+
+
+    .stat-card {
+
+        padding: 12px 5px;
+
+    }
+
+
+    .stat-card h3 {
+
+        font-size: 19px;
+
+    }
+
+
+    .stat-card h2 {
+
+        font-size: 18px;
+
+    }
+
+
+    .stat-card p {
+
+        font-size: 11px;
+
+    }
+
+
+    .actions-grid {
+
+        gap: 8px;
+
+    }
+
+
+    .action-card {
+
+        padding: 15px 7px;
+
+    }
+
+
+    .action-card h3 {
+
+        font-size: 14px;
+
+    }
+
+
+    .action-card p {
+
+        font-size: 11px;
+
+    }
+
+
+    .badges-container {
+
+        gap: 8px;
+
+    }
+
+
+    .badge-card {
+
+        padding: 14px 6px;
+
+    }
+
+
+    .badge-icon {
+
+        width: 50px;
+
+        height: 50px;
+
+    }
+
+
+    .badge-name {
+
+        font-size: 12px;
+
+    }
+
+}
+
+
+/* =========================
+   TRÈS PETITS ÉCRANS
+========================= */
+
+@media (max-width: 360px) {
+
+    .statistics-section {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .actions-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .badges-container {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .level-header {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+    }
+
+
+    .level-header span {
+
+        align-self: flex-start;
+
+    }
 
 }

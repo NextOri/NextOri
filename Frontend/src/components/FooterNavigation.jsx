@@ -88,7 +88,7 @@ function FooterNavigation() {
                 </span>
 
                 <p>
-                    Formations
+                    Filières
                 </p>
 
             </NavLink>

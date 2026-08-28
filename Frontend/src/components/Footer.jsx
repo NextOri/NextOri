@@ -1,32 +1,77 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "../styles/Footer.css";
 
 import {
     FaInstagram,
     FaLinkedin,
     FaFacebook,
-    FaWhatsapp
+    FaWhatsapp,
+    FaSnapchat
 } from "react-icons/fa";
+
+import {
+    FaTiktok,
+    FaXTwitter
+} from "react-icons/fa6";
+
+import "../styles/Footer.css";
 
 
 function Footer() {
+
+    const reseauxSociaux = [
+        {
+            nom: "Instagram",
+            url: "https://www.instagram.com/nextori2?utm_source=qr&igsi=MXIzODB6aDEwNnFlaA==",
+            icone: FaInstagram
+        },
+        {
+            nom: "LinkedIn",
+            url: "",
+            icone: FaLinkedin
+        },
+        {
+            nom: "Facebook",
+            url: "https://www.facebook.com/share/1EMXHGo4NU/",
+            icone: FaFacebook
+        },
+        {
+            nom: "WhatsApp",
+            url: "https://chat.whatsapp.com/ClOq5el9jdPIVx7Vglq4F5?s=cl&p=a&ilr=2",
+            icone: FaWhatsapp
+        },
+        {
+            nom: "Snapchat",
+            url: "https://www.instagram.com/nextori2?utm_source=qr&igsi=MXIzODB6aDEwNnFlaA==",
+            icone: FaSnapchat
+        },
+        {
+            nom: "TikTok",
+            url: "",
+            icone: FaTiktok
+        },
+        {
+            nom: "X",
+            url: "",
+            icone: FaXTwitter
+        }
+    ];
 
 
     return (
 
         <footer className="site-footer">
 
-
             <div className="site-footer-container">
 
+
+                {/* Identité */}
 
                 <div className="site-footer-brand">
 
                     <h2>
                         NextOri
                     </h2>
-
 
                     <p>
                         Votre plateforme d'accompagnement
@@ -37,82 +82,98 @@ function Footer() {
                 </div>
 
 
+                {/* Navigation */}
+
+                <div className="site-footer-links">
+
+                    <h3>
+                        Navigation
+                    </h3>
+
+                    <div className="site-footer-link-list">
+
+                        <Link to="/">
+                            Accueil
+                        </Link>
+
+                        <span className="footer-separator">
+                            •
+                        </span>
+
+                        <Link to="/test">
+                            Test RIASEC
+                        </Link>
+
+                        <span className="footer-separator">
+                            •
+                        </span>
+
+                        <Link to="/metiers">
+                            Métiers
+                        </Link>
+
+                        <span className="footer-separator">
+                            •
+                        </span>
+
+                        <Link to="/filieres">
+                            Formations
+                        </Link>
+
+                        <span className="footer-separator">
+                            •
+                        </span>
+
+                        <Link to="/universite-catalogue">
+                            Universités
+                        </Link>
+
+                    </div>
+
+                </div>
 
 
-               <div className="site-footer-links">
-
-    <h3>
-        Navigation
-    </h3>
-
-   <div className="site-footer-link-list">
-
-   <Link to="/">Accueil</Link>
-
-<span className="footer-separator">•</span>
-
-<Link to="/test">Test RIASEC</Link>
-
-<span className="footer-separator">•</span>
-
-<Link to="/metiers">Métiers</Link>
-
-<span className="footer-separator">•</span>
-
-<Link to="/filieres">Formations</Link>
-
-<span className="footer-separator">•</span>
-
-<Link to="/universite-catalogue">Universités</Link>
-</div>
-
-</div>
-
+                {/* Réseaux sociaux */}
 
                 <div className="site-footer-social">
-
 
                     <h3>
                         Suivez-nous
                     </h3>
 
+                    <div className="social-links">
 
+                        {reseauxSociaux.map((reseau) => {
 
-                    <div>
+                            const Icone = reseau.icone;
 
+                            return (
 
-                        <a href="#">
-                            <FaInstagram />
-                        </a>
+                                <a
+                                    key={reseau.nom}
+                                    href={reseau.url || "#"}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    aria-label={`NextOri sur ${reseau.nom}`}
+                                >
 
+                                    <Icone />
 
-                        <a href="#">
-                            <FaLinkedin />
-                        </a>
+                                </a>
 
+                            );
 
-                        <a href="#">
-                            <FaFacebook />
-                        </a>
-
-
-                        <a href="#">
-                            <FaWhatsapp />
-                        </a>
-
+                        })}
 
                     </div>
 
-
                 </div>
-
 
 
             </div>
 
 
-
-
+            {/* Bas du footer */}
 
             <div className="site-footer-bottom">
 
@@ -121,8 +182,6 @@ function Footer() {
                 </p>
 
             </div>
-
-
 
         </footer>
 

@@ -28,6 +28,8 @@ function Test(){
 
     const [loading, setLoading] = useState(true);
 
+    const [afficherInformation, setAfficherInformation] = useState(true);
+
     const navigate = useNavigate();
 
     useEffect(()=>{
@@ -197,33 +199,88 @@ function precedent(){
 
    return (
 
-<div className="test-page">
+    <div className="test-page">
 
 
-<header className="test-header">
+        <header className="test-header">
 
-<h1>
-NextOri
-</h1>
+            <div className="test-brand">
 
-<p>
-Test d'orientation RIASEC
-</p>
+                <img
+                    src="/images/logo.png"
+                    alt="NextOri"
+                    className="test-logo"
+                />
 
-</header>
+                <h1>
+                    NextOri
+                </h1>
 
-<div className="test-introduction">
+            </div>
 
-    <h1>
-        Découvre ton profil professionnel
-    </h1>
+            <p>
+                Test d'orientation RIASEC
+            </p>
 
-    <p>
-        Réponds aux questions suivantes pour mieux comprendre 
-        tes centres d'intérêt et découvrir les métiers qui te correspondent.
-    </p>
+        </header>
 
-</div>
+
+        {/* Boîte d'information */}
+
+        {afficherInformation && (
+
+            <div className="test-information">
+
+                <div className="test-information-content">
+
+                    <div className="test-information-text">
+
+                        <strong>
+                            Avant de commencer
+                        </strong>
+
+                        <p>
+                            Il n’y a pas de bonne ou de mauvaise réponse.
+                            Réponds simplement selon ce qui te correspond
+                            réellement. Tes réponses nous aideront à mieux
+                            comprendre tes intérêts, tes forces et tes attentes.
+                        </p>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        className="test-information-close"
+                        onClick={() =>
+                            setAfficherInformation(false)
+                        }
+                        aria-label="Fermer l'information"
+                    >
+
+                        <X />
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        )}
+
+
+        <div className="test-introduction">
+
+            <h1>
+                Découvre ton profil professionnel
+            </h1>
+
+            <p>
+                Réponds aux questions suivantes pour mieux comprendre 
+                tes centres d'intérêt et découvrir les métiers qui te correspondent.
+            </p>
+
+        </div>
 
 
 

@@ -1,83 +1,131 @@
 import { useNavigate } from "react-router-dom";
+import { ArrowRight, Compass } from "lucide-react";
 
 import "../styles/HeroSection.css";
 
 
-function HeroSection(){
+function HeroSection() {
 
     const navigate = useNavigate();
 
 
-    return(
+    return (
 
-        <section className="hero">
+        <section className="hero-section">
 
-
-            <div className="hero-text">
-
-
-                <h1>
-
-                    Trouve la voie qui correspond à ton potentiel.
-
-                </h1>
+            <div className="hero-container">
 
 
-                <p>
+                <div className="hero-content">
 
-                    NextOri t'accompagne dans ton orientation grâce au profil RIASEC.
-                    Découvre les métiers, les filières et les universités adaptés à ton avenir.
+                    <div className="hero-badge">
 
-                </p>
+                        <Compass />
 
+                        <span>
+                            Ton orientation, autrement
+                        </span>
 
-                <div className="hero-buttons">
-
-
-                    <button
-
-                        className="btn-primary"
-
-                        onClick={()=>navigate("/test")}
-
-                    >
-
-                        Commencer le test
-
-                    </button>
+                    </div>
 
 
+                    <h1>
 
-                    <button 
-                    className="btn-secondary"
-                     onClick={() => navigate("/dashboard")}
-                         >
-                     Explorer la plateforme
+                        Trouve la voie qui
+                        <span> correspond à ton potentiel.</span>
+
+                    </h1>
+
+
+                    <p className="hero-description">
+
+                        Découvre les métiers, les filières et les
+                        établissements qui peuvent correspondre à ton
+                        profil et construis ton parcours étape par étape.
+
+                    </p>
+
+
+                    <div className="hero-actions">
+
+                        <button
+                            className="hero-primary-button"
+                            onClick={() => navigate("/test")}
+                        >
+
+                            Commencer mon orientation
+
+                            <ArrowRight />
+
                         </button>
 
 
+                        <button
+                            className="hero-secondary-button"
+                            onClick={() => navigate("/metiers")}
+                        >
+
+                            Explorer les métiers
+
+                        </button>
+
+                    </div>
+
+
+                    <div className="hero-meta">
+
+                        <span>
+                            Profil RIASEC
+                        </span>
+
+                        <span className="hero-meta-separator">
+                            •
+                        </span>
+
+                        <span>
+                            Métiers
+                        </span>
+
+                        <span className="hero-meta-separator">
+                            •
+                        </span>
+
+                        <span>
+                            Filières
+                        </span>
+
+                        <span className="hero-meta-separator">
+                            •
+                        </span>
+
+                        <span>
+                            Établissements
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+
+                <div className="hero-visual">
+
+                    <div className="hero-image-wrapper">
+
+                        <img
+                            src="/images/home/hero-nextori.png"
+                            alt="Illustration de l'orientation avec NextOri"
+                            className="hero-image"
+                        />
+
+                    </div>
+
                 </div>
 
 
             </div>
-
-
-
-            <div className="hero-image">
-
-
-                <div className="image-placeholder">
-
-                    Illustration NextOri
-
-                </div>
-
-
-            </div>
-
 
         </section>
-
 
     );
 

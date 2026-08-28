@@ -313,7 +313,7 @@ const getEtapeActuelle = (parcours) => {
     </div>
 
 
-
+ {/*
     <div className="welcome-about">
 
         <h3>
@@ -346,6 +346,9 @@ const getEtapeActuelle = (parcours) => {
     </p>
 
     </div>
+
+    */}
+    
 
 
 </section>

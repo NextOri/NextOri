@@ -1,37 +1,71 @@
 import { useNavigate } from "react-router-dom";
+import { ArrowRight, Compass } from "lucide-react";
+
+import "../styles/CTASection.css";
+
 
 function CTASection() {
 
     const navigate = useNavigate();
 
+
     return (
 
-        <section className="cta">
+        <section className="cta-section">
 
-            <h2>Prêt à découvrir ton avenir ?</h2>
+            <div className="cta-container">
 
-            <p>
 
-                Passe gratuitement le test RIASEC et découvre les métiers,
-                les filières et les universités adaptées à ton profil.
+                <div className="cta-icon">
 
-            </p>
+                    <Compass />
 
-            <div className="cta-buttons">
+                </div>
 
-                <button
-                    className="btn-primary"
-                    onClick={() => navigate("/test")}
-                >
-                    Commencer le test
-                </button>
 
-                <button 
-                className="btn-secondary"
-    onClick={() => navigate("/dashboard")}
->
-    Explorer la plateforme
-</button>
+                <span className="cta-label">
+                    PASSE À L'ÉTAPE SUIVANTE
+                </span>
+
+
+                <h2>
+                    Ton orientation
+                    <span> commence maintenant.</span>
+                </h2>
+
+
+                <p>
+                    Mieux comprendre ton profil, explorer les métiers
+                    et les filières qui t'intéressent, puis construire
+                    progressivement ton parcours.
+                </p>
+
+
+                <div className="cta-actions">
+
+                    <button
+                        className="cta-primary-button"
+                        onClick={() => navigate("/test")}
+                    >
+
+                        Commencer mon orientation
+
+                        <ArrowRight />
+
+                    </button>
+
+
+                    <button
+                        className="cta-secondary-button"
+                        onClick={() => navigate("/metiers")}
+                    >
+
+                        Explorer les métiers
+
+                    </button>
+
+                </div>
+
 
             </div>
 
@@ -40,5 +74,6 @@ function CTASection() {
     );
 
 }
+
 
 export default CTASection;

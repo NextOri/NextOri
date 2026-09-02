@@ -74,7 +74,7 @@ if ($requete->fetchColumn() > 0) {
    }
  
 
-   private function calculerBadges(int $idUser): array
+   private function calculerBadges(int $idUser, int $serie): array
 {
     $badges = [];
 
@@ -158,6 +158,13 @@ if ($requete->fetchColumn() > 0) {
         ];
     }
 
+    // 7. Série de 5 jours
+    if ($serie >= 5) {
+        $badges[] = [
+            "nom" => "Série de 5 jours",
+            "icone" => "serie-5-jours"
+        ];
+    }
     return $badges;
 }
    private function calculerNiveau(int $points): array
@@ -208,15 +215,50 @@ if ($requete->fetchColumn() > 0) {
     }
 
     private function calculerSerie(int $idUser): int
-    {
-    /*
-     * V1 :
-     * La série sera calculée automatiquement
-     * lorsque l'historique de connexion sera disponible.
-     */
+{
+    $sql = "
+        SELECT date_connexion
+        FROM connexion_utilisateur
+        WHERE id_user = ?
+        ORDER BY date_connexion DESC
+    ";
 
-    return 1;
+    $requete = $this->connexion->prepare($sql);
+    $requete->execute([$idUser]);
+
+    $dates = $requete->fetchAll(PDO::FETCH_COLUMN);
+
+    // Aucune connexion enregistrée
+    if (empty($dates)) {
+        return 0;
     }
+
+    $serie = 1;
+
+    $dateActuelle = new DateTimeImmutable($dates[0]);
+
+    for ($i = 1; $i < count($dates); $i++) {
+
+        $datePrecedente = new DateTimeImmutable($dates[$i]);
+
+        $difference = $dateActuelle->diff($datePrecedente)->days;
+
+        // Les deux jours sont consécutifs
+        if ($difference === 1) {
+
+            $serie++;
+
+            $dateActuelle = $datePrecedente;
+
+        } else {
+
+            // Une journée a été manquée
+            break;
+        }
+    }
+
+    return $serie;
+}
          
 
     private function calculerParcours(int $idUser): array
@@ -335,10 +377,10 @@ if ($requete->fetchColumn() > 0) {
             return null;
         }
         $points = $this->calculerPoints($idUser);
-        $niveau = $this->calculerNiveau($points);
-        $serie = $this->calculerSerie($idUser);
-        $badges = $this->calculerBadges($idUser);
-        $parcours = $this->calculerParcours($idUser);
+$niveau = $this->calculerNiveau($points);
+$serie = $this->calculerSerie($idUser);
+$badges = $this->calculerBadges($idUser, $serie);
+$parcours = $this->calculerParcours($idUser);
 
         return [
 

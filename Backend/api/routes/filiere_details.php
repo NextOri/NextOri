@@ -26,18 +26,21 @@ try {
 
     $filiere = $filieresService->getById($idFiliere);
 
-    $metiers = $filieresService->getMetiersByFiliere($idFiliere);
-
     if (!$filiere) {
 
         throw new Exception("Filière introuvable.");
 
     }
 
+    $metiers = $filieresService->getMetiersByFiliere($idFiliere);
+
+    $universites = $filieresService->getUniversitesByFiliere($idFiliere);
+
     echo json_encode([
         "success" => true,
         "data" => $filiere,
-        "metiers" => $metiers
+        "metiers" => $metiers,
+        "universites" => $universites
     ]);
 
 } catch (Exception $e) {

@@ -1,6 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import FooterNavigation from "../components/FooterNavigation";
+import {
+    FaGraduationCap,
+    FaFolderOpen,
+    FaClock,
+    FaBriefcase,
+    FaUniversity,
+    FaArrowLeft,
+    FaTools
+} from "react-icons/fa";
 import "../styles/FiliereDetail.css";
 
 function FiliereDetail() {
@@ -10,10 +19,9 @@ function FiliereDetail() {
     const navigate = useNavigate();
 
     const [filiere, setFiliere] = useState(null);
-
     const [loading, setLoading] = useState(true);
-
     const [metiers, setMetiers] = useState([]);
+    const [universites, setUniversites] = useState([]);
 
     useEffect(() => {
 
@@ -25,10 +33,21 @@ function FiliereDetail() {
 
         .then(data => {
 
-            if(data.success){
+            if (data.success) {
 
                 setFiliere(data.data);
-                setMetiers(data.metiers);
+
+                setMetiers(
+                    Array.isArray(data.metiers)
+                        ? data.metiers
+                        : []
+                );
+
+                setUniversites(
+                    Array.isArray(data.universites)
+                        ? data.universites
+                        : []
+                );
 
             }
 
@@ -50,9 +69,12 @@ function FiliereDetail() {
     }, [id_filiere]);
 
 
-    if(loading){
+    /*
+     * État de chargement
+     */
+    if (loading) {
 
-        return(
+        return (
 
             <div className="loading-container">
 
@@ -67,26 +89,31 @@ function FiliereDetail() {
     }
 
 
-    if(!filiere){
+    /*
+     * Filière introuvable
+     */
+    if (!filiere) {
 
-        return(
+        return (
 
             <div className="filiere-introuvable">
 
-                <h2>🎓 Filière introuvable</h2>
+                <FaGraduationCap className="introuvable-icon" />
+
+                <h2>Filière introuvable</h2>
 
                 <p>
-
                     Cette filière n'existe pas ou n'est plus disponible.
-
                 </p>
 
                 <button
                     className="retour-btn"
-                    onClick={()=>navigate("/filieres")}
+                    onClick={() => navigate("/filieres")}
                 >
 
-                    ← Retour aux filières
+                    <FaArrowLeft />
+
+                    <span>Retour aux filières</span>
 
                 </button>
 
@@ -97,26 +124,41 @@ function FiliereDetail() {
     }
 
 
-    return(
+    return (
 
         <div className="filiere-detail-page">
 
 
+            {/* ================================
+                EN-TÊTE
+            ================================= */}
+
             <div className="filiere-detail-header">
 
-                <h1>{filiere.nom}</h1>
+                <div className="filiere-title-container">
+
+                    <FaGraduationCap className="filiere-main-icon" />
+
+                    <h1>{filiere.nom}</h1>
+
+                </div>
+
 
                 <div className="header-infos">
 
                     <span>
 
-                        📂 {filiere.domaine}
+                        <FaFolderOpen />
+
+                        {filiere.domaine}
 
                     </span>
 
                     <span>
 
-                        ⏳ {filiere.duree}
+                        <FaClock />
+
+                        {filiere.duree}
 
                     </span>
 
@@ -126,88 +168,214 @@ function FiliereDetail() {
 
 
 
+            {/* ================================
+                PRÉSENTATION
+            ================================= */}
+
             <section className="detail-section">
 
-                <h2>Présentation</h2>
+                <h2>
+                    <FaGraduationCap />
+                    Présentation
+                </h2>
 
                 <p>
-
                     {filiere.presentation}
-
                 </p>
 
             </section>
 
 
 
+            {/* ================================
+                COMPÉTENCES
+            ================================= */}
+
             <section className="detail-section">
 
-                <h2>Compétences développées</h2>
+                <h2>
+                    <FaTools />
+                    Compétences développées
+                </h2>
 
                 <div className="competences-container">
 
                     {
                         filiere.competences_developpees
-                        .split(",")
+                            ? filiere.competences_developpees
+                                .split(",")
+                                .map((competence, index) => (
 
-                        .map((competence,index)=>(
+                                    <span
+                                        key={index}
+                                        className="competence-badge"
+                                    >
 
-                            <span
-                                key={index}
-                                className="competence-badge"
-                            >
+                                        {competence.trim()}
 
-                                {competence.trim()}
+                                    </span>
 
-                            </span>
-
-                        ))
+                                ))
+                            : (
+                                <p>
+                                    Aucune compétence renseignée.
+                                </p>
+                            )
                     }
 
                 </div>
 
             </section>
 
+
+
+            {/* ================================
+                MÉTIERS
+            ================================= */}
+
             <section className="detail-section">
 
-       <h2>🎯 Métiers accessibles après cette filière</h2>
-
-       <div className="filiere-metiers-container">
-
-        {
-            metiers.map((metier) => (
-
-                <div
-                    key={metier.id_metier}
-                    className="filiere-metier-card"
-                >
-
-                    💼 {metier.nom}
-
-                </div>
-
-            ))
-        }
-
-     </div>
-
-     </section>
+                <h2>
+                    <FaBriefcase />
+                    Métiers accessibles après cette filière
+                </h2>
 
 
+                {
+                    metiers.length > 0 ? (
+
+                        <div className="filiere-metiers-container">
+
+                            {
+                                metiers.map((metier) => (
+
+                                    <button
+                                        key={metier.id_metier}
+                                        className="filiere-metier-card"
+                                        onClick={() =>
+                                            navigate(
+                                                `/metiers/${metier.id_metier}`
+                                            )
+                                        }
+                                    >
+
+                                        <FaBriefcase />
+
+                                        <span>
+                                            {metier.nom}
+                                        </span>
+
+                                    </button>
+
+                                ))
+                            }
+
+                        </div>
+
+                    ) : (
+
+                        <p className="empty-message">
+                            Aucun métier associé à cette filière.
+                        </p>
+
+                    )
+                }
+
+            </section>
+
+
+
+            {/* ================================
+                UNIVERSITÉS
+            ================================= */}
+
+            <section className="detail-section">
+
+                <h2>
+                    <FaUniversity />
+                    Universités proposant cette filière
+                </h2>
+
+
+                {
+                    universites.length > 0 ? (
+
+                        <div className="filiere-universites-container">
+
+                            {
+                                universites.map((universite) => (
+
+                                    <button
+                                        key={universite.id_universite}
+                                        className="filiere-universite-card"
+                                        onClick={() =>
+                                            navigate(
+                                                `/universite-catalogue/${universite.id_universite}`
+                                            )
+                                        }
+                                    >
+
+                                        <div className="universite-icon-container">
+
+                                            <FaUniversity />
+
+                                        </div>
+
+                                        <div className="universite-info">
+
+                                            <h3>
+                                                {universite.nom}
+                                            </h3>
+
+                                            {
+                                                universite.ville && (
+
+                                                    <span>
+                                                        {universite.ville}
+                                                    </span>
+
+                                                )
+                                            }
+
+                                        </div>
+
+                                    </button>
+
+                                ))
+                            }
+
+                        </div>
+
+                    ) : (
+
+                        <p className="empty-message">
+                            Aucune université associée à cette filière.
+                        </p>
+
+                    )
+                }
+
+            </section>
+
+
+
+            {/* ================================
+                RETOUR
+            ================================= */}
 
             <button
                 className="retour-btn"
-                onClick={()=>navigate("/filieres")}
+                onClick={() => navigate("/filieres")}
             >
 
-                ← Retour aux filières
+                <FaArrowLeft />
+
+                <span>Retour aux filières</span>
 
             </button>
 
 
-            
-
-            <FooterNavigation/>
+            <FooterNavigation />
 
         </div>
 

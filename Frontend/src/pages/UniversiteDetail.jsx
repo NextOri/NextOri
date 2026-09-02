@@ -1,18 +1,38 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
+
 import FooterNavigation from "../components/FooterNavigation";
+
 import "../styles/universite-detail.css";
+
 import { afficherTypeUniversite } from "../utils/universiteUtils";
 import { enregistrerAction } from "../services/historiqueService";
+
+import {
+    FaUniversity,
+    FaMapMarkerAlt,
+    FaGlobe,
+    FaGraduationCap,
+    FaBookOpen,
+    FaFileAlt,
+    FaGift,
+    FaArrowLeft,
+    FaExternalLinkAlt,
+    FaClock
+} from "react-icons/fa";
+
 
 function UniversiteDetail() {
 
     const { id_universite } = useParams();
 
+    const navigate = useNavigate();
+
     const [universite, setUniversite] = useState(null);
     const [detail, setDetail] = useState(null);
     const [filieres, setFilieres] = useState([]);
     const [chargement, setChargement] = useState(true);
+
 
     useEffect(() => {
 
@@ -20,6 +40,7 @@ function UniversiteDetail() {
             `http://localhost/NextOri/Backend/api/routes/universite-detail.php?id_universite=${id_universite}`
         )
             .then((reponse) => reponse.json())
+
             .then((data) => {
 
                 if (data.success) {
@@ -33,159 +54,448 @@ function UniversiteDetail() {
                 setChargement(false);
 
             })
+
             .catch((erreur) => {
 
                 console.error(erreur);
+
                 setChargement(false);
 
             });
 
     }, [id_universite]);
 
+
+    /*
+     * ================================
+     * CHARGEMENT
+     * ================================
+     */
+
     if (chargement) {
 
-        return <h2>Chargement...</h2>;
+        return (
+
+            <div className="no-universite-detail-loading">
+
+                <div className="no-universite-detail-spinner"></div>
+
+                <FaUniversity className="no-universite-detail-loading-icon" />
+
+                <p>Chargement de l'université...</p>
+
+            </div>
+
+        );
 
     }
+
+
+    /*
+     * ================================
+     * UNIVERSITÉ INTROUVABLE
+     * ================================
+     */
 
     if (!universite) {
 
-        return <h2>Université introuvable.</h2>;
+        return (
+
+            <div className="no-universite-detail-not-found">
+
+                <FaUniversity className="no-universite-detail-not-found-icon" />
+
+                <h2>Université introuvable</h2>
+
+                <p>
+                    Cette université n'existe pas ou n'est plus disponible.
+                </p>
+
+                <button
+                    className="no-universite-detail-retour-button"
+                    onClick={() => navigate("/universite-catalogue")}
+                >
+
+                    <FaArrowLeft />
+
+                    <span>Retour aux universités</span>
+
+                </button>
+
+            </div>
+
+        );
 
     }
+
 
     return (
 
         <div className="no-universite-detail-page">
 
-            <div className="no-universite-detail-header">
 
-                <img
-                    src={universite.logo}
-                    alt={universite.nom}
-                    className="no-universite-detail-logo"
-                />
+            {/* =========================================
+                HEADER
+            ========================================= */}
 
-                <h1>{universite.nom}</h1>
+            <header className="no-universite-detail-header">
+
+                <div className="no-universite-detail-logo-container">
+
+                    <img
+                        src={universite.logo}
+                        alt={`Logo ${universite.nom}`}
+                        className="no-universite-detail-logo"
+                    />
+
+                </div>
+
+
+                <div className="no-universite-detail-title">
+
+                    <div className="no-universite-detail-title-icon">
+
+                        
+
+                    </div>
+
+                    <h1>{universite.nom}</h1>
+
+                </div>
+
 
                 <span className="no-universite-detail-type">
+
+                    <FaGraduationCap />
+
                     {afficherTypeUniversite(universite.type)}
+
                 </span>
 
-            </div>
 
-            <div className="no-universite-detail-content">
+                <div className="no-universite-detail-location">
+
+                    <span>
+                        <FaMapMarkerAlt />
+                        {universite.ville}
+                    </span>
+
+                    
+
+                </div>
+
+            </header>
+
+
+
+            {/* =========================================
+                CONTENU
+            ========================================= */}
+
+            <main className="no-universite-detail-content">
+
+
+                {/* ================= PRÉSENTATION ================= */}
 
                 <section className="no-universite-detail-presentation">
 
-                    <h2>Présentation</h2>
+                    <div className="no-universite-detail-section-title">
 
-                    <p>{detail?.presentation}</p>
+                        <div className="no-universite-detail-section-icon">
+                            <FaBookOpen />
+                        </div>
 
-                </section>
+                        <div>
+                            <span>À propos</span>
+                            <h2>Présentation</h2>
+                        </div>
 
-                <section className="no-universite-detail-informations">
+                    </div>
 
-    <h2>Informations</h2>
 
-    <p><strong>Ville :</strong> {universite.ville}</p>
+                    <div className="no-universite-detail-text">
 
-    <p><strong>Région :</strong> {universite.region}</p>
-
-    {
-        universite.site_web &&
-        (
-           <a
-    href={universite.site_web}
-    target="_blank"
-    rel="noopener noreferrer"
-    className="no-universite-detail-site-button"
-    onClick={() =>
-        enregistrerAction(
-            `UNIVERSITE_CONSULTEE: ${universite.nom}`
-        )
-    }
->
-    Visiter le site officiel
-</a>
-        )
-       }
-
-      </section>
-
-                <section className="no-universite-detail-admission">
-
-                    <h2>Conditions d'admission</h2>
-
-                    <p>{detail?.conditions_admission}</p>
-
-                </section>
-
-                <section className="no-universite-detail-bourses">
-
-                    <h2>Bourses</h2>
-
-                    <p>{detail?.bourses}</p>
-
-                </section>
-
-                <section className="no-universite-detail-filieres">
-
-                    <h2>Filières proposées</h2>
-
-                    <div className="no-universite-detail-filieres-grid">
-
-                        {filieres.map((filiere) => (
-
-                            <div
-                                key={filiere.id_filiere}
-                                className="no-universite-detail-filiere-card"
-                            >
-
-                                <h3>{filiere.nom}</h3>
-
-                                <p>{filiere.domaine}</p>
-
-                                <p>{filiere.duree}</p>
-
-                               <button
-    className="no-universite-detail-button"
-    onClick={async () => {
-
-        await enregistrerAction(
-            `FORMATION_CONSULTEE: ${filiere.nom}`
-        );
-
-        window.location.href =
-            `/filieres/${filiere.id_filiere}`;
-
-    }}
->
-    Voir la filière
-</button>
-
-                            </div>
-
-                        ))}
+                        <p>
+                            {detail?.presentation ||
+                                "Aucune présentation disponible pour cette université."}
+                        </p>
 
                     </div>
 
                 </section>
 
-            </div>
+
+
+                {/* ================= INFORMATIONS ================= */}
+
+                <section className="no-universite-detail-informations">
+
+                    <div className="no-universite-detail-section-title">
+
+                        <div className="no-universite-detail-section-icon">
+                            <FaUniversity />
+                        </div>
+
+                        <div>
+                            <span>En bref</span>
+                            <h2>Informations</h2>
+                        </div>
+
+                    </div>
+
+
+                    <div className="no-universite-detail-info-grid">
+
+                        <div className="no-universite-detail-info-item">
+
+                            <FaMapMarkerAlt />
+
+                            <div>
+                                <span>Ville</span>
+                                <strong>{universite.ville}</strong>
+                            </div>
+
+                        </div>
+
+
+                        <div className="no-universite-detail-info-item">
+
+                            <FaMapMarkerAlt />
+
+                            <div>
+                                <span>Région</span>
+                                <strong>{universite.region}</strong>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    {
+                        universite.site_web && (
+
+                            <a
+                                href={universite.site_web}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="no-universite-detail-site-button"
+                                onClick={() =>
+                                    enregistrerAction(
+                                        `UNIVERSITE_CONSULTEE: ${universite.nom}`
+                                    )
+                                }
+                            >
+
+                                <FaGlobe />
+
+                                <span>Visiter le site officiel</span>
+
+                                <FaExternalLinkAlt className="external-icon" />
+
+                            </a>
+
+                        )
+                    }
+
+                </section>
+
+
+
+                {/* ================= ADMISSION ================= */}
+
+                <section className="no-universite-detail-admission">
+
+                    <div className="no-universite-detail-section-title">
+
+                        <div className="no-universite-detail-section-icon">
+                            <FaFileAlt />
+                        </div>
+
+                        <div>
+                            <span>Intégrer l'établissement</span>
+                            <h2>Conditions d'admission</h2>
+                        </div>
+
+                    </div>
+
+
+                    <div className="no-universite-detail-text">
+
+                        <p>
+                            {detail?.conditions_admission ||
+                                "Aucune information sur les conditions d'admission n'est disponible."}
+                        </p>
+
+                    </div>
+
+                </section>
+
+
+
+                {/* ================= BOURSES ================= */}
+
+                <section className="no-universite-detail-bourses">
+
+                    <div className="no-universite-detail-section-title">
+
+                        <div className="no-universite-detail-section-icon">
+                            <FaGift />
+                        </div>
+
+                        <div>
+                            <span>Financement</span>
+                            <h2>Bourses et aides</h2>
+                        </div>
+
+                    </div>
+
+
+                    <div className="no-universite-detail-text">
+
+                        <p>
+                            {detail?.bourses ||
+                                "Aucune information sur les bourses n'est disponible."}
+                        </p>
+
+                    </div>
+
+                </section>
+
+
+
+                {/* ================= FILIÈRES ================= */}
+
+                <section className="no-universite-detail-filieres">
+
+                    <div className="no-universite-detail-section-title">
+
+                        <div className="no-universite-detail-section-icon">
+                            <FaGraduationCap />
+                        </div>
+
+                        <div>
+                            <span>Parcours académiques</span>
+                            <h2>Filières proposées</h2>
+                        </div>
+
+                    </div>
+
+
+                    {
+                        filieres.length > 0 ? (
+
+                            <div className="no-universite-detail-filieres-grid">
+
+                                {
+                                    filieres.map((filiere) => (
+
+                                        <article
+                                            key={filiere.id_filiere}
+                                            className="no-universite-detail-filiere-card"
+                                        >
+
+                                            <div className="no-universite-detail-filiere-icon">
+
+                                                <FaGraduationCap />
+
+                                            </div>
+
+
+                                            <div className="no-universite-detail-filiere-content">
+
+                                                <h3>
+                                                    {filiere.nom}
+                                                </h3>
+
+                                                <div className="no-universite-detail-filiere-meta">
+
+                                                    <span>
+                                                        <FaBookOpen />
+                                                        {filiere.domaine}
+                                                    </span>
+
+                                                    <span>
+                                                        <FaClock />
+                                                        {filiere.duree}
+                                                    </span>
+
+                                                </div>
+
+                                            </div>
+
+
+                                            <button
+                                                className="no-universite-detail-button"
+                                                onClick={async () => {
+
+                                                    await enregistrerAction(
+                                                        `FORMATION_CONSULTEE: ${filiere.nom}`
+                                                    );
+
+                                                    navigate(
+                                                        `/filieres/${filiere.id_filiere}`
+                                                    );
+
+                                                }}
+                                            >
+
+                                                <span>Voir la filière</span>
+
+                                                <FaArrowLeft className="arrow-right" />
+
+                                            </button>
+
+                                        </article>
+
+                                    ))
+                                }
+
+                            </div>
+
+                        ) : (
+
+                            <div className="no-universite-detail-empty">
+
+                                <FaGraduationCap />
+
+                                <p>
+                                    Aucune filière n'est actuellement renseignée
+                                    pour cette université.
+                                </p>
+
+                            </div>
+
+                        )
+                    }
+
+                </section>
+
+            </main>
+
+
+
+            {/* =========================================
+                RETOUR
+            ========================================= */}
 
             <div className="no-universite-detail-retour">
 
-    <button
-        onClick={() => {
-            window.location.href = "/universite-catalogue";
-        }}
-        className="no-universite-detail-retour-button"
-    >
-        ← Retour aux universités
-    </button>
+                <button
+                    onClick={() =>
+                        navigate("/universite-catalogue")
+                    }
+                    className="no-universite-detail-retour-button"
+                >
 
-    </div>
+                    <FaArrowLeft />
+
+                    <span>Retour aux universités</span>
+
+                </button>
+
+            </div>
+
 
             <FooterNavigation />
 

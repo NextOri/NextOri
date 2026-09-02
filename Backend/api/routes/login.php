@@ -33,10 +33,12 @@ if ($_SERVER["REQUEST_METHOD"] !== "POST") {
     ]);
 
     exit();
-
 }
 
-$donnees = json_decode(file_get_contents("php://input"), true);
+$donnees = json_decode(
+    file_get_contents("php://input"),
+    true
+);
 
 if (
     empty($donnees["email"]) ||
@@ -51,7 +53,6 @@ if (
     ]);
 
     exit();
-
 }
 
 $userService = new UserService();
@@ -63,8 +64,13 @@ $utilisateur = $userService->login(
 
 if ($utilisateur) {
 
-     
-      $_SESSION["id_user"] = (int) $utilisateur["id_user"];
+    $idUser = (int) $utilisateur["id_user"];
+
+    // Créer la session utilisateur
+    $_SESSION["id_user"] = $idUser;
+
+    // Enregistrer la connexion du jour
+    $userService->enregistrerConnexion($idUser);
 
     echo json_encode([
         "success" => true,

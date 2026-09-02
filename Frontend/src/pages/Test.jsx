@@ -208,12 +208,10 @@ function precedent(){
 
             <div className="test-brand">
 
-                <img
-                    src="/images/logo-nextori.jpg"
-                    alt="NextOri"
-                    className="test-logo"
-                />
-
+               
+   <h1>
+                NextOri
+            </h1>
                 
             </div>
 

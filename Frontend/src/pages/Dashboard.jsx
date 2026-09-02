@@ -14,6 +14,7 @@ import {
     Star,
     Flame,
     Award,
+    Medal,
     Hand,
     FlaskConical,
     BriefcaseBusiness,
@@ -209,7 +210,11 @@ const badgeIcons = {
     "connaissance-de-soi": Target,
     "decouvreur-metiers": BriefcaseBusiness,
     "choix-carriere": GraduationCap,
-    "pret-universite": Landmark
+    "pret-universite": Landmark,
+    "serie-5-jours": Flame,
+    "serie-7-jours": Rocket,
+    "serie-15-jours": Star,
+    "serie-30-jours": Medal
 };
     return (
 

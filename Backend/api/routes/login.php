@@ -69,8 +69,7 @@ if ($utilisateur) {
     // Créer la session utilisateur
     $_SESSION["id_user"] = $idUser;
 
-    // Enregistrer la connexion du jour
-    $userService->enregistrerConnexion($idUser);
+    
 
     echo json_encode([
         "success" => true,

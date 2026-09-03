@@ -1,40 +1,40 @@
 import { useEffect, useState } from "react";
 
-import { useLocation, useNavigate } from "react-router-dom";
+import {
+    useLocation,
+    useNavigate
+} from "react-router-dom";
 
 import "../styles/Formations.css";
 
 import {
-
+    FaBullseye,
     FaGraduationCap,
-
     FaClock,
-
-    FaArrowLeft
-
+    FaArrowLeft,
+    FaArrowRight,
+    FaUniversity,
+    FaLayerGroup,
+    FaInfoCircle,
+    FaExclamationCircle
 } from "react-icons/fa";
 
-import {
-
-    MdCategory
-
-} from "react-icons/md";
+import { MdCategory } from "react-icons/md";
 
 import { enregistrerAction } from "../services/historiqueService";
 
 
-function Formations(){
-
+function Formations() {
 
     const navigate = useNavigate();
-
 
     const location = useLocation();
 
 
-
     /*
-        Métier reçu depuis Result.jsx
+    =====================================
+    DONNEES RECUES DEPUIS LA PAGE RESULTAT
+    =====================================
     */
 
     const metier = location.state?.metier;
@@ -43,375 +43,685 @@ function Formations(){
 
     const nomMetier = metier?.nom || "ce métier";
 
-    
+
+    /*
+    =====================================
+    ETATS
+    =====================================
+    */
+
+    const [formations, setFormations] = useState([]);
+
+    const [chargement, setChargement] = useState(true);
+
+    const [erreur, setErreur] = useState("");
 
 
     /*
-        Etats
+    =====================================
+    RECUPERATION DES FORMATIONS
+    =====================================
     */
 
-    const [formations,setFormations] = useState([]);
+    useEffect(() => {
 
+        const chargerFormations = async () => {
 
-    const [chargement,setChargement] = useState(true);
+            try {
 
-
-    const [erreur,setErreur] = useState("");
-
-
-
-
-    /*
-        Récupération des filières
-        depuis le backend
-    */
-
-    useEffect(()=>{
-        console.log("useEffect Formations executee");
-        console.log("Metier dans useEffect :", metier);
-
-
-        const chargerFormations = async()=>{
-
-
-            try{
-
-
-                if(!metier){
+                if (!metier) {
 
                     setErreur(
-                        "Aucun métier sélectionné."
+                        "Aucun métier n'a été sélectionné."
                     );
-
 
                     setChargement(false);
 
-
                     return;
-
                 }
 
-     console.log(
-    "URL appelée :",
-    `http://localhost/NextOri/backend/api/routes/filieres.php?id_metier=${metier.id_metier}`
-);
 
                 const reponse = await fetch(
-
                     `http://localhost/NextOri/backend/api/routes/filieres.php?id_metier=${metier.id_metier}`
-
                 );
-                 console.log("Reponse HTTP :", reponse);
-
 
 
                 const data = await reponse.json();
-                console.log("Reponse backend :", data);
 
 
+                if (data.success) {
 
-                if(data.success){
+                    setFormations(
+                        data.formations || []
+                    );
 
+                } else {
 
-                    setFormations(data.formations);
-
-
-                }
-                else{
-
-
-                    setErreur(data.message);
-
+                    setErreur(
+                        data.message ||
+                        "Impossible de récupérer les formations."
+                    );
 
                 }
 
 
+            } catch (error) {
 
-            }
-            catch(error){
-            console.log("Erreur fetch :", error);
+                console.error(
+                    "Erreur lors du chargement des formations :",
+                    error
+                );
 
                 setErreur(
-                    "Erreur lors du chargement des formations."
+                    "Une erreur est survenue lors du chargement des formations."
                 );
 
 
-            }
-            finally{
-
+            } finally {
 
                 setChargement(false);
 
-
             }
 
-
         };
-
 
 
         chargerFormations();
 
 
+    }, [metier]);
 
-    },[metier]);
+
+    /*
+    =====================================
+    CONSULTER LES UNIVERSITES
+    =====================================
+    */
 
     const consulterUniversite = async (
-    formation,
-    metier,
-    resultat
-) => {
+        formation,
+        metier,
+        resultat
+    ) => {
 
-    // Action générale : progression / badges
-    await enregistrerAction(
-        "UNIVERSITES_CONSULTEES"
-    );
-
-    // Action détaillée : historique
-    await enregistrerAction(
-        `FORMATION_CONSULTEE: ${formation.nom}`
-    );
-
-    navigate("/universites", {
-
-        state: {
-            filiere: formation,
-            metier,
-            resultat
-        }
-
-    });
-
-};
+        // Progression / badges
+        await enregistrerAction(
+            "UNIVERSITES_CONSULTEES"
+        );
 
 
-    return(
+        // Historique détaillé
+        await enregistrerAction(
+            `FORMATION_CONSULTEE: ${formation.nom}`
+        );
 
+
+        navigate("/universites", {
+
+            state: {
+                filiere: formation,
+                metier,
+                resultat
+            }
+
+        });
+
+    };
+
+
+    /*
+    =====================================
+    RETOUR AUX RESULTATS
+    =====================================
+    */
+
+    const retournerAuxResultats = () => {
+
+        navigate("/result", {
+
+            state: {
+                data: resultat
+            }
+
+        });
+
+    };
+
+
+    /*
+    =====================================
+    AFFICHAGE
+    =====================================
+    */
+
+    return (
 
         <div className="formations-page">
 
 
+            {/* =====================================
+                BOUTON RETOUR
+            ===================================== */}
 
-     <header className="formations-header">
+            <div className="formations-navigation">
 
-      <h1>
+                <button
+                    className="formations-back-button"
+                    onClick={retournerAuxResultats}
+                >
 
-           🎯 Parcours de formation pour devenir
+                    <FaArrowLeft />
 
-            <span className="metier-title">
+                    <span>
+                        Retour aux résultats
+                    </span>
 
-             {" "}{nomMetier}
+                </button>
 
-            </span>
-
-       </h1>
-
-       <p>
-
-        Découvrez les formations recommandées pour accéder à ce métier,
-        puis explorez les universités qui les proposent.
-
-      </p>
-
-          </header>
+            </div>
 
 
+            {/* =====================================
+                HERO / EN-TETE
+            ===================================== */}
+
+            <header className="formations-header">
 
 
+                <div className="formations-header-icon">
 
-            <section className="formations-list">
+                    <FaBullseye />
+
+                </div>
 
 
-                {
-                    chargement && (
+                <div className="formations-header-content">
 
-                        <p className="formations-message">
+                    <span className="formations-eyebrow">
 
-                            Chargement des formations...
+                        PARCOURS D'ORIENTATION
+
+                    </span>
+
+
+                    <h1>
+    Quoi étudier pour accéder au métier de{" "}
+    <span className="metier-title">
+        {nomMetier}
+    </span>
+    <span className="question-mark"> ?</span>
+</h1>
+
+
+                    <p>
+
+                        Découvrez les formations recommandées
+                        pour accéder à ce métier, puis explorez
+                        les universités qui les proposent.
+
+                    </p>
+
+                </div>
+
+
+            </header>
+
+
+            {/* =====================================
+                CONTEXTE DU METIER
+            ===================================== */}
+
+            {metier && (
+
+                <section className="metier-context">
+
+
+                    <div className="metier-context-icon">
+
+                        <FaGraduationCap />
+
+                    </div>
+
+
+                    <div className="metier-context-content">
+
+                        <span>
+
+                            MÉTIER SÉLECTIONNÉ
+
+                        </span>
+
+
+                        <strong>
+
+                            {nomMetier}
+
+                        </strong>
+
+
+                    </div>
+
+
+                </section>
+
+            )}
+
+
+            {/* =====================================
+                CONTENU PRINCIPAL
+            ===================================== */}
+
+            <main className="formations-content">
+
+
+                {/* =====================================
+                    TITRE SECTION
+                ===================================== */}
+
+                <div className="formations-section-header">
+
+
+                    <div>
+
+                        <span className="section-eyebrow">
+
+                            FORMATIONS RECOMMANDÉES
+
+                        </span>
+
+
+                        <h2>
+
+                            Les parcours à envisager
+
+                        </h2>
+
+
+                        <p>
+
+                            Comparez les différentes filières
+                            qui peuvent vous préparer à cette carrière.
 
                         </p>
 
-                    )
-                }
+                    </div>
 
 
+                    {!chargement && !erreur && formations.length > 0 && (
+
+                        <div className="formations-count">
+
+                            <FaLayerGroup />
+
+                            <span>
+
+                                {formations.length}
+
+                            </span>
+
+                            <small>
+
+                                {formations.length > 1
+                                    ? "formations trouvées"
+                                    : "formation trouvée"
+                                }
+
+                            </small>
+
+                        </div>
+
+                    )}
+
+                </div>
 
 
-                {
-                    erreur && (
+                {/* =====================================
+                    CHARGEMENT
+                ===================================== */}
 
-                        <p className="formations-message error">
+                {chargement && (
+
+                    <div className="formations-state formations-loading">
+
+
+                        <div className="formations-loading-spinner"></div>
+
+
+                        <h3>
+
+                            Chargement des formations...
+
+                        </h3>
+
+
+                        <p>
+
+                            Nous recherchons les parcours
+                            adaptés à ce métier.
+
+                        </p>
+
+                    </div>
+
+                )}
+
+
+                {/* =====================================
+                    ERREUR
+                ===================================== */}
+
+                {!chargement && erreur && (
+
+                    <div className="formations-state formations-error">
+
+
+                        <div className="formations-state-icon">
+
+                            <FaExclamationCircle />
+
+                        </div>
+
+
+                        <h3>
+
+                            Impossible de charger les formations
+
+                        </h3>
+
+
+                        <p>
 
                             {erreur}
 
                         </p>
 
-                    )
-                }
+
+                        <button
+                            className="formations-back-button"
+                            onClick={retournerAuxResultats}
+                        >
+
+                            <FaArrowLeft />
+
+                            Retour aux résultats
+
+                        </button>
+
+                    </div>
+
+                )}
 
 
+                {/* =====================================
+                    AUCUNE FORMATION
+                ===================================== */}
+
+                {!chargement &&
+                    !erreur &&
+                    formations.length === 0 && (
+
+                        <div className="formations-state formations-empty">
 
 
-                {
-                    !chargement && !erreur && formations.length === 0 && (
+                            <div className="formations-state-icon">
 
-                        <p className="formations-message">
+                                <FaInfoCircle />
 
-                            Aucune formation trouvée pour ce métier.
-
-                        </p>
-
-                    )
-                }
+                            </div>
 
 
+                            <h3>
 
+                                Aucune formation trouvée
 
-
-                {
-
-                formations.map((formation)=>(
-
-
-                    <article
-
-                    className="formation-card"
-
-                    key={formation.id_filiere}
-
-                    >
-
-
-
-                        <h2>
-
-                            🎓 {formation.nom}
-
-                        </h2>
-
-
-
-
-
-                        <div className="formation-info">
-
+                            </h3>
 
 
                             <p>
 
-               <MdCategory className="formation-icon domaine-icon"/>
+                                Nous n'avons pas encore identifié
+                                de formation associée à ce métier.
 
-                                <strong>
-
-                        Domaine :
-
-                            </strong>
-
-                     {" "}
-
-                      {formation.domaine}
-
-                        </p>
+                            </p>
 
 
+                            <button
+                                className="formations-back-button"
+                                onClick={retournerAuxResultats}
+                            >
+
+                                <FaArrowLeft />
+
+                                Retour aux recommandations
+
+                            </button>
+
+                        </div>
+
+                    )}
 
 
-                                 <p>
+                {/* =====================================
+                    LISTE DES FORMATIONS
+                ===================================== */}
 
-                        <FaClock className="formation-icon duree-icon"/>
+                {!chargement &&
+                    !erreur &&
+                    formations.length > 0 && (
 
-                            <strong>
+                        <div className="formations-list">
 
-                          Durée :
 
-                    </strong>
+                            {formations.map((formation) => (
 
-                      {" "}
+                                <article
+                                    className="formation-card"
+                                    key={formation.id_filiere}
+                                >
 
-                    {formation.duree}
 
-                     </p>
+                                    {/* En-tête formation */}
+
+                                    <div className="formation-card-header">
+
+
+                                        <div className="formation-card-icon">
+
+                                            <FaGraduationCap />
+
+                                        </div>
+
+
+                                        <div className="formation-card-title">
+
+                                            <span>
+
+                                                FILIÈRE
+
+                                            </span>
+
+
+                                            <h3>
+
+                                                {formation.nom}
+
+                                            </h3>
+
+                                        </div>
+
+                                    </div>
+
+
+                                    {/* Informations */}
+
+                                    <div className="formation-info">
+
+
+                                        <div className="formation-info-item">
+
+                                            <MdCategory />
+
+                                            <div>
+
+                                                <span>
+
+                                                    Domaine
+
+                                                </span>
+
+                                                <strong>
+
+                                                    {formation.domaine}
+
+                                                </strong>
+
+                                            </div>
+
+                                        </div>
+
+
+                                        <div className="formation-info-item">
+
+                                            <FaClock />
+
+                                            <div>
+
+                                                <span>
+
+                                                    Durée
+
+                                                </span>
+
+                                                <strong>
+
+                                                    {formation.duree}
+
+                                                </strong>
+
+                                            </div>
+
+                                        </div>
+
+
+                                    </div>
+
+
+                                    {/* Description */}
+
+                                    {formation.description && (
+
+                                        <div className="formation-description">
+
+
+                                            <div className="formation-description-icon">
+
+                                                <FaInfoCircle />
+
+                                            </div>
+
+
+                                            <p>
+
+                                                {formation.description}
+
+                                            </p>
+
+                                        </div>
+
+                                    )}
+
+
+                                    {/* Action */}
+
+                                    <div className="formation-card-action">
+
+
+                                        <button
+                                            className="university-button"
+                                            onClick={() =>
+                                                consulterUniversite(
+                                                    formation,
+                                                    metier,
+                                                    resultat
+                                                )
+                                            }
+                                        >
+
+                                            <FaUniversity />
+
+                                            <span>
+
+                                                Voir les universités
+
+                                            </span>
+
+                                            <FaArrowRight />
+
+                                        </button>
+
+
+                                    </div>
+
+
+                                </article>
+
+                            ))}
 
 
                         </div>
 
+                    )}
+
+            </main>
 
 
+            {/* =====================================
+                NAVIGATION BAS DE PAGE
+            ===================================== */}
+
+            {!chargement && (
+
+                <footer className="formations-footer">
 
 
+                    <div className="formations-footer-content">
 
 
-                        <p className="formation-description">
+                        <FaGraduationCap />
 
-                            {formation.description}
+
+                        <p>
+
+                            Choisissez une formation qui correspond
+                            à votre projet, puis découvrez où l'étudier.
 
                         </p>
 
+                    </div>
 
 
+                    <button
+                        className="back-result-button"
+                        onClick={retournerAuxResultats}
+                    >
+
+                        <FaArrowLeft />
+
+                        Retour aux résultats
+
+                    </button>
 
 
+                </footer>
 
-                       <button
-     className="university-button"
-     onClick={() =>
-        consulterUniversite(
-            formation,
-            metier,
-            resultat
-        )
-     }
-     >
-      Voir les universités
-         </button>
+            )}
 
-
-
-
-
-                    </article>
-
-
-                ))
-
-                }
-                </section>
-
-
-             <div className="formations-actions">
-
-    <button
-
-        className="back-result-button"
-
-        onClick={() =>
-            navigate("/result", {
-                state: {
-                    data: location.state?.resultat
-                }
-            })
-        }
-
-    >
-
-        <FaArrowLeft />
-
-            {" "}
-
-             Retour aux résultats
-
-            </button>
-
-               </div>
 
         </div>
 
-
     );
 
-
 }
-
 
 
 export default Formations;

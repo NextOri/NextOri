@@ -39,9 +39,15 @@ function Dashboard() {
 
     const [aDejaTeste, setADejaTeste] = useState(false);
 
-    const [dashboardDataState, setDashboardDataState] = useState(null);
+const [dashboardDataState, setDashboardDataState] = useState(null);
 
-    const [chargementDashboard, setChargementDashboard] = useState(true);
+const [chargementDashboard, setChargementDashboard] = useState(true);
+
+const [chargementNotification, setChargementNotification] = useState(false);
+
+const [messageNotification, setMessageNotification] = useState("");
+
+const [typeNotification, setTypeNotification] = useState("");
 
     useEffect(() => {
 
@@ -216,9 +222,93 @@ const badgeIcons = {
     "serie-15-jours": Star,
     "serie-30-jours": Medal
 };
+
+
+const demanderNotification = async () => {
+
+    if (chargementNotification) {
+        return;
+    }
+
+    setChargementNotification(true);
+
+    try {
+
+        const response = await fetch(
+            "http://localhost/NextOri/backend/api/routes/notifier-fonctionnalite.php",
+            {
+                method: "POST",
+                credentials: "include",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    fonctionnalite: "COACHING_PERSONNALISE"
+                })
+            }
+        );
+
+        const data = await response.json();
+
+        if (data.success) {
+
+            setTypeNotification("success");
+
+            setMessageNotification(
+                data.message ||
+                "Vous serez averti dès que cette fonctionnalité sera disponible."
+            );
+
+        } else {
+
+            setTypeNotification("error");
+
+            setMessageNotification(
+                data.message ||
+                "Une erreur est survenue."
+            );
+        }
+
+    } catch (error) {
+
+        console.error(
+            "Erreur inscription notification :",
+            error
+        );
+
+        setTypeNotification("error");
+
+        setMessageNotification(
+            "Impossible de vous inscrire pour le moment."
+        );
+
+    } finally {
+
+        setChargementNotification(false);
+
+        setTimeout(() => {
+            setMessageNotification("");
+            setTypeNotification("");
+        }, 4000);
+
+    }
+};
+
     return (
 
         <div className="dashboard-page">
+
+            {messageNotification && (
+    <div className={`dashboard-notification ${typeNotification}`}>
+        {typeNotification === "success" ? (
+            <Check />
+        ) : (
+            <Bell />
+        )}
+
+        <span>{messageNotification}</span>
+    </div>
+     )}
 
             {/* HEADER */}
 
@@ -651,13 +741,18 @@ etape.numero
 
         </p>
 
-        <button className="help-button">
+       <button
+    className="help-button"
+    onClick={demanderNotification}
+    disabled={chargementNotification}
+>
+    <Bell />
 
-            
-
-           <Bell />  Me notifier
-
-        </button>
+    {chargementNotification
+        ? "Inscription..."
+        : "Me notifier"
+    }
+</button>
 
     </div>
 

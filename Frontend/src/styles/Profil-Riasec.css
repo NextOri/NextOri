@@ -1,595 +1,1151 @@
-/* ==========================================
-   PAGE PROFIL RIASEC
-========================================== */
+/* ============================================================
+   NEXTORI — PROFIL RIASEC
+   Design premium / page isolée
+   ============================================================ */
 
-.profil-page{
 
-    min-height:100vh;
+/* ============================================================
+   1. VARIABLES LOCALES
+   ============================================================ */
 
-    background:#F2F4F7;
+.nextori-riasec-profile-page,
+.nextori-riasec-profile-empty {
+    --nextori-riasec-deep-blue: #0D1B2A;
+    --nextori-riasec-orange: #F4B400;
+    --nextori-riasec-blue: #1E3A8A;
+    --nextori-riasec-light: #F2F4F7;
+    --nextori-riasec-white: #FFFFFF;
 
-    padding:40px 20px;
+    --nextori-riasec-radius-sm: 12px;
+    --nextori-riasec-radius-md: 18px;
+    --nextori-riasec-radius-lg: 26px;
 
-    color:#0D1B2A;
+    --nextori-riasec-shadow:
+        0 12px 35px rgba(13, 27, 42, 0.08);
 
+    --nextori-riasec-shadow-hover:
+        0 18px 45px rgba(13, 27, 42, 0.13);
 }
 
 
+/* ============================================================
+   2. RESET LOCAL
+   ============================================================ */
 
-/* ==========================================
-   HEADER
-========================================== */
-
-.profil-header{
-
-    text-align:center;
-
-    margin-bottom:35px;
-
-}
-
-.profil-header h1{
-
-    font-size:2.4rem;
-
-    color:#0D1B2A;
-
-    margin-bottom:10px;
-
-}
-
-.profil-header p{
-
-    color:#1E3A8A;
-
-    font-size:1.05rem;
-
+.nextori-riasec-profile-page *,
+.nextori-riasec-profile-page *::before,
+.nextori-riasec-profile-page *::after,
+.nextori-riasec-profile-empty *,
+.nextori-riasec-profile-empty *::before,
+.nextori-riasec-profile-empty *::after {
+    box-sizing: border-box;
 }
 
 
+/* ============================================================
+   3. PAGE PRINCIPALE
+   ============================================================ */
 
-/* ==========================================
-   CARTE PRINCIPALE
-========================================== */
+.nextori-riasec-profile-page {
+    min-height: 100vh;
+    background: var(--nextori-riasec-light);
+    color: var(--nextori-riasec-deep-blue);
 
-.profil-card{
+    font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Arial,
+        sans-serif;
 
-    max-width:900px;
+    padding-bottom: 70px;
 
-    margin:0 auto 40px;
-
-    background:#FFFFFF;
-
-    border-radius:22px;
-
-    padding:40px;
-
-    text-align:center;
-
-    box-shadow:0 10px 35px rgba(13,27,42,.08);
-
+    overflow-x: hidden;
 }
 
 
+/* ============================================================
+   4. HEADER / HERO
+   ============================================================ */
 
-/* Cercle du profil */
+.nextori-riasec-profile-header {
+    position: relative;
 
-.profil-code{
+    width: 100%;
 
-    width:120px;
+    background:
+        radial-gradient(
+            circle at 82% 18%,
+            rgba(244, 180, 0, 0.20),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 10% 100%,
+            rgba(30, 58, 138, 0.38),
+            transparent 34%
+        ),
+        linear-gradient(
+            135deg,
+            #0D1B2A 0%,
+            #0D1B2A 45%,
+            #1E3A8A 100%
+        );
 
-    height:120px;
+    color: var(--nextori-riasec-white);
 
-    margin:auto;
+    padding: 78px 20px 150px;
 
-    margin-bottom:25px;
-
-    border-radius:50%;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-     background:linear-gradient(
-
-        90deg,
-
-        #0D1B2A 0%,
-
-        #1E3A8A 100%
-
-    );
-
-    color:#FFFFFF;
-
-    font-size:2.6rem;
-
-    font-weight:700;
-
-    letter-spacing:2px;
-
+    overflow: hidden;
 }
 
 
+/* Décoration subtile */
 
-/* Nom du profil */
+.nextori-riasec-profile-header::before {
+    content: "";
 
-.profil-card h2{
+    position: absolute;
 
-    color:#1E3A8A;
+    width: 320px;
+    height: 320px;
 
-    margin-bottom:20px;
+    right: -120px;
+    top: -150px;
 
-    font-size:1.8rem;
+    border-radius: 50%;
 
+    border: 1px solid rgba(244, 180, 0, 0.20);
+
+    pointer-events: none;
 }
 
 
+.nextori-riasec-profile-header::after {
+    content: "";
 
-/* Description */
+    position: absolute;
 
-.profil-description{
+    width: 180px;
+    height: 180px;
 
-    max-width:700px;
+    left: -80px;
+    bottom: -100px;
 
-    margin:auto;
+    border-radius: 50%;
 
-    line-height:1.8;
+    border: 1px solid rgba(255, 255, 255, 0.10);
 
-    color:#555;
-
-    font-size:1rem;
-
+    pointer-events: none;
 }
 
 
+.nextori-riasec-profile-header-content {
+    position: relative;
 
-/* ==========================================
-   SECTIONS
-========================================== */
+    z-index: 2;
 
-.profil-section{
+    width: min(900px, calc(100% - 20px));
 
-    max-width:900px;
+    margin: 0 auto;
 
-    margin:0 auto 35px;
-
+    text-align: center;
 }
 
 
+/* ============================================================
+   5. PETIT LABEL
+   ============================================================ */
 
-.profil-section h2{
+.nextori-riasec-profile-eyebrow {
+    display: inline-flex;
 
-    color:#0D1B2A;
+    align-items: center;
+    justify-content: center;
 
-    font-size:1.45rem;
+    padding: 8px 15px;
 
-    margin-bottom:20px;
+    margin-bottom: 22px;
 
-    padding-left:10px;
+    border-radius: 999px;
 
-    border-left:5px solid #F4B400;
+    border: 1px solid rgba(244, 180, 0, 0.40);
 
+    background: rgba(244, 180, 0, 0.12);
+
+    color: var(--nextori-riasec-orange);
+
+    font-size: 0.75rem;
+    font-weight: 800;
+
+    letter-spacing: 0.12em;
 }
 
 
+/* ============================================================
+   6. TITRE HERO
+   ============================================================ */
 
-/* ==========================================
-   LISTES
-========================================== */
+.nextori-riasec-profile-header-content h1 {
+    margin: 0;
 
-.profil-list{
+    color: var(--nextori-riasec-white);
 
-    display:grid;
+    font-size: clamp(2.2rem, 5vw, 4rem);
 
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    line-height: 1.05;
 
-    gap:18px;
+    font-weight: 850;
 
+    letter-spacing: -0.045em;
 }
 
 
+.nextori-riasec-profile-header-content p {
+    max-width: 700px;
 
-/* ==========================================
-   CARTES
-========================================== */
+    margin: 22px auto 0;
 
-.profil-item{
+    color: rgba(255, 255, 255, 0.82);
 
-    background:#FFFFFF;
+    font-size: 1.05rem;
 
-    border-left:5px solid #1E3A8A;
-
-    border-radius:16px;
-
-    padding:18px 20px;
-
-    font-size:1rem;
-
-    color:#0D1B2A;
-
-    line-height:1.6;
-
-    box-shadow:0 8px 25px rgba(13,27,42,.06);
-
-    transition:all .25s ease;
-
+    line-height: 1.75;
 }
 
 
+/* ============================================================
+   7. CONTENU PRINCIPAL
+   ============================================================ */
 
-.profil-item:hover{
+.nextori-riasec-profile-main {
+    position: relative;
 
-    transform:translateY(-4px);
+    z-index: 5;
 
-    border-left-color:#F4B400;
+    width: min(1080px, calc(100% - 40px));
 
-    box-shadow:0 14px 35px rgba(13,27,42,.12);
-
+    margin: -85px auto 0;
 }
 
 
-/* ==========================================
-   ACTIONS
-========================================== */
+/* ============================================================
+   8. CARTE IDENTITÉ DU PROFIL
+   ============================================================ */
 
-.profil-actions{
+.nextori-riasec-profile-identity {
+    display: grid;
 
-    max-width:900px;
+    grid-template-columns: 190px minmax(0, 1fr);
 
-    margin:45px auto 0;
+    align-items: center;
 
-     display:flex;
+    gap: 42px;
 
-    justify-content:center;
+    padding: 42px;
 
-    gap:20px;
+    background: var(--nextori-riasec-white);
 
-    flex-wrap:wrap;
+    border: 1px solid rgba(13, 27, 42, 0.06);
 
+    border-radius: var(--nextori-riasec-radius-lg);
+
+    box-shadow: var(--nextori-riasec-shadow);
+
+    margin-bottom: 28px;
+
+    animation: nextoriRiasecProfileAppear 0.65s ease both;
 }
 
 
+/* ============================================================
+   9. CODE RIASEC
+   ============================================================ */
 
-.back-result-button{
+.nextori-riasec-profile-code-wrapper {
+    display: flex;
 
-    background:#0D1B2A;
+    flex-direction: column;
 
-    color:#FFFFFF;
+    align-items: center;
 
-    border:none;
-
-    border-radius:14px;
-
-    padding:14px 28px;
-
-    font-size:1rem;
-
-    font-weight:600;
-
-    cursor:pointer;
-
-    transition:all .3s ease;
-
+    justify-content: center;
 }
 
 
+.nextori-riasec-profile-code-label {
+    display: block;
 
-.back-result-button:hover{
+    margin-bottom: 12px;
 
-    background:#1E3A8A;
+    color: var(--nextori-riasec-blue);
 
-    transform:translateY(-3px);
+    font-size: 0.72rem;
 
-    box-shadow:0 10px 25px rgba(13,27,42,.20);
+    font-weight: 800;
 
+    letter-spacing: 0.12em;
 }
 
 
+.nextori-riasec-profile-code {
+    display: flex;
 
-/* ==========================================
-   PAGE VIDE
-========================================== */
+    align-items: center;
+    justify-content: center;
 
-.profil-empty{
+    width: 145px;
+    height: 145px;
 
-    min-height:100vh;
+    border-radius: 50%;
 
-    background:#F2F4F7;
+    background:
+        radial-gradient(
+            circle at 30% 25%,
+            rgba(244, 180, 0, 0.25),
+            transparent 35%
+        ),
+        linear-gradient(
+            145deg,
+            #0D1B2A,
+            #1E3A8A
+        );
 
-    display:flex;
+    color: var(--nextori-riasec-white);
 
-    flex-direction:column;
+    font-size: 2.6rem;
 
-    justify-content:center;
+    font-weight: 900;
 
-    align-items:center;
+    letter-spacing: 0.08em;
 
-    text-align:center;
-
-    padding:30px;
-
+    box-shadow:
+        0 15px 35px rgba(13, 27, 42, 0.20),
+        0 0 0 8px rgba(244, 180, 0, 0.08);
 }
 
 
+/* ============================================================
+   10. CONTENU IDENTITÉ
+   ============================================================ */
 
-.profil-empty h1{
-
-    color:#0D1B2A;
-
-    font-size:2rem;
-
-    margin-bottom:15px;
-
+.nextori-riasec-profile-identity-content {
+    min-width: 0;
 }
 
 
+.nextori-riasec-profile-identity-kicker {
+    display: inline-block;
 
-.profil-empty p{
+    margin-bottom: 9px;
 
-    max-width:520px;
+    color: var(--nextori-riasec-orange);
 
-    color:#555;
+    font-size: 0.78rem;
 
-    line-height:1.7;
+    font-weight: 800;
 
-    margin-bottom:30px;
+    text-transform: uppercase;
 
+    letter-spacing: 0.10em;
 }
 
 
+.nextori-riasec-profile-identity-content h2 {
+    margin: 0;
 
-.profil-empty button{
+    color: var(--nextori-riasec-deep-blue);
 
-    background:#F4B400;
+    font-size: clamp(1.8rem, 3vw, 2.7rem);
 
-    color:#0D1B2A;
+    line-height: 1.15;
 
-    border:none;
+    font-weight: 850;
 
-    border-radius:12px;
-
-    padding:14px 28px;
-
-    font-size:1rem;
-
-    font-weight:700;
-
-    cursor:pointer;
-
-    transition:all .3s ease;
-
+    letter-spacing: -0.035em;
 }
 
 
+.nextori-riasec-profile-description {
+    margin: 18px 0 0;
 
-.profil-empty button:hover{
+    color: rgba(13, 27, 42, 0.72);
 
-    background:#E5A800;
+    font-size: 1rem;
 
-    transform:translateY(-3px);
+    line-height: 1.8;
 
-    box-shadow:0 10px 25px rgba(244,180,0,.25);
-
+    max-width: 720px;
 }
 
-/* ==========================================
-   RESPONSIVE
-========================================== */
 
-@media (max-width:768px){
+/* ============================================================
+   11. SECTIONS
+   ============================================================ */
 
-    .profil-page{
+.nextori-riasec-profile-section {
+    position: relative;
 
-        padding:25px 15px;
+    background: var(--nextori-riasec-white);
 
+    border: 1px solid rgba(13, 27, 42, 0.06);
+
+    border-radius: var(--nextori-riasec-radius-lg);
+
+    padding: 34px;
+
+    margin-bottom: 24px;
+
+    box-shadow: var(--nextori-riasec-shadow);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+
+    animation: nextoriRiasecProfileAppear 0.65s ease both;
+}
+
+
+.nextori-riasec-profile-section:hover {
+    transform: translateY(-2px);
+
+    box-shadow: var(--nextori-riasec-shadow-hover);
+}
+
+
+/* ============================================================
+   12. TITRES DE SECTIONS
+   ============================================================ */
+
+.nextori-riasec-profile-section-heading {
+    display: flex;
+
+    align-items: center;
+
+    gap: 17px;
+
+    margin-bottom: 27px;
+}
+
+
+.nextori-riasec-profile-section-icon {
+    flex: 0 0 auto;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 52px;
+    height: 52px;
+
+    border-radius: 15px;
+
+    background: rgba(244, 180, 0, 0.13);
+
+    color: var(--nextori-riasec-orange);
+
+    font-size: 1.2rem;
+}
+
+
+.nextori-riasec-profile-section-kicker {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: var(--nextori-riasec-blue);
+
+    font-size: 0.68rem;
+
+    font-weight: 850;
+
+    letter-spacing: 0.12em;
+
+    text-transform: uppercase;
+}
+
+
+.nextori-riasec-profile-section-heading h2 {
+    margin: 0;
+
+    color: var(--nextori-riasec-deep-blue);
+
+    font-size: clamp(1.25rem, 2vw, 1.65rem);
+
+    line-height: 1.3;
+
+    font-weight: 800;
+}
+
+
+/* ============================================================
+   13. LISTES
+   ============================================================ */
+
+.nextori-riasec-profile-list {
+    display: grid;
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 13px;
+}
+
+
+/* ============================================================
+   14. ITEMS
+   ============================================================ */
+
+.nextori-riasec-profile-item {
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 13px;
+
+    min-height: 60px;
+
+    padding: 16px 17px;
+
+    background: var(--nextori-riasec-light);
+
+    border: 1px solid rgba(13, 27, 42, 0.055);
+
+    border-radius: var(--nextori-riasec-radius-sm);
+
+    color: rgba(13, 27, 42, 0.82);
+
+    font-size: 0.94rem;
+
+    line-height: 1.55;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.nextori-riasec-profile-item:hover {
+    background: var(--nextori-riasec-white);
+
+    border-color: rgba(244, 180, 0, 0.35);
+
+    transform: translateX(3px);
+}
+
+
+.nextori-riasec-profile-item-marker {
+    flex: 0 0 auto;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 25px;
+    height: 25px;
+
+    margin-top: 1px;
+
+    border-radius: 50%;
+
+    background: var(--nextori-riasec-white);
+
+    color: var(--nextori-riasec-orange);
+
+    font-size: 0.7rem;
+
+    box-shadow: 0 2px 8px rgba(13, 27, 42, 0.08);
+}
+
+
+/* ============================================================
+   15. ACTIONS
+   ============================================================ */
+
+.nextori-riasec-profile-actions {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 14px;
+
+    padding-top: 10px;
+
+    animation: nextoriRiasecProfileAppear 0.65s ease both;
+}
+
+
+.nextori-riasec-profile-back-button,
+.nextori-riasec-profile-home-button {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 10px;
+
+    min-height: 50px;
+
+    padding: 0 22px;
+
+    border-radius: 13px;
+
+    font-family: inherit;
+
+    font-size: 0.9rem;
+
+    font-weight: 750;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+/* ============================================================
+   16. BOUTON RETOUR
+   ============================================================ */
+
+.nextori-riasec-profile-back-button {
+    background: var(--nextori-riasec-white);
+
+    color: var(--nextori-riasec-deep-blue);
+
+    border: 1px solid rgba(13, 27, 42, 0.12);
+
+    box-shadow: 0 5px 15px rgba(13, 27, 42, 0.06);
+}
+
+
+.nextori-riasec-profile-back-button:hover {
+    background: var(--nextori-riasec-light);
+
+    color: var(--nextori-riasec-deep-blue);
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 9px 22px rgba(13, 27, 42, 0.10);
+}
+
+
+.nextori-riasec-profile-back-button svg {
+    color: var(--nextori-riasec-blue);
+
+    font-size: 0.85rem;
+}
+
+
+/* ============================================================
+   17. BOUTON ACCUEIL
+   ============================================================ */
+
+.nextori-riasec-profile-home-button {
+    background: var(--nextori-riasec-deep-blue);
+
+    color: var(--nextori-riasec-white) !important;
+
+    border: 1px solid var(--nextori-riasec-deep-blue);
+
+    box-shadow: 0 8px 22px rgba(13, 27, 42, 0.16);
+}
+
+
+.nextori-riasec-profile-home-button:hover {
+    background: var(--nextori-riasec-blue);
+
+    color: var(--nextori-riasec-white) !important;
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 12px 28px rgba(13, 27, 42, 0.20);
+}
+
+
+.nextori-riasec-profile-home-button svg {
+    color: var(--nextori-riasec-white);
+
+    font-size: 0.9rem;
+}
+
+
+/* ============================================================
+   18. ÉTAT VIDE / ERREUR
+   ============================================================ */
+
+.nextori-riasec-profile-empty {
+    min-height: 100vh;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 30px 20px;
+
+    background:
+        radial-gradient(
+            circle at 85% 15%,
+            rgba(244, 180, 0, 0.10),
+            transparent 25%
+        ),
+        var(--nextori-riasec-light);
+
+    color: var(--nextori-riasec-deep-blue);
+
+    font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Arial,
+        sans-serif;
+}
+
+
+.nextori-riasec-profile-empty-card {
+    width: min(520px, 100%);
+
+    padding: 45px 35px;
+
+    text-align: center;
+
+    background: var(--nextori-riasec-white);
+
+    border-radius: var(--nextori-riasec-radius-lg);
+
+    border: 1px solid rgba(13, 27, 42, 0.06);
+
+    box-shadow: var(--nextori-riasec-shadow);
+}
+
+
+.nextori-riasec-profile-empty-icon {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 68px;
+    height: 68px;
+
+    margin: 0 auto 22px;
+
+    border-radius: 20px;
+
+    background: rgba(244, 180, 0, 0.13);
+
+    color: var(--nextori-riasec-orange);
+
+    font-size: 1.6rem;
+}
+
+
+.nextori-riasec-profile-empty-card h1 {
+    margin: 0;
+
+    color: var(--nextori-riasec-deep-blue);
+
+    font-size: 1.7rem;
+
+    font-weight: 850;
+}
+
+
+.nextori-riasec-profile-empty-card p {
+    margin: 15px auto 26px;
+
+    color: rgba(13, 27, 42, 0.68);
+
+    line-height: 1.7;
+
+    max-width: 410px;
+}
+
+
+/* ============================================================
+   19. BOUTON TEST
+   ============================================================ */
+
+.nextori-riasec-profile-start-button {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    min-height: 50px;
+
+    padding: 0 27px;
+
+    border: 0;
+
+    border-radius: 13px;
+
+    background: var(--nextori-riasec-deep-blue);
+
+    color: var(--nextori-riasec-white);
+
+    font-family: inherit;
+
+    font-size: 0.92rem;
+
+    font-weight: 750;
+
+    cursor: pointer;
+
+    box-shadow: 0 8px 22px rgba(13, 27, 42, 0.15);
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.nextori-riasec-profile-start-button:hover {
+    background: var(--nextori-riasec-blue);
+
+    color: var(--nextori-riasec-white);
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 12px 28px rgba(13, 27, 42, 0.20);
+}
+
+
+/* ============================================================
+   20. FOCUS ACCESSIBLE
+   ============================================================ */
+
+.nextori-riasec-profile-back-button:focus-visible,
+.nextori-riasec-profile-home-button:focus-visible,
+.nextori-riasec-profile-start-button:focus-visible {
+    outline: 3px solid rgba(244, 180, 0, 0.45);
+
+    outline-offset: 3px;
+}
+
+
+/* ============================================================
+   21. ANIMATION
+   ============================================================ */
+
+@keyframes nextoriRiasecProfileAppear {
+
+    from {
+        opacity: 0;
+
+        transform: translateY(18px);
     }
 
-    .profil-header h1{
+    to {
+        opacity: 1;
 
-        font-size:1.9rem;
-
-    }
-
-    .profil-header p{
-
-        font-size:.95rem;
-
-    }
-
-    .profil-card{
-
-        padding:30px 20px;
-
-        border-radius:18px;
-
-    }
-
-    .profil-code{
-
-        width:95px;
-
-        height:95px;
-
-        font-size:2rem;
-
-        margin-bottom:20px;
-
-    }
-
-    .profil-card h2{
-
-        font-size:1.5rem;
-
-    }
-
-    .profil-description{
-
-        font-size:.95rem;
-
-    }
-
-    .profil-section h2{
-
-        font-size:1.25rem;
-
-    }
-
-    .profil-list{
-
-        grid-template-columns:1fr;
-
-    }
-
-    .profil-item{
-
-        padding:16px;
-
-        font-size:.95rem;
-
-    }
-
-    .back-result-button{
-
-        width:100%;
-
-        max-width:320px;
-
+        transform: translateY(0);
     }
 
 }
 
 
+/* ============================================================
+   22. TABLETTE
+   ============================================================ */
 
-@media (max-width:480px){
+@media (max-width: 900px) {
 
-    .profil-header h1{
-
-        font-size:1.6rem;
-
+    .nextori-riasec-profile-header {
+        padding: 65px 20px 130px;
     }
 
-    .profil-code{
 
-        width:80px;
+    .nextori-riasec-profile-main {
+        width: min(100% - 30px, 760px);
 
-        height:80px;
-
-        font-size:1.7rem;
-
+        margin-top: -70px;
     }
 
-    .profil-card{
 
-        padding:25px 18px;
+    .nextori-riasec-profile-identity {
+        grid-template-columns: 150px minmax(0, 1fr);
 
+        gap: 28px;
+
+        padding: 32px;
     }
 
-    .profil-description{
 
-        line-height:1.6;
+    .nextori-riasec-profile-code {
+        width: 120px;
+        height: 120px;
 
+        font-size: 2.2rem;
     }
 
-    .profil-section h2{
 
-        font-size:1.15rem;
+    .nextori-riasec-profile-section {
+        padding: 28px;
+    }
 
+
+    .nextori-riasec-profile-list {
+        grid-template-columns: 1fr;
     }
 
 }
 
 
-/* ==========================================
-   ICONES DES SECTIONS
-========================================== */
+/* ============================================================
+   23. MOBILE
+   ============================================================ */
+
+@media (max-width: 700px) {
+
+    .nextori-riasec-profile-page {
+        padding-bottom: 45px;
+    }
 
 
-.section-title{
+    .nextori-riasec-profile-header {
+        padding: 52px 18px 115px;
+    }
 
-    display:flex;
 
-    align-items:center;
+    .nextori-riasec-profile-header-content {
+        width: 100%;
+    }
 
-    gap:12px;
+
+    .nextori-riasec-profile-eyebrow {
+        font-size: 0.66rem;
+
+        padding: 7px 12px;
+
+        margin-bottom: 18px;
+    }
+
+
+    .nextori-riasec-profile-header-content h1 {
+        font-size: 2.15rem;
+    }
+
+
+    .nextori-riasec-profile-header-content p {
+        font-size: 0.92rem;
+
+        line-height: 1.65;
+
+        margin-top: 17px;
+    }
+
+
+    .nextori-riasec-profile-main {
+        width: calc(100% - 24px);
+
+        margin-top: -62px;
+    }
+
+
+    .nextori-riasec-profile-identity {
+        grid-template-columns: 1fr;
+
+        text-align: center;
+
+        gap: 25px;
+
+        padding: 28px 21px;
+
+        border-radius: 22px;
+    }
+
+
+    .nextori-riasec-profile-code {
+        width: 110px;
+        height: 110px;
+
+        margin: 0 auto;
+
+        font-size: 2rem;
+    }
+
+
+    .nextori-riasec-profile-identity-kicker {
+        font-size: 0.7rem;
+    }
+
+
+    .nextori-riasec-profile-identity-content h2 {
+        font-size: 1.65rem;
+    }
+
+
+    .nextori-riasec-profile-description {
+        font-size: 0.91rem;
+
+        line-height: 1.7;
+    }
+
+
+    .nextori-riasec-profile-section {
+        padding: 24px 19px;
+
+        border-radius: 20px;
+
+        margin-bottom: 18px;
+    }
+
+
+    .nextori-riasec-profile-section-heading {
+        align-items: flex-start;
+
+        gap: 13px;
+
+        margin-bottom: 21px;
+    }
+
+
+    .nextori-riasec-profile-section-icon {
+        width: 44px;
+        height: 44px;
+
+        border-radius: 13px;
+
+        font-size: 1rem;
+    }
+
+
+    .nextori-riasec-profile-section-kicker {
+        font-size: 0.61rem;
+    }
+
+
+    .nextori-riasec-profile-section-heading h2 {
+        font-size: 1.15rem;
+    }
+
+
+    .nextori-riasec-profile-item {
+        padding: 14px;
+
+        min-height: 56px;
+
+        font-size: 0.88rem;
+    }
+
+
+    .nextori-riasec-profile-actions {
+        flex-direction: column;
+
+        width: 100%;
+
+        gap: 10px;
+
+        padding-top: 6px;
+    }
+
+
+    .nextori-riasec-profile-back-button,
+    .nextori-riasec-profile-home-button {
+        width: 100%;
+
+        min-height: 52px;
+    }
+
+
+    .nextori-riasec-profile-empty {
+        padding: 20px 15px;
+    }
+
+
+    .nextori-riasec-profile-empty-card {
+        padding: 35px 23px;
+    }
 
 }
 
 
+/* ============================================================
+   24. PETIT MOBILE
+   ============================================================ */
 
-.section-icon{
+@media (max-width: 430px) {
 
-    font-size:1.5rem;
-
-}
-
-
-
-/* ⭐ Points forts */
-
-.forces-icon{
-
-    color:#F4B400;
-
-}
+    .nextori-riasec-profile-header {
+        padding-top: 43px;
+    }
 
 
-
-/* 🧠 Compétences naturelles */
-
-.competences-icon{
-
-    color:#1E3A8A;
-
-}
+    .nextori-riasec-profile-header-content h1 {
+        font-size: 1.9rem;
+    }
 
 
-
-/* 🏢 Environnements professionnels */
-
-.environnements-icon{
-
-    color:#0D1B2A;
-
-}
-
-/* ==========================================
-   BOUTON RETOUR ACCUEIL
-========================================== */
+    .nextori-riasec-profile-header-content p {
+        font-size: 0.87rem;
+    }
 
 
-.home-button{
+    .nextori-riasec-profile-main {
+        width: calc(100% - 18px);
 
-    background:#F4B400;
+        margin-top: -55px;
+    }
 
-    color:#0D1B2A;
 
-    border:none;
+    .nextori-riasec-profile-identity {
+        padding: 24px 16px;
+    }
 
-    border-radius:14px;
 
-    padding:14px 28px;
+    .nextori-riasec-profile-section {
+        padding: 21px 15px;
+    }
 
-    font-size:1rem;
 
-    font-weight:600;
+    .nextori-riasec-profile-item {
+        gap: 10px;
 
-    cursor:pointer;
+        font-size: 0.84rem;
+    }
 
-    transition:.3s ease;
+
+    .nextori-riasec-profile-item-marker {
+        width: 23px;
+        height: 23px;
+    }
+
+
+    .nextori-riasec-profile-empty-card h1 {
+        font-size: 1.45rem;
+    }
 
 }
 
 
+/* ============================================================
+   25. RÉDUCTION DES ANIMATIONS
+   ============================================================ */
 
-.home-button:hover{
+@media (prefers-reduced-motion: reduce) {
 
-    background:#1E3A8A;
+    .nextori-riasec-profile-identity,
+    .nextori-riasec-profile-section,
+    .nextori-riasec-profile-actions {
+        animation: none;
+    }
 
-    color:#FFFFFF;
 
-    transform:translateY(-3px);
+    .nextori-riasec-profile-section,
+    .nextori-riasec-profile-item,
+    .nextori-riasec-profile-back-button,
+    .nextori-riasec-profile-home-button,
+    .nextori-riasec-profile-start-button {
+        transition: none;
+    }
 
 }

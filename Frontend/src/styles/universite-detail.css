@@ -544,6 +544,42 @@
 
     font-size:.95rem;
 
+    overflow-wrap:anywhere;
+
+}
+
+
+/* =========================================================
+   CONTACT
+========================================================= */
+
+
+
+
+/* Liens téléphone et email */
+
+.no-universite-detail-info-item a {
+
+    color:#0D1B2A;
+
+    font-size:.95rem;
+
+    font-weight:700;
+
+    text-decoration:none;
+
+    overflow-wrap:anywhere;
+
+    transition:
+        color .25s ease;
+
+}
+
+
+.no-universite-detail-info-item a:hover {
+
+    color:#1E3A8A;
+
 }
 
 

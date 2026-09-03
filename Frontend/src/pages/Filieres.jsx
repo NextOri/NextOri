@@ -21,11 +21,19 @@ function Filieres() {
 
     const [filieres, setFilieres] = useState([]);
 
-    const [recherche, setRecherche] = useState("");
+const [recherche, setRecherche] = useState(
+    () => sessionStorage.getItem("filieres_recherche") || ""
+);
 
-    const [domaine, setDomaine] = useState("Tous");
+const [domaine, setDomaine] = useState(
+    () => sessionStorage.getItem("filieres_domaine") || "Tous"
+);
 
-    const [duree, setDuree] = useState("Tous");
+const [duree, setDuree] = useState(
+    () => sessionStorage.getItem("filieres_duree") || "Tous"
+);
+
+const [chargement, setChargement] = useState(true);
 
 
     useEffect(() => {
@@ -51,9 +59,44 @@ function Filieres() {
                     error
                 );
 
+            })
+            .finally(() => {
+
+                setChargement(false);
+
             });
 
     }, []);
+
+
+    useEffect(() => {
+
+    sessionStorage.setItem(
+        "filieres_recherche",
+        recherche
+    );
+
+}, [recherche]);
+
+
+useEffect(() => {
+
+    sessionStorage.setItem(
+        "filieres_domaine",
+        domaine
+    );
+
+}, [domaine]);
+
+
+useEffect(() => {
+
+    sessionStorage.setItem(
+        "filieres_duree",
+        duree
+    );
+
+}, [duree]);
 
 
     const domaines = [
@@ -243,116 +286,120 @@ function Filieres() {
 
             <div className="filieres-list">
 
-                {
+    {
 
-                    resultats.length > 0 ?
+        chargement ? (
 
-                        (
+            <div className="filieres-loading">
 
-                            resultats.map((filiere) => (
+                <div className="filieres-loading-spinner"></div>
 
-                                <div
-                                    className="filiere-card"
-                                    key={filiere.id_filiere}
-                                >
+                <h2>
+                    Chargement des filières...
+                </h2>
 
-                                    <h2>
-                                        {filiere.nom}
-                                    </h2>
-
-
-                                    <div className="filiere-top-bar"></div>
-
-
-                                    <p>
-                                        {filiere.description}
-                                    </p>
-
-
-                                    <p>
-
-                                        <strong>
-                                            <FaTag />
-                                            Domaine :
-                                        </strong>
-
-                                        {" "}
-
-                                        {filiere.domaine}
-
-                                    </p>
-
-
-                                    <p>
-
-                                        <strong>
-                                            <FaClock />
-                                            Durée :
-                                        </strong>
-
-                                        {" "}
-
-                                        {filiere.duree}
-
-                                    </p>
-
-
-                                    <button
-                                        className="filiere-button"
-                                        onClick={async () => {
-
-                                            await enregistrerAction(
-                                                `FORMATION_CONSULTEE: ${filiere.nom}`
-                                            );
-
-                                            navigate(
-                                                `/filieres/${filiere.id_filiere}`
-                                            );
-
-                                        }}
-                                    >
-
-                                        Voir détails
-
-                                        <FaArrowRight />
-
-                                    </button>
-
-                                </div>
-
-                            ))
-
-                        )
-
-                        :
-
-                        (
-
-                            <div className="aucune-filiere">
-
-                                <h2>
-
-                                    <FaFrown />
-                                    Aucune filière trouvée
-
-                                </h2>
-
-                                <p>
-
-                                    Essayez un autre mot-clé,
-                                    un autre domaine
-                                    ou une autre durée.
-
-                                </p>
-
-                            </div>
-
-                        )
-
-                }
+                <p>
+                    Veuillez patienter quelques instants.
+                </p>
 
             </div>
 
+        ) : resultats.length > 0 ? (
+
+            resultats.map((filiere) => (
+
+                <div
+                    className="filiere-card"
+                    key={filiere.id_filiere}
+                >
+
+                    <h2>
+                        {filiere.nom}
+                    </h2>
+
+                    <div className="filiere-top-bar"></div>
+
+                    <p>
+                        {filiere.description}
+                    </p>
+
+                    <p>
+
+                        <strong>
+                            <FaTag />
+                            Domaine :
+                        </strong>
+
+                        {" "}
+
+                        {filiere.domaine}
+
+                    </p>
+
+                    <p>
+
+                        <strong>
+                            <FaClock />
+                            Durée :
+                        </strong>
+
+                        {" "}
+
+                        {filiere.duree}
+
+                    </p>
+
+                    <button
+                        className="filiere-button"
+                        onClick={async () => {
+
+                            await enregistrerAction(
+                                `FORMATION_CONSULTEE: ${filiere.nom}`
+                            );
+
+                            navigate(
+                                `/filieres/${filiere.id_filiere}`
+                            );
+
+                        }}
+                    >
+
+                        Voir détails
+
+                        <FaArrowRight />
+
+                    </button>
+
+                </div>
+
+            ))
+
+        ) : (
+
+            <div className="aucune-filiere">
+
+                <h2>
+
+                    <FaFrown />
+                    Aucune filière trouvée
+
+                </h2>
+
+                <p>
+
+                    Essayez un autre mot-clé,
+                    un autre domaine
+                    ou une autre durée.
+
+                </p>
+
+            </div>
+
+        )
+
+    }
+
+</div>
 
             <FooterNavigation />
 

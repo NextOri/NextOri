@@ -58,6 +58,9 @@ class UniversiteCatalogueService
             type,
             ville,
             region,
+            adresse,
+            telephone,
+            email,
             pays,
             site_web,
             logo

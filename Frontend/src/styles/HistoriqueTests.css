@@ -1,18 +1,32 @@
 /* =========================================================
    NEXTORI — HISTORIQUE DES TESTS
+   DESIGN PROFESSIONNEL
+   Palette officielle :
+   #0D1B2A — Deep Blue
+   #F4B400 — Orange
+   #1E3A8A — Secondary Blue
+   #F2F4F7 — Light Gray
+   #FFFFFF — White
+   ========================================================= */
+
+
+/* =========================================================
+   PAGE
    ========================================================= */
 
 .historique-tests-page {
     min-height: 100vh;
-    padding: 50px 7% 110px;
+    padding: 48px 24px 120px;
+
     background:
         radial-gradient(
-            circle at top right,
-            rgba(30, 58, 138, 0.08),
-            transparent 32%
+            circle at 85% 0%,
+            rgba(30, 58, 138, 0.07),
+            transparent 30%
         ),
-        #f7f9fc;
-    color: #0d1b2a;
+        #F2F4F7;
+
+    color: #0D1B2A;
     box-sizing: border-box;
 }
 
@@ -24,89 +38,270 @@
 .historique-tests-header {
     max-width: 1180px;
     margin: 0 auto 42px;
+}
 
+.historique-tests-header-content {
     display: flex;
     align-items: center;
     justify-content: space-between;
+
     gap: 30px;
 }
 
-.historique-tests-header h1 {
-    margin: 0 0 10px;
-
-    font-size: 2.2rem;
-    font-weight: 800;
-    letter-spacing: -0.6px;
-    color: #0d1b2a;
-}
-
-.historique-tests-header p {
-    margin: 0;
-
-    max-width: 650px;
-
-    font-size: 1rem;
-    line-height: 1.7;
-    color: #667085;
-}
-
 
 /* =========================================================
-   COMPTEUR
+   TITRE
    ========================================================= */
 
-.historique-tests-count {
-    min-width: 155px;
+.historique-tests-title {
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
+}
 
-    padding: 18px 24px;
+.historique-tests-title-icon {
+    width: 58px;
+    height: 58px;
+
+    flex-shrink: 0;
 
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
 
-    background: #ffffff;
+    border-radius: 16px;
 
-    border: 1px solid #e4e7ec;
-    border-radius: 18px;
+    background: #0D1B2A;
+    color: #FFFFFF;
+
+    font-size: 1.45rem;
 
     box-shadow:
-        0 8px 24px rgba(13, 27, 42, 0.07);
-
-    text-align: center;
+        0 10px 24px rgba(13, 27, 42, 0.16);
 }
 
-.historique-tests-count strong {
-    display: block;
+.historique-tests-label {
+    margin: 0 0 5px !important;
 
-    font-size: 2rem;
-    line-height: 1;
+    color: #F4B400 !important;
 
+    font-size: 0.78rem !important;
+    font-weight: 800 !important;
+
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.historique-tests-header h1 {
+    margin: 0 0 9px;
+
+    color: #0D1B2A;
+
+    font-size: 2.25rem;
+    line-height: 1.15;
     font-weight: 800;
 
-    color: #1e3a8a;
+    letter-spacing: -0.7px;
 }
 
-.historique-tests-count span {
-    margin-top: 7px;
+.historique-tests-description {
+    margin: 0 !important;
 
-    font-size: 0.85rem;
-    font-weight: 600;
+    max-width: 650px;
 
-    color: #667085;
+    color: #1E3A8A !important;
+
+    font-size: 0.98rem !important;
+    line-height: 1.65 !important;
 }
 
 
 /* =========================================================
-   LISTE DES TESTS
+   BOUTON RETOUR AUX RÉSULTATS
+   ========================================================= */
+
+.historique-resultats-button {
+    flex-shrink: 0;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+
+    padding: 12px 18px;
+
+    border: 1px solid #0D1B2A;
+    border-radius: 11px;
+
+    background: #FFFFFF;
+    color: #0D1B2A;
+
+    font-size: 0.88rem;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.historique-resultats-button:hover {
+    background: #0D1B2A;
+    color: #FFFFFF;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 20px rgba(13, 27, 42, 0.15);
+}
+
+.historique-resultats-button svg {
+    font-size: 0.82rem;
+}
+
+
+/* =========================================================
+   RÉSUMÉ / COMPTEUR
+   ========================================================= */
+
+.historique-tests-summary {
+    width: fit-content;
+
+    margin-top: 28px;
+
+    display: flex;
+    align-items: center;
+    gap: 13px;
+
+    padding: 14px 20px;
+
+    background: #FFFFFF;
+
+    border: 1px solid #F2F4F7;
+    border-radius: 14px;
+
+    box-shadow:
+        0 7px 22px rgba(13, 27, 42, 0.06);
+}
+
+.historique-summary-icon {
+    width: 40px;
+    height: 40px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 11px;
+
+    background: #1E3A8A;
+    color: #FFFFFF;
+
+    font-size: 1rem;
+}
+
+.historique-tests-summary strong {
+    display: block;
+
+    color: #0D1B2A;
+
+    font-size: 1.35rem;
+    line-height: 1;
+    font-weight: 800;
+}
+
+.historique-tests-summary span {
+    display: block;
+
+    margin-top: 4px;
+
+    color: #1E3A8A;
+
+    font-size: 0.78rem;
+    font-weight: 650;
+}
+
+
+/* =========================================================
+   CONTENU
+   ========================================================= */
+
+.historique-tests-content {
+    max-width: 1180px;
+    margin: 0 auto;
+}
+
+
+/* =========================================================
+   INTRODUCTION
+   ========================================================= */
+
+.historique-tests-introduction {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+
+    margin-bottom: 22px;
+    padding: 18px 20px;
+
+    background: #FFFFFF;
+
+    border: 1px solid #F2F4F7;
+    border-radius: 15px;
+
+    box-shadow:
+        0 6px 20px rgba(13, 27, 42, 0.04);
+}
+
+.historique-introduction-icon {
+    width: 40px;
+    height: 40px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 10px;
+
+    background: #F4B400;
+    color: #0D1B2A;
+
+    font-size: 1rem;
+}
+
+.historique-tests-introduction h2 {
+    margin: 0 0 3px;
+
+    color: #0D1B2A;
+
+    font-size: 1rem;
+    font-weight: 800;
+}
+
+.historique-tests-introduction p {
+    margin: 0;
+
+    color: #1E3A8A;
+
+    font-size: 0.85rem;
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   LISTE
    ========================================================= */
 
 .historique-tests-list {
-    max-width: 1180px;
-    margin: 0 auto;
-
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
 
     gap: 24px;
 }
@@ -119,17 +314,20 @@
 .historique-test-card {
     position: relative;
 
-    padding: 26px;
+    display: flex;
+    flex-direction: column;
 
-    background: #ffffff;
+    padding: 0;
 
-    border: 1px solid #e4e7ec;
-    border-radius: 22px;
+    background: #FFFFFF;
+
+    border: 1px solid #F2F4F7;
+    border-radius: 20px;
+
+    overflow: hidden;
 
     box-shadow:
         0 8px 28px rgba(13, 27, 42, 0.06);
-
-    overflow: hidden;
 
     transition:
         transform 0.25s ease,
@@ -137,136 +335,257 @@
         border-color 0.25s ease;
 }
 
-.historique-test-card::before {
-    content: "";
-
-    position: absolute;
-
-    top: 0;
-    left: 0;
-    right: 0;
-
-    height: 4px;
-
-    background: linear-gradient(
-        90deg,
-        #0d1b2a,
-        #1e3a8a,
-        #f4b400
-    );
-}
-
 .historique-test-card:hover {
     transform: translateY(-5px);
 
-    border-color: rgba(30, 58, 138, 0.25);
+    border-color: #1E3A8A;
 
     box-shadow:
         0 16px 38px rgba(13, 27, 42, 0.11);
 }
 
 
-/* =========================================================
-   HAUT DE CARTE
-   ========================================================= */
+/* Barre supérieure */
 
-.historique-test-top {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
+.historique-test-card::before {
+    content: "";
 
-    gap: 20px;
+    display: block;
 
-    margin-bottom: 25px;
-}
-
-.historique-test-top h2 {
-    margin: 0 0 7px;
-
-    font-size: 1.15rem;
-    font-weight: 750;
-
-    color: #0d1b2a;
-}
-
-.historique-test-top p {
-    margin: 0;
-
-    font-size: 0.9rem;
-    color: #667085;
-}
-
-
-/* =========================================================
-   PROFIL RIASEC
-   ========================================================= */
-
-.historique-test-profil {
-    min-width: 62px;
-    height: 62px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 16px;
+    height: 4px;
 
     background:
         linear-gradient(
-            135deg,
-            #0d1b2a,
-            #1e3a8a
+            90deg,
+            #0D1B2A 0%,
+            #1E3A8A 65%,
+            #F4B400 100%
         );
-
-    color: #ffffff;
-
-    font-size: 1.2rem;
-    font-weight: 800;
-
-    letter-spacing: 1px;
-
-    box-shadow:
-        0 7px 18px rgba(30, 58, 138, 0.22);
 }
 
 
 /* =========================================================
-   SCORES
+   EN-TÊTE CARTE
+   ========================================================= */
+
+.historique-test-card-header {
+    display: grid;
+
+    grid-template-columns:
+        auto minmax(0, 1fr) auto;
+
+    align-items: center;
+
+    gap: 18px;
+
+    padding: 24px 24px 20px;
+}
+
+
+/* =========================================================
+   NUMÉRO DU TEST
+   ========================================================= */
+
+.historique-test-number {
+    width: 52px;
+    height: 52px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    background: #0D1B2A;
+
+    border-radius: 14px;
+
+    color: #FFFFFF;
+}
+
+.historique-test-number span {
+    font-size: 0.62rem;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.7px;
+
+    opacity: 0.75;
+}
+
+.historique-test-number strong {
+    margin-top: 2px;
+
+    color: #F4B400;
+
+    font-size: 1rem;
+    line-height: 1;
+}
+
+
+/* =========================================================
+   TITRE CARTE
+   ========================================================= */
+
+.historique-test-card-title {
+    min-width: 0;
+}
+
+.historique-test-card-title h2 {
+    margin: 0 0 7px;
+
+    color: #0D1B2A;
+
+    font-size: 1.05rem;
+    font-weight: 800;
+}
+
+.historique-test-card-title p {
+    margin: 0;
+
+    display: flex;
+    align-items: flex-start;
+    gap: 7px;
+
+    color: #1E3A8A;
+
+    font-size: 0.8rem;
+    line-height: 1.4;
+}
+
+.historique-test-card-title p svg {
+    flex-shrink: 0;
+
+    margin-top: 2px;
+
+    font-size: 0.75rem;
+}
+
+
+/* =========================================================
+   PROFIL DOMINANT
+   ========================================================= */
+
+.historique-test-profile {
+    min-width: 82px;
+
+    padding: 10px 13px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    background: #F2F4F7;
+
+    border: 1px solid #F2F4F7;
+    border-radius: 13px;
+
+    text-align: center;
+}
+
+.historique-test-profile span {
+    margin-bottom: 5px;
+
+    color: #1E3A8A;
+
+    font-size: 0.6rem;
+    font-weight: 700;
+
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.historique-test-profile strong {
+    color: #0D1B2A;
+
+    font-size: 1.25rem;
+    line-height: 1;
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   SÉPARATION
+   ========================================================= */
+
+.historique-test-divider {
+    height: 1px;
+
+    margin: 0 24px;
+
+    background: #F2F4F7;
+}
+
+
+/* =========================================================
+   SECTION SCORES
+   ========================================================= */
+
+.historique-test-scores-section {
+    padding: 20px 24px 22px;
+}
+
+.historique-test-scores-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    margin-bottom: 13px;
+
+    color: #0D1B2A;
+
+    font-size: 0.82rem;
+    font-weight: 800;
+}
+
+.historique-test-scores-title svg {
+    color: #F4B400;
+
+    font-size: 0.85rem;
+}
+
+
+/* =========================================================
+   SCORES RIASEC
    ========================================================= */
 
 .historique-test-scores {
     display: grid;
 
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns:
+        repeat(6, minmax(0, 1fr));
 
-    gap: 9px;
+    gap: 7px;
 
-    padding: 16px;
+    padding: 10px;
 
-    background: #f7f9fc;
+    background: #F2F4F7;
 
-    border: 1px solid #eef0f4;
-    border-radius: 16px;
+    border-radius: 13px;
 }
 
-.historique-test-scores > div {
+.historique-score-item {
+    min-width: 0;
+
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+
     gap: 6px;
 
-    padding: 9px 4px;
+    padding: 9px 3px;
 
-    background: #ffffff;
+    background: #FFFFFF;
 
-    border-radius: 11px;
-
-    border: 1px solid #eaecf0;
+    border-radius: 9px;
 }
 
-.historique-test-scores span {
-    width: 30px;
-    height: 30px;
+.historique-score-item span {
+    width: 27px;
+    height: 27px;
 
     display: flex;
     align-items: center;
@@ -274,62 +593,86 @@
 
     border-radius: 50%;
 
-    background: #0d1b2a;
+    background: #0D1B2A;
+    color: #FFFFFF;
 
-    color: #ffffff;
-
-    font-size: 0.78rem;
+    font-size: 0.7rem;
     font-weight: 800;
 }
 
-.historique-test-scores strong {
-    font-size: 1rem;
-    color: #1e3a8a;
+.historique-score-item strong {
+    color: #1E3A8A;
+
+    font-size: 0.9rem;
+    font-weight: 800;
 }
 
 
 /* =========================================================
-   FOOTER DE CARTE
+   PIED DE CARTE
    ========================================================= */
 
-.historique-test-footer {
+.historique-test-card-footer {
+    margin-top: auto;
+
     display: flex;
     align-items: center;
     justify-content: space-between;
 
     gap: 15px;
 
-    margin-top: 22px;
-    padding-top: 18px;
+    padding: 16px 24px 20px;
 
-    border-top: 1px solid #eef0f4;
-}
-
-.historique-test-footer span {
-    font-size: 0.82rem;
-    font-weight: 600;
-
-    color: #98a2b3;
+    border-top: 1px solid #F2F4F7;
 }
 
 
 /* =========================================================
-   BOUTON VOIR LE RÉSULTAT
+   STATUT
    ========================================================= */
 
-.historique-test-footer button {
+.historique-test-status {
+    min-width: 0;
+
+    display: flex;
+    align-items: center;
+    gap: 7px;
+
+    color: #1E3A8A;
+
+    font-size: 0.76rem;
+    font-weight: 650;
+}
+
+.historique-test-status svg {
+    flex-shrink: 0;
+
+    font-size: 0.78rem;
+}
+
+
+/* =========================================================
+   BOUTON RÉSULTAT
+   ========================================================= */
+
+.historique-result-button {
+    flex-shrink: 0;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    padding: 10px 15px;
+
     border: none;
-
-    padding: 11px 18px;
-
     border-radius: 10px;
 
-    background: #1e3a8a;
+    background: #1E3A8A;
+    color: #FFFFFF;
 
-    color: #ffffff;
-
-    font-size: 0.88rem;
-    font-weight: 700;
+    font-size: 0.8rem;
+    font-weight: 750;
 
     cursor: pointer;
 
@@ -339,13 +682,65 @@
         box-shadow 0.2s ease;
 }
 
-.historique-test-footer button:hover {
-    background: #0d1b2a;
+.historique-result-button:hover {
+    background: #0D1B2A;
 
     transform: translateX(2px);
 
     box-shadow:
-        0 6px 15px rgba(13, 27, 42, 0.18);
+        0 7px 17px rgba(13, 27, 42, 0.17);
+}
+
+.historique-result-button svg {
+    font-size: 0.72rem;
+}
+
+
+/* =========================================================
+   NAVIGATION BAS DE PAGE
+   ========================================================= */
+
+.historique-tests-bottom-navigation {
+    display: flex;
+    justify-content: center;
+
+    margin-top: 35px;
+}
+
+.historique-retour-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+
+    padding: 11px 19px;
+
+    border: 1px solid #0D1B2A;
+    border-radius: 11px;
+
+    background: #FFFFFF;
+    color: #0D1B2A;
+
+    font-size: 0.85rem;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.historique-retour-button:hover {
+    background: #0D1B2A;
+    color: #FFFFFF;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 20px rgba(13, 27, 42, 0.14);
 }
 
 
@@ -354,16 +749,16 @@
    ========================================================= */
 
 .historique-tests-empty {
-    max-width: 650px;
+    max-width: 680px;
 
-    margin: 70px auto;
+    margin: 60px auto 40px;
 
     padding: 55px 35px;
 
-    background: #ffffff;
+    background: #FFFFFF;
 
-    border: 1px solid #e4e7ec;
-    border-radius: 24px;
+    border: 1px solid #F2F4F7;
+    border-radius: 22px;
 
     text-align: center;
 
@@ -371,36 +766,152 @@
         0 12px 35px rgba(13, 27, 42, 0.07);
 }
 
+.historique-empty-icon {
+    width: 68px;
+    height: 68px;
+
+    margin: 0 auto 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 18px;
+
+    background: #0D1B2A;
+    color: #F4B400;
+
+    font-size: 1.55rem;
+}
+
 .historique-tests-empty h2 {
     margin: 0 0 12px;
 
-    font-size: 1.6rem;
+    color: #0D1B2A;
 
-    color: #0d1b2a;
+    font-size: 1.5rem;
+    font-weight: 800;
 }
 
 .historique-tests-empty p {
+    max-width: 470px;
+
     margin: 0 auto 28px;
 
-    max-width: 450px;
+    color: #1E3A8A;
 
-    color: #667085;
-
+    font-size: 0.92rem;
     line-height: 1.7;
 }
 
-.historique-tests-empty button {
+.historique-first-test-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+
+    padding: 13px 22px;
+
     border: none;
-
-    padding: 13px 24px;
-
     border-radius: 11px;
 
-    background: #1e3a8a;
+    background: #F4B400;
+    color: #0D1B2A;
 
-    color: #ffffff;
+    font-size: 0.88rem;
+    font-weight: 800;
 
-    font-weight: 700;
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.historique-first-test-button:hover {
+    background: #F4B400;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 20px rgba(13, 27, 42, 0.15);
+}
+
+
+/* =========================================================
+   ERREUR
+   ========================================================= */
+
+.historique-tests-error {
+    max-width: 620px;
+
+    margin: 70px auto;
+
+    padding: 45px 30px;
+
+    background: #FFFFFF;
+
+    border: 1px solid #F2F4F7;
+    border-radius: 20px;
+
+    text-align: center;
+
+    box-shadow:
+        0 12px 35px rgba(13, 27, 42, 0.07);
+}
+
+.historique-tests-error-icon {
+    width: 58px;
+    height: 58px;
+
+    margin: 0 auto 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 15px;
+
+    background: #0D1B2A;
+    color: #F4B400;
+
+    font-size: 1.3rem;
+}
+
+.historique-tests-error h1 {
+    margin: 0 0 10px;
+
+    color: #0D1B2A;
+
+    font-size: 1.45rem;
+    font-weight: 800;
+}
+
+.historique-tests-error p {
+    margin: 0 auto 24px;
+
+    color: #1E3A8A;
+
+    line-height: 1.6;
+}
+
+.historique-tests-error button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    padding: 11px 20px;
+
+    border: none;
+    border-radius: 10px;
+
+    background: #1E3A8A;
+    color: #FFFFFF;
+
+    font-size: 0.85rem;
+    font-weight: 750;
 
     cursor: pointer;
 
@@ -409,73 +920,10 @@
         transform 0.2s ease;
 }
 
-.historique-tests-empty button:hover {
-    background: #0d1b2a;
+.historique-tests-error button:hover {
+    background: #0D1B2A;
 
     transform: translateY(-2px);
-}
-
-
-/* =========================================================
-   ERREUR
-   ========================================================= */
-
-.historique-error {
-    max-width: 600px;
-
-    margin: 50px auto;
-    padding: 20px 24px;
-
-    border-radius: 14px;
-
-    background: #fff4f4;
-
-    border: 1px solid #f5c2c7;
-
-    color: #b42318;
-
-    text-align: center;
-}
-
-
-/* =========================================================
-   RETOUR AU PROFIL
-   ========================================================= */
-
-.historique-retour-button {
-    display: block;
-
-    max-width: 1180px;
-
-    margin: 35px auto 0;
-
-    padding: 12px 20px;
-
-    border: 1px solid #d0d5dd;
-
-    border-radius: 11px;
-
-    background: #ffffff;
-
-    color: #344054;
-
-    font-size: 0.9rem;
-    font-weight: 650;
-
-    cursor: pointer;
-
-    transition:
-        background 0.2s ease,
-        border-color 0.2s ease,
-        color 0.2s ease;
-}
-
-.historique-retour-button:hover {
-    background: #f2f4f7;
-
-    border-color: #98a2b3;
-
-    color: #0d1b2a;
 }
 
 
@@ -483,27 +931,77 @@
    CHARGEMENT
    ========================================================= */
 
-.historique-tests-page > h2 {
-    max-width: 1180px;
+.historique-tests-loading {
+    min-height: 65vh;
 
-    margin: 100px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 
     text-align: center;
+}
 
-    font-size: 1.2rem;
+.historique-tests-loading-icon {
+    width: 64px;
+    height: 64px;
 
-    font-weight: 650;
+    margin-bottom: 18px;
 
-    color: #667085;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 18px;
+
+    background: #0D1B2A;
+    color: #F4B400;
+
+    font-size: 1.5rem;
+
+    animation:
+        historique-pulse 1.5s ease-in-out infinite;
+}
+
+.historique-tests-loading h2 {
+    margin: 0 0 7px;
+
+    color: #0D1B2A;
+
+    font-size: 1.15rem;
+    font-weight: 750;
+}
+
+.historique-tests-loading p {
+    margin: 0;
+
+    color: #1E3A8A;
+
+    font-size: 0.88rem;
+}
+
+@keyframes historique-pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(0.94);
+        opacity: 0.72;
+    }
 }
 
 
-
 /* =========================================================
-   Partie Footer
+   STRUCTURE FOOTER
    ========================================================= */
+
 .historique-tests-layout {
     min-height: 100vh;
+
     display: flex;
     flex-direction: column;
 }
@@ -512,17 +1010,18 @@
     flex: 1;
 }
 
+
 /* =========================================================
-   RESPONSIVE — TABLETTE
+   TABLETTE
    ========================================================= */
 
-@media (max-width: 900px) {
+@media (max-width: 950px) {
 
     .historique-tests-page {
-        padding: 40px 5% 105px;
+        padding: 40px 22px 115px;
     }
 
-    .historique-tests-header {
+    .historique-tests-header-content {
         align-items: flex-start;
     }
 
@@ -533,125 +1032,248 @@
 }
 
 
-
-
 /* =========================================================
-   RESPONSIVE — MOBILE
+   MOBILE
    ========================================================= */
 
-@media (max-width: 600px) {
+@media (max-width: 700px) {
 
     .historique-tests-page {
-        padding: 28px 18px 95px;
+        padding: 30px 17px 100px;
     }
 
+
+    /* HEADER */
+
     .historique-tests-header {
+        margin-bottom: 30px;
+    }
+
+    .historique-tests-header-content {
         flex-direction: column;
         align-items: stretch;
 
-        margin-bottom: 30px;
+        gap: 22px;
+    }
+
+
+    /* TITRE */
+
+    .historique-tests-title {
+        gap: 13px;
+    }
+
+    .historique-tests-title-icon {
+        width: 48px;
+        height: 48px;
+
+        border-radius: 13px;
+
+        font-size: 1.15rem;
     }
 
     .historique-tests-header h1 {
         font-size: 1.7rem;
-        line-height: 1.25;
+        line-height: 1.2;
     }
 
-    .historique-tests-header p {
-        font-size: 0.92rem;
+    .historique-tests-description {
+        font-size: 0.88rem !important;
+        line-height: 1.55 !important;
     }
 
-    .historique-tests-count {
-        align-self: flex-start;
 
-        min-width: 125px;
+    /* RETOUR */
 
-        padding: 14px 20px;
-    }
-
-    .historique-tests-count strong {
-        font-size: 1.7rem;
-    }
-
-    .historique-test-card {
-        padding: 21px;
-        border-radius: 18px;
-    }
-
-    .historique-test-top {
-        align-items: center;
-    }
-
-    .historique-test-top h2 {
-        font-size: 1rem;
-    }
-
-    .historique-test-top p {
-        font-size: 0.82rem;
-        line-height: 1.5;
-    }
-
-    .historique-test-profil {
-        min-width: 52px;
-        height: 52px;
-
-        border-radius: 14px;
-
-        font-size: 1rem;
-    }
-
-    .historique-test-scores {
-        gap: 6px;
-        padding: 10px;
-    }
-
-    .historique-test-scores > div {
-        padding: 7px 2px;
-    }
-
-    .historique-test-scores span {
-        width: 26px;
-        height: 26px;
-
-        font-size: 0.7rem;
-    }
-
-    .historique-test-scores strong {
-        font-size: 0.85rem;
-    }
-
-    .historique-test-footer {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    .historique-test-footer span {
-        text-align: center;
-    }
-
-    .historique-test-footer button {
+    .historique-resultats-button {
         width: 100%;
     }
 
+
+    /* COMPTEUR */
+
+    .historique-tests-summary {
+        width: 100%;
+
+        box-sizing: border-box;
+
+        margin-top: 22px;
+    }
+
+
+    /* INTRODUCTION */
+
+    .historique-tests-introduction {
+        align-items: flex-start;
+
+        padding: 16px;
+    }
+
+
+    /* CARTE */
+
+    .historique-test-card {
+        border-radius: 18px;
+    }
+
+    .historique-test-card-header {
+        grid-template-columns:
+            auto minmax(0, 1fr);
+
+        gap: 13px;
+
+        padding: 20px 18px 17px;
+    }
+
+
+    /* PROFIL */
+
+    .historique-test-profile {
+        grid-column: 1 / -1;
+
+        width: 100%;
+
+        box-sizing: border-box;
+
+        flex-direction: row;
+
+        justify-content: space-between;
+
+        padding: 10px 13px;
+    }
+
+    .historique-test-profile span {
+        margin-bottom: 0;
+    }
+
+
+    /* DIVIDER */
+
+    .historique-test-divider {
+        margin: 0 18px;
+    }
+
+
+    /* SCORES */
+
+    .historique-test-scores-section {
+        padding: 18px;
+    }
+
+    .historique-test-scores {
+        gap: 5px;
+
+        padding: 8px;
+    }
+
+    .historique-score-item {
+        padding: 8px 2px;
+    }
+
+    .historique-score-item span {
+        width: 25px;
+        height: 25px;
+
+        font-size: 0.65rem;
+    }
+
+    .historique-score-item strong {
+        font-size: 0.82rem;
+    }
+
+
+    /* FOOTER CARTE */
+
+    .historique-test-card-footer {
+        flex-direction: column;
+        align-items: stretch;
+
+        padding: 15px 18px 18px;
+    }
+    .historique-test-status {
+        justify-content: center;
+    }
+
+    .historique-result-button {
+        width: 100%;
+    }
+
+
+    /* EMPTY */
+
     .historique-tests-empty {
-        margin: 45px auto;
-        padding: 40px 22px;
+        margin: 40px auto;
+
+        padding: 42px 22px;
+
         border-radius: 19px;
     }
 
-    .historique-tests-empty h2 {
-        font-size: 1.35rem;
+
+    /* RETOUR PROFIL */
+
+    .historique-tests-bottom-navigation {
+        margin-top: 28px;
     }
 
     .historique-retour-button {
         width: 100%;
-        margin-top: 25px;
     }
 
 }
 
-@media (max-width: 480px) {
+
+/* =========================================================
+   PETITS ÉCRANS
+   ========================================================= */
+
+@media (max-width: 430px) {
+
     .historique-tests-page {
-        padding-bottom: 90px;
+        padding-left: 14px;
+        padding-right: 14px;
     }
+
+    .historique-tests-header h1 {
+        font-size: 1.5rem;
+    }
+
+    .historique-tests-title-icon {
+        width: 44px;
+        height: 44px;
+
+        font-size: 1rem;
+    }
+
+    .historique-test-number {
+        width: 46px;
+        height: 46px;
+    }
+
+    .historique-test-card-title h2 {
+        font-size: 0.95rem;
+    }
+
+    .historique-test-card-title p {
+        font-size: 0.73rem;
+    }
+
+    .historique-test-scores {
+        gap: 3px;
+        padding: 6px;
+    }
+
+    .historique-score-item {
+        padding: 7px 1px;
+    }
+
+    .historique-score-item span {
+        width: 23px;
+        height: 23px;
+    }
+
+    .historique-score-item strong {
+        font-size: 0.78rem;
+    }
+
 }

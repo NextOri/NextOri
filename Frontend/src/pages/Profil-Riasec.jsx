@@ -13,53 +13,48 @@ import {
 } from "react-icons/fa";
 
 
-
-function ProfilRiasec(){
-
+function ProfilRiasec() {
 
     const location = useLocation();
 
     const navigate = useNavigate();
 
-
-
     const resultat = location.state?.resultat;
-
 
 
     /*
         Si aucun résultat n'est disponible
     */
 
-    if(!resultat){
+    if (!resultat) {
 
-        return(
+        return (
 
-            <div className="profil-empty">
+            <div className="nextori-riasec-profile-empty">
 
+                <div className="nextori-riasec-profile-empty-card">
 
-                <h1>
-                    Aucun profil disponible
-                </h1>
+                    <div className="nextori-riasec-profile-empty-icon">
+                        <FaBrain />
+                    </div>
 
+                    <h1>
+                        Aucun profil disponible
+                    </h1>
 
-                <p>
-                    Vous devez effectuer le test RIASEC
-                    avant de consulter votre profil.
-                </p>
+                    <p>
+                        Vous devez effectuer le test RIASEC
+                        avant de consulter votre profil.
+                    </p>
 
+                    <button
+                        className="nextori-riasec-profile-start-button"
+                        onClick={() => navigate("/test")}
+                    >
+                        Faire le test
+                    </button>
 
-
-                <button
-
-                onClick={()=>navigate("/test")}
-
-                >
-
-                    Faire le test
-
-                </button>
-
+                </div>
 
             </div>
 
@@ -68,35 +63,37 @@ function ProfilRiasec(){
     }
 
 
-
-
     const codeProfil = resultat.profil.principal;
 
-
-
     const profil = profilsRiasec[codeProfil];
-
 
 
     /*
         Sécurité si le profil n'existe pas
     */
 
-    if(!profil){
+    if (!profil) {
 
-        return(
+        return (
 
-            <div className="profil-empty">
+            <div className="nextori-riasec-profile-empty">
 
-                <h1>
-                    Profil introuvable
-                </h1>
+                <div className="nextori-riasec-profile-empty-card">
 
+                    <div className="nextori-riasec-profile-empty-icon">
+                        <FaBrain />
+                    </div>
 
-                <p>
-                    Une erreur est survenue lors du chargement
-                    de votre profil RIASEC.
-                </p>
+                    <h1>
+                        Profil introuvable
+                    </h1>
+
+                    <p>
+                        Une erreur est survenue lors du chargement
+                        de votre profil RIASEC.
+                    </p>
+
+                </div>
 
             </div>
 
@@ -105,260 +102,292 @@ function ProfilRiasec(){
     }
 
 
+    return (
 
-    return(
-
-        <div className="profil-page">
-
+        <div className="nextori-riasec-profile-page">
 
 
-            <header className="profil-header">
+            {/* =====================================================
+                EN-TÊTE
+            ===================================================== */}
 
+            <header className="nextori-riasec-profile-header">
 
-                <h1>
-                    Votre profil RIASEC
-                </h1>
+                <div className="nextori-riasec-profile-header-content">
 
+                    <span className="nextori-riasec-profile-eyebrow">
+                        ANALYSE DE VOTRE PROFIL
+                    </span>
 
-                <p>
-                    Découvrez votre personnalité professionnelle.
-                </p>
+                    <h1>
+                        Votre profil RIASEC
+                    </h1>
 
+                    <p>
+                        Découvrez votre personnalité professionnelle,
+                        vos forces naturelles et les environnements
+                        dans lesquels vous pouvez vous épanouir.
+                    </p>
+
+                </div>
 
             </header>
-            <section className="profil-card">
 
 
+            {/* =====================================================
+                IDENTITÉ DU PROFIL
+            ===================================================== */}
 
-                <div className="profil-code">
+            <main className="nextori-riasec-profile-main">
 
-                    {codeProfil}
+                <section className="nextori-riasec-profile-identity">
 
-                </div>
+                    <div className="nextori-riasec-profile-code-wrapper">
 
+                        <span className="nextori-riasec-profile-code-label">
+                            VOTRE CODE
+                        </span>
 
+                        <div className="nextori-riasec-profile-code">
+                            {codeProfil}
+                        </div>
 
-
-                <h2>
-
-                    {profil.nom}
-
-                </h2>
-
-
-
-
-                <p className="profil-description">
-
-                    {profil.description}
-
-                </p>
+                    </div>
 
 
+                    <div className="nextori-riasec-profile-identity-content">
 
-            </section>
+                        <span className="nextori-riasec-profile-identity-kicker">
+                            Votre profil dominant
+                        </span>
 
+                        <h2>
+                            {profil.nom}
+                        </h2>
 
+                        <p className="nextori-riasec-profile-description">
+                            {profil.description}
+                        </p>
 
+                    </div>
 
-
-
-
-            <section className="profil-section">
-
-
-
-                    <h2 className="section-title">
-
-                        <FaStar className="section-icon forces-icon" />
-
-                            Vos points forts
-
-                                </h2>
+                </section>
 
 
+                {/* =================================================
+                    POINTS FORTS
+                ================================================= */}
 
-                <div className="profil-list">
+                <section className="nextori-riasec-profile-section">
+
+                    <div className="nextori-riasec-profile-section-heading">
+
+                        <div className="nextori-riasec-profile-section-icon">
+                            <FaStar />
+                        </div>
+
+                        <div>
+                            <span className="nextori-riasec-profile-section-kicker">
+                                CE QUI VOUS CARACTÉRISE
+                            </span>
+
+                            <h2>
+                                Vos points forts
+                            </h2>
+                        </div>
+
+                    </div>
 
 
-                    {
-                        profil.forces.map(
-                            (force,index)=>(
+                    <div className="nextori-riasec-profile-list">
 
-                                <div
+                        {
+                            profil.forces.map(
+                                (force, index) => (
 
-                                key={index}
+                                    <div
+                                        key={index}
+                                        className="nextori-riasec-profile-item"
+                                    >
 
-                                className="profil-item"
+                                        <span className="nextori-riasec-profile-item-marker">
+                                            <FaStar />
+                                        </span>
 
-                                >
+                                        <span>
+                                            {force}
+                                        </span>
 
-                                    {force}
+                                    </div>
 
-                                </div>
-
+                                )
                             )
-                        )
-                    }
+                        }
+
+                    </div>
+
+                </section>
 
 
-                </div>
+                {/* =================================================
+                    COMPÉTENCES NATURELLES
+                ================================================= */}
+
+                <section className="nextori-riasec-profile-section">
+
+                    <div className="nextori-riasec-profile-section-heading">
+
+                        <div className="nextori-riasec-profile-section-icon">
+                            <FaBrain />
+                        </div>
+
+                        <div>
+                            <span className="nextori-riasec-profile-section-kicker">
+                                VOS APTITUDES
+                            </span>
+
+                            <h2>
+                                Vos compétences naturelles
+                            </h2>
+                        </div>
+
+                    </div>
 
 
+                    <div className="nextori-riasec-profile-list">
 
-            </section>
-            <section className="profil-section">
+                        {
+                            profil.competences.map(
+                                (competence, index) => (
 
+                                    <div
+                                        key={index}
+                                        className="nextori-riasec-profile-item"
+                                    >
 
+                                        <span className="nextori-riasec-profile-item-marker">
+                                            <FaBrain />
+                                        </span>
 
-               <h2 className="section-title">
+                                        <span>
+                                            {competence}
+                                        </span>
 
-               <FaBrain className="section-icon competences-icon" />
+                                    </div>
 
-                Vos compétences naturelles
-
-                </h2>
-
-
-
-                <div className="profil-list">
-
-
-                    {
-                        profil.competences.map(
-                            (competence,index)=>(
-
-                                <div
-
-                                key={index}
-
-                                className="profil-item"
-
-                                >
-
-                                    {competence}
-
-                                </div>
-
+                                )
                             )
-                        )
-                    }
+                        }
+
+                    </div>
+
+                </section>
 
 
-                </div>
+                {/* =================================================
+                    ENVIRONNEMENTS PROFESSIONNELS
+                ================================================= */}
+
+                <section className="nextori-riasec-profile-section">
+
+                    <div className="nextori-riasec-profile-section-heading">
+
+                        <div className="nextori-riasec-profile-section-icon">
+                            <FaBuilding />
+                        </div>
+
+                        <div>
+                            <span className="nextori-riasec-profile-section-kicker">
+                                VOTRE CADRE IDÉAL
+                            </span>
+
+                            <h2>
+                                Environnements professionnels adaptés
+                            </h2>
+                        </div>
+
+                    </div>
 
 
+                    <div className="nextori-riasec-profile-list">
 
-            </section>
+                        {
+                            profil.environnements.map(
+                                (environnement, index) => (
 
+                                    <div
+                                        key={index}
+                                        className="nextori-riasec-profile-item"
+                                    >
 
+                                        <span className="nextori-riasec-profile-item-marker">
+                                            <FaBuilding />
+                                        </span>
 
+                                        <span>
+                                            {environnement}
+                                        </span>
 
+                                    </div>
 
-
-
-
-
-            <section className="profil-section">
-
-
-
-                <h2 className="section-title">
-
-                   <FaBuilding className="section-icon environnements-icon" />
- 
-                  Environnements professionnels adaptés
-
-               </h2>
-
-
-
-                <div className="profil-list">
-
-
-                    {
-                        profil.environnements.map(
-                            (environnement,index)=>(
-
-                                <div
-
-                                key={index}
-
-                                className="profil-item"
-
-                                >
-
-                                    {environnement}
-
-                                </div>
-
+                                )
                             )
-                        )
-                    }
+                        }
+
+                    </div>
+
+                </section>
 
 
-                </div>
+                {/* =================================================
+                    ACTIONS
+                ================================================= */}
+
+                <section className="nextori-riasec-profile-actions">
+
+                    <button
+                        className="nextori-riasec-profile-back-button"
+                        onClick={() =>
+                            navigate("/result", {
+                                state: {
+                                    data: resultat
+                                }
+                            })
+                        }
+                    >
+
+                        <FaArrowLeft />
+
+                        <span>
+                            Retour aux résultats
+                        </span>
+
+                    </button>
 
 
+                    <button
+                        className="nextori-riasec-profile-home-button"
+                        onClick={() => navigate("/dashboard")}
+                    >
 
-            </section>
+                        <FaHome />
 
+                        <span>
+                            Retour à l'accueil
+                        </span>
 
+                    </button>
 
-
-
-
-
-
-            <div className="profil-actions">
-
-
-    <button
-
-    className="back-result-button"
-
-    onClick={()=>navigate("/result",{
-
-        state: {
-            data: resultat
-        }
-
-    })}
-
-    >
-
-        ← Retour aux résultats
-
-    </button>
+                </section>
 
 
-
-    <button
-
-    className="home-button"
-
-    onClick={()=>navigate("/dashboard")}
-
-    >
-
-        🏠 Retour à l'accueil
-
-    </button>
-
-
-</div>
-
-
-
-
+            </main>
 
         </div>
 
     );
 
-
 }
-
 
 
 export default ProfilRiasec;

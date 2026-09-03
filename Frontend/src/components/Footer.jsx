@@ -27,7 +27,7 @@ function Footer() {
         },
         {
             nom: "LinkedIn",
-            url: "",
+            url: "https://www.linkedin.com/in/nextori-sénégal-361b76431",
             icone: FaLinkedin
         },
         {
@@ -47,12 +47,12 @@ function Footer() {
         },
         {
             nom: "TikTok",
-            url: "",
+            url: "https://www.tiktok.com/@nextori07?_r=1&_t=ZS-99QeSoJ1Bvo",
             icone: FaTiktok
         },
         {
             nom: "X",
-            url: "",
+            url: "https://x.com/NextOrideov",
             icone: FaXTwitter
         }
     ];

@@ -18,7 +18,9 @@ import {
     FaGift,
     FaArrowLeft,
     FaExternalLinkAlt,
-    FaClock
+    FaClock,
+    FaPhone,
+    FaEnvelope,
 } from "react-icons/fa";
 
 
@@ -173,16 +175,7 @@ function UniversiteDetail() {
                 </span>
 
 
-                <div className="no-universite-detail-location">
-
-                    <span>
-                        <FaMapMarkerAlt />
-                        {universite.ville}
-                    </span>
-
-                    
-
-                </div>
+                
 
             </header>
 
@@ -269,36 +262,123 @@ function UniversiteDetail() {
 
                         </div>
 
+                        {
+    universite.adresse && (
+
+        <div className="no-universite-detail-info-item">
+
+            <FaMapMarkerAlt />
+
+            <div>
+                <span>Adresse</span>
+                <strong>{universite.adresse}</strong>
+            </div>
+
+        </div>
+
+    )
+      }
+
                     </div>
 
 
-                    {
-                        universite.site_web && (
-
-                            <a
-                                href={universite.site_web}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="no-universite-detail-site-button"
-                                onClick={() =>
-                                    enregistrerAction(
-                                        `UNIVERSITE_CONSULTEE: ${universite.nom}`
-                                    )
-                                }
-                            >
-
-                                <FaGlobe />
-
-                                <span>Visiter le site officiel</span>
-
-                                <FaExternalLinkAlt className="external-icon" />
-
-                            </a>
-
-                        )
-                    }
-
+                    
                 </section>
+
+
+                {/* ================= CONTACT ================= */}
+
+<section className="no-universite-detail-contact">
+
+    <div className="no-universite-detail-section-title">
+
+        <div className="no-universite-detail-section-icon">
+            <FaPhone />
+        </div>
+
+        <div>
+            <span>Nous contacter</span>
+            <h2>Contact</h2>
+        </div>
+
+    </div>
+
+
+    <div className="no-universite-detail-info-grid">
+
+        {
+            universite.telephone && (
+
+                <div className="no-universite-detail-info-item">
+
+                    <FaPhone />
+
+                    <div>
+                        <span>Téléphone</span>
+
+                        <a href={`tel:${universite.telephone}`}>
+                            {universite.telephone}
+                        </a>
+                    </div>
+
+                </div>
+
+            )
+        }
+
+
+        {
+            universite.email && (
+
+                <div className="no-universite-detail-info-item">
+
+                    <FaEnvelope />
+
+                    <div>
+                        <span>Email</span>
+
+                        <a href={`mailto:${universite.email}`}>
+                            {universite.email}
+                        </a>
+                    </div>
+
+                </div>
+
+            )
+        }
+
+    </div>
+
+
+    {/* ================= SITE OFFICIEL ================= */}
+
+    {
+        universite.site_web && (
+
+            <a
+                href={universite.site_web}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="no-universite-detail-site-button"
+                onClick={() =>
+                    enregistrerAction(
+                        `UNIVERSITE_CONSULTEE: ${universite.nom}`
+                    )
+                }
+            >
+
+                <FaGlobe />
+
+                <span>Visiter le site officiel</span>
+
+                <FaExternalLinkAlt className="external-icon" />
+
+            </a>
+
+        )
+    }
+
+</section>
 
 
 

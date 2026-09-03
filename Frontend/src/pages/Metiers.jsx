@@ -27,9 +27,12 @@ function Metiers() {
     const navigate = useNavigate();
     // 1) États
     const [metiers, setMetiers] = useState([]);
-    const [recherche, setRecherche] = useState("");
-    const [secteur, setSecteur] = useState("Tous");
+    const [recherche, setRecherche] = useState(
+    () => sessionStorage.getItem("metiers_recherche") || "");
+    const [secteur, setSecteur] = useState(
+    () => sessionStorage.getItem("metiers_secteur") || "Tous");
     const [niveauEtude, setNiveauEtude] = useState("Tous");
+    const [chargement, setChargement] = useState(true);
 
 
    
@@ -38,31 +41,68 @@ function Metiers() {
     // 2) Récupération des métiers depuis le backend
     useEffect(() => {
 
-        fetch("http://localhost/NextOri/Backend/api/routes/metiers.php")
+    fetch("http://localhost/NextOri/Backend/api/routes/metiers.php")
 
-            .then((response) => response.json())
+        .then((response) => response.json())
 
-            .then((data) => {
+        .then((data) => {
 
-                if (data.success) {
+            if (data.success) {
 
-                    setMetiers(data.data);
+                setMetiers(data.data);
 
-                }
+            }
 
-            })
+        })
 
-            .catch((error) => {
+        .catch((error) => {
 
-                console.error(
-                    "Erreur récupération métiers :",
-                    error
-                );
+            console.error(
+                "Erreur récupération métiers :",
+                error
+            );
 
-            });
+        })
+
+        .finally(() => {
+
+            setChargement(false);
+
+        });
+
+}, []);
 
 
-    }, []);
+
+useEffect(() => {
+
+    sessionStorage.setItem(
+        "metiers_recherche",
+        recherche
+    );
+
+}, [recherche]);
+
+
+useEffect(() => {
+
+    sessionStorage.setItem(
+        "metiers_secteur",
+        secteur
+    );
+
+}, [secteur]);
+
+
+useEffect(() => {
+
+    sessionStorage.setItem(
+        "metiers_niveau",
+        niveauEtude
+    );
+
+}, [niveauEtude]);
+
 
      const getTendanceIcon = (tendance) => {
 
@@ -309,13 +349,26 @@ function Metiers() {
 
            </div>
 
-           <div className="metiers-list">
+      <div className="metiers-list">
 
     {
+        chargement ? (
 
-        resultats.length > 0 ?
+            <div className="metiers-loading">
 
-        (
+                <div className="metiers-loading-spinner"></div>
+
+                <h2>
+                    Chargement des métiers...
+                </h2>
+
+                <p>
+                    Veuillez patienter quelques instants.
+                </p>
+
+            </div>
+
+        ) : resultats.length > 0 ? (
 
             resultats.map((metier) => (
 
@@ -323,100 +376,93 @@ function Metiers() {
                     className="metier-card"
                     key={metier.id_metier}
                 >
-                    
 
                     <h2>
                         {metier.nom}
-
                     </h2>
 
                     <div className="metier-top-bar"></div>
-
 
                     <p>
                         {metier.description}
                     </p>
 
-
                     <p>
-                        <strong><FaBuilding/> Secteur :</strong>{" "}
+                        <strong>
+                            <FaBuilding/> Secteur :
+                        </strong>{" "}
                         {metier.secteur}
                     </p>
 
-
                     <p>
-                        <strong><FaGraduationCap/> Niveau d'étude :</strong>{" "}
+                        <strong>
+                            <FaGraduationCap/> Niveau d'étude :
+                        </strong>{" "}
                         {metier.niveau_etude}
                     </p>
 
+                    <p>
+                        <strong>
+                            <FaMoneyBillWave/> Salaire :
+                        </strong>{" "}
 
-            <p>
-                        <strong><FaMoneyBillWave/> Salaire :</strong>{" "}
-                   {metier.salaire_min.toLocaleString("fr-FR")}
-                 {" à "}
-                 {metier.salaire_max.toLocaleString("fr-FR")}
-                {" FCFA"}
-            </p>
+                        {metier.salaire_min.toLocaleString("fr-FR")}
+                        {" à "}
+                        {metier.salaire_max.toLocaleString("fr-FR")}
+                        {" FCFA"}
+                    </p>
 
-                             <p>
+                    <p>
 
-    <strong>Tendance :</strong>
+                        <strong>
+                            Tendance :
+                        </strong>
 
-    <span
-        className={`tendance-badge ${getTendanceClass(metier.tendance)}`}
-    >
+                        <span
+                            className={`tendance-badge ${getTendanceClass(metier.tendance)}`}
+                        >
 
-        {getTendanceIcon(metier.tendance)}
-        {" "}
-        {metier.tendance}
+                            {getTendanceIcon(metier.tendance)}
+                            {" "}
+                            {metier.tendance}
 
-    </span>
+                        </span>
 
-
-      </p>
-
+                    </p>
 
                     <button
-    className="metier-button"
-    onClick={async () => {
+                        className="metier-button"
+                        onClick={async () => {
 
-        await enregistrerAction(
-            `METIER_CONSULTE: ${metier.nom}`
-        );
+                            await enregistrerAction(
+                                `METIER_CONSULTE: ${metier.nom}`
+                            );
 
-        navigate(`/metiers/${metier.id_metier}`);
+                            navigate(
+                                `/metiers/${metier.id_metier}`
+                            );
 
-    }}
->
-    Voir détails →
-</button>
+                        }}
+                    >
+                        Voir détails →
+                    </button>
 
                 </div>
 
             ))
 
-        )
-
-
-        :
-
-        (
+        ) : (
 
             <div className="aucun-metier">
 
                 <h2>
-
                     <FaFaceFrown/> Aucun métier trouvé
-
                 </h2>
 
-
                 <p>
-
                     Essayez un autre mot-clé,
                     un autre secteur
                     ou un autre niveau d'étude.
-
                 </p>
 
             </div>

@@ -12,8 +12,7 @@ import {
   FaUniversity,
   FaSearch,
   FaMapMarkerAlt,
-  FaArrowRight,
-  FaSpinner
+  FaArrowRight
 } from "react-icons/fa";
 
 
@@ -29,11 +28,17 @@ export default function UniversiteCatalogue() {
 
   const [loading, setLoading] = useState(true);
 
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState(
+  () => sessionStorage.getItem("universites_search") || ""
+   );
 
-  const [selectedType, setSelectedType] = useState("");
+  const [selectedType, setSelectedType] = useState(
+  () => sessionStorage.getItem("universites_type") || ""
+   );
 
-  const [selectedRegion, setSelectedRegion] = useState("");
+  const [selectedRegion, setSelectedRegion] = useState(
+  () => sessionStorage.getItem("universites_region") || ""
+  );
 
 
   useEffect(() => {
@@ -62,6 +67,35 @@ export default function UniversiteCatalogue() {
       .finally(() => setLoading(false));
 
   }, []);
+
+  useEffect(() => {
+
+  sessionStorage.setItem(
+    "universites_search",
+    search
+  );
+
+}, [search]);
+
+
+useEffect(() => {
+
+  sessionStorage.setItem(
+    "universites_type",
+    selectedType
+  );
+
+}, [selectedType]);
+
+
+useEffect(() => {
+
+  sessionStorage.setItem(
+    "universites_region",
+    selectedRegion
+  );
+
+}, [selectedRegion]);
 
 
   const normaliserTexte = (texte) => {
@@ -121,21 +155,25 @@ export default function UniversiteCatalogue() {
 
   if (loading) {
 
-    return (
+  return (
 
-      <div className="no-universite-catalogue-loading">
+    <div className="universites-loading">
 
-        <FaSpinner className="loading-icon" />
+      <div className="universites-loading-spinner"></div>
 
-        <p>
-          Chargement des universités...
-        </p>
+      <h2>
+        Chargement des universités...
+      </h2>
 
-      </div>
+      <p>
+        Veuillez patienter quelques instants.
+      </p>
 
-    );
+    </div>
 
-  }
+  );
+
+}
 
 
   return (
@@ -293,123 +331,133 @@ export default function UniversiteCatalogue() {
 
       <div className="no-universite-catalogue-grid">
 
+  {universitesFiltrees.length > 0 ? (
 
-        {universitesFiltrees.map((universite) => (
+    universitesFiltrees.map((universite) => (
 
-          <div
-            key={universite.id_universite}
-            className="no-universite-catalogue-card"
-          >
+      <div
+        key={universite.id_universite}
+        className="no-universite-catalogue-card"
+      >
 
+        {/* LOGO */}
 
-            {/* LOGO */}
+        <div className="no-universite-catalogue-logo">
 
-            <div className="no-universite-catalogue-logo">
+          {universite.logo ? (
 
-              {universite.logo ? (
+            <img
+              src={universite.logo}
+              alt={`Logo ${universite.nom}`}
+            />
 
-                <img
-                  src={universite.logo}
-                  alt={`Logo ${universite.nom}`}
-                />
+          ) : (
 
-              ) : (
+            <FaUniversity />
 
-                <FaUniversity />
+          )}
 
-              )}
-
-            </div>
-
-
-
-            {/* NOM */}
-
-            <h2>
-              {universite.nom}
-            </h2>
+        </div>
 
 
+        {/* NOM */}
 
-            {/* DESCRIPTION */}
-
-            <p className="no-universite-catalogue-description">
-
-              {universite.description}
-
-            </p>
+        <h2>
+          {universite.nom}
+        </h2>
 
 
+        {/* DESCRIPTION */}
 
-            {/* TYPE */}
+        <p className="no-universite-catalogue-description">
 
-            <span
-              className={
-                `no-universite-catalogue-type ${universite.type}`
-              }
-            >
+          {universite.description}
 
-              {afficherTypeUniversite(
-                universite.type
-              )}
-
-            </span>
+        </p>
 
 
+        {/* TYPE */}
 
-            {/* LOCALISATION */}
+        <span
+          className={
+            `no-universite-catalogue-type ${universite.type}`
+          }
+        >
 
-            <div className="no-universite-catalogue-localisation">
+          {afficherTypeUniversite(
+            universite.type
+          )}
 
-              <FaMapMarkerAlt />
-
-              <span>
-
-                {universite.ville}
-
-                {" • "}
-
-                {universite.region}
-
-              </span>
-
-            </div>
+        </span>
 
 
+        {/* LOCALISATION */}
 
-            {/* BOUTON */}
+        <div className="no-universite-catalogue-localisation">
 
-            <button
-              className="no-universite-catalogue-button"
+          <FaMapMarkerAlt />
 
-              onClick={async () => {
+          <span>
 
-                await enregistrerAction(
-                  `/UNIVERSITE_CONSULTEE: ${universite.nom}`
-                );
+            {universite.ville}
+            {" • "}
+            {universite.region}
 
-                navigate(
-                  `/universite-catalogue/${universite.id_universite}`
-                );
+          </span>
 
-              }}
-            >
-
-              <span>
-                Voir les détails
-              </span>
-
-              <FaArrowRight />
-
-            </button>
+        </div>
 
 
-          </div>
+        {/* BOUTON */}
 
-        ))}
+        <button
+          className="no-universite-catalogue-button"
 
+          onClick={async () => {
+
+            await enregistrerAction(
+              `UNIVERSITE_CONSULTEE: ${universite.nom}`
+            );
+
+            navigate(
+              `/universite-catalogue/${universite.id_universite}`
+            );
+
+          }}
+        >
+
+          <span>
+            Voir les détails
+          </span>
+
+          <FaArrowRight />
+
+        </button>
 
       </div>
+
+    ))
+
+  ) : (
+
+    <div className="no-universite-catalogue-empty">
+
+      <FaUniversity />
+
+      <h2>
+        Aucune université trouvée
+      </h2>
+
+      <p>
+        Essayez un autre nom, un autre type
+        ou une autre région.
+      </p>
+
+    </div>
+
+  )}
+
+</div>
 
 
 

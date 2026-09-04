@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : jeu. 03 sep. 2026 à 15:48
+-- Généré le : ven. 04 sep. 2026 à 16:59
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.2.12
 
@@ -20,6 +20,28 @@ SET time_zone = "+00:00";
 --
 -- Base de données : `nextori_db_v2`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `attente_fonctionnalite`
+--
+
+CREATE TABLE `attente_fonctionnalite` (
+  `id_attente` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `fonctionnalite` varchar(100) NOT NULL,
+  `date_inscription` datetime DEFAULT current_timestamp(),
+  `statut` enum('en_attente','notifie') DEFAULT 'en_attente',
+  `date_notification` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Déchargement des données de la table `attente_fonctionnalite`
+--
+
+INSERT INTO `attente_fonctionnalite` (`id_attente`, `id_user`, `fonctionnalite`, `date_inscription`, `statut`, `date_notification`) VALUES
+(1, 19, 'COACHING_PERSONNALISE', '2026-09-03 15:24:31', 'en_attente', NULL);
 
 -- --------------------------------------------------------
 
@@ -128,7 +150,8 @@ INSERT INTO `connexion_utilisateur` (`id_connexion`, `id_user`, `date_connexion`
 (83, 19, '2026-08-31'),
 (84, 19, '2026-09-01'),
 (85, 19, '2026-09-02'),
-(96, 19, '2026-09-03');
+(96, 19, '2026-09-03'),
+(148, 19, '2026-09-04');
 
 -- --------------------------------------------------------
 
@@ -4595,7 +4618,48 @@ INSERT INTO `historique` (`id_historique`, `id_user`, `action`, `date_action`) V
 (264, 19, 'FORMATION_CONSULTEE: Informatique', '2026-09-03 13:43:29'),
 (265, 19, 'UNIVERSITES_CONSULTEES', '2026-09-03 13:47:16'),
 (266, 19, 'FORMATION_CONSULTEE: Infographie et Multimédia', '2026-09-03 13:47:16'),
-(267, 19, 'UNIVERSITE_CONSULTEE: ESTM', '2026-09-03 13:47:45');
+(267, 19, 'UNIVERSITE_CONSULTEE: ESTM', '2026-09-03 13:47:45'),
+(268, 19, 'UNIVERSITE_CONSULTEE:  AFI-UE', '2026-09-03 15:42:35'),
+(269, 19, 'FORMATION_CONSULTEE: Actuariat', '2026-09-03 15:42:42'),
+(270, 19, 'PROFIL_CONSULTE', '2026-09-03 18:43:27'),
+(271, 19, 'METIER_CONSULTE: UX/UI Designer', '2026-09-03 18:43:37'),
+(272, 19, 'FORMATION_CONSULTEE', '2026-09-03 18:43:37'),
+(273, 19, 'METIER_CONSULTE: Urbaniste', '2026-09-03 19:15:16'),
+(274, 19, 'FORMATION_CONSULTEE', '2026-09-03 19:15:17'),
+(275, 19, 'PROFIL_CONSULTE', '2026-09-03 19:19:17'),
+(276, 19, 'METIER_CONSULTE: UX/UI Designer', '2026-09-03 19:19:32'),
+(277, 19, 'FORMATION_CONSULTEE', '2026-09-03 19:19:32'),
+(278, 19, 'UNIVERSITES_CONSULTEES', '2026-09-03 19:19:41'),
+(279, 19, 'FORMATION_CONSULTEE: Informatique', '2026-09-03 19:19:41'),
+(280, 19, 'PROFIL_CONSULTE', '2026-09-03 19:19:52'),
+(281, 19, 'METIER_CONSULTE: UX/UI Designer', '2026-09-03 19:32:01'),
+(282, 19, 'FORMATION_CONSULTEE', '2026-09-03 19:32:01'),
+(283, 19, 'UNIVERSITES_CONSULTEES', '2026-09-03 19:35:46'),
+(284, 19, 'FORMATION_CONSULTEE: Informatique', '2026-09-03 19:35:46'),
+(285, 19, 'UNIVERSITE_CONSULTEE:  BATISUP', '2026-09-03 19:46:58'),
+(286, 19, 'FORMATION_CONSULTEE: Génie Civil', '2026-09-03 19:47:03'),
+(287, 19, 'METIER_CONSULTE: Administrateur Base de Données', '2026-09-04 11:15:19'),
+(288, 19, 'METIER_CONSULTE: Administrateur télécom', '2026-09-04 11:15:31'),
+(289, 19, 'FORMATION_CONSULTEE: Actuariat', '2026-09-04 11:15:47'),
+(290, 19, 'FORMATION_CONSULTEE: Agriculture biologique', '2026-09-04 11:16:01'),
+(291, 19, 'FORMATION_CONSULTEE: Agriculture biologique', '2026-09-04 11:16:14'),
+(292, 19, 'FORMATION_CONSULTEE: Agro-alimentaire et eau', '2026-09-04 11:16:27'),
+(293, 19, 'FORMATION_CONSULTEE: Agrobusiness', '2026-09-04 11:16:37'),
+(294, 19, 'PROFIL_CONSULTE', '2026-09-04 11:17:20'),
+(295, 19, 'UNIVERSITE_CONSULTEE: UCAD', '2026-09-04 11:23:01'),
+(296, 19, 'UNIVERSITE_CONSULTEE: UGB', '2026-09-04 11:23:21'),
+(297, 19, 'UNIVERSITE_CONSULTEE: ESTM', '2026-09-04 11:26:23'),
+(298, 19, 'METIER_CONSULTE: Spécialiste marketing digital', '2026-09-04 11:40:35'),
+(299, 19, 'FORMATION_CONSULTEE', '2026-09-04 11:40:35'),
+(300, 19, 'METIER_CONSULTE: UX/UI Designer', '2026-09-04 11:40:50'),
+(301, 19, 'FORMATION_CONSULTEE', '2026-09-04 11:40:50'),
+(302, 19, 'UNIVERSITES_CONSULTEES', '2026-09-04 11:41:40'),
+(303, 19, 'FORMATION_CONSULTEE: Infographie et Multimédia', '2026-09-04 11:41:40'),
+(304, 19, 'UNIVERSITE_CONSULTEE: ESTM', '2026-09-04 13:24:15'),
+(305, 19, 'UNIVERSITE_CONSULTEE: ESP', '2026-09-04 13:26:39'),
+(306, 19, 'UNIVERSITE_CONSULTEE: ESTM', '2026-09-04 13:27:00'),
+(307, 19, 'UNIVERSITE_CONSULTEE: ESP', '2026-09-04 14:25:27'),
+(308, 19, 'UNIVERSITE_CONSULTEE:  ESTG ', '2026-09-04 14:28:33');
 
 -- --------------------------------------------------------
 
@@ -8977,7 +9041,7 @@ CREATE TABLE `universite` (
   `ville` varchar(100) NOT NULL,
   `region` varchar(100) DEFAULT NULL,
   `adresse` varchar(255) DEFAULT NULL,
-  `telephone` varchar(30) DEFAULT NULL,
+  `telephone` varchar(100) DEFAULT NULL,
   `email` varchar(150) DEFAULT NULL,
   `site_web` varchar(255) DEFAULT NULL,
   `logo` text DEFAULT NULL
@@ -8988,34 +9052,34 @@ CREATE TABLE `universite` (
 --
 
 INSERT INTO `universite` (`id_universite`, `nom`, `description`, `type`, `pays`, `ville`, `region`, `adresse`, `telephone`, `email`, `site_web`, `logo`) VALUES
-(1, 'UCAD', 'Université Cheikh Anta Diop de Dakar, la plus grande université du Sénégal', 'publique', 'Sénégal', 'Dakar', 'Dakar', NULL, NULL, NULL, 'https://ucad.sn', '/assets/logo/universites/UCAD.png'),
-(2, 'UGB', 'Université Gaston Berger de Saint-Louis', 'publique', 'Sénégal', 'Saint-Louis', 'Saint-Louis', NULL, NULL, NULL, 'https://ugb.sn', '/assets/logo/universites/UGB.png'),
-(3, 'UIDT', 'Université Iba Der Thiam de Thiès', 'publique', 'Sénégal', 'Thiès', 'Thiès', NULL, NULL, NULL, 'https://www.uidt.sn', '/assets/logo/universites/UIDT.png'),
-(4, 'ESP', 'École Supérieure Polytechnique de Dakar', 'publique', 'Sénégal', 'Dakar', 'Dakar', NULL, NULL, NULL, 'https://www.esp.sn', '/assets/logo/universites/ESP.png'),
-(5, 'SUPDECO', 'École Supérieure de Commerce de Dakar', 'privee', 'Sénégal', 'Dakar', 'Dakar', NULL, NULL, NULL, 'https://supdeco.sn', '/assets/logo/universites/SUPDECO.png'),
-(6, 'UASZ', 'Université Assane Seck de Ziguinchor', 'publique', 'Sénégal', 'Ziguinchor', 'Ziguinchor', NULL, NULL, NULL, 'https://uasz.sn', '/assets/logo/universites/UASZ.png'),
-(7, 'UADB', 'Université Alioune Diop de Bambey', 'publique', 'Sénégal', 'Bambey', 'Diourbel', NULL, NULL, NULL, 'https://uadb.edu.sn', '/assets/logo/universites/UADB.png'),
-(8, 'UNCHK (ex UVS)', 'Université numérique Cheikh Hamidou Kane', 'publique', 'Sénégal', 'Dakar', 'Dakar', NULL, NULL, NULL, 'https://www.unchk.sn/', '/assets/logo/universites/UNCHK.png'),
-(9, 'USSEIN', 'Université du Sine Saloum El Hadji Ibrahima Niass', 'publique', 'Sénégal', 'Kaolack', 'Kaolack', NULL, NULL, NULL, 'https://ussein.sn', '/assets/logo/universites/USSEIN.png'),
-(10, 'ENSAE', 'École Nationale de la Statistique et de l’Analyse Économique', 'publique', 'Sénégal', 'Dakar', 'Dakar', NULL, NULL, NULL, 'https://www.ensae.sn/', '/assets/logo/universites/ENSAE.png'),
-(11, 'ENSA', 'École Nationale Supérieure d’Agriculture', 'publique', 'Sénégal', 'Thiès', 'Thiès', NULL, NULL, NULL, 'https://www.concoursensa.com/', '/assets/logo/universites/ENSA.png'),
-(12, 'EPT', 'École Polytechnique de Thiès', 'publique', 'Sénégal', 'Thiès', 'Thiès', NULL, NULL, NULL, 'https://ept.edu.sn', '/assets/logo/universites/EPT.png'),
-(13, 'EISMV', 'École Inter-États des Sciences et Médecine Vétérinaires', 'publique', 'Sénégal', 'Dakar', 'Dakar', NULL, NULL, NULL, 'https://eismv.org', '/assets/logo/universites/EISMV.png'),
-(14, 'ENSETP', 'École Normale Supérieure d’Enseignement Technique et Professionnel', 'publique', 'Sénégal', 'Dakar', 'Dakar', NULL, NULL, NULL, 'https://ensetp.ucad.sn/fr', '/assets/logo/universites/ENSETP.png'),
-(16, 'INSEPS', 'Institut National Supérieur de l’Éducation Populaire et du Sport', 'publique', 'Sénégal', 'Dakar', 'Dakar', NULL, NULL, NULL, 'https://inseps.ucad.sn', '/assets/logo/universites/INSEPS.png'),
-(17, 'EBAD', 'École des Bibliothécaires, Archivistes et Documentalistes', 'publique', 'Sénégal', 'Dakar', 'Dakar', NULL, NULL, NULL, 'https://ebad.ucad.sn', '/assets/logo/universites/EBAD.png'),
-(18, 'CESAG', 'Centre Africain d’Études Supérieures en Gestion', 'publique', 'Sénégal', 'Dakar', 'Dakar', NULL, NULL, NULL, 'https://cesag.sn', '/assets/logo/universites/CESAG.png'),
-(19, 'CFPT', 'Centre de Formation Professionnelle et Technique Sénégal-Japon', 'publique', 'Sénégal', 'Dakar', 'Dakar', NULL, NULL, NULL, 'https://www.cfptsj.sn', '/assets/logo/universites/CFPT.png'),
-(20, 'ISEP Thiès', 'Institut Supérieur d\'Enseignement Professionnel de Thiès', 'publique', 'Sénégal', 'Thiès', 'Thiès', NULL, NULL, NULL, 'https://www.isep-thies.sn', '/assets/logo/universites/ISEP_Thies.png'),
-(21, 'ISEP Diamniadio', 'Institut Supérieur d\'Enseignement Professionnel de Diamniadio', 'publique', 'Sénégal', 'Diamniadio', 'Dakar', NULL, NULL, NULL, 'https://isepdiamniadio.com/', '/assets/logo/universites/ISEP_Diamniadio.png'),
-(22, 'ISEP Richard-Toll', 'Institut Supérieur d\'Enseignement Professionnel de Richard-Toll', 'publique', 'Sénégal', 'Richard-Toll', 'Saint-Louis', NULL, NULL, NULL, 'https://iseprichardtoll.sn/', '/assets/logo/universites/ISEP_Richard_Toll.png'),
-(23, 'ISEP Bignona', 'Institut Supérieur d\'Enseignement Professionnel de Bignona', 'publique', 'Sénégal', 'Bignona', 'Ziguinchor', NULL, NULL, NULL, 'https://isep-bignona.edu.sn/', '/assets/logo/universites/ISEP_Bignona.png'),
-(24, 'ISEP Matam', 'Institut Supérieur d\'Enseignement Professionnel de Matam', 'publique', 'Sénégal', 'Matam', 'Matam', NULL, NULL, NULL, 'https://isepmatam.sn/', '/assets/logo/universites/ISEP_Matam.png'),
-(25, 'ISEP Mbacké', 'Institut Supérieur d\'Enseignement Professionnel de Mbacké', 'publique', 'Sénégal', 'Mbacké', 'Diourbel', NULL, NULL, NULL, 'https://isepmbacke.sn/', '/assets/logo/universites/ISEP_Mbacke.png'),
-(26, 'ISEP Kédougou', 'Institut Supérieur d\'Enseignement Professionnel de Kédougou', 'publique', 'Sénégal', 'Kédougou', 'Kédougou', NULL, NULL, NULL, 'https://mesrisenegal.sn', '/assets/logo/universites/ISEP_Kedougou.png'),
-(28, 'ISM', 'Institut Supérieur de Management', 'privee', 'Sénégal', 'Dakar', 'Dakar', NULL, NULL, NULL, 'https://www.groupeism.sn/', '/assets/logo/universites/ISM.png'),
+(1, 'UCAD', 'Université Cheikh Anta Diop de Dakar, la plus grande université du Sénégal', 'publique', 'Sénégal', 'Dakar', 'Dakar', 'Avenue Cheikh Anta Diop, BP 5005, Dakar-Fann', '+221 33 825 05 30', 'rectorat@ucad.edu.sn', 'https://ucad.sn', '/assets/logo/universites/UCAD.png'),
+(2, 'UGB', 'Université Gaston Berger de Saint-Louis', 'publique', 'Sénégal', 'Saint-Louis', 'Saint-Louis', 'Route de Ngallèle, Nationale 2, BP 234, Saint-Louis', '+221 33 961 19 06 / +221 33 961 23 60', 'dcm@ugb.edu.sn / webmaster@ugb.edu.sn', 'https://ugb.sn', '/assets/logo/universites/UGB.png'),
+(3, 'UIDT', 'Université Iba Der Thiam de Thiès', 'publique', 'Sénégal', 'Thiès', 'Thiès', 'Quartier Escale / Voie Contournement Nord (VCN), Thiès', '+221 33 894 40 00', 'info@uidt.sn', 'https://www.uidt.sn', '/assets/logo/universites/UIDT.png'),
+(4, 'ESP', 'École Supérieure Polytechnique de Dakar', 'publique', 'Sénégal', 'Dakar', 'Dakar', 'Campus universitaire de l\'UCAD, Corniche Ouest, BP 5085, Dakar-Fann', '+221 33 824 05 40', 'esp@esp.sn', 'https://www.esp.sn', '/assets/logo/universites/ESP.png'),
+(5, 'SUPDECO', 'École Supérieure de Commerce de Dakar', 'privee', 'Sénégal', 'Dakar', 'Dakar', '7, Avenue Faidherbe, BP 21354, Dakar', '+221 33 849 69 19', 'admission@supdeco.edu.sn', 'https://supdeco.sn', '/assets/logo/universites/SUPDECO.png'),
+(6, 'UASZ', 'Université Assane Seck de Ziguinchor', 'publique', 'Sénégal', 'Ziguinchor', 'Ziguinchor', 'Quartier Diabir', '+221 33 991 68 09', 'rectorat@univ-zig.sn', 'https://uasz.sn', '/assets/logo/universites/UASZ.png'),
+(7, 'UADB', 'Université Alioune Diop de Bambey', 'publique', 'Sénégal', 'Bambey', 'Diourbel', 'Quartier Escale, Bambey', '+221 33 973 30 86', 'contact@bambey.univ.sn', 'https://uadb.edu.sn', '/assets/logo/universites/UADB.png'),
+(8, 'UNCHK (ex UVS)', 'Université numérique Cheikh Hamidou Kane', 'publique', 'Sénégal', 'Dakar', 'Dakar', 'Siège : Cité du Savoir, Diamniadio (BP 15126 Dakar-Fann)', '+221 30 108 41 53', 'contact@unchk.edu.sn', 'https://www.unchk.sn/', '/assets/logo/universites/UNCHK.png'),
+(9, 'USSEIN', 'Université du Sine Saloum El Hadji Ibrahima Niass', 'publique', 'Sénégal', 'Kaolack', 'Kaolack', 'Quartier Kasnack (Face ex-Cinéma ABC)', '+221 33 942 29 29', 'secretariat@ussein.edu.sn', 'https://ussein.sn', '/assets/logo/universites/USSEIN.png'),
+(10, 'ENSAE', 'École Nationale de la Statistique et de l’Analyse Économique', 'publique', 'Sénégal', 'Dakar', 'Dakar', 'Rocade Fann Bel-Air, Cerf-Volant (Près de la Maison du Parti, Colobane), Dakar', '+221 33 825 15 19', 'scolarite.ensae@ansd.sn', 'https://www.ensae.sn/', '/assets/logo/universites/ENSAE.png'),
+(11, 'ENSA', 'École Nationale Supérieure d’Agriculture', 'publique', 'Sénégal', 'Thiès', 'Thiès', 'Route de Khombole, BP A296, Thiès', '+221 33 939 59 26 / +221 33 939 59 25', 'info@ensathies.net', 'https://www.concoursensa.com/', '/assets/logo/universites/ENSA.png'),
+(12, 'EPT', 'École Polytechnique de Thiès', 'publique', 'Sénégal', 'Thiès', 'Thiès', 'Voie de Contournement Nord (VCN), Route de la Base, BP A10, Thiès', '+221 76 223 61 60 / +221 76 223 61 77', 'contact@ept.edu.sn ou scolarite@ept.sn', 'https://ept.edu.sn', '/assets/logo/universites/EPT.png'),
+(13, 'EISMV', 'École Inter-États des Sciences et Médecine Vétérinaires', 'publique', 'Sénégal', 'Dakar', 'Dakar', 'Campus universitaire de l\'UCAD, BP 5077, Dakar-Fann', '+221 33 865 10 08', 'contact@eismv.org / directiongenerale@eismv.org', 'https://eismv.org', '/assets/logo/universites/EISMV.png'),
+(14, 'ENSETP', 'École Normale Supérieure d’Enseignement Technique et Professionnel', 'publique', 'Sénégal', 'Dakar', 'Dakar', 'Campus de l\'UCAD, Corniche Ouest, BP 5005, Dakar-Fann', '+221 33 821 76 69', 'ensetp@ucad.edu.sn', 'https://ensetp.ucad.sn/fr', '/assets/logo/universites/ENSETP.png'),
+(16, 'INSEPS', 'Institut National Supérieur de l’Éducation Populaire et du Sport', 'publique', 'Sénégal', 'Dakar', 'Dakar', ' Rue 11 x 18, Médina, Dakar', '+221 32 823 33 84', 'inseps@ucad.edu.sn', 'https://inseps.ucad.sn', '/assets/logo/universites/INSEPS.png'),
+(17, 'EBAD', 'École des Bibliothécaires, Archivistes et Documentalistes', 'publique', 'Sénégal', 'Dakar', 'Dakar', 'Campus de l\'UCAD, BP 3252, Dakar', '+221 33 825 76 60', 'ebad@ucad.edu.sn', 'https://ebad.ucad.sn', '/assets/logo/universites/EBAD.png'),
+(18, 'CESAG', 'Centre Africain d’Études Supérieures en Gestion', 'publique', 'Sénégal', 'Dakar', 'Dakar', 'Boulevard du Général de Gaulle x Rue Malick Sy, BP 3802, Dakar', '+221 33 839 73 60', 'courrier@cesag.edu.sn', 'https://cesag.sn', '/assets/logo/universites/CESAG.png'),
+(19, 'CFPT', 'Centre de Formation Professionnelle et Technique Sénégal-Japon', 'publique', 'Sénégal', 'Dakar', 'Dakar', 'Route du Sud (CICES / VDN), Dakar', '+221 33 869 82 82 / +221 77 836 14 93', 'contact@cfptsj.sn', 'https://www.cfptsj.sn', '/assets/logo/universites/CFPT.png'),
+(20, 'ISEP Thiès', 'Institut Supérieur d\'Enseignement Professionnel de Thiès', 'publique', 'Sénégal', 'Thiès', 'Thiès', 'Route Nationale 2 x VCN, BP 1509, Thiès', '+221 33 951 24 25', 'isep@isep-thies.edu.sn', 'https://www.isep-thies.sn', '/assets/logo/universites/ISEP_Thies.png'),
+(21, 'ISEP Diamniadio', 'Institut Supérieur d\'Enseignement Professionnel de Diamniadio', 'publique', 'Sénégal', 'Diamniadio', 'Dakar', 'Pôle Urbain de Diamniadio, Cité du Savoir', '+221 77 445 89 07 / +221 33 864 68 67', 'contact@isepat.edu.sn / contact@isepdiamniadio.com', 'https://isepdiamniadio.com/', '/assets/logo/universites/ISEP_Diamniadio.png'),
+(22, 'ISEP Richard-Toll', 'Institut Supérieur d\'Enseignement Professionnel de Richard-Toll', 'publique', 'Sénégal', 'Richard-Toll', 'Saint-Louis', 'Route nationale N°2, Quartier Khouma (En face de la station Neptune), Richard-Toll', '+221 33 964 20 16', 'isep@isep-rt.edu.sn', 'https://iseprichardtoll.sn/', '/assets/logo/universites/ISEP_Richard_Toll.png'),
+(23, 'ISEP Bignona', 'Institut Supérieur d\'Enseignement Professionnel de Bignona', 'publique', 'Sénégal', 'Bignona', 'Ziguinchor', 'HLM Médina Plateau, Villa N°2501, Bignona', '+221 33 994 07 81', 'admin@isep-bignona.edu.sn', 'https://isep-bignona.edu.sn/', '/assets/logo/universites/ISEP_Bignona.png'),
+(24, 'ISEP Matam', 'Institut Supérieur d\'Enseignement Professionnel de Matam', 'publique', 'Sénégal', 'Matam', 'Matam', 'Quartier Soubalo, Matam', '+221 33 966 61 00', 'contact@isep.sn', 'https://isepmatam.sn/', '/assets/logo/universites/ISEP_Matam.png'),
+(25, 'ISEP Mbacké', 'Institut Supérieur d\'Enseignement Professionnel de Mbacké', 'publique', 'Sénégal', 'Mbacké', 'Diourbel', ' Quartier Mbacké Khewar, Ancien siège ASP, Mbacké', '+221 33 972 82 10', 'mbackeisep@gmail.com', 'https://isepmbacke.sn/', '/assets/logo/universites/ISEP_Mbacke.png'),
+(26, 'ISEP Kédougou', 'Institut Supérieur d\'Enseignement Professionnel de Kédougou', 'publique', 'Sénégal', 'Kédougou', 'Kédougou', 'Quartier Togoro, Kédougou', '+221 33 889 81 33', 'contact@mesr.gouv.sn', 'https://mesrisenegal.sn', '/assets/logo/universites/ISEP_Kedougou.png'),
+(28, 'ISM', 'Institut Supérieur de Management', 'privee', 'Sénégal', 'Dakar', 'Dakar', 'Point E, 2 Rue des Écrivains, Dakar', '+221 33 869 76 76', 'info@ism.edu.sn', 'https://www.groupeism.sn/', '/assets/logo/universites/ISM.png'),
 (29, ' ISI', 'Institut Supérieur d\'Informatique', 'privee', 'Sénégal', 'Dakar', 'Dakar', NULL, NULL, NULL, 'https://groupeisi.com', '/assets/logo/universites/ISI.png'),
-(30, 'ESTM', 'École Supérieure de Technologie et de Management ', 'privee', 'Sénégal', 'Dakar', 'Dakar', NULL, NULL, NULL, 'https://estm.sn', '/assets/logo/universites/ESTM.png'),
+(30, 'ESTM', 'École Supérieure de Technologie et de Management ', 'privee', 'Sénégal', 'Dakar', 'Dakar', 'Terrain Foyer, Rocade Fann Bel-Air, BP 10 000, Dakar-Liberté', '+221 33 869 03 00 / +221 32 824 84 84', 'esmt@esmt.sn / secretariatdg@esmt.sn', 'https://estm.sn', '/assets/logo/universites/ESTM.png'),
 (31, 'ESEBAT', 'École Supérieure d\'Électricité, du Bâtiment et des Travaux Publics', 'privee', 'Sénégal', 'Dakar', 'Dakar', NULL, NULL, NULL, 'https://www.esebat.com', '/assets/logo/universites/ESEBAT.png'),
 (32, 'CEFER', 'Centre Européen de Formation en Énergie Renouvelable', 'privee', 'Sénégal', 'Dakar', 'Dakar', NULL, NULL, NULL, 'https://ceferdakar.org', '/assets/logo/universites/CEFER.png'),
 (33, ' IFAA', 'Institut de Formation en Administration des Affaires', 'privee', 'Sénégal', 'Dakar', 'Dakar', NULL, NULL, NULL, 'https://ifaa.sn', '/assets/logo/universites/IFAA.png'),
@@ -9925,6 +9989,13 @@ INSERT INTO `utilisateur` (`id_user`, `nom`, `email`, `mot_de_passe`, `pays`, `n
 --
 
 --
+-- Index pour la table `attente_fonctionnalite`
+--
+ALTER TABLE `attente_fonctionnalite`
+  ADD PRIMARY KEY (`id_attente`),
+  ADD UNIQUE KEY `unique_attente_fonctionnalite` (`id_user`,`fonctionnalite`);
+
+--
 -- Index pour la table `badge`
 --
 ALTER TABLE `badge`
@@ -10135,6 +10206,12 @@ ALTER TABLE `utilisateur`
 --
 
 --
+-- AUTO_INCREMENT pour la table `attente_fonctionnalite`
+--
+ALTER TABLE `attente_fonctionnalite`
+  MODIFY `id_attente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT pour la table `badge`
 --
 ALTER TABLE `badge`
@@ -10144,13 +10221,13 @@ ALTER TABLE `badge`
 -- AUTO_INCREMENT pour la table `badge_utilisateur`
 --
 ALTER TABLE `badge_utilisateur`
-  MODIFY `id_badge_utilisateur` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=293;
+  MODIFY `id_badge_utilisateur` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=773;
 
 --
 -- AUTO_INCREMENT pour la table `connexion_utilisateur`
 --
 ALTER TABLE `connexion_utilisateur`
-  MODIFY `id_connexion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=108;
+  MODIFY `id_connexion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=156;
 
 --
 -- AUTO_INCREMENT pour la table `favori`
@@ -10210,7 +10287,7 @@ ALTER TABLE `hesitation_test`
 -- AUTO_INCREMENT pour la table `historique`
 --
 ALTER TABLE `historique`
-  MODIFY `id_historique` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=268;
+  MODIFY `id_historique` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=309;
 
 --
 -- AUTO_INCREMENT pour la table `metier`
@@ -10287,6 +10364,12 @@ ALTER TABLE `utilisateur`
 --
 -- Contraintes pour les tables déchargées
 --
+
+--
+-- Contraintes pour la table `attente_fonctionnalite`
+--
+ALTER TABLE `attente_fonctionnalite`
+  ADD CONSTRAINT `fk_attente_fonctionnalite_user` FOREIGN KEY (`id_user`) REFERENCES `utilisateur` (`id_user`) ON DELETE CASCADE;
 
 --
 -- Contraintes pour la table `badge_utilisateur`

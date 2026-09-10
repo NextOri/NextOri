@@ -7,10 +7,9 @@ import {
     FaBriefcase,
     FaGraduationCap,
     FaUniversity,
+    FaComments,
     FaUser
 } from "react-icons/fa";
-
-
 
 
 function FooterNavigation() {
@@ -19,26 +18,26 @@ function FooterNavigation() {
 
     const handleProfileClick = () => {
 
-    const utilisateur = localStorage.getItem("utilisateur");
+        const utilisateur = localStorage.getItem("utilisateur");
 
+        if (utilisateur) {
 
-    if (utilisateur) {
+            navigate("/profil");
 
-        navigate("/profil");
+        } else {
 
-    } else {
+            navigate("/connexion");
 
-        navigate("/connexion");
+        }
 
-    }
-
-     };
+    };
 
     return (
 
         <footer className="footer-navigation">
 
 
+            {/* ACCUEIL */}
             <NavLink to="/dashboard">
 
                 <span>
@@ -52,7 +51,7 @@ function FooterNavigation() {
             </NavLink>
 
 
-
+            {/* TEST */}
             <NavLink to="/test">
 
                 <span>
@@ -66,7 +65,7 @@ function FooterNavigation() {
             </NavLink>
 
 
-
+            {/* MÉTIERS */}
             <NavLink to="/metiers">
 
                 <span>
@@ -80,7 +79,7 @@ function FooterNavigation() {
             </NavLink>
 
 
-
+            {/* FILIÈRES */}
             <NavLink to="/filieres">
 
                 <span>
@@ -94,7 +93,7 @@ function FooterNavigation() {
             </NavLink>
 
 
-
+            {/* UNIVERSITÉS */}
             <NavLink to="/universite-catalogue">
 
                 <span>
@@ -108,18 +107,35 @@ function FooterNavigation() {
             </NavLink>
 
 
+            {/* TÉMOIGNAGES */}
+            <NavLink to="/temoignages">
 
-            <NavLink 
-    to="/profil"
-    onClick={handleProfileClick}
-                   >
-    <span>
-        <FaUser />
-    </span>
+                <span>
+                    <FaComments />
+                </span>
 
-    <p>Profil</p>
+                <p>
+                    Témoignages
+                </p>
 
-       </NavLink>
+            </NavLink>
+
+
+            {/* PROFIL */}
+            <NavLink
+                to="/profil"
+                onClick={handleProfileClick}
+            >
+
+                <span>
+                    <FaUser />
+                </span>
+
+                <p>
+                    Profil
+                </p>
+
+            </NavLink>
 
 
         </footer>

@@ -8,11 +8,13 @@ import {
     GraduationCap,
     Building2,
     PartyPopper,
-    X
+    X,
+    MessageSquare,
+    ArrowRight
 } from "lucide-react";
 
 
-function OrientationNotification({ etape }) {
+function OrientationNotification({ etape, avisDonne, onAvis }) {
 
     const [visible, setVisible] = useState(true);
 
@@ -59,16 +61,20 @@ function OrientationNotification({ etape }) {
 
         6: {
             icone: PartyPopper,
-            titre: "Parcours terminé",
+            titre: "Parcours terminé 🎉",
             message:
                 "Félicitations ! Vous avez terminé votre parcours d'orientation NextOri. " +
-                "Vous pouvez maintenant consulter vos recommandations et construire votre projet."
+                "Votre expérience compte pour nous. Prenez quelques secondes pour partager votre avis et nous aider à améliorer NextOri.",
+            avis: true
         }
 
     };
 
 
     const notification = notifications[etape];
+    if (etape === 6 && avisDonne) {
+        return null;
+    }
 
 
     if (!notification || !visible) {
@@ -76,13 +82,13 @@ function OrientationNotification({ etape }) {
     }
 
 
-    const IconeNotification = notification.icone;
-
-
     return (
 
-        <div className="orientation-notification">
-
+        <div
+            className={`orientation-notification ${
+                notification.avis ? "orientation-notification-avis" : ""
+            }`}
+        >
 
             <button
                 type="button"
@@ -96,18 +102,13 @@ function OrientationNotification({ etape }) {
 
             <div className="notification-header">
 
-
                 <div className="notification-icon">
-
-                    {React.createElement(notification.icone)}
-
+                    <notification.icone />
                 </div>
-
 
                 <h3>
                     {notification.titre}
                 </h3>
-
 
             </div>
 
@@ -116,6 +117,20 @@ function OrientationNotification({ etape }) {
                 {notification.message}
             </p>
 
+
+            {notification.avis && (
+
+                <button
+                    type="button"
+                    className="notification-avis-button"
+                    onClick={onAvis}
+                >
+                    <MessageSquare />
+                    Donner mon avis
+                    <ArrowRight />
+                </button>
+
+            )}
 
         </div>
 

@@ -2698,3 +2698,313 @@ padding:18px;
     }
 
 }
+
+/* =========================================================
+   AVIS DASHBOARD - PARCOURS TERMINÉ
+   ========================================================= */
+
+.avis-dashboard-card {
+    width: min(94%, 980px);
+    margin: 28px auto 25px;
+
+    position: relative;
+    overflow: hidden;
+
+    display: flex;
+    align-items: center;
+    gap: 24px;
+
+    padding: 28px 30px;
+
+    background: #FFFFFF;
+    border-radius: 24px;
+
+    border: 1px solid rgba(244, 180, 0, 0.25);
+
+    box-shadow:
+        0 12px 35px rgba(13, 27, 42, 0.08);
+
+    box-sizing: border-box;
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+
+/* Petite touche décorative */
+
+.avis-dashboard-card::after {
+    content: "";
+
+    position: absolute;
+
+    width: 150px;
+    height: 150px;
+
+    right: -70px;
+    top: -70px;
+
+    border-radius: 50%;
+
+    background: #F4B400;
+
+    opacity: 0.08;
+
+    pointer-events: none;
+}
+
+
+.avis-dashboard-card:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 16px 40px rgba(13, 27, 42, 0.11);
+}
+
+
+/* =========================================================
+   ICÔNE
+   ========================================================= */
+
+.avis-dashboard-icon {
+    width: 68px;
+    height: 68px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 20px;
+
+    background: #F4B400;
+
+    color: #0D1B2A;
+
+    box-shadow:
+        0 10px 25px rgba(244, 180, 0, 0.22);
+}
+
+
+.avis-dashboard-icon svg {
+    width: 31px;
+    height: 31px;
+
+    color: #0D1B2A;
+    stroke: #0D1B2A;
+
+    stroke-width: 2.2;
+}
+
+
+/* =========================================================
+   CONTENU
+   ========================================================= */
+
+.avis-dashboard-content {
+    flex: 1;
+
+    position: relative;
+    z-index: 1;
+}
+
+
+.avis-dashboard-content > span {
+    display: inline-flex;
+
+    align-items: center;
+
+    padding: 6px 12px;
+
+    margin-bottom: 9px;
+
+    border-radius: 30px;
+
+    background: #F2F4F7;
+
+    color: #1E3A8A;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    letter-spacing: 0.7px;
+}
+
+
+.avis-dashboard-content h2 {
+    margin: 0 0 8px;
+
+    color: #0D1B2A;
+
+    font-size: 24px;
+
+    font-weight: 750;
+}
+
+
+.avis-dashboard-content p {
+    margin: 0;
+
+    max-width: 620px;
+
+    color: #555555;
+
+    font-size: 14px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   BOUTON
+   ========================================================= */
+
+.avis-dashboard-content button {
+    margin-top: 18px;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 9px;
+
+    padding: 13px 20px;
+
+    border: none;
+
+    border-radius: 13px;
+
+    background: #1E3A8A;
+
+    color: #FFFFFF;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 8px 20px rgba(30, 58, 138, 0.20);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+
+.avis-dashboard-content button svg {
+    width: 18px;
+    height: 18px;
+
+    color: #FFFFFF;
+    stroke: #FFFFFF;
+}
+
+
+.avis-dashboard-content button:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 12px 28px rgba(30, 58, 138, 0.28);
+}
+
+
+.avis-dashboard-content button:active {
+    transform: translateY(0);
+}
+
+
+/* =========================================================
+   TABLETTE
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .avis-dashboard-card {
+        width: calc(100% - 32px);
+
+        padding: 25px;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+    .avis-dashboard-card {
+        width: calc(100% - 28px);
+
+        margin-top: 24px;
+
+        padding: 22px 18px;
+
+        border-radius: 20px;
+
+        flex-direction: column;
+
+        align-items: center;
+
+        text-align: center;
+
+        gap: 16px;
+    }
+
+
+    .avis-dashboard-icon {
+        width: 60px;
+        height: 60px;
+
+        border-radius: 18px;
+    }
+
+
+    .avis-dashboard-icon svg {
+        width: 28px;
+        height: 28px;
+    }
+
+
+    .avis-dashboard-content {
+        width: 100%;
+    }
+
+
+    .avis-dashboard-content > span {
+        margin-bottom: 8px;
+
+        font-size: 10px;
+    }
+
+
+    .avis-dashboard-content h2 {
+        font-size: 21px;
+
+        margin-bottom: 8px;
+    }
+
+
+    .avis-dashboard-content p {
+        font-size: 14px;
+
+        line-height: 1.7;
+    }
+
+
+    .avis-dashboard-content button {
+        width: 100%;
+
+        margin-top: 17px;
+
+        padding: 14px 18px;
+    }
+
+}

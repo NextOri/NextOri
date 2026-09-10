@@ -324,3 +324,111 @@
     }
 
 }
+
+
+/* =========================================================
+   AVIS - PARCOURS TERMINÉ
+========================================================= */
+
+.orientation-notification-avis {
+    border: 1px solid rgba(244, 180, 0, 0.35);
+    box-shadow:
+        0 12px 30px rgba(13, 27, 42, 0.10);
+}
+
+
+/* Icône spéciale de fin de parcours */
+
+.orientation-notification-avis .notification-icon {
+    background: #F4B400;
+    color: #0D1B2A;
+}
+
+
+.orientation-notification-avis .notification-icon svg {
+    color: #0D1B2A;
+    stroke: #0D1B2A;
+}
+
+
+/* Bouton Donner mon avis */
+
+.notification-avis-button {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 9px;
+
+    margin-top: 16px;
+
+    padding: 13px 20px;
+
+    border: none;
+    border-radius: 13px;
+
+    background: #1E3A8A;
+
+    color: #FFFFFF;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 8px 20px rgba(30, 58, 138, 0.20);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+
+.notification-avis-button svg {
+    width: 18px;
+    height: 18px;
+
+    color: #FFFFFF;
+    stroke: #FFFFFF;
+}
+
+
+.notification-avis-button svg:last-child {
+    width: 16px;
+    height: 16px;
+}
+
+
+.notification-avis-button:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 12px 28px rgba(30, 58, 138, 0.28);
+}
+
+
+.notification-avis-button:active {
+    transform: translateY(0);
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 768px) {
+
+    .orientation-notification-avis {
+        padding-bottom: 20px;
+    }
+
+
+    .notification-avis-button {
+        width: 100%;
+
+        padding: 14px 18px;
+    }
+
+}

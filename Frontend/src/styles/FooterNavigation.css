@@ -2,92 +2,134 @@
    FOOTER NAVIGATION
 =========================== */
 
+.footer-navigation {
 
-.footer-navigation{
+    position: fixed;
 
-    position:fixed;
+    bottom: 0;
 
-    bottom:0;
+    left: 0;
 
-    left:0;
+    width: 100%;
 
-    width:100%;
+    height: 75px;
 
-    height:75px;
+    background: #FFFFFF;
 
-    background:#FFFFFF;
+    display: flex;
 
-    display:flex;
+    justify-content: center;
 
-    justify-content:center;
+    align-items: center;
 
-    align-items:center;
+    border-top: 1px solid #F2F4F7;
 
-    gap: 2.2rem;
+    box-shadow: 0 -5px 20px rgba(13,27,42,0.08);
 
-    border-top:1px solid #F2F4F7;
+    z-index: 1000;
 
-    box-shadow:0 -5px 20px rgba(13,27,42,0.08);
-
-    z-index:1000;
-
-}
-
-
-
-.footer-navigation a{
-
-    text-decoration:none;
-
-    color:#0D1B2A;
-
-    display:flex;
-
-    flex-direction:column;
-
-    align-items:center;
-
-    justify-content:center;
-
-    width:42px;
-
-    font-size:12px;
+    box-sizing: border-box;
 
 }
 
 
+/* ===========================
+   LIENS
+=========================== */
 
-.footer-navigation span{
+.footer-navigation a {
 
-    font-size:24px;
+    text-decoration: none;
 
-    margin-bottom:4px;
+    color: #0D1B2A;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: 82px;
+
+    min-width: 0;
+
+    height: 100%;
+
+    font-size: 12px;
+
+    font-weight: 500;
+
+    transition:
+        color 0.2s ease,
+        transform 0.2s ease;
 
 }
 
 
+.footer-navigation a:hover {
 
-.footer-navigation p{
-
-    margin:0;
-
-}
-
-
-
-/* Page active */
-
-.footer-navigation a.active{
-
-    color:#1E3A8A;
+    color: #1E3A8A;
 
 }
 
 
+.footer-navigation span {
 
-.footer-navigation a.active span{
+    display: flex;
 
-    color:#F4B400;
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 24px;
+
+    line-height: 1;
+
+    margin-bottom: 5px;
+
+}
+
+
+.footer-navigation span svg {
+
+    width: 23px;
+
+    height: 23px;
+
+}
+
+
+/* ===========================
+   TEXTE
+=========================== */
+
+.footer-navigation p {
+
+    margin: 0;
+
+    line-height: 1;
+
+    white-space: nowrap;
+
+}
+
+
+/* ===========================
+   PAGE ACTIVE
+=========================== */
+
+.footer-navigation a.active {
+
+    color: #1E3A8A;
+
+}
+
+
+.footer-navigation a.active span {
+
+    color: #F4B400;
 
 }
 
@@ -100,9 +142,7 @@
 
     .footer-navigation {
 
-        height: 60px;
-
-        gap: 0.9rem;
+        height: 62px;
 
         padding: 0 8px;
 
@@ -111,18 +151,20 @@
 
     .footer-navigation a {
 
-        width: 42px;
+        width: calc(100% / 7);
 
-        font-size: 11px;
+        max-width: 82px;
+
+        font-size: 10.5px;
 
     }
 
 
     .footer-navigation span {
 
-        font-size: 20px;
+        font-size: 21px;
 
-        margin-bottom: 2px;
+        margin-bottom: 3px;
 
     }
 
@@ -146,29 +188,29 @@
 
     .footer-navigation {
 
-        height: 55px;
+        height: 58px;
 
-        gap: 0.55rem;
-
-        padding: 0 5px;
+        padding: 0 4px;
 
     }
 
 
     .footer-navigation a {
 
-        width: 40px;
+        width: calc(100% / 7);
 
-        font-size: 10px;
+        max-width: none;
+
+        font-size: 9.5px;
 
     }
 
 
     .footer-navigation span {
 
-        font-size: 18px;
+        font-size: 19px;
 
-        margin-bottom: 2px;
+        margin-bottom: 3px;
 
     }
 
@@ -178,6 +220,13 @@
         width: 18px;
 
         height: 18px;
+
+    }
+
+
+    .footer-navigation p {
+
+        line-height: 1;
 
     }
 
@@ -192,9 +241,7 @@
 
     .footer-navigation {
 
-        height: 53px;
-
-        gap: 0.35rem;
+        height: 56px;
 
         padding: 0 2px;
 
@@ -203,16 +250,14 @@
 
     .footer-navigation a {
 
-        width: 38px;
-
-        font-size: 9px;
+        font-size: 8.5px;
 
     }
 
 
     .footer-navigation span {
 
-        font-size: 17px;
+        margin-bottom: 2px;
 
     }
 
@@ -222,6 +267,37 @@
         width: 17px;
 
         height: 17px;
+
+    }
+
+}
+
+
+/* ===========================
+   ÉCRANS TRÈS ÉTROITS
+=========================== */
+
+@media (max-width: 340px) {
+
+    .footer-navigation {
+
+        height: 54px;
+
+    }
+
+
+    .footer-navigation a {
+
+        font-size: 8px;
+
+    }
+
+
+    .footer-navigation span svg {
+
+        width: 16px;
+
+        height: 16px;
 
     }
 

@@ -22,6 +22,8 @@ import ResultatHistorique from "./pages/ResultatHistorique";
 import Hesitation from "./pages/Hesitation";
 import ResultatHesitation from "./pages/ResultatHesitation";
 import DepartagerHesitation from "./pages/DepartagerHesitation";
+import Avis from "./pages/Avis";
+import Temoignages from "./pages/Temoignages";
 
 
 function App() {
@@ -72,6 +74,10 @@ function App() {
     <Route path="/resultat-hesitation" element={<ResultatHesitation />} />
 
     <Route path="/hesitation/departager" element={<DepartagerHesitation />} />
+
+    <Route path="/avis" element={<Avis />} />
+
+    <Route path="/temoignages" element={<Temoignages />} />
 
     </Route>
 

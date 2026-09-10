@@ -24,11 +24,10 @@ import {
     Rocket,
     MessageCircle,
     Bell,
-    LockKeyhole,
     UserRound,
      Target,
      Brain,
-     University,
+     MessageSquare,
     Check
 } from "lucide-react";
 
@@ -217,12 +216,14 @@ const badgeIcons = {
     "decouvreur-metiers": BriefcaseBusiness,
     "choix-carriere": GraduationCap,
     "pret-universite": Landmark,
+    "contributeur": MessageSquare,
     "serie-5-jours": Flame,
     "serie-7-jours": Rocket,
     "serie-15-jours": Star,
     "serie-30-jours": Medal
 };
-
+  
+const etapeActuelle = getEtapeActuelle(dashboardDataState.parcours);
 
 const demanderNotification = async () => {
 
@@ -336,10 +337,11 @@ const demanderNotification = async () => {
 
 </section> 
 
-     <OrientationNotification 
+    <OrientationNotification
     etape={getEtapeActuelle(dashboardDataState.parcours)}
+    avisDonne={dashboardDataState.parcours.avisDonne}
+    onAvis={() => navigate("/avis")}
 />
-
 
             {/* NIVEAU */}
 
@@ -528,6 +530,67 @@ etape.numero
 </section>
 
 
+{parcours.length === 6 && etapeActuelle === 6 && (
+    <section className="avis-dashboard-card">
+
+        <div className="avis-dashboard-icon">
+            <MessageSquare />
+        </div>
+
+        <div className="avis-dashboard-content">
+
+            {!dashboardDataState.parcours.avisDonne ? (
+                <>
+                    <span>
+                        PARCOURS TERMINÉ
+                    </span>
+
+                    <h2>
+                        Ton avis compte.
+                    </h2>
+
+                    <p>
+                        Tu viens de parcourir les principales étapes
+                        de ton orientation avec NextOri.
+                        Quelques secondes suffisent pour partager
+                        ton expérience et nous aider à améliorer la plateforme.
+                    </p>
+                </>
+            ) : (
+                <>
+                    <span>
+                        VOTRE EXPÉRIENCE COMPTE
+                    </span>
+
+                    <h2>
+                        Une suggestion pour NextOri ?
+                    </h2>
+
+                    <p>
+                        Tu as déjà partagé ton expérience avec nous.
+                        Mais ton avis peut évoluer avec le temps.
+                        Tu peux toujours nous faire part d'une recommandation,
+                        d'une idée ou d'une suggestion pour améliorer NextOri.
+                    </p>
+                </>
+            )}
+
+            <button
+                onClick={() => navigate("/avis")}
+            >
+                {dashboardDataState.parcours.avisDonne
+                    ? "Partager une suggestion"
+                    : "Donner mon avis"
+                }
+
+                <Rocket />
+            </button>
+
+        </div>
+
+    </section>
+)}
+
             {/* ACTIONS RAPIDES */}
 
             <section className="quick-actions">
@@ -633,9 +696,9 @@ etape.numero
 
 </section>
 
-            {/* PROJET */}
+            {/* PROJET 
 
-            <section className="project-card">
+            <section className="project-card"> 
 
     <h2>
     Mon plan d'avenir <Rocket />
@@ -646,7 +709,7 @@ etape.numero
     RIASEC, de vos recommandations et de vos objectifs professionnels.
 </p>
 
-<div className="future-plan-card">
+<div className="future-plan-card"> 
 
     <div className="future-icon">
 
@@ -687,7 +750,7 @@ etape.numero
 
    </p>
 
-   </section>
+    </section>  */}
 
    
    

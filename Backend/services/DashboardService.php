@@ -70,12 +70,21 @@ class DashboardService
             $points += 10;
         }
 
-        // 7. Connexions quotidiennes (+5 points par jour)
+        // 7. Avis donné (+20)
+        $sql = "SELECT COUNT(*) FROM historique WHERE id_user = ? AND action = 'AVIS_DONNE'";
+        $requete = $this->connexion->prepare($sql);
+        $requete->execute([$idUser]);
+
+        if ($requete->fetchColumn() > 0) {
+            $points += 20;
+        }
+
+        // 8. Connexions quotidiennes (+5 points par jour)
         $sql = "
-    SELECT COUNT(*)
-    FROM connexion_utilisateur
-    WHERE id_user = ?
-";
+         SELECT COUNT(*)
+         FROM connexion_utilisateur
+         WHERE id_user = ?
+         ";
 
         $requete = $this->connexion->prepare($sql);
         $requete->execute([$idUser]);
@@ -85,7 +94,7 @@ class DashboardService
         $points += $nombreConnexions * 5;
 
 
-        // 8. Points des badges obtenus
+        // 9. Points des badges obtenus
         $sql = "
     SELECT COALESCE(SUM(b.points), 0)
     FROM badge_utilisateur bu
@@ -103,168 +112,184 @@ class DashboardService
     }
 
     private function verifierBadges(
-    int $idUser,
-    int $serie
-): void
-{
-    // 1. Premier Pas
-    $this->attribuerBadge(
-        $idUser,
-        "PREMIER_PAS"
-    );
+        int $idUser,
+        int $serie
+    ): void {
+        // 1. Premier Pas
+        $this->attribuerBadge(
+            $idUser,
+            "PREMIER_PAS"
+        );
 
-    // 2. Explorateur
-    $sql = "
+        // 2. Explorateur
+        $sql = "
         SELECT COUNT(*)
         FROM test_riasec
         WHERE id_user = ?
     ";
 
-    $requete = $this->connexion->prepare($sql);
-    $requete->execute([$idUser]);
+        $requete = $this->connexion->prepare($sql);
+        $requete->execute([$idUser]);
 
-    if ((int) $requete->fetchColumn() > 0) {
-        $this->attribuerBadge(
-            $idUser,
-            "EXPLORATEUR"
-        );
-    }
+        if ((int) $requete->fetchColumn() > 0) {
+            $this->attribuerBadge(
+                $idUser,
+                "EXPLORATEUR"
+            );
+        }
 
 
-    // 3. Connaissance de soi
-    $sql = "
+        // 3. Connaissance de soi
+        $sql = "
         SELECT COUNT(*)
         FROM historique
         WHERE id_user = ?
         AND action = 'PROFIL_CONSULTE'
     ";
 
-    $requete = $this->connexion->prepare($sql);
-    $requete->execute([$idUser]);
+        $requete = $this->connexion->prepare($sql);
+        $requete->execute([$idUser]);
 
-    if ((int) $requete->fetchColumn() > 0) {
-        $this->attribuerBadge(
-            $idUser,
-            "CONNAISSANCE_SOI"
-        );
-    }
+        if ((int) $requete->fetchColumn() > 0) {
+            $this->attribuerBadge(
+                $idUser,
+                "CONNAISSANCE_SOI"
+            );
+        }
 
 
-    // 4. Découvreur de métiers
-    $sql = "
+        // 4. Découvreur de métiers
+        $sql = "
         SELECT COUNT(*)
         FROM historique
         WHERE id_user = ?
         AND action = 'METIERS_CONSULTES'
     ";
 
-    $requete = $this->connexion->prepare($sql);
-    $requete->execute([$idUser]);
+        $requete = $this->connexion->prepare($sql);
+        $requete->execute([$idUser]);
 
-    if ((int) $requete->fetchColumn() > 0) {
-        $this->attribuerBadge(
-            $idUser,
-            "DECOUVREUR_METIERS"
-        );
-    }
+        if ((int) $requete->fetchColumn() > 0) {
+            $this->attribuerBadge(
+                $idUser,
+                "DECOUVREUR_METIERS"
+            );
+        }
 
 
-    // 5. Choix de carrière
-    $sql = "
+        // 5. Choix de carrière
+        $sql = "
         SELECT COUNT(*)
         FROM historique
         WHERE id_user = ?
         AND action = 'FORMATION_CONSULTEE'
     ";
 
-    $requete = $this->connexion->prepare($sql);
-    $requete->execute([$idUser]);
+        $requete = $this->connexion->prepare($sql);
+        $requete->execute([$idUser]);
 
-    if ((int) $requete->fetchColumn() > 0) {
-        $this->attribuerBadge(
-            $idUser,
-            "CHOIX_CARRIERE"
-        );
-    }
+        if ((int) $requete->fetchColumn() > 0) {
+            $this->attribuerBadge(
+                $idUser,
+                "CHOIX_CARRIERE"
+            );
+        }
 
 
-    // 6. Prêt pour l'université
-    $sql = "
+        // 6. Prêt pour l'université
+        $sql = "
         SELECT COUNT(*)
         FROM historique
         WHERE id_user = ?
         AND action = 'UNIVERSITES_CONSULTEES'
     ";
 
-    $requete = $this->connexion->prepare($sql);
-    $requete->execute([$idUser]);
+        $requete = $this->connexion->prepare($sql);
+        $requete->execute([$idUser]);
 
-    if ((int) $requete->fetchColumn() > 0) {
-        $this->attribuerBadge(
-            $idUser,
-            "PRET_UNIVERSITE"
-        );
+        if ((int) $requete->fetchColumn() > 0) {
+            $this->attribuerBadge(
+                $idUser,
+                "PRET_UNIVERSITE"
+            );
+        }
+
+
+        // 7. Contributeur
+        $sql = "
+    SELECT COUNT(*)
+    FROM historique
+    WHERE id_user = ?
+    AND action = 'AVIS_DONNE'
+    ";
+
+        $requete = $this->connexion->prepare($sql);
+        $requete->execute([$idUser]);
+
+        if ((int) $requete->fetchColumn() > 0) {
+            $this->attribuerBadge(
+                $idUser,
+                "CONTRIBUTEUR"
+            );
+        }
+
+        // 8. Série de 5 jours
+        if ($serie >= 5) {
+            $this->attribuerBadge(
+                $idUser,
+                "SERIE_5_JOURS"
+            );
+        }
+
+        // 9. Série de 7 jours
+        if ($serie >= 7) {
+            $this->attribuerBadge(
+                $idUser,
+                "SERIE_7_JOURS"
+            );
+        }
+
+        // 10. Série de 15 jours
+        if ($serie >= 15) {
+            $this->attribuerBadge(
+                $idUser,
+                "SERIE_15_JOURS"
+            );
+        }
+
+        // 11. Série de 30 jours
+        if ($serie >= 30) {
+            $this->attribuerBadge(
+                $idUser,
+                "SERIE_30_JOURS"
+            );
+        }
     }
 
 
-    // 7. Série de 5 jours
-if ($serie >= 5) {
-    $this->attribuerBadge(
-        $idUser,
-        "SERIE_5_JOURS"
-    );
-}
-
-// 8. Série de 7 jours
-if ($serie >= 7) {
-    $this->attribuerBadge(
-        $idUser,
-        "SERIE_7_JOURS"
-    );
-}
-
-// 9. Série de 15 jours
-if ($serie >= 15) {
-    $this->attribuerBadge(
-        $idUser,
-        "SERIE_15_JOURS"
-    );
-}
-
-// 10. Série de 30 jours
-if ($serie >= 30) {
-    $this->attribuerBadge(
-        $idUser,
-        "SERIE_30_JOURS"
-    );
-}
-}
-
-
     private function attribuerBadge(
-    int $idUser,
-    string $code
-): void
-{
-    // Récupérer le badge
-    $sql = "
+        int $idUser,
+        string $code
+    ): void {
+        // Récupérer le badge
+        $sql = "
         SELECT id_badge
         FROM badge
         WHERE code = ?
         LIMIT 1
     ";
 
-    $requete = $this->connexion->prepare($sql);
-    $requete->execute([$code]);
+        $requete = $this->connexion->prepare($sql);
+        $requete->execute([$code]);
 
-    $idBadge = $requete->fetchColumn();
+        $idBadge = $requete->fetchColumn();
 
-    if (!$idBadge) {
-        return;
-    }
+        if (!$idBadge) {
+            return;
+        }
 
-    // Attribuer le badge une seule fois
-    $sql = "
+        // Attribuer le badge une seule fois
+        $sql = "
         INSERT INTO badge_utilisateur
         (
             id_user,
@@ -281,13 +306,13 @@ if ($serie >= 30) {
             id_badge_utilisateur = id_badge_utilisateur
     ";
 
-    $requete = $this->connexion->prepare($sql);
+        $requete = $this->connexion->prepare($sql);
 
-    $requete->execute([
-        $idUser,
-        $idBadge
-    ]);
-}
+        $requete->execute([
+            $idUser,
+            $idBadge
+        ]);
+    }
 
 
     private function recupererBadgesUtilisateur(int $idUser): array
@@ -313,77 +338,77 @@ if ($serie >= 30) {
 
 
     private function calculerNiveau(int $points): array
-{
-    // Niveau 1 : Explorateur
-    if ($points < 100) {
+    {
+        // Niveau 1 : Explorateur
+        if ($points < 100) {
+            return [
+                "nom" => "Explorateur",
+                "numero" => 1,
+                "progression" => intval(($points / 100) * 100)
+            ];
+        }
+
+        // Niveau 2 : Découvreur
+        elseif ($points < 200) {
+            return [
+                "nom" => "Découvreur",
+                "numero" => 2,
+                "progression" => intval((($points - 100) / 100) * 100)
+            ];
+        }
+
+        // Niveau 3 : Visionnaire
+        elseif ($points < 300) {
+            return [
+                "nom" => "Visionnaire",
+                "numero" => 3,
+                "progression" => intval((($points - 200) / 100) * 100)
+            ];
+        }
+
+        // Niveau 4 : Expert
+        elseif ($points < 500) {
+            return [
+                "nom" => "Expert",
+                "numero" => 4,
+                "progression" => intval((($points - 300) / 200) * 100)
+            ];
+        }
+
+        // Niveau 5 : Maître
+        elseif ($points < 750) {
+            return [
+                "nom" => "Maître",
+                "numero" => 5,
+                "progression" => intval((($points - 500) / 250) * 100)
+            ];
+        }
+
+        // Niveau 6 : Ambassadeur
+        elseif ($points < 1000) {
+            return [
+                "nom" => "Ambassadeur",
+                "numero" => 6,
+                "progression" => intval((($points - 750) / 250) * 100)
+            ];
+        }
+
+        // Niveau 7 : Mentor
+        elseif ($points < 1500) {
+            return [
+                "nom" => "Mentor",
+                "numero" => 7,
+                "progression" => intval((($points - 1000) / 500) * 100)
+            ];
+        }
+
+        // Niveau 8 : Légende
         return [
-            "nom" => "Explorateur",
-            "numero" => 1,
-            "progression" => intval(($points / 100) * 100)
+            "nom" => "Légende",
+            "numero" => 8,
+            "progression" => 100
         ];
     }
-
-    // Niveau 2 : Découvreur
-    elseif ($points < 200) {
-        return [
-            "nom" => "Découvreur",
-            "numero" => 2,
-            "progression" => intval((($points - 100) / 100) * 100)
-        ];
-    }
-
-    // Niveau 3 : Visionnaire
-    elseif ($points < 300) {
-        return [
-            "nom" => "Visionnaire",
-            "numero" => 3,
-            "progression" => intval((($points - 200) / 100) * 100)
-        ];
-    }
-
-    // Niveau 4 : Expert
-    elseif ($points < 500) {
-        return [
-            "nom" => "Expert",
-            "numero" => 4,
-            "progression" => intval((($points - 300) / 200) * 100)
-        ];
-    }
-
-    // Niveau 5 : Maître
-    elseif ($points < 750) {
-        return [
-            "nom" => "Maître",
-            "numero" => 5,
-            "progression" => intval((($points - 500) / 250) * 100)
-        ];
-    }
-
-    // Niveau 6 : Ambassadeur
-    elseif ($points < 1000) {
-        return [
-            "nom" => "Ambassadeur",
-            "numero" => 6,
-            "progression" => intval((($points - 750) / 250) * 100)
-        ];
-    }
-
-    // Niveau 7 : Mentor
-    elseif ($points < 1500) {
-        return [
-            "nom" => "Mentor",
-            "numero" => 7,
-            "progression" => intval((($points - 1000) / 500) * 100)
-        ];
-    }
-
-    // Niveau 8 : Légende
-    return [
-        "nom" => "Légende",
-        "numero" => 8,
-        "progression" => 100
-    ];
-}
 
     private function calculerSerie(int $idUser): int
     {
@@ -517,6 +542,11 @@ if ($serie >= 30) {
             "universitesConsultees" => in_array(
                 "UNIVERSITES_CONSULTEES",
                 $actions
+            ),
+
+            "avisDonne" => in_array(
+                "AVIS_DONNE",
+                $actions
             )
 
         ];
@@ -566,15 +596,15 @@ if ($serie >= 30) {
         }
 
         // Enregistrer la visite du jour
-       $this->enregistrerVisiteDuJour($idUser);
+        $this->enregistrerVisiteDuJour($idUser);
 
-$serie = $this->calculerSerie($idUser);
+        $serie = $this->calculerSerie($idUser);
 
-// Vérifier et attribuer les badges
-$this->verifierBadges($idUser, $serie);
+        // Vérifier et attribuer les badges
+        $this->verifierBadges($idUser, $serie);
 
-// Calculer les points
-$points = $this->calculerPoints($idUser);
+        // Calculer les points
+        $points = $this->calculerPoints($idUser);
         // Calculer le niveau
         $niveau = $this->calculerNiveau($points);
 

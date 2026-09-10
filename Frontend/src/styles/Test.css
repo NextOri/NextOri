@@ -1,107 +1,341 @@
 /* =========================================================
-   NEXTORI — PAGE TEST
+   NEXTORI — TEST RIASEC
    ========================================================= */
 
-.test-page {
+.nextori-test-page {
     min-height: 100vh;
-    box-sizing: border-box;
-
     background: #F2F4F7;
     color: #0D1B2A;
-
-    padding: 32px 24px 40px;
+    font-family: inherit;
 
     display: flex;
     flex-direction: column;
-    align-items: center;
 }
 
 
 /* =========================================================
-   EN-TÊTE
+   HEADER
    ========================================================= */
 
-.test-header {
-    width: min(100%, 920px);
+.nextori-test-header {
+    height: 72px;
+    flex-shrink: 0;
 
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    background: #FFFFFF;
+    border-bottom: 1px solid rgba(13, 27, 42, 0.08);
 
-    margin-bottom: 28px;
-}
-
-
-/* Logo + nom NextOri */
-
-.test-brand {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
     align-items: center;
 
-    gap: 10px;
+    padding: 0 48px;
 }
 
-.test-logo {
-    width: 120px;
-    height: 120px;
 
-    object-fit: contain;
-
-    display: block;
+.nextori-test-header-left {
+    display: flex;
+    justify-content: flex-start;
 }
 
-.test-brand h1 {
-    margin: 0;
+
+.nextori-test-home-link {
+    border: none;
+    background: transparent;
 
     color: #0D1B2A;
 
-    font-size: 24px;
-    font-weight: 800;
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
 
-    letter-spacing: -0.5px;
+    padding: 9px 0;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: color 0.2s ease;
 }
 
 
-/* Sous-titre */
+.nextori-test-home-link:hover {
+    color: #1E3A8A;
+}
 
-.test-header p {
-    margin: 0;
 
+/* =========================================================
+   BRAND
+   ========================================================= */
+
+.nextori-test-brand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 11px;
+}
+
+
+.nextori-test-brand-mark {
+    width: 40px;
+    height: 40px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #0D1B2A;
+    color: #F4B400;
+
+    border-radius: 11px;
+}
+
+
+.nextori-test-brand > div:last-child {
+    display: flex;
+    flex-direction: column;
+
+    line-height: 1.1;
+}
+
+
+.nextori-test-brand strong {
+    color: #0D1B2A;
+
+    font-size: 19px;
+    letter-spacing: -0.4px;
+}
+
+
+.nextori-test-brand span {
+    margin-top: 4px;
+
+    color: #1E3A8A;
+
+    font-size: 10px;
+    font-weight: 800;
+
+    text-transform: uppercase;
+    letter-spacing: 1.1px;
+}
+
+
+/* =========================================================
+   HEADER RIGHT
+   ========================================================= */
+
+.nextori-test-header-right {
+    display: flex;
+    justify-content: flex-end;
+}
+
+
+.nextori-test-header-right span {
     color: #1E3A8A;
 
     font-size: 14px;
     font-weight: 700;
+
+    padding: 8px 14px;
+
+    background: #F2F4F7;
+
+    border-radius: 20px;
 }
+
+
+/* =========================================================
+   MAIN
+   ========================================================= */
+
+.nextori-test-main {
+    width: min(1120px, calc(100% - 64px));
+
+    margin: 0 auto;
+
+    padding: 30px 0 32px;
+
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+}
+
 
 /* =========================================================
    INTRODUCTION
    ========================================================= */
 
-.test-introduction {
-    width: min(100%, 920px);
+.nextori-test-intro {
+    display: flex;
+    align-items: center;
 
-    margin-bottom: 24px;
+    gap: 18px;
+
+    margin-bottom: 19px;
 }
 
-.test-introduction h1 {
-    margin: 0 0 10px;
+
+.nextori-test-intro-icon {
+    width: 52px;
+    height: 52px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #F4B400;
+    background: #0D1B2A;
+
+    border-radius: 14px;
+}
+
+
+.nextori-test-intro-content {
+    min-width: 0;
+}
+
+
+.nextori-test-eyebrow {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: #1E3A8A;
+
+    font-size: 11px;
+    font-weight: 800;
+
+    letter-spacing: 1.6px;
+}
+
+
+.nextori-test-intro h1 {
+    margin: 0;
 
     color: #0D1B2A;
 
-    font-size: clamp(28px, 4vw, 40px);
-    line-height: 1.15;
+    font-size: clamp(28px, 3vw, 35px);
+    line-height: 1.12;
+
     letter-spacing: -1px;
 }
 
-.test-introduction p {
-    max-width: 680px;
 
-    margin: 0;
+.nextori-test-intro p {
+    margin: 6px 0 0;
 
-    color: #5F6B7A;
+    color: rgba(13, 27, 42, 0.62);
 
-    font-size: 16px;
-    line-height: 1.65;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   INFORMATION
+   ========================================================= */
+
+.nextori-test-information {
+    min-height: 58px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 13px;
+
+    margin-bottom: 18px;
+    padding: 10px 14px;
+
+    background: #FFFFFF;
+
+    border: 1px solid rgba(244, 180, 0, 0.30);
+    border-left: 4px solid #F4B400;
+
+    border-radius: 11px;
+}
+
+
+.nextori-test-information-icon {
+    width: 30px;
+    height: 30px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #F4B400;
+    color: #0D1B2A;
+
+    border-radius: 50%;
+
+    font-size: 14px;
+    font-weight: 900;
+}
+
+
+.nextori-test-information-content {
+    min-width: 0;
+
+    display: flex;
+    align-items: baseline;
+
+    gap: 8px;
+
+    flex: 1;
+}
+
+
+.nextori-test-information-content strong {
+    color: #0D1B2A;
+
+    font-size: 13px;
+
+    white-space: nowrap;
+}
+
+
+.nextori-test-information-content span {
+    color: rgba(13, 27, 42, 0.62);
+
+    font-size: 13px;
+    line-height: 1.45;
+}
+
+
+.nextori-test-information-close {
+    width: 32px;
+    height: 32px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+
+    background: transparent;
+    color: rgba(13, 27, 42, 0.50);
+
+    border-radius: 7px;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease;
+}
+
+
+.nextori-test-information-close:hover {
+    background: #F2F4F7;
+    color: #0D1B2A;
 }
 
 
@@ -109,47 +343,65 @@
    PROGRESSION
    ========================================================= */
 
-.progress-container {
-    width: min(100%, 920px);
-
-    margin-bottom: 20px;
+.nextori-test-progress {
+    margin-bottom: 17px;
 }
 
-.progress-info {
+
+.nextori-test-progress-top {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
 
-    margin-bottom: 9px;
-
-    color: #5F6B7A;
+    margin-bottom: 8px;
 
     font-size: 14px;
-    font-weight: 600;
 }
 
-.progress-info span:last-child {
-    color: #1E3A8A;
-    font-weight: 800;
+
+.nextori-test-progress-top > div {
+    display: flex;
+    align-items: baseline;
+
+    gap: 5px;
 }
 
-.progress-bar {
+
+.nextori-test-progress-label {
+    color: rgba(13, 27, 42, 0.55);
+}
+
+
+.nextori-test-progress-top strong {
+    color: #0D1B2A;
+
+    font-size: 14px;
+}
+
+
+.nextori-test-progress-percent {
+    color: #1E3A8A !important;
+}
+
+
+.nextori-test-progress-track {
     width: 100%;
-    height: 8px;
+    height: 6px;
 
     overflow: hidden;
 
-    background: #DDE3EA;
+    background: #FFFFFF;
 
-    border-radius: 999px;
+    border-radius: 10px;
 }
 
-.progress-fill {
+
+.nextori-test-progress-fill {
     height: 100%;
 
     background: #F4B400;
 
-    border-radius: 999px;
+    border-radius: inherit;
 
     transition: width 0.35s ease;
 }
@@ -159,31 +411,83 @@
    QUESTION
    ========================================================= */
 
-.question-card {
-    width: min(100%, 920px);
+.nextori-test-question-card {
+    display: flex;
+    align-items: center;
 
-    box-sizing: border-box;
+    gap: 19px;
+
+    margin-bottom: 15px;
+    padding: 19px 22px;
 
     background: #FFFFFF;
 
-    border: 1px solid #E2E7ED;
+    border: 1px solid rgba(13, 27, 42, 0.07);
 
-    border-radius: 22px;
-
-    padding: 32px;
+    border-radius: 15px;
 
     box-shadow:
-        0 8px 30px rgba(13, 27, 42, 0.06);
+        0 6px 20px rgba(13, 27, 42, 0.05);
 }
 
-.question-card h2 {
-    margin: 0 0 28px;
+
+.nextori-test-question-number {
+    width: 52px;
+    height: 52px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #0D1B2A;
+    color: #F4B400;
+
+    border-radius: 12px;
+
+    font-size: 18px;
+    font-weight: 800;
+}
+
+
+.nextori-test-question-content {
+    min-width: 0;
+}
+
+
+.nextori-test-question-label {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: #1E3A8A;
+
+    font-size: 10px;
+    font-weight: 800;
+
+    letter-spacing: 1.4px;
+}
+
+
+.nextori-test-question-content h2 {
+    margin: 0;
 
     color: #0D1B2A;
 
-    font-size: clamp(21px, 3vw, 28px);
-    line-height: 1.4;
-    letter-spacing: -0.3px;
+    font-size: clamp(20px, 2.2vw, 24px);
+    line-height: 1.3;
+
+    font-weight: 700;
+}
+
+
+.nextori-test-question-helper {
+    margin: 5px 0 0;
+
+    color: rgba(13, 27, 42, 0.50);
+
+    font-size: 13px;
 }
 
 
@@ -191,99 +495,155 @@
    RÉPONSES
    ========================================================= */
 
-.answers {
+.nextori-test-answers {
     display: grid;
 
     grid-template-columns: repeat(2, minmax(0, 1fr));
 
-    gap: 14px;
+    gap: 11px;
+
+    margin-bottom: 17px;
 }
 
-.answer {
-    width: 100%;
-    min-height: 72px;
 
-    box-sizing: border-box;
+.nextori-test-answer {
+    min-height: 66px;
+
+    position: relative;
 
     display: flex;
     align-items: center;
 
-    gap: 14px;
+    gap: 13px;
 
-    padding: 15px 18px;
+    padding: 10px 15px;
 
-    border: 2px solid #E2E7ED;
-    border-radius: 14px;
+    border: 1.5px solid rgba(13, 27, 42, 0.11);
+
+    border-radius: 12px;
 
     background: #FFFFFF;
-
     color: #0D1B2A;
-
-    font-family: inherit;
-    font-size: 15px;
-    font-weight: 600;
 
     text-align: left;
 
     cursor: pointer;
 
     transition:
-        border-color 0.2s ease,
-        background 0.2s ease,
-        transform 0.2s ease,
-        box-shadow 0.2s ease;
+        transform 0.18s ease,
+        border-color 0.18s ease,
+        box-shadow 0.18s ease,
+        background 0.18s ease;
 }
 
-.answer:hover {
+
+.nextori-test-answer:hover {
+    transform: translateY(-1px);
+
     border-color: #1E3A8A;
 
-    background: #F7F9FC;
-
-    transform: translateY(-2px);
-
     box-shadow:
-        0 6px 18px rgba(30, 58, 138, 0.08);
+        0 6px 16px rgba(13, 27, 42, 0.07);
 }
 
-.answer span {
+
+.nextori-test-answer-letter {
     width: 38px;
     height: 38px;
 
-    flex: 0 0 38px;
+    flex-shrink: 0;
 
     display: flex;
     align-items: center;
     justify-content: center;
 
-    border-radius: 10px;
-
     background: #F2F4F7;
-
     color: #1E3A8A;
+
+    border-radius: 9px;
 
     font-size: 14px;
     font-weight: 800;
 
     transition:
-        background 0.2s ease,
-        color 0.2s ease;
+        background 0.18s ease,
+        color 0.18s ease;
 }
 
 
-/* Réponse sélectionnée */
+.nextori-test-answer-text {
+    flex: 1;
 
-.answer.active {
-    border-color: #F4B400;
+    color: #0D1B2A;
 
-    background: #FFF9E8;
+    font-size: 14px;
+    font-weight: 600;
+
+    line-height: 1.4;
+}
+
+
+.nextori-test-answer-check {
+    width: 23px;
+    height: 23px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1.5px solid rgba(13, 27, 42, 0.16);
+
+    border-radius: 50%;
+
+    color: transparent;
+
+    font-size: 11px;
+    font-weight: 900;
+
+    transition:
+        background 0.18s ease,
+        border-color 0.18s ease,
+        color 0.18s ease;
+}
+
+
+/* =========================================================
+   RÉPONSE ACTIVE
+   ========================================================= */
+
+.nextori-test-answer-active {
+    background: #0D1B2A;
+
+    border-color: #0D1B2A;
 
     box-shadow:
-        0 6px 20px rgba(244, 180, 0, 0.12);
+        0 8px 20px rgba(13, 27, 42, 0.15);
 }
 
-.answer.active span {
+
+.nextori-test-answer-active:hover {
+    border-color: #0D1B2A;
+}
+
+
+.nextori-test-answer-active .nextori-test-answer-letter {
     background: #F4B400;
+    color: #0D1B2A;
+}
+
+
+.nextori-test-answer-active .nextori-test-answer-text {
     color: #FFFFFF;
+}
+
+
+.nextori-test-answer-active .nextori-test-answer-check {
+    background: #F4B400;
+    border-color: #F4B400;
+
+    color: #0D1B2A;
 }
 
 
@@ -291,464 +651,220 @@
    NAVIGATION
    ========================================================= */
 
-.navigation-buttons {
-    width: min(100%, 920px);
+.nextori-test-navigation {
+    display: grid;
 
-    display: flex;
-    justify-content: space-between;
+    grid-template-columns: 1fr auto 1fr;
+
     align-items: center;
 
-    gap: 16px;
-
-    margin-top: 20px;
+    margin-top: auto;
 }
 
-.previous-button,
-.next-button {
-    min-height: 48px;
 
-    padding: 0 24px;
+.nextori-test-previous,
+.nextori-test-next {
+    min-height: 46px;
 
-    border-radius: 12px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 
-    font-family: inherit;
+    gap: 9px;
 
-    font-size: 15px;
+    border-radius: 10px;
+
+    padding: 0 18px;
+
+    font-size: 14px;
     font-weight: 700;
 
     cursor: pointer;
 
     transition:
-        background 0.2s ease,
-        border-color 0.2s ease,
-        transform 0.2s ease,
-        box-shadow 0.2s ease;
+        transform 0.18s ease,
+        background 0.18s ease,
+        border-color 0.18s ease,
+        opacity 0.18s ease;
 }
 
 
-/* Précédent */
+.nextori-test-previous {
+    justify-self: start;
 
-.previous-button {
+    border: 1px solid rgba(13, 27, 42, 0.13);
+
     background: #FFFFFF;
-
-    border: 2px solid #DDE3EA;
-
     color: #0D1B2A;
 }
 
-.previous-button:hover:not(:disabled) {
+
+.nextori-test-previous:hover:not(:disabled) {
     border-color: #1E3A8A;
-
     color: #1E3A8A;
-
-    transform: translateY(-1px);
 }
 
-.previous-button:disabled {
-    opacity: 0.45;
+
+.nextori-test-previous:disabled {
+    opacity: 0.35;
 
     cursor: not-allowed;
 }
 
 
-/* Suivant / Terminer */
+.nextori-test-navigation-status {
+    color: rgba(13, 27, 42, 0.48);
 
-.next-button {
-    background: #1E3A8A;
-
-    border: 2px solid #1E3A8A;
-
-    color: #FFFFFF;
-
-    box-shadow:
-        0 6px 16px rgba(30, 58, 138, 0.18);
+    font-size: 13px;
+    font-weight: 700;
 }
 
-.next-button:hover {
-    background: #0D1B2A;
 
-    border-color: #0D1B2A;
+.nextori-test-next {
+    justify-self: end;
+
+    border: 1px solid #0D1B2A;
+
+    background: #0D1B2A;
+    color: #FFFFFF;
+}
+
+
+.nextori-test-next:hover {
+    background: #1E3A8A;
+    border-color: #1E3A8A;
 
     transform: translateY(-1px);
-
-    box-shadow:
-        0 8px 20px rgba(13, 27, 42, 0.2);
-}
-
-
-
-
-/* =========================================================
-   FOCUS ACCESSIBLE
-   ========================================================= */
-
-.answer:focus-visible,
-.previous-button:focus-visible,
-.next-button:focus-visible {
-    outline: 3px solid rgba(244, 180, 0, 0.45);
-
-    outline-offset: 3px;
 }
 
 
 /* =========================================================
-   TABLETTE
+   LOADING / EMPTY
    ========================================================= */
 
-@media (max-width: 768px) {
+.nextori-test-loading,
+.nextori-test-empty {
+    align-items: center;
+    justify-content: center;
 
-    .test-page {
-        padding: 24px 18px 32px;
-    }
-
-    .test-header {
-        margin-bottom: 22px;
-    }
-
-    .test-logo {
-        width: 70px;
-        height: 70px;
-    }
-
-    .test-brand {
-        gap: 8px;
-    }
-
-    .test-brand h1 {
-        font-size: 21px;
-    }
-
-    .test-header p {
-        font-size: 13px;
-    }
-
-
-    .test-introduction {
-        margin-bottom: 20px;
-    }
-
-    .question-card {
-        padding: 26px;
-        border-radius: 18px;
-    }
-
-    .answers {
-        grid-template-columns: 1fr;
-    }
-
-    .answer {
-        min-height: 64px;
-    }
-
+    padding: 30px;
 }
 
 
-/* =========================================================
-   MOBILE
-   ========================================================= */
-@media (max-width: 480px) {
+.nextori-test-loading-card,
+.nextori-test-empty-card {
+    width: min(440px, 100%);
 
-    .test-page {
-        min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
-        padding: 18px 14px 24px;
-    }
+    text-align: center;
 
-    .test-header {
-        align-items: center;
-
-        gap: 12px;
-
-        margin-bottom: 20px;
-    }
-
-    .test-logo {
-        width: 50px;
-        height: 50px;
-    }
-
-    .test-brand {
-        gap: 7px;
-    }
-
-    .test-brand h1 {
-        font-size: 20px;
-    }
-
-    .test-header p {
-        max-width: 150px;
-
-        font-size: 12px;
-
-        text-align: right;
-        line-height: 1.4;
-    }
-
-    /* Le reste de ton CSS mobile reste inchangé */
-
-
-
-    .test-introduction h1 {
-        margin-bottom: 8px;
-
-        font-size: 27px;
-    }
-
-    .test-introduction p {
-        font-size: 14px;
-        line-height: 1.55;
-    }
-
-    .progress-container {
-        margin-bottom: 14px;
-    }
-
-    .progress-info {
-        font-size: 12px;
-    }
-
-    .question-card {
-        padding: 20px 16px;
-
-        border-radius: 16px;
-    }
-
-    .question-card h2 {
-        margin-bottom: 20px;
-
-        font-size: 20px;
-        line-height: 1.4;
-    }
-
-    .answers {
-        gap: 10px;
-    }
-
-    .answer {
-        min-height: 60px;
-
-        padding: 11px 12px;
-
-        gap: 10px;
-
-        font-size: 14px;
-    }
-
-    .answer span {
-        width: 34px;
-        height: 34px;
-
-        flex-basis: 34px;
-
-        border-radius: 9px;
-    }
-
-    .navigation-buttons {
-        margin-top: 14px;
-
-        gap: 10px;
-    }
-
-    .previous-button,
-    .next-button {
-        min-height: 46px;
-
-        padding: 0 17px;
-
-        font-size: 14px;
-    }
-
-}
-
-
-/* =========================================================
-   TRÈS PETITS ÉCRANS
-   ========================================================= */
-
-@media (max-width: 360px) {
-
-    .test-page {
-        padding-left: 10px;
-        padding-right: 10px;
-    }
-
-    .test-introduction h1 {
-        font-size: 24px;
-    }
-
-    .question-card {
-        padding: 17px 13px;
-    }
-
-    .question-card h2 {
-        font-size: 18px;
-    }
-
-    .answer {
-        font-size: 13px;
-    }
-
-    .previous-button,
-    .next-button {
-        padding: 0 13px;
-    }
-
-}
-
-
-/* =========================================================
-   BOÎTE D'INFORMATION DU TEST
-   ========================================================= */
-
-.test-information {
-    width: min(100%, 920px);
-
-    margin: 0 auto 24px;
-
-    box-sizing: border-box;
+    padding: 40px;
 
     background: #FFFFFF;
 
-    border: 1px solid rgba(30, 58, 138, 0.14);
+    border-radius: 17px;
 
-    border-left: 4px solid #F4B400;
-
-    border-radius: 14px;
-
-    box-shadow: 0 6px 20px rgba(13, 27, 42, 0.06);
-
-    animation: test-information-appear 0.3s ease;
+    box-shadow:
+        0 10px 35px rgba(13, 27, 42, 0.08);
 }
 
 
-/* Contenu */
+.nextori-test-loading-card p,
+.nextori-test-empty-card p {
+    margin: 16px 0 0;
 
-.test-information-content {
-    display: flex;
-
-    align-items: flex-start;
-
-    justify-content: space-between;
-
-    gap: 20px;
-
-    padding: 18px 18px 18px 20px;
-}
-
-
-/* Texte */
-
-.test-information-text {
-    flex: 1;
-
-    min-width: 0;
-}
-
-
-.test-information-text strong {
-    display: block;
-
-    margin-bottom: 6px;
-
-    color: #0D1B2A;
+    color: rgba(13, 27, 42, 0.60);
 
     font-size: 15px;
-
-    font-weight: 800;
 }
 
 
-.test-information-text p {
-    margin: 0;
-
-    color: #5F6B7A;
-
-    font-size: 14px;
-
-    line-height: 1.6;
-}
-
-
-/* =========================================================
-   BOUTON FERMER
-   ========================================================= */
-
-.test-information-close {
+.nextori-test-loading-spinner {
     width: 34px;
-
     height: 34px;
 
-    flex-shrink: 0;
+    border: 3px solid #F2F4F7;
+    border-top-color: #F4B400;
 
-    display: flex;
+    border-radius: 50%;
 
+    animation: nextoriTestSpin 0.8s linear infinite;
+}
+
+
+@keyframes nextoriTestSpin {
+
+    to {
+        transform: rotate(360deg);
+    }
+
+}
+
+
+.nextori-test-empty-card {
+    color: #0D1B2A;
+}
+
+
+.nextori-test-empty-card h2 {
+    margin: 15px 0 0;
+
+    font-size: 22px;
+}
+
+
+.nextori-test-home-button {
+    margin-top: 22px;
+
+    display: inline-flex;
     align-items: center;
 
-    justify-content: center;
+    gap: 8px;
 
-    padding: 0;
+    padding: 12px 18px;
 
     border: none;
 
     border-radius: 9px;
 
-    background: #F2F4F7;
-
-    color: #0D1B2A;
-
-    cursor: pointer;
-
-    transition:
-        background 0.2s ease,
-        color 0.2s ease,
-        transform 0.2s ease;
-}
-
-
-.test-information-close svg {
-    width: 18px;
-
-    height: 18px;
-}
-
-
-.test-information-close:hover {
     background: #0D1B2A;
-
     color: #FFFFFF;
 
-    transform: scale(1.04);
-}
+    font-size: 14px;
+    font-weight: 700;
 
-
-.test-information-close:active {
-    transform: scale(0.96);
-}
-
-
-.test-information-close:focus-visible {
-    outline: 3px solid rgba(244, 180, 0, 0.35);
-
-    outline-offset: 2px;
+    cursor: pointer;
 }
 
 
 /* =========================================================
-   ANIMATION
+   ÉCRANS MOYENS
    ========================================================= */
 
-@keyframes test-information-appear {
+@media (max-width: 900px) {
 
-    from {
-        opacity: 0;
-
-        transform: translateY(-6px);
+    .nextori-test-header {
+        padding: 0 28px;
     }
 
-    to {
-        opacity: 1;
 
-        transform: translateY(0);
+    .nextori-test-main {
+        width: min(100% - 44px, 760px);
+
+        padding-top: 25px;
+    }
+
+
+    .nextori-test-intro h1 {
+        font-size: 29px;
+    }
+
+
+    .nextori-test-answer-text {
+        font-size: 13px;
     }
 
 }
@@ -758,14 +874,53 @@
    TABLETTE
    ========================================================= */
 
-@media (max-width: 768px) {
+@media (max-width: 800px) {
 
-    .test-information {
-        margin-bottom: 20px;
+    .nextori-test-header {
+        grid-template-columns: 1fr auto;
+
+        padding: 0 20px;
     }
 
-    .test-information-content {
-        padding: 16px;
+
+    .nextori-test-header-right {
+        display: none;
+    }
+
+
+    .nextori-test-brand {
+        grid-column: 2;
+        grid-row: 1;
+    }
+
+
+    .nextori-test-header-left {
+        grid-column: 1;
+        grid-row: 1;
+    }
+
+
+    .nextori-test-main {
+        width: min(100% - 28px, 650px);
+
+        padding-top: 20px;
+    }
+
+
+    .nextori-test-intro h1 {
+        font-size: 26px;
+    }
+
+
+    .nextori-test-information-content {
+        flex-direction: column;
+
+        gap: 2px;
+    }
+
+
+    .nextori-test-answer {
+        min-height: 62px;
     }
 
 }
@@ -775,49 +930,134 @@
    MOBILE
    ========================================================= */
 
-@media (max-width: 480px) {
+@media (max-width: 560px) {
 
-    .test-information {
-        margin-bottom: 18px;
+    .nextori-test-header {
+        height: 60px;
 
-        border-left-width: 3px;
-
-        border-radius: 12px;
+        padding: 0 15px;
     }
 
 
-    .test-information-content {
-        gap: 12px;
-
-        padding: 14px 12px 14px 14px;
+    .nextori-test-home-link span {
+        display: none;
     }
 
 
-    .test-information-text strong {
-        font-size: 14px;
+    .nextori-test-brand-mark {
+        width: 32px;
+        height: 32px;
     }
 
 
-    .test-information-text p {
+    .nextori-test-brand strong {
+        font-size: 15px;
+    }
+
+
+    .nextori-test-main {
+        width: calc(100% - 22px);
+
+        padding: 16px 0 20px;
+    }
+
+
+    .nextori-test-intro {
+        align-items: flex-start;
+
+        gap: 11px;
+
+        margin-bottom: 12px;
+    }
+
+
+    .nextori-test-intro-icon {
+        width: 40px;
+        height: 40px;
+    }
+
+
+    .nextori-test-intro h1 {
+        font-size: 21px;
+    }
+
+
+    .nextori-test-intro p {
+        font-size: 11px;
+    }
+
+
+    .nextori-test-information {
+        align-items: flex-start;
+
+        padding: 9px;
+    }
+
+
+    .nextori-test-information-content strong {
+        white-space: normal;
+    }
+
+
+    .nextori-test-question-card {
+        align-items: flex-start;
+
+        gap: 11px;
+
+        padding: 13px;
+    }
+
+
+    .nextori-test-question-number {
+        width: 38px;
+        height: 38px;
+
         font-size: 13px;
-
-        line-height: 1.5;
     }
 
 
-    .test-information-close {
-        width: 30px;
-
-        height: 30px;
-
-        border-radius: 8px;
+    .nextori-test-question-content h2 {
+        font-size: 16px;
     }
 
 
-    .test-information-close svg {
-        width: 16px;
+    .nextori-test-question-helper {
+        display: none;
+    }
 
-        height: 16px;
+
+    .nextori-test-answers {
+        grid-template-columns: 1fr;
+
+        gap: 7px;
+    }
+
+
+    .nextori-test-answer {
+        min-height: 53px;
+    }
+
+
+    .nextori-test-answer-text {
+        font-size: 12px;
+    }
+
+
+    .nextori-test-navigation {
+        grid-template-columns: 1fr 1fr;
+
+        gap: 8px;
+    }
+
+
+    .nextori-test-navigation-status {
+        display: none;
+    }
+
+
+    .nextori-test-previous,
+    .nextori-test-next {
+        width: 100%;
     }
 
 }

@@ -161,7 +161,7 @@ function UniversiteDetail() {
 
                     </div>
 
-                    <h1>{universite.nom}</h1>
+                   <strong> <h2>{universite.description}</h2> </ strong>
 
                 </div>
 

@@ -11,31 +11,31 @@ function AboutSection() {
                 <div className="about-content">
 
                     <span className="about-label">
-                        À PROPOS DE NEXTORI
+                        � PROPOS DE NEXTORI
                     </span>
 
                     <h2>
-                        Une orientation pensée pour construire
+                        Une orientation pens�e pour construire
                         <span> ton avenir.</span>
                     </h2>
 
                     <p>
                         NextOri est une plateforme d'accompagnement
-                        à l'orientation qui aide les étudiants et les
-                        futurs étudiants à mieux construire leur avenir
-                        académique et professionnel.
+                        � l'orientation qui aide les �tudiants et les
+                        futurs �tudiants � mieux construire leur avenir
+                        acad�mique et professionnel.
                     </p>
 
                     <p>
-                        Grâce à l'analyse de tes centres d'intérêt,
+                        Gr�ce � l'analyse de tes centres d'int�r�t,
                         de tes forces et de tes attentes, NextOri
-                        t'aide à mieux comprendre les possibilités
-                        qui s'offrent à toi.
+                        t'aide � mieux comprendre les possibilit�s
+                        qui s'offrent � toi.
                     </p>
 
                     <p>
-                        Découvre des métiers, explore les filières
-                        correspondantes et recherche les établissements
+                        D�couvre des m�tiers, explore les fili�res
+                        correspondantes et recherche les �tablissements
                         qui peuvent accompagner ton parcours.
                     </p>
 
@@ -45,16 +45,16 @@ function AboutSection() {
                 <div className="about-highlight">
 
                     <div className="about-highlight-number">
-                        →
+                        ?
                     </div>
 
                     <h3>
                         Ton orientation,
-                        étape par étape.
+                        �tape par �tape.
                     </h3>
 
                     <p>
-                        Comprendre ton profil, explorer les possibilités
+                        Comprendre ton profil, explorer les possibilit�s
                         et avancer vers un choix qui te ressemble.
                     </p>
 

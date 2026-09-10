@@ -1,3 +1,4 @@
+import { API_ROUTES_URL } from "../config/api";
 import { useEffect, useState } from "react";
 
 import {
@@ -82,7 +83,7 @@ function Formations() {
 
 
                 const reponse = await fetch(
-                    `http://localhost/NextOri/backend/api/routes/filieres.php?id_metier=${metier.id_metier}`
+                    `${API_ROUTES_URL}/filieres.php?id_metier=${metier.id_metier}`
                 );
 
 

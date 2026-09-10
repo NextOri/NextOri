@@ -1,3 +1,4 @@
+import { API_ROUTES_URL } from "../config/api";
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
@@ -39,7 +40,7 @@ function UniversiteDetail() {
     useEffect(() => {
 
         fetch(
-            `http://localhost/NextOri/Backend/api/routes/universite-detail.php?id_universite=${id_universite}`
+            `${API_ROUTES_URL}/universite-detail.php?id_universite=${id_universite}`
         )
             .then((reponse) => reponse.json())
 

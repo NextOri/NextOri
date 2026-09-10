@@ -1,3 +1,4 @@
+import { API_ROUTES_URL } from "../config/api";
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -17,7 +18,7 @@ import {
 
 
 const API_URL =
-  "http://localhost/nextori/backend/api/routes/universite-catalogue.php";
+  `${API_ROUTES_URL}/universite-catalogue.php`;
 
 
 export default function UniversiteCatalogue() {

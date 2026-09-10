@@ -1,19 +1,23 @@
-<?php
+﻿<?php
 
 class Database
 {
-    private string $host = "localhost";
-    private string $dbName = "nextori_db_V2";
-    private string $username = "root";
+    private string $host = "";
+    private string $dbName = "";
+    private string $username = "";
     private string $password = "";
 
     private ?PDO $connection = null;
 
     /**
-     * Retourne une connexion PDO à la base de données.
+     * Retourne une connexion PDO Ã  la base de donnÃ©es.
      */
     public function connect(): PDO
     {
+        $this->host = getenv("DB_HOST") ?: "localhost";
+        $this->dbName = getenv("DB_NAME") ?: "nextori_db_V2";
+        $this->username = getenv("DB_USER") ?: "root";
+        $this->password = getenv("DB_PASSWORD") ?: "";
         if ($this->connection === null) {
 
             $dsn = "mysql:host={$this->host};dbname={$this->dbName};charset=utf8mb4";
@@ -33,3 +37,4 @@ class Database
         return $this->connection;
     }
 }
+

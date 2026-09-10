@@ -1,11 +1,11 @@
-const API_URL = "http://localhost/NextOri/backend/api/routes/avis.php";
+﻿import { API_ROUTES_URL } from "../config/api";
 
 export const envoyerAvis = async (note, commentaire, afficher) => {
 
     try {
 
         const response = await fetch(
-            API_URL,
+            `${API_ROUTES_URL}/avis.php`,
             {
                 credentials: "include",
 

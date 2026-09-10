@@ -1,12 +1,9 @@
-const API_URL = "http://localhost/NextOri/backend/public";
-
+﻿import { API_ROUTES_URL, API_PUBLIC_URL } from "../config/api";
 
 export async function getQuestions(){
 
     const response = await fetch(
-
-        `${API_URL}/questions.php`
-
+        `${API_PUBLIC_URL}/questions.php`
     );
 
     if(!response.ok){
@@ -26,9 +23,7 @@ export async function getQuestions(){
 export async function getPropositions(id_question){
 
     const response = await fetch(
-
-        `${API_URL}/propositions.php?id_question=${id_question}`
-
+        `${API_PUBLIC_URL}/propositions.php?id_question=${id_question}`
     );
 
     if(!response.ok){
@@ -52,9 +47,7 @@ export async function getPropositions(id_question){
 export async function getOrientationResult(){
 
     const response = await fetch(
-
-        "http://localhost/NextOri/backend/api/routes/orientation.php"
-
+        `${API_ROUTES_URL}/orientation.php`
     );
 
     if(!response.ok){
@@ -70,35 +63,20 @@ export async function getOrientationResult(){
 export async function envoyerReponses(reponses){
 
     const response = await fetch(
-
-        "http://localhost/NextOri/backend/api/routes/orientation.php",
-
+        `${API_ROUTES_URL}/orientation.php`,
         {
-
             method:"POST",
-
             credentials: "include",
-
             headers:{
-
                 "Content-Type":"application/json"
-
             },
-
             body:JSON.stringify({
-
                 id_questionnaire:1,
-
                 reponses:reponses.map((reponse)=>({
-
                     id_proposition:reponse.id_proposition
-
                 }))
-
             })
-
         }
-
     );
 
 

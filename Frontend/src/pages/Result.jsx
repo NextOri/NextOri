@@ -1,3 +1,4 @@
+import { API_ROUTES_URL } from "../config/api";
 import Confetti from "react-confetti";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -79,7 +80,7 @@ function Result(){
             setChargement(true);
 
             fetch(
-                "http://localhost/NextOri/backend/api/routes/resultats.php",
+                `${API_ROUTES_URL}/resultats.php`,
                 {
                     credentials: "include"
                 }

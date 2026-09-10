@@ -1,3 +1,4 @@
+import { API_ROUTES_URL } from "../config/api";
 import React, { useState, useEffect } from "react";
 import "../styles/Metiers.css";
 
@@ -19,7 +20,7 @@ function Metiers() {
     // 2) Récupération des métiers depuis le backend
     useEffect(() => {
 
-        fetch("http://localhost/NextOri/Backend/api/routes/metiers.php")
+        fetch(`${API_ROUTES_URL}/metiers.php`)
 
             .then((response) => response.json())
 

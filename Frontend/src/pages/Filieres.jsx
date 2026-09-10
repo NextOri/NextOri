@@ -1,3 +1,4 @@
+import { API_ROUTES_URL } from "../config/api";
 import React, { useState, useEffect } from "react";
 import "../styles/Filieres.css";
 import FooterNavigation from "../components/FooterNavigation";
@@ -38,7 +39,7 @@ const [chargement, setChargement] = useState(true);
 
     useEffect(() => {
 
-        fetch("http://localhost/NextOri/Backend/api/routes/filiere.php")
+        fetch(`${API_ROUTES_URL}/filiere.php`)
 
             .then((response) => response.json())
 

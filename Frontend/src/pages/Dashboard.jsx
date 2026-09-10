@@ -1,3 +1,4 @@
+import { API_ROUTES_URL } from "../config/api";
 import "./../styles/Dashboard.css";
 
 import FooterNavigation from "../components/FooterNavigation";
@@ -51,7 +52,7 @@ const [typeNotification, setTypeNotification] = useState("");
     useEffect(() => {
 
     fetch(
-     "http://localhost/NextOri/backend/api/routes/resultats.php",
+     `${API_ROUTES_URL}/resultats.php`,
     {
         credentials: "include"
     }
@@ -79,7 +80,7 @@ const [typeNotification, setTypeNotification] = useState("");
       useEffect(() => {
 
     fetch(
-    "http://localhost/NextOri/backend/api/routes/dashboard.php",
+    `${API_ROUTES_URL}/dashboard.php`,
     {
         credentials: "include"
     }
@@ -236,7 +237,7 @@ const demanderNotification = async () => {
     try {
 
         const response = await fetch(
-            "http://localhost/NextOri/backend/api/routes/notifier-fonctionnalite.php",
+            `${API_ROUTES_URL}/notifier-fonctionnalite.php`,
             {
                 method: "POST",
                 credentials: "include",

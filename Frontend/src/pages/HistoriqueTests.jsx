@@ -1,3 +1,4 @@
+import { API_ROUTES_URL } from "../config/api";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -32,7 +33,7 @@ function HistoriqueTests() {
     useEffect(() => {
 
         fetch(
-            "http://localhost/NextOri/backend/api/routes/historique-tests.php",
+            `${API_ROUTES_URL}/historique-tests.php`,
             {
                 credentials: "include"
             }

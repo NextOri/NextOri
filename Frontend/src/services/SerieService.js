@@ -1,4 +1,4 @@
-const API_URL = "http://localhost/NextOri/Backend/api/routes";
+﻿import { API_ROUTES_URL } from "../config/api";
 
 
 export async function recupererSeries() {
@@ -6,7 +6,7 @@ export async function recupererSeries() {
     try {
 
         const response = await fetch(
-            `${API_URL}/series.php`,
+            `${API_ROUTES_URL}/series.php`,
             {
                 method: "GET",
                 headers: {

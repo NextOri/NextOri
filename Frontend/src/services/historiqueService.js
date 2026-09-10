@@ -1,12 +1,11 @@
-const API_URL = "http://localhost/NextOri/backend/api/routes/historique.php";
-
+﻿import { API_ROUTES_URL } from "../config/api";
 
 export const enregistrerAction = async (action) => {
 
     try {
 
         const response = await fetch(
-            API_URL,
+            `${API_ROUTES_URL}/historique.php`,
             {
                 credentials: "include",
 
@@ -41,5 +40,4 @@ export const enregistrerAction = async (action) => {
         throw error;
 
     }
-
 };

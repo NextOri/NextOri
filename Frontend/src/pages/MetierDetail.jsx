@@ -1,3 +1,4 @@
+import { API_ROUTES_URL } from "../config/api";
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import "../styles/MetierDetail.css";
@@ -33,7 +34,7 @@ function MetierDetail() {
 
 
         fetch(
-            `http://localhost/nextori/backend/api/routes/metiers_details.php?id_metier=${id_metier}`
+            `${API_ROUTES_URL}/metiers_details.php?id_metier=${id_metier}`
         )
 
         .then((response) => response.json())

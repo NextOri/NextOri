@@ -1,3 +1,4 @@
+import { API_ROUTES_URL } from "../config/api";
 import React, { useEffect, useState } from "react";
 import { Star, MessageSquare, ArrowRight, Loader2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
@@ -5,7 +6,7 @@ import "../styles/Temoignages.css";
 import FooterNavigation from "../components/FooterNavigation";
 
 const API_URL =
-    "http://localhost/NextOri/backend/api/routes/temoignages.php";
+    `${API_ROUTES_URL}/temoignages.php`;
 
 function Temoignages() {
 
